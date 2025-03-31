@@ -100,3 +100,6 @@
 - name: schedule_messages
   enabled: true
   premium: true
+- name: wavoip
+  enabled: false
+  premium: true

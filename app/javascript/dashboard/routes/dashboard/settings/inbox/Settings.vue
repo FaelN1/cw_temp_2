@@ -220,6 +220,14 @@ export default {
     facebookUnauthorized() {
       return this.isAFacebookInbox && this.inbox.reauthorization_required;
     },
+
+    isWavoipFeatureEnabled() {
+      return this.isFeatureEnabledonAccount(
+        this.accountId,
+        FEATURE_FLAGS.WAVOIP
+      );
+    },
+
     googleUnauthorized() {
       const isLegacyInbox = ['imap.gmail.com', 'imap.google.com'].includes(
         this.inbox.imap_address
@@ -443,6 +451,15 @@ export default {
               : ''
           "
           @blur="v$.webhookUrl.$touch"
+        />
+        <woot-input
+          v-if="isAPIInbox && isWavoipFeatureEnabled"
+          v-model.trim="externalToken"
+          class="w-3/4 pb-4"
+          :label="$t('INBOX_MGMT.SETTINGS_POPUP.EXTERNAL_TOKEN')"
+          :placeholder="
+            $t('INBOX_MGMT.SETTINGS_POPUP.EXTERNAL_TOKEN_PLACEHOLDER')
+          "
         />
         <woot-input
           v-if="isAWebWidgetInbox"

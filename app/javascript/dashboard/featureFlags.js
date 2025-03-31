@@ -29,6 +29,8 @@ export const FEATURE_FLAGS = {
   EMAIL_CONTINUITY_ON_API_CHANNEL: 'email_continuity_on_api_channel',
   INBOUND_EMAILS: 'inbound_emails',
   IP_LOOKUP: 'ip_lookup',
+  WAVOIP: 'wavoip',
+  EVOLUTION_API: 'evolution_api',
   LINEAR: 'linear_integration',
   CAPTAIN: 'captain_integration',
   CUSTOM_ROLES: 'custom_roles',
