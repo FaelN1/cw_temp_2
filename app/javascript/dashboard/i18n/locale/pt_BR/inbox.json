@@ -1,0 +1,64 @@
+{
+  "INBOX": {
+    "LIST": {
+      "TITLE": "Caixa de Entrada",
+      "DISPLAY_DROPDOWN": "Exibir",
+      "LOADING": "Buscando notificações",
+      "404": "Não há notificações ativas neste grupo.",
+      "NO_NOTIFICATIONS": "Nenhuma notificação",
+      "NOTE": "Notificações de todas as caixas de entrada inscritas",
+      "NO_MESSAGES_AVAILABLE": "Ops! Não foi possível buscar mensagens",
+      "SNOOZED_UNTIL": "Adiado até",
+      "SNOOZED_UNTIL_TOMORROW": "Adiado até amanhã",
+      "SNOOZED_UNTIL_NEXT_WEEK": "Adiado até a próxima semana"
+    },
+    "ACTION_HEADER": {
+      "SNOOZE": "Adiar notificação",
+      "DELETE": "Excluir notificação",
+      "BACK": "Voltar"
+    },
+    "TYPES": {
+      "CONVERSATION_MENTION": "Você foi mencionado em uma conversa",
+      "CONVERSATION_CREATION": "Nova conversa criada",
+      "CONVERSATION_ASSIGNMENT": "Uma conversa foi atribuída a você",
+      "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Nova mensagem em uma conversa atribuída",
+      "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Nova mensagem em uma conversa que você está participando",
+      "SLA_MISSED_FIRST_RESPONSE": "Meta de SLA da primeira resposta perdida na conversa",
+      "SLA_MISSED_NEXT_RESPONSE": "Meta de SLA da próxima resposta perdida na conversa",
+      "SLA_MISSED_RESOLUTION": "Meta de SLA de resolução perdida na conversa"
+    },
+    "MENU_ITEM": {
+      "MARK_AS_READ": "Marcar como lida",
+      "MARK_AS_UNREAD": "Marcar como não lida",
+      "SNOOZE": "Adiar",
+      "DELETE": "Excluir",
+      "MARK_ALL_READ": "Marcar todas como lidas",
+      "DELETE_ALL": "Excluir todas",
+      "DELETE_ALL_READ": "Excluir todas as lidas"
+    },
+    "DISPLAY_MENU": {
+      "SORT": "Ordenar",
+      "DISPLAY": "Exibir:",
+      "SORT_OPTIONS": {
+        "NEWEST": "Mais recentes",
+        "OLDEST": "Mais antigas",
+        "PRIORITY": "Prioridade"
+      },
+      "DISPLAY_OPTIONS": {
+        "SNOOZED": "Adiadas",
+        "READ": "Lidas",
+        "LABELS": "Marcadores",
+        "CONVERSATION_ID": "ID da Conversa"
+      }
+    },
+    "ALERTS": {
+      "MARK_AS_READ": "Notificação marcada como lida",
+      "MARK_AS_UNREAD": "Notificação marcada como não lida",
+      "SNOOZE": "Notificação adiada",
+      "DELETE": "Notificação excluída",
+      "MARK_ALL_READ": "Todas as notificações marcadas como lidas",
+      "DELETE_ALL": "Todas as notificações excluídas",
+      "DELETE_ALL_READ": "Todas as notificações lidas excluídas"
+    }
+  }
+}

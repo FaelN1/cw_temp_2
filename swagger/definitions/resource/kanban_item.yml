@@ -1,0 +1,58 @@
+type: object
+properties:
+  id:
+    type: number
+    description: ID do item do kanban
+  title:
+    type: string
+    description: Título do item
+  description:
+    type: string
+    description: Descrição do item
+  funnel_id:
+    type: number
+    description: ID do funil ao qual o item pertence
+  account_id:
+    type: number
+    description: ID da conta associada ao item
+  conversation_id:
+    type: number
+    description: ID da conversa associada ao item
+  contact_id:
+    type: number
+    description: ID do contato associado ao item
+  stage:
+    type: string
+    description: Estágio atual do item no funil
+  priority:
+    type: string
+    enum: [low, medium, high, urgent]
+    description: Prioridade do item
+  status:
+    type: string
+    enum: [active, completed, archived]
+    description: Status do item
+  due_date:
+    type: string
+    format: date-time
+    description: Data de vencimento do item
+  assigned_user_id:
+    type: number
+    description: ID do usuário designado para o item
+  created_by_id:
+    type: number
+    description: ID do usuário que criou o item
+  updated_by_id:
+    type: number
+    description: ID do usuário que atualizou o item por último
+  position:
+    type: number
+    description: Posição do item na lista do estágio
+  created_at:
+    type: string
+    format: date-time
+    description: Data de criação do item
+  updated_at:
+    type: string
+    format: date-time
+    description: Data da última atualização do item

@@ -1,0 +1,21 @@
+{
+  "SCHEDULE_MESSAGES": {
+    "FEATURE_DISABLED": "O agendamento de mensagens está desabilitado",
+    "TITLE": "Agendamento de Mensagem",
+    "BUTTON_LABEL": "Agendar mensagem",
+    "EMPTY": "Nenhuma mensagem agendada",
+    "CREATE": "Agendar Mensagem",
+    "UPDATE": "Atualizar Agendamento",
+    "DELETE": "Excluir Agendamento",
+    "SUCCESS": {
+      "CREATE": "Mensagem agendada com sucesso",
+      "UPDATE": "Agendamento atualizado com sucesso",
+      "DELETE": "Agendamento excluído com sucesso"
+    },
+    "ERROR": {
+      "CREATE": "Erro ao agendar mensagem",
+      "UPDATE": "Erro ao atualizar agendamento",
+      "DELETE": "Erro ao excluir agendamento"
+    }
+  }
+}

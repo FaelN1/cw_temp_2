@@ -1,0 +1,517 @@
+{
+  "KANBAN": {
+    "OPEN": "Open",
+    "YEAR": "Year",
+    "NO_AGENT_ASSIGNED": "No agent assigned",
+    "CURRENCY": "USD",
+    "DEADLINE": "Deadline",
+    "DESCRIPTION": "Description",
+    "DEADLINE_DESCRIPTION": "Set a deadline for the item",
+    "ADD_ITEM": "Add Item",
+    "NO_DESCRIPTION": "No description",
+    "PENDING": "Pending",
+    "STAGE": {
+      "LABEL": "Stage",
+      "TIME_IN_STAGE": "%{time} ago"
+    },
+    "RESOLVED": "Resolved",
+    "WON": "Won",
+    "LOST": "Lost",
+    "NO_FILTERED_ITEMS": "No filtered items",
+    "NO_ITEMS": "No items",
+    "FILTER_ITEMS": "Filter items",
+    "VALUE": {
+      "LABEL": "Value",
+      "MIN": "Min",
+      "MAX": "Max"
+    },
+    "AGENT": {
+      "LABEL": "Assigned Agent",
+      "ALL": "All"
+    },
+    "SHARE": {
+      "TITLE": "Share"
+    },
+    "CONTEXT_MENU": {
+      "QUICK_MESSAGE": "Quick Message",
+      "VIEW_CONTACT": "View Contact",
+      "CUSTOMIZE_FIELDS": {
+        "TITLE": "Customize Fields",
+        "DESCRIPTION": "Customize the fields of the item",
+        "VISIBLE_WHEN_COLLAPSED": "Visible when collapsed"
+      },
+      "EXPAND": "Expand",
+      "COLLAPSE": "Collapse"
+    },
+    "BULK_ACTIONS": {
+      "TITLE": "Bulk Actions",
+      "CONVERSATION_ID": "Conversation #%{id}",
+      "MESSAGE_SUMMARY": "Messages will be sent to %{count} of %{total} conversations",
+      "NO_CONVERSATIONS_AVAILABLE": "No conversations available",
+      "SELECT_MESSAGE_TEMPLATE": "Select message template",
+      "MESSAGE_TEMPLATE_SELECT": "Select message template",
+      "HAS_ATTACHMENTS": "Has attachments",
+      "ADD": "Add",
+      "SEND_MESSAGES": "Send messages",
+      "CANCEL": "Cancel",
+      "FILTERS_ACTIVE": "Filters active",
+      "CLEAR_FILTERS": "Clear filters",
+      "FILTER_CONVERSATIONS": "Filter conversations",
+      "FILTER_CONVERSATIONS_COUNT": "%{count} conversations found",
+      "CONFIRM": "Confirm",
+      "FILTER_ITEMS": "Filter items",
+      "MOVE": {
+        "TITLE": "Move items",
+        "DESCRIPTION": "Selected items will be moved to the selected stage."
+      },
+      "LAST_ACTIVITY": {
+        "TITLE": "Last activity",
+        "ANY": "Any",
+        "OPEN": "Open",
+        "WON": "Won",
+        "LOST": "Lost"
+      },
+      "ITEM_STATUS": {
+        "TITLE": "Item status",
+        "ALL": "All",
+        "OPEN": "Open",
+        "WON": "Won",
+        "LOST": "Lost"
+      },
+      "PRIORITY": {
+        "TITLE": "Priority",
+        "ALL": "All",
+        "URGENT": "Urgent",
+        "HIGH": "High",
+        "MEDIUM": "Medium",
+        "LOW": "Low"
+      },
+      "STAGE": {
+        "TITLE": "Stage",
+        "ALL": "All",
+        "OPEN": "Open",
+        "WON": "Won",
+        "LOST": "Lost"
+      },
+      "SHOW_HIDDEN": "Show hidden",
+      "SELECT_ALL": "Select all",
+      "DESELECT_ALL": "Deselect all",
+      "SELECTED_CONVERSATIONS": "Selected conversations (%{count}/%{total})",
+      "SELECT_STAGE": "Select stage",
+      "SEND_MESSAGE": {
+        "TITLE": "Send message",
+        "PROCESSING_TITLE": "Sending messages",
+        "PROCESSING_DESCRIPTION": "{{ count }} of {{ total }} messages processed",
+        "SUCCESS": "sent",
+        "ERROR": "errors",
+        "CONVERSATION_ID": "Conversation #{{ id }}"
+      },
+      "DELETE": {
+        "TITLE": "Delete items",
+        "DESCRIPTION": "Selected items will be deleted."
+      },
+      "BULK_FORM": {
+        "ACTIONS": {
+          "ADD_TO_LIST": "Add to list",
+          "CANCEL": "Cancel",
+          "SAVE": "Save",
+          "CONFIRM": "Confirm",
+          "ADD_ITEM": "Add item"
+        },
+        "STAGE": {
+          "LABEL": "Stage",
+          "PLACEHOLDER": "Select a stage"
+        },
+        "INPUTS": {
+          "TITLE": {
+            "LABEL": "Title",
+            "PLACEHOLDER": "Enter item title"
+          },
+          "PRIORITY": {
+            "LABEL": "Priority",
+            "PLACEHOLDER": "Select a priority"
+          },
+          "AGENT": {
+            "LABEL": "Assigned Agent",
+            "PLACEHOLDER": "Select an agent"
+          }
+        }
+      }
+    },
+    "ITEM_DETAILS": {
+      "AGENT_RESPONSIBLE": "Responsible Agent",
+      "UNTITLED_ITEM": "Untitled item",
+      "LOADING_AGENT": "Loading agent...",
+      "NO_AGENT": "No agent assigned",
+      "ATTACHMENTS": {
+        "ADD_FILE": "Add File",
+        "IMAGES": "Images",
+        "FILES": "Files"
+      }
+    },
+    "CUSTOM_FIELDS": {
+      "TITLE": "Custom Fields",
+      "CONVERSATION_ATTRIBUTES": "Conversation Attributes ",
+      "NOT_FILLED": "Not filled",
+      "NO_CUSTOM_FIELDS": "No custom fields",
+      "NO_CUSTOM_FIELDS_DESCRIPTION": "There are no custom fields defined for conversations."
+    },
+    "SEARCH": {
+      "TITLE": "Search",
+      "INPUT_PLACEHOLDER": "Search for an item..."
+    },
+    "FORM": {
+      "CLEAR": "Clear",
+      "APPLY": "Apply",
+      "EDIT_ITEM": "Edit Item",
+      "TITLE": {
+        "LABEL": "Title",
+        "PLACEHOLDER": "Enter item title"
+      },
+      "DESCRIPTION": {
+        "LABEL": "Description",
+        "PLACEHOLDER": "Enter item description"
+      },
+      "VALUE": {
+        "LABEL": "Value",
+        "PLACEHOLDER": "Enter value",
+        "HAS_VALUE": "Has value",
+        "OFFER_DESCRIPTION_PLACEHOLDER": "Offer description"
+      },
+      "FUNNEL": {
+        "LABEL": "Funnel"
+      },
+      "STAGE": {
+        "LABEL": "Current Stage",
+        "PLACEHOLDER": "Select a stage"
+      },
+      "PRIORITY": {
+        "LABEL": "Priority"
+      },
+      "AGENT": {
+        "LABEL": "Assigned Agent",
+        "PLACEHOLDER": "Select an agent"
+      },
+      "SCHEDULING": {
+        "LABEL": "Scheduling",
+        "HAS_SCHEDULING": "Schedule this item",
+        "DEADLINE": "Deadline",
+        "SCHEDULE": "Schedule with time",
+        "DATETIME": "Schedule Date and Time",
+        "DEADLINE_DATE": "Deadline Date"
+      },
+      "CONVERSATION": {
+        "TITLE": "Conversation",
+        "FOOTER": {
+          "MESSAGE_INPUT_PLACEHOLDER": "Type a message..."
+        },
+        "DESCRIPTION": "Related Conversation",
+        "LABEL": "Related Conversation",
+        "HAS_CONVERSATION": "Link to a conversation",
+        "PLACEHOLDER": "Select a conversation"
+      },
+      "CUSTOM_FIELDS": {
+        "EMPTY": "No custom fields available",
+        "SELECT": "Select an option"
+      },
+      "NOTES": {
+        "PLACEHOLDER": "Add a note...",
+        "LINK_ITEM": "Link Item",
+        "LINK_CONVERSATION": "Link Conversation",
+        "LINK_CONTACT": "Link Contact",
+        "SELECT_ITEM": "Select an Item",
+        "SELECT_CONVERSATION": "Select a Conversation",
+        "SELECT_CONTACT": "Select a Contact",
+        "NO_ITEMS": "No items found",
+        "NO_CONVERSATIONS": "No conversations found",
+        "NO_CONTACTS": "No contacts found",
+        "ITEM_NOT_FOUND": "Item not found",
+        "CONTACT_NOT_FOUND": "Contact not found",
+        "LAST_ACTIVITY": "Last activity"
+      },
+      "CHECKLIST": {
+        "PROGRESS": "Checklist Progress",
+        "ITEMS": "items",
+        "HIDE_COMPLETED": "Hide Completed",
+        "ADD_ITEM": "Add item to checklist..."
+      }
+    },
+    "ERRORS": {
+      "TITLE_REQUIRED": "Title is required",
+      "FUNNEL_REQUIRED": "Funnel is required",
+      "STAGE_REQUIRED": "Stage is required",
+      "FUNNEL_SELECTION_FAILED": "Failed to select funnel",
+      "FUNNEL_FETCH_FAILED": "Failed to fetch funnels",
+      "FETCH_ITEMS": "Failed to fetch items",
+      "DELETE_FUNNEL_WITH_ITEMS": "Cannot delete funnel with existing items. Please move or delete the items first."
+    },
+    "TABS": {
+      "GENERAL": "General",
+      "PIPELINE": "Pipeline",
+      "ASSIGNMENT": "Assignment",
+      "SCHEDULING": "Scheduling",
+      "RELATIONSHIPS": "Relationships",
+      "CUSTOM_FIELDS": "Custom Fields",
+      "NOTES": "Notes",
+      "CHECKLIST": "Checklist",
+      "ATTACHMENTS": "Attachments",
+      "HISTORY": "History"
+    },
+    "PRIORITY_LABELS": {
+      "NONE": "None",
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High",
+      "URGENT": "Urgent"
+    },
+    "LOADING": "Loading...",
+    "LOADING_CONVERSATION": "Loading conversation...",
+    "CONVERSATION_NOT_FOUND": "Conversation not found",
+    "CONVERSATION_NO_CONTACT": "No contact",
+    "UNTITLED_ITEM": "Untitled item",
+    "NO_MESSAGES": "No messages",
+    "HISTORY": {
+      "NO_ACTIVITY": "No activity recorded yet.",
+      "ATTACHMENT_ADDED": "Attachment added",
+      "FILE": "File",
+      "NOTE_ADDED": "Note added",
+      "CHECKLIST_ITEM_ADDED": "Checklist item added",
+      "CHECKLIST_ITEM_UPDATED": "Checklist item updated",
+      "COMPLETED": "Completed",
+      "PENDING": "Pending",
+      "PRIORITY_CHANGED": "Priority changed",
+      "STATUS_CHANGED": "Status changed",
+      "STAGE_CHANGED": "Stage changed",
+      "VALUE_CHANGED": "Value changed",
+      "AGENT_CHANGED": "Agent changed",
+      "NONE": "None",
+      "CONVERSATION_LINKED": "Conversation linked",
+      "LINKED_CONVERSATION": "linked conversation",
+      "ACTIVITY": "Activity"
+    },
+    "ACTIONS": {
+      "CLOSE": "Close",
+      "EDIT": "Edit",
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete"
+    },
+    "DEBUG": {
+      "SHOW": "Show Debug",
+      "HIDE": "Hide Debug"
+    },
+    "SYSTEM": "System",
+    "CANCEL": "Cancel",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "DELETE": "Delete",
+    "NOTE": "Note",
+    "ITEM_ATTACHMENT": "Item attachment",
+    "NOTES_UPDATED_SUCCESS": "Notes updated successfully",
+    "NOTES_UPDATE_ERROR": "Error updating notes",
+    "CHECKLIST_UPDATED_SUCCESS": "Checklist updated successfully",
+    "CHECKLIST_UPDATE_ERROR": "Error updating checklist",
+    "PRIORITY": {
+      "HIGH": "High",
+      "MEDIUM": "Medium",
+      "LOW": "Low",
+      "NONE": "None"
+    },
+    "FILTER": {
+      "RESULTS": "results",
+      "VALUE": {
+        "MIN": "Min",
+        "MAX": "Max"
+      },
+      "DATE": {
+        "LABEL": "Date",
+        "START": "Start",
+        "END": "End"
+      },
+      "AGENT": {
+        "ALL": "All"
+      }
+    },
+    "MESSAGE_TEMPLATES": {
+      "NO_TEMPLATES": "No templates",
+      "TITLE": "Message Templates",
+      "ADD": "Add template",
+      "NEW": "New template",
+      "NO_TEMPLATES_DESCRIPTION": "There are no templates defined for conversations.",
+      "ERROR": "Error",
+      "EMPTY": "No templates",
+      "EMPTY_DESCRIPTION": "There are no templates defined for conversations.",
+      "FORM": {
+        "TITLE": {
+          "LABEL": "Title",
+          "PLACEHOLDER": "Enter template title"
+        },
+        "CONDITIONS": {
+          "TITLE": "Conditions",
+          "FIELD": {
+            "LABEL": "Field",
+            "PLACEHOLDER": "Select a field"
+          },
+          "OPERATOR": {
+            "LABEL": "Operator",
+            "PLACEHOLDER": "Select an operator"
+          },
+          "VALUE": {
+            "LABEL": "Value",
+            "PLACEHOLDER": "Enter a value"
+          },
+          "ADD_RULE": "Add rule"
+        },
+        "BASIC_INFO": "Basic Info",
+        "FUNNEL_INFO": "Funnel Info",
+        "WEBHOOK": {
+          "TITLE": "Webhook",
+          "URL": {
+            "LABEL": "URL",
+            "PLACEHOLDER": "Enter webhook URL"
+          },
+          "METHOD": {
+            "LABEL": "Method",
+            "PLACEHOLDER": "Select a method"
+          }
+        },
+        "CONTENT": {
+          "TITLE": "Content",
+          "PLACEHOLDER": "Enter template content"
+        },
+        "FUNNEL": {
+          "LABEL": "Funnel",
+          "PLACEHOLDER": "Select a funnel"
+        },
+        "STAGE": {
+          "LABEL": "Stage",
+          "PLACEHOLDER": "Select a stage"
+        },
+        "ACTIONS": {
+          "CANCEL": "Cancel",
+          "SAVE": "Save"
+        }
+      }
+    },
+    "ITEM_CONVERSATION": {
+      "TITLE": "Conversation",
+      "NO_CONTACT": "No contact",
+      "DESCRIPTION": "Related Conversation",
+      "CONTACT": {
+        "EMAIL": "Email",
+        "PHONE": "Phone"
+      }
+    },
+    "SEND_MESSAGE": {
+      "TITLE": "Send message",
+      "SELECT_TEMPLATE": "Select a template",
+      "CUSTOM_MESSAGE": "Custom message",
+      "CUSTOM_MESSAGE_PLACEHOLDER": "Enter your custom message...",
+      "STATUS": {
+        "SENDING": "Sending..."
+      },
+      "ACTIONS": {
+        "SEND_SELECTED": "Send selected template",
+        "SEND_CUSTOM": "Send custom message",
+        "SEND": "Send"
+      }
+    },
+    "FUNNELS": {
+      "TITLE": "Funnel",
+      "FORM": {
+        "NAME": {
+          "LABEL": "Name",
+          "PLACEHOLDER": "Enter funnel name"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Description",
+          "PLACEHOLDER": "Enter funnel description"
+        },
+        "STAGES": {
+          "TITLE": "Stages",
+          "EDITING": "Editing",
+          "NAME": "Name",
+          "NAME_PLACEHOLDER": "Enter stage name",
+          "COLOR": "Color",
+          "DESCRIPTION": "Description",
+          "DESCRIPTION_PLACEHOLDER": "Enter stage description",
+          "ADD": "Add stage",
+          "PREVIEW": "Preview",
+          "EDIT_STAGE": "Edit stage"
+        },
+        "ACTIONS": {
+          "CANCEL": "Cancel",
+          "SAVE": "Save",
+          "NEW": "New Funnel"
+        }
+      },
+      "TEMPLATES": {
+        "TITLE": "Funnel Templates"
+      },
+      "ACTIONS": {
+        "NEW": "New Funnel"
+      },
+      "EDIT": {
+        "TITLE": "Edit Funnel"
+      },
+      "DELETE": {
+        "TITLE": "Delete Funnel",
+        "DESCRIPTION": "Are you sure you want to delete the funnel %{name}?"
+      }
+    },
+    "AGENDA": {
+      "TODAY_EVENTS": "Today's Events",
+      "TOTAL_EVENTS": "Total Events",
+      "DRAG_TO_SCHEDULE": "Drag to schedule",
+      "MONTH_EVENTS": "Month Events",
+      "RESCHEDULED_EVENTS": "Rescheduled Events",
+      "NO_DATE_ITEMS": "No Date Items",
+      "RECENT_ITEMS": "Recent Items",
+      "RESCHEDULED": "Rescheduled",
+      "LOADING_AGENT": "Loading agent...",
+      "NO_EVENTS_TODAY": "No events today",
+      "DRAG_TO_RESCHEDULE": "Drag to reschedule",
+      "VIEW_MODES": {
+        "TODAY": "Today",
+        "MONTH": "Month",
+        "WEEK": "Week"
+      }
+    },
+    "MORE_OPTIONS": {
+      "KANBAN_SETTINGS": "Kanban Settings",
+      "MESSAGE_TEMPLATES": "Message Templates",
+      "MANAGE_FUNNELS": "Manage Funnels",
+      "AUTOMATIONS": "Automations"
+    },
+    "AI_CONFIG": {
+      "STATUS": {
+        "CONNECTED": "Connected",
+        "DISCONNECTED": "Disconnected"
+      }
+    },
+    "AI": {
+      "WELCOME_MESSAGE": "Hello! I'm your Kanban AI assistant. How can I help you today?"
+    },
+    "VIEW_MODES": {
+      "LIST": "List",
+      "AGENDA": "Agenda"
+    },
+    "SETTINGS": {
+      "TITLE": "Settings",
+      "ENABLE_GLOBAL_WEBHOOK": "Enable global webhooks",
+      "ENABLE_GLOBAL_WEBHOOK_DESCRIPTION": "Enable global webhooks for all funnels and stages."
+    },
+    "QUICK_ACTIONS": "Quick Actions",
+    "QUICK_CHAT": "Quick Chat",
+    "MOCK_DATA": "Mock Data",
+    "TYPE_MESSAGE": "Type a message...",
+    "COMMENTS": "Comments",
+    "ADD_COMMENT": "Add a comment...",
+    "REPLY": "Reply",
+    "EDIT": "Edit",
+    "MOVE": "Move",
+    "ASSIGN": "Assign",
+    "STATUS": "Status",
+    "SEND": "Send"
+  }
+}

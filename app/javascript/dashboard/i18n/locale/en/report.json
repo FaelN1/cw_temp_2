@@ -1,0 +1,70 @@
+{
+  "REPORT": {
+    "HEADER": "Reports",
+    "LOADING_CHART": "Loading chart data...",
+    "NO_ENOUGH_DATA": "We haven't received enough data points to generate report. Please try again later.",
+    "DOWNLOAD": "Download Report",
+    "HEADER_HELP_TEXT": "See your customer conversation metrics in visual charts and tables. Export data for further analysis.",
+    "DOWNLOAD_AGENT_REPORTS": "Download Agent Reports",
+    "METRICS": {
+      "CONVERSATIONS": {
+        "NAME": "Conversations",
+        "DESC": "( Total )"
+      },
+      "INCOMING_MESSAGES": {
+        "NAME": "Incoming Messages",
+        "DESC": "( Total )"
+      },
+      "OUTGOING_MESSAGES": {
+        "NAME": "Outgoing Messages",
+        "DESC": "( Total )"
+      },
+      "FIRST_RESPONSE_TIME": {
+        "NAME": "First Response Time",
+        "DESC": "( Avg )",
+        "INFO_TEXT": "Total number of conversations used for calculation:",
+        "TOOLTIP_TEXT": "First Response Time is"
+      },
+      "RESOLUTION_TIME": {
+        "NAME": "Resolution Time",
+        "DESC": "( Avg )",
+        "INFO_TEXT": "Total number of conversations used for calculation:",
+        "TOOLTIP_TEXT": "Resolution Time is"
+      },
+      "RESOLUTION_COUNT": {
+        "NAME": "Resolution Count",
+        "DESC": "( Total )"
+      }
+    }
+  },
+  "KANBAN_REPORTS": {
+    "HEADER": "Relatórios Kanban",
+    "DOWNLOAD": "Baixar Relatório",
+    "LOADING": "Carregando métricas...",
+    "METRICS": {
+      "TOTAL_ITEMS": "Total de Itens",
+      "ITEMS_BY_STAGE": "Itens por Estágio",
+      "AVERAGE_VALUE": "Valor Médio",
+      "TOTAL_VALUE": "Valor Total",
+      "AVG_TIME_IN_STAGE": "Tempo Médio por Estágio",
+      "CONVERSION_RATES": "Taxa de Conversão entre Estágios"
+    },
+    "METRICS_FETCH_ERROR": "Erro ao carregar métricas do Kanban",
+    "DOWNLOAD_ERROR": "Erro ao baixar relatório do Kanban",
+    "CSV": {
+      "HEADERS": {
+        "ID": "ID",
+        "STAGE": "Estágio",
+        "TITLE": "Título",
+        "VALUE": "Valor",
+        "CREATED_AT": "Data de Criação",
+        "STAGE_ENTERED_AT": "Data de Entrada no Estágio",
+        "DESCRIPTION": "Descrição"
+      }
+    },
+    "TIME": {
+      "DAY": "dia",
+      "DAYS": "dias"
+    }
+  }
+}

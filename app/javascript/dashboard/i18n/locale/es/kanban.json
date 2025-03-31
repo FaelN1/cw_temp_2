@@ -1,0 +1,498 @@
+{
+  "KANBAN": {
+    "OPEN": "Abierto",
+    "CURRENCY": "ARS",
+    "PENDING": "Pendiente",
+    "NO_AGENT_ASSIGNED": "Ningún agente asignado",
+    "DEADLINE": "Fecha límite",
+    "DESCRIPTION": "Descripción",
+    "DEADLINE_DESCRIPTION": "Establece una fecha límite para el elemento",
+    "YEAR": "Año",
+    "STAGE": {
+      "LABEL": "Etapa",
+      "TIME_IN_STAGE": "Hace %{time}"
+    },
+    "RESOLVED": "Resuelto",
+    "WON": "Ganado",
+    "LOST": "Perdido",
+    "ADD_ITEM": "Añadir Elemento",
+    "NO_DESCRIPTION": "Sin descripción",
+    "NO_FILTERED_ITEMS": "No hay elementos filtrados",
+    "NO_ITEMS": "No hay elementos",
+    "SHARE": {
+      "TITLE": "Compartir"
+    },
+    "CONTEXT_MENU": {
+      "QUICK_MESSAGE": "Mensaje Rápido",
+      "VIEW_CONTACT": "Ver Contacto",
+      "CUSTOMIZE_FIELDS": "Personalizar Campos",
+      "EXPAND": "Expandir",
+      "COLLAPSE": "Colapsar"
+    },
+    "BULK_ACTIONS": {
+      "TITLE": "Acciones en Masa",
+      "CONVERSATION_ID": "Conversa #%{id}",
+      "MESSAGE_SUMMARY": "Se enviarán mensajes a %{count} de %{total} conversaciones",
+      "NO_CONVERSATIONS_AVAILABLE": "No hay conversaciones disponibles",
+      "SELECT_MESSAGE_TEMPLATE": "Seleccionar plantilla de mensaje",
+      "MESSAGE_TEMPLATE_SELECT": "Seleccionar plantilla de mensaje",
+      "HAS_ATTACHMENTS": "Tiene adjuntos",
+      "ADD": "Añadir",
+      "SEND_MESSAGES": "Enviar mensajes",
+      "MOVE": "Mover",
+      "DELETE": {
+        "TITLE": "Eliminar elementos",
+        "DESCRIPTION": "Los elementos seleccionados serán eliminados."
+      },
+      "LAST_ACTIVITY": {
+        "TITLE": "Última actividad",
+        "ANY": "Cualquier",
+        "OPEN": "Abierto",
+        "WON": "Ganado",
+        "LOST": "Perdido"
+      },
+      "ITEM_STATUS": {
+        "TITLE": "Estado del elemento",
+        "ALL": "Todos",
+        "OPEN": "Abierto",
+        "WON": "Ganado",
+        "LOST": "Perdido"
+      },
+      "PRIORITY": {
+        "TITLE": "Prioridad",
+        "ALL": "Todas",
+        "URGENT": "Urgente",
+        "HIGH": "Alta",
+        "MEDIUM": "Media",
+        "LOW": "Baja"
+      },
+      "STAGE": {
+        "TITLE": "Etapa",
+        "ALL": "Todas",
+        "OPEN": "Abierto",
+        "WON": "Ganado",
+        "LOST": "Perdido"
+      },
+      "CANCEL": "Cancelar",
+      "FILTERS_ACTIVE": "Filtros activos",
+      "CLEAR_FILTERS": "Limpiar filtros",
+      "FILTER_CONVERSATIONS": "Filtrar conversaciones",
+      "FILTER_CONVERSATIONS_COUNT": "%{count} conversaciones encontradas",
+      "CONFIRM": "Confirmar",
+      "FILTER_ITEMS": "Filtrar elementos",
+      "SHOW_HIDDEN": "Mostrar ocultos",
+      "DESELECT_ALL": "Deseleccionar todos",
+      "SELECT_ALL": "Seleccionar todos",
+      "SELECTED_CONVERSATIONS": "Conversaciones seleccionadas (%{count}/%{total})",
+      "SELECT_STAGE": "Seleccionar etapa",
+      "SEND_MESSAGE": {
+        "TITLE": "Enviar mensaje",
+        "PROCESSING_TITLE": "Enviando mensajes",
+        "PROCESSING_DESCRIPTION": "{{ count }} de {{ total }} mensajes procesados",
+        "SUCCESS": "enviados",
+        "ERROR": "fallos",
+        "CONVERSATION_ID": "Conversa #{{ id }}"
+      },
+      "BULK_FORM": {
+        "ACTIONS": {
+          "ADD_TO_LIST": "Añadir a la lista",
+          "CANCEL": "Cancelar",
+          "CONFIRM": "Confirmar",
+          "SAVE": "Guardar",
+          "ADD_ITEM": "Añadir elementos",
+          "DELETE_ITEM": "Eliminar elementos",
+          "SEND_MESSAGE": "Enviar mensajes"
+        },
+        "STAGE": {
+          "LABEL": "Etapa",
+          "PLACEHOLDER": "Selecciona una etapa"
+        },
+        "INPUTS": {
+          "TITLE": {
+            "LABEL": "Título",
+            "PLACEHOLDER": "Introduce el título del elemento"
+          },
+          "PRIORITY": {
+            "LABEL": "Prioridad",
+            "PLACEHOLDER": "Selecciona una prioridad"
+          },
+          "AGENT": {
+            "LABEL": "Agente Asignado",
+            "PLACEHOLDER": "Selecciona un agente"
+          }
+        }
+      }
+    },
+    "ITEM_DETAILS": {
+      "AGENT_RESPONSIBLE": "Agente Responsable",
+      "UNTITLED_ITEM": "Elemento sin título",
+      "LOADING_AGENT": "Cargando agente...",
+      "NO_AGENT": "Ningún agente asignado",
+      "ATTACHMENTS": {
+        "ADD_FILE": "Añadir Archivo",
+        "IMAGES": "Imágenes",
+        "FILES": "Archivos"
+      }
+    },
+    "CUSTOM_FIELDS": {
+      "TITLE": "Dados Adicionais",
+      "CONVERSATION_ATTRIBUTES": "Atributos de Conversación ",
+      "NOT_FILLED": "No rellenado",
+      "NO_CUSTOM_FIELDS": "Sin campos personalizados",
+      "NO_CUSTOM_FIELDS_DESCRIPTION": "No hay campos personalizados definidos para conversaciones."
+    },
+    "SEARCH": {
+      "TITLE": "Buscar",
+      "INPUT_PLACEHOLDER": "Buscar un elemento..."
+    },
+    "FORM": {
+      "CLEAR": "Limpiar",
+      "APPLY": "Aplicar",
+      "EDIT_ITEM": "Editar Elemento",
+      "TITLE": {
+        "LABEL": "Título",
+        "PLACEHOLDER": "Introduce el título del elemento"
+      },
+      "DESCRIPTION": {
+        "LABEL": "Descripción",
+        "PLACEHOLDER": "Introduce la descripción del elemento"
+      },
+      "VALUE": {
+        "LABEL": "Valor",
+        "PLACEHOLDER": "Introduce el valor",
+        "HAS_VALUE": "Tiene valor",
+        "OFFER_DESCRIPTION_PLACEHOLDER": "Descripción de la oferta"
+      },
+      "FUNNEL": {
+        "LABEL": "Embudo"
+      },
+      "STAGE": {
+        "LABEL": "Etapa Actual",
+        "PLACEHOLDER": "Selecciona una etapa"
+      },
+      "PRIORITY": {
+        "LABEL": "Prioridad"
+      },
+      "AGENT": {
+        "LABEL": "Agente Asignado",
+        "PLACEHOLDER": "Selecciona un agente"
+      },
+      "SCHEDULING": {
+        "LABEL": "Programación",
+        "HAS_SCHEDULING": "Programar este elemento",
+        "DEADLINE": "Fecha límite",
+        "SCHEDULE": "Programar con hora",
+        "DATETIME": "Fecha y Hora Programada",
+        "DEADLINE_DATE": "Fecha Límite"
+      },
+      "CONVERSATION": {
+        "TITLE": "Conversación",
+        "FOOTER": {
+          "MESSAGE_INPUT_PLACEHOLDER": "Escribe un mensaje..."
+        },
+        "DESCRIPTION": "Conversación Relacionada",
+        "LABEL": "Conversación Relacionada",
+        "HAS_CONVERSATION": "Vincular a una conversación",
+        "PLACEHOLDER": "Selecciona una conversación"
+      },
+      "CUSTOM_FIELDS": {
+        "EMPTY": "No hay campos personalizados disponibles",
+        "SELECT": "Selecciona una opción"
+      },
+      "NOTES": {
+        "PLACEHOLDER": "Añade una nota...",
+        "LINK_ITEM": "Vincular Elemento",
+        "LINK_CONVERSATION": "Vincular Conversación",
+        "LINK_CONTACT": "Vincular Contacto",
+        "SELECT_ITEM": "Selecciona un Elemento",
+        "SELECT_CONVERSATION": "Selecciona una Conversación",
+        "SELECT_CONTACT": "Selecciona un Contacto",
+        "NO_ITEMS": "No se encontraron elementos",
+        "NO_CONVERSATIONS": "No se encontraron conversaciones",
+        "NO_CONTACTS": "No se encontraron contactos",
+        "ITEM_NOT_FOUND": "Elemento no encontrado",
+        "CONTACT_NOT_FOUND": "Contacto no encontrado",
+        "LAST_ACTIVITY": "Última actividad"
+      },
+      "CHECKLIST": {
+        "PROGRESS": "Progreso de la Lista",
+        "ITEMS": "elementos",
+        "HIDE_COMPLETED": "Ocultar Completados",
+        "ADD_ITEM": "Añadir elemento a la lista..."
+      }
+    },
+    "ERRORS": {
+      "TITLE_REQUIRED": "El título es obligatorio",
+      "FUNNEL_REQUIRED": "El embudo es obligatorio",
+      "STAGE_REQUIRED": "La etapa es obligatoria",
+      "FUNNEL_SELECTION_FAILED": "No se pudo seleccionar el embudo",
+      "FUNNEL_FETCH_FAILED": "No se pudieron obtener los embudos",
+      "FETCH_ITEMS": "No se pudieron obtener los elementos",
+      "DELETE_FUNNEL_WITH_ITEMS": "No se puede eliminar el embudo con elementos existentes. Por favor, mueva o elimine los elementos primero."
+    },
+    "TABS": {
+      "GENERAL": "General",
+      "PIPELINE": "Pipeline",
+      "ASSIGNMENT": "Asignación",
+      "SCHEDULING": "Programación",
+      "RELATIONSHIPS": "Relaciones",
+      "CUSTOM_FIELDS": "Dados Adicionais",
+      "NOTES": "Notas",
+      "CHECKLIST": "Checklist",
+      "ATTACHMENTS": "Archivos Adjuntos",
+      "HISTORY": "Historial"
+    },
+    "PRIORITY_LABELS": {
+      "NONE": "Ninguna",
+      "LOW": "Baja",
+      "MEDIUM": "Media",
+      "HIGH": "Alta",
+      "URGENT": "Urgente"
+    },
+    "LOADING": "Cargando...",
+    "LOADING_CONVERSATION": "Cargando conversación...",
+    "CONVERSATION_NOT_FOUND": "Conversación no encontrada",
+    "CONVERSATION_NO_CONTACT": "Sin contacto",
+    "UNTITLED_ITEM": "Elemento sin título",
+    "NO_MESSAGES": "Sin mensajes",
+    "HISTORY": {
+      "NO_ACTIVITY": "Aún no hay actividad registrada.",
+      "ATTACHMENT_ADDED": "Archivo adjunto añadido",
+      "FILE": "Archivo",
+      "NOTE_ADDED": "Nota añadida",
+      "CHECKLIST_ITEM_ADDED": "Elemento añadido a la lista",
+      "CHECKLIST_ITEM_UPDATED": "Elemento de la lista actualizado",
+      "COMPLETED": "Completado",
+      "PENDING": "Pendiente",
+      "PRIORITY_CHANGED": "Prioridad cambiada",
+      "STATUS_CHANGED": "Estado cambiado",
+      "STAGE_CHANGED": "Etapa cambiada",
+      "VALUE_CHANGED": "Valor cambiado",
+      "AGENT_CHANGED": "Agente cambiado",
+      "NONE": "Ninguno",
+      "CONVERSATION_LINKED": "Conversación vinculada",
+      "LINKED_CONVERSATION": "vinculó la conversación",
+      "ACTIVITY": "Actividad"
+    },
+    "ACTIONS": {
+      "CLOSE": "Cerrar",
+      "EDIT": "Editar",
+      "DELETE": "Eliminar"
+    },
+    "DEBUG": {
+      "SHOW": "Mostrar Debug",
+      "HIDE": "Ocultar Debug"
+    },
+    "SYSTEM": "Sistema",
+    "CANCEL": "Cancelar",
+    "ADD": "Añadir",
+    "SAVE": "Guardar",
+    "DELETE": "Eliminar",
+    "NOTE": "Nota",
+    "ITEM_ATTACHMENT": "Adjunto del elemento",
+    "NOTES_UPDATED_SUCCESS": "Notas actualizadas con éxito",
+    "NOTES_UPDATE_ERROR": "Error al actualizar las notas",
+    "CHECKLIST_UPDATED_SUCCESS": "Lista actualizada con éxito",
+    "CHECKLIST_UPDATE_ERROR": "Error al actualizar la lista",
+    "PRIORITY": {
+      "HIGH": "Alta",
+      "MEDIUM": "Media",
+      "LOW": "Baja",
+      "NONE": "Ninguna"
+    },
+    "FILTER": {
+      "LABEL": "Filtrar",
+      "RESULTS": "resultados",
+      "VALUE": {
+        "MIN": "Mínimo",
+        "MAX": "Máximo"
+      },
+      "AGENT": {
+        "ALL": "Todos"
+      },
+      "DATE": {
+        "LABEL": "Fecha",
+        "START": "Inicio",
+        "END": "Fin"
+      }
+    },
+    "MESSAGE_TEMPLATES": {
+      "NO_TEMPLATES": "Sin plantillas",
+      "TITLE": "Plantillas de mensaje",
+      "ADD": "Añadir plantilla",
+      "NEW": "Nueva plantilla",
+      "NO_TEMPLATES_DESCRIPTION": "No hay plantillas definidas para conversaciones.",
+      "ERROR": "Error",
+      "EMPTY": "Sin plantillas",
+      "EMPTY_DESCRIPTION": "No hay plantillas definidas para conversaciones.",
+      "FORM": {
+        "CONDITIONS": {
+          "TITLE": "Condiciones",
+          "FIELD": {
+            "LABEL": "Campo",
+            "PLACEHOLDER": "Selecciona un campo"
+          },
+          "OPERATOR": {
+            "LABEL": "Operador",
+            "PLACEHOLDER": "Selecciona un operador"
+          },
+          "VALUE": {
+            "LABEL": "Valor",
+            "PLACEHOLDER": "Introduce un valor"
+          },
+          "ADD_RULE": "Añadir regla"
+        },
+        "BASIC_INFO": "Información básica",
+        "FUNNEL_INFO": "Información del embudo",
+        "WEBHOOK": {
+          "TITLE": "Webhook",
+          "URL": {
+            "LABEL": "URL",
+            "PLACEHOLDER": "Introduce la URL del webhook"
+          },
+          "METHOD": {
+            "LABEL": "Método",
+            "PLACEHOLDER": "Selecciona un método"
+          }
+        },
+        "CONTENT": {
+          "TITLE": "Contenido",
+          "PLACEHOLDER": "Introduce el contenido de la plantilla"
+        },
+        "FUNNEL": {
+          "LABEL": "Embudo",
+          "PLACEHOLDER": "Selecciona un embudo"
+        },
+        "STAGE": {
+          "LABEL": "Etapa",
+          "PLACEHOLDER": "Selecciona una etapa"
+        },
+        "ACTIONS": {
+          "CANCEL": "Cancelar",
+          "SAVE": "Guardar"
+        }
+      }
+    },
+    "ITEM_CONVERSATION": {
+      "TITLE": "Conversación",
+      "NO_CONTACT": "Sin contacto",
+      "DESCRIPTION": "Conversación Relacionada",
+      "CONTACT": {
+        "EMAIL": "Correo electrónico",
+        "PHONE": "Teléfono"
+      }
+    },
+    "SEND_MESSAGE": {
+      "TITLE": "Enviar mensaje",
+      "SELECT_TEMPLATE": "Seleccionar plantilla",
+      "CUSTOM_MESSAGE": "Mensaje personalizado",
+      "CUSTOM_MESSAGE_PLACEHOLDER": "Introduce tu mensaje personalizado...",
+      "STATUS": {
+        "SENDING": "Enviando..."
+      },
+      "ACTIONS": {
+        "SEND_SELECTED": "Enviar plantilla seleccionada",
+        "SEND_CUSTOM": "Enviar mensaje personalizado",
+        "SEND": "Enviar"
+      }
+    },
+    "FUNNELS": {
+      "TITLE": "Embudo",
+      "FORM": {
+        "NAME": {
+          "LABEL": "Nombre",
+          "PLACEHOLDER": "Introduce el nombre del embudo"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Descripción",
+          "PLACEHOLDER": "Introduce la descripción del embudo"
+        },
+        "STAGES": {
+          "TITLE": "Etapas",
+          "EDITING": "Editando",
+          "NAME": "Nombre",
+          "NAME_PLACEHOLDER": "Introduce el nombre de la etapa",
+          "COLOR": "Color",
+          "DESCRIPTION": "Descripción",
+          "DESCRIPTION_PLACEHOLDER": "Introduce la descripción de la etapa",
+          "ADD": "Añadir etapa",
+          "PREVIEW": "Vista previa",
+          "EDIT_STAGE": "Editar etapa",
+          "EMPTY": "Sin etapas"
+        },
+        "ACTIONS": {
+          "CANCEL": "Cancelar",
+          "SAVE": "Guardar",
+          "NEW": "Nuevo Embudo"
+        }
+      },
+      "TEMPLATES": {
+        "TITLE": "Plantillas de Embudo"
+      },
+      "ACTIONS": {
+        "NEW": "Nuevo Embudo"
+      },
+      "EDIT": {
+        "TITLE": "Editar Embudo"
+      },
+      "DELETE": {
+        "TITLE": "Eliminar Funil",
+        "DESCRIPTION": "¿Estás seguro que deseas eliminar el funil %{name}?"
+      }
+    },
+    "AGENDA": {
+      "TODAY_EVENTS": "Eventos de hoy",
+      "RESCHEDULED": "Reagendado",
+      "DRAG_TO_SCHEDULE": "Arrastra para programar",
+      "TOTAL_EVENTS": "Total de Eventos",
+      "MONTH_EVENTS": "Eventos del Mes",
+      "RESCHEDULED_EVENTS": "Eventos Reagendados",
+      "NO_DATE_ITEMS": "Elementos sin fecha",
+      "RECENT_ITEMS": "Elementos Recientes",
+      "LOADING_AGENT": "Cargando agente...",
+      "NO_EVENTS_TODAY": "No hay eventos hoy",
+      "DRAG_TO_RESCHEDULE": "Arrastra para reagendar",
+      "VIEW_MODES": {
+        "TODAY": "Hoy",
+        "MONTH": "Mes",
+        "WEEK": "Semana"
+      }
+    },
+    "MORE_OPTIONS": {
+      "KANBAN_SETTINGS": "Configuración del Kanban",
+      "MESSAGE_TEMPLATES": "Plantillas de mensaje",
+      "MANAGE_FUNNELS": "Administrar Embudos",
+      "AUTOMATIONS": "Automatizaciones"
+    },
+    "AI_CONFIG": {
+      "STATUS": {
+        "CONNECTED": "Conectado",
+        "DISCONNECTED": "Desconectado"
+      }
+    },
+    "AI": {
+      "WELCOME_MESSAGE": "¡Hola! Soy tu asistente de Kanban AI. ¿Cómo puedo ayudarte hoy?"
+    },
+    "VIEW_MODES": {
+      "LIST": "Lista",
+      "AGENDA": "Agenda"
+    },
+    "SETTINGS": {
+      "TITLE": "Configuración",
+      "ENABLE_GLOBAL_WEBHOOK": "Habilitar webhooks globales",
+      "ENABLE_GLOBAL_WEBHOOK_DESCRIPTION": "Habilita webhooks globales para todos los embudos y etapas."
+    },
+    "QUICK_ACTIONS": "Acciones Rápidas",
+    "QUICK_CHAT": "Chat Rápido",
+    "MOCK_DATA": "Datos de Prueba",
+    "TYPE_MESSAGE": "Escribe un mensaje...",
+    "COMMENTS": "Comentarios",
+    "ADD_COMMENT": "Añadir un comentario...",
+    "REPLY": "Responder",
+    "EDIT": "Editar",
+    "MOVE": "Mover",
+    "ASSIGN": "Asignar",
+    "STATUS": "Estado",
+    "SEND": "Enviar"
+  }
+}

@@ -1,0 +1,56 @@
+tags:
+  - Kanban Items
+summary: Create a kanban item
+description: Create a new kanban item in a funnel
+parameters:
+  - name: data
+    in: body
+    required: true
+    schema:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Título do item
+        description:
+          type: string
+          description: Descrição do item
+        funnel_id:
+          type: number
+          description: ID do funil
+        conversation_id:
+          type: number
+          description: ID da conversa associada
+        contact_id:
+          type: number
+          description: ID do contato associado
+        stage:
+          type: string
+          description: Estágio do item
+        priority:
+          type: string
+          enum: [low, medium, high, urgent]
+          description: Prioridade do item
+        status:
+          type: string
+          enum: [active, completed, archived]
+          description: Status do item
+        due_date:
+          type: string
+          format: date-time
+          description: Data de vencimento
+        assigned_user_id:
+          type: number
+          description: ID do usuário designado
+        position:
+          type: number
+          description: Posição do item na lista
+responses:
+  200:
+    description: Success
+    schema:
+      $ref: '#/definitions/kanban_item'
+  401:
+    description: Unauthorized
+  403:
+    description: Access denied
