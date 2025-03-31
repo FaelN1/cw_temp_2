@@ -1,19 +1,18 @@
-# #
-# # This action will publish Chatwoot CE docker image.
-# # This is set to run against merges to develop, master
-# # and when tags are created.
-# #
-
-name: Publish Chatwoot CE docker images
+name: Publish Salez CE docker images for AMD64
 on:
   push:
     branches:
-      - develop
-      - master
+      - main
+      - staging
+      - development
     tags:
       - v*
-# pull_request:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Tag da versão (ex: v4.0.1). Se vazio, usará a branch/tag do Git.'
+        required: false
+        default: ''
 
 jobs:
   build:
@@ -25,43 +24,47 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v3.2.0
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3.6.1
 
-      - name: Strip enterprise code
+      # Extrair a versão do package.json
+      - name: Extrair versão do package.json
+        id: package_version
         run: |
-          rm -rf enterprise
-          rm -rf spec/enterprise
+          APP_VERSION=$(cat package.json | grep '"version"' | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[:space:]')
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
+          echo "Versão do package.json: $APP_VERSION"
 
-      - name: Set Chatwoot edition
+      - name: Set docker tag
         run: |
-          echo -en '\nENV CW_EDITION="ce"' >> docker/Dockerfile
+          VERSION=${{ github.event.inputs.version }}
+          if [ -z "$VERSION" ]; then
+            VERSION=$GIT_REF
+          fi
+          echo "DOCKER_TAG=saleztechnology/salez_v4:$VERSION" >> $GITHUB_ENV
 
-      - name: set docker tag
+      - name: Replace docker tag if main
+        if: github.ref_name == 'main'
         run: |
-          # Replace forward slashes with hyphens in the ref name
-          SANITIZED_REF=$(echo "$GIT_REF" | sed 's/\//-/g')
-          echo "DOCKER_TAG=chatwoot/chatwoot:$SANITIZED_REF-ce" >> $GITHUB_ENV
-
-      - name: replace docker tag if master
-        if: github.ref_name == 'master'
-        run: |
-          echo "DOCKER_TAG=chatwoot/chatwoot:latest-ce" >> $GITHUB_ENV
+          echo "DOCKER_TAG=saleztechnology/salez_v4:latest" >> $GITHUB_ENV
 
       - name: Login to DockerHub
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3.3.0
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: saleztechnology
+          password: dckr_pat_mySJ4YUFFMPHG19nqvqYpgpa24g
 
-      - name: Build and push
-        uses: docker/build-push-action@v2
+      - name: Build and push amd64 image
+        uses: docker/build-push-action@v6.5.0
         with:
           context: .
           file: docker/Dockerfile
-          platforms: linux/amd64, linux/arm64
-          push: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
+          platforms: linux/amd64
+          push: true
           tags: ${{ env.DOCKER_TAG }}
+          build-args: |
+            APP_VERSION=${{ env.APP_VERSION }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

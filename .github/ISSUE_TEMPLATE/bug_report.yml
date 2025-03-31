@@ -27,9 +27,9 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: Describe whether you are using Chatwoot Cloud (app.chatwoot.com) or a self-hosted installation of Chatwoot. If you are using a self-hosted installation of Chatwoot, describe the type of deployment (Docker/Linux VM installation/Heroku/Kubernetes/Other).
+      description: Describe whether you are using Salez Cloud (app.salez.com.br) or a self-hosted installation of Salez. If you are using a self-hosted installation of Salez, describe the type of deployment (Docker/Linux VM installation/Heroku/Kubernetes/Other).
       options:
-        - app.chatwoot.com
+        - app.salez.com.br
         - Linux VM
         - Docker
         - Kubernetes
@@ -68,7 +68,7 @@ body:
     attributes:
       label: Docker (if applicable)
       description: |
-        Please share the output of the following. 
+        Please share the output of the following.
         - `docker version`
         - `docker info`
         - `docker-compose version`
