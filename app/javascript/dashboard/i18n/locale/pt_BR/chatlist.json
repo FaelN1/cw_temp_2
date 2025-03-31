@@ -1,38 +1,38 @@
 {
   "CHAT_LIST": {
-    "LOADING": "Buscando conversas",
+    "LOADING": "Carregando conversas...",
     "LOAD_MORE_CONVERSATIONS": "Carregar mais conversas",
-    "EOF": "Todas as conversas carregadas 🎉",
+    "EOF": "Todas as conversas carregadas ✅",
     "LIST": {
-      "404": "Não há conversas ativas neste grupo."
+      "404": "Ops! Não há conversas ativas nesta aba."
     },
     "TAB_HEADING": "Conversas",
     "MENTION_HEADING": "Menções",
-    "UNATTENDED_HEADING": "Não Atendidas",
+    "UNATTENDED_HEADING": "Não respondidas",
     "SEARCH": {
-      "INPUT": "Pesquisar pessoas, conversas, respostas salvas .."
+      "INPUT": "Pesquisar usuários, conversas, respostas rápidas..."
     },
-    "FILTER_ALL": "Todos",
+    "FILTER_ALL": "Todas",
     "ASSIGNEE_TYPE_TABS": {
-      "me": "Minha",
-      "unassigned": "Não atribuída",
-      "all": "Todos"
+      "me": "Minhas",
+      "unassigned": "Não atribuídas",
+      "all": "Geral"
     },
     "CHAT_STATUS_FILTER_ITEMS": {
       "open": {
         "TEXT": "Abertas"
       },
       "resolved": {
-        "TEXT": "Resolvida"
+        "TEXT": "Resolvidas"
       },
       "pending": {
-        "TEXT": "Pendente"
+        "TEXT": "Pendentes"
       },
       "snoozed": {
-        "TEXT": "Adiado"
+        "TEXT": "Retornos"
       },
       "all": {
-        "TEXT": "Todos"
+        "TEXT": "Todas"
       }
     },
     "VIEW_FILTER": "Visualizar",
@@ -53,7 +53,7 @@
     },
     "SORT_ORDER_ITEMS": {
       "last_activity_at_asc": {
-        "TEXT": "Última atividade: Mais antigas primeiro"
+        "TEXT": "Última atividade: Antigas primeiro"
       },
       "last_activity_at_desc": {
         "TEXT": "Última atividade: Recentes primeiro"
@@ -62,7 +62,7 @@
         "TEXT": "Criado em: Recentes primeiro"
       },
       "created_at_asc": {
-        "TEXT": "Criado em: Antigos primeiro"
+        "TEXT": "Criado em: Antigas primeiro"
       },
       "priority_desc": {
         "TEXT": "Prioridade: Altas primeiro"
@@ -88,13 +88,13 @@
         "CONTENT": "Mensagem de vídeo"
       },
       "file": {
-        "CONTENT": "Arquivo anexo"
+        "CONTENT": "Arquivo em anexo"
       },
       "location": {
         "CONTENT": "Localização"
       },
       "fallback": {
-        "CONTENT": "compartilhou uma URL"
+        "CONTENT": "Compartilhou uma URL"
       }
     },
     "CHAT_SORT_BY_FILTER": {
@@ -110,22 +110,22 @@
           "LABEL": "Criado em"
         },
         "LAST_USER_MESSAGE_AT": {
-          "NAME": "Última mensagem de usuário em",
+          "NAME": "Última mensagem do usuário em",
           "LABEL": "Última mensagem"
         }
       }
     },
     "RECEIVED_VIA_EMAIL": "Recebido por e-mail",
-    "VIEW_TWEET_IN_TWITTER": "Ver tweet no Twitter",
+    "VIEW_TWEET_IN_TWITTER": "Ver tweet no twitter",
     "REPLY_TO_TWEET": "Responder a este tweet",
-    "LINK_TO_STORY": "Vá para o Story do Instagram",
+    "LINK_TO_STORY": "Vá para o story do instagram",
     "SENT": "Enviado com sucesso",
     "READ": "Lido com sucesso",
     "DELIVERED": "Entregue com sucesso",
-    "NO_MESSAGES": "Nova Mensagem",
+    "NO_MESSAGES": "Nova mensagem",
     "NO_CONTENT": "Nenhum conteúdo disponível",
-    "HIDE_QUOTED_TEXT": "Ocultar Texto Citado",
-    "SHOW_QUOTED_TEXT": "Mostrar Texto Citado",
+    "HIDE_QUOTED_TEXT": "Ocultar texto citado",
+    "SHOW_QUOTED_TEXT": "Mostrar texto citado",
     "MESSAGE_READ": "Lida"
   }
 }

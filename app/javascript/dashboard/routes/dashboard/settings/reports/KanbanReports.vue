@@ -874,7 +874,7 @@ export default {
       const classes = {
         high: 'bg-red-500',
         medium: 'bg-yellow-500',
-        low: 'bg-orange-500',
+        low: 'bg-[#ff3900]',
       };
       return classes[severity] || classes.medium;
     },

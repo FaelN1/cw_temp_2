@@ -1,62 +1,62 @@
 {
   "SLA": {
-    "HEADER": "Termos do Serviço",
+    "HEADER": "SLA",
     "ADD_ACTION": "Adicionar SLA",
-    "ADD_ACTION_LONG": "Criar uma nova Política de SLA",
-    "DESCRIPTION": "Contratos de Nível de Serviço são contratos que definem expectativas claras entre sua equipe e os clientes. Estabelecem normas para tempos de resposta e de resolução, criando um quadro de responsabilização e garantindo uma experiência coerente e de qualidade.",
-    "LEARN_MORE": "Saiba mais sobre SLA",
-    "LOADING": "Buscando SLAs",
+    "ADD_ACTION_LONG": "Adicionar SLA",
+    "DESCRIPTION": "O SLA estabelece um padrão de tempo para as respostas e conclusão da solicitação do cliente, criando uma estrutura que garante um atendimento rápido e eficiente.",
+    "LEARN_MORE": "Saiba mais sobre as funções dos SLAs",
+    "LOADING": "Carregando SLAs...",
     "PAYWALL": {
       "TITLE": "Atualize para criar SLAs",
       "AVAILABLE_ON": "O recurso SLA está disponível apenas nos planos Business e Enterprise.",
-      "UPGRADE_PROMPT": "Atualize seu plano para obter acesso a recursos avançados como gerenciamento de equipe, automações, atributos personalizados e muito mais.",
-      "UPGRADE_NOW": "Atualizar agora",
-      "CANCEL_ANYTIME": "Você pode alterar ou cancelar seu plano a qualquer momento"
+      "UPGRADE_PROMPT": "Atualize seu plano para ter acesso a recursos avançados.",
+      "UPGRADE_NOW": "Atualize agora",
+      "CANCEL_ANYTIME": "Você pode alterar ou cancelar seu plano a qualquer momento."
     },
     "ENTERPRISE_PAYWALL": {
       "AVAILABLE_ON": "O recurso SLA está disponível apenas nos planos pagos.",
-      "UPGRADE_PROMPT": "Atualize para um plano pago para acessar recursos avançados como registros de auditoria, capacidade do agente e muito mais.",
-      "ASK_ADMIN": "Entre em contato com seu administrador para fazer a atualização."
+      "UPGRADE_PROMPT": "Faça upgrade para um plano pago para acessar recursos avançados.",
+      "ASK_ADMIN": "Entre em contato com seu gerente de contas para fazer a atualização."
     },
     "LIST": {
-      "404": "Não há SLAs disponíveis nesta conta.",
+      "404": "Ops! Nenhum SLA criado ainda. Vamos criar? 🙌",
       "EMPTY": {
         "TITLE_1": "Enterprise P0",
-        "DESC_1": "Questões levantadas por clientes empresariais que requerem atenção imediata.",
+        "DESC_1": "Problemas levantados por clientes que exigem atenção imediata.",
         "TITLE_2": "Enterprise P1",
-        "DESC_2": "Questões levantadas por clientes empresariais que precisam ser reconhecidas rapidamente."
+        "DESC_2": "Problemas levantados por clientes que precisam ser reconhecidos rapidamente."
       },
-      "BUSINESS_HOURS_ON": "Horários de funcionamento",
-      "BUSINESS_HOURS_OFF": "Horário comercial desligado",
+      "BUSINESS_HOURS_ON": "Horário comercial ativado",
+      "BUSINESS_HOURS_OFF": "Horário comercial desativado",
       "RESPONSE_TYPES": {
-        "FRT": "Próximo limite de tempo de resposta",
-        "NRT": "Próximo limite de tempo de resposta",
-        "RT": "Limite de tempo de resolução",
+        "FRT": "Tempo de primeira reposta",
+        "NRT": "Tempo de demais respostas",
+        "RT": "Tempo de resolução",
         "SHORT_HAND": {
-          "FRT": "FRT",
-          "NRT": "NRT",
-          "RT": "RT"
+          "FRT": "TPR",
+          "NRT": "TDR",
+          "RT": "TR"
         }
       }
     },
     "FORM": {
       "NAME": {
-        "LABEL": "Nome da SLA",
-        "PLACEHOLDER": "Nome da SLA",
-        "REQUIRED_ERROR": "Nome da SLA é obrigatória",
-        "MINIMUM_LENGTH_ERROR": "Tamanho mínimo 2 é necessário",
-        "VALID_ERROR": "Somente Letras, Números, Hífen e Sublinhado são permitidos"
+        "LABEL": "Nome do SLA",
+        "PLACEHOLDER": "Digite o nome do SLA",
+        "REQUIRED_ERROR": "Ops! O nome é obrigatório.",
+        "MINIMUM_LENGTH_ERROR": "Ops! É necessário o mínimo de 2 caracteres.",
+        "VALID_ERROR": "Ops! Somente letras, números, hífen e sublinhado são permitidos."
       },
       "DESCRIPTION": {
         "LABEL": "Descrição",
-        "PLACEHOLDER": ""
+        "PLACEHOLDER": "Digite a descrição para o SLA"
       },
       "FIRST_RESPONSE_TIME": {
-        "LABEL": "Tempo da Primeira Resposta",
+        "LABEL": "Tempo de primeira resposta",
         "PLACEHOLDER": "5"
       },
       "NEXT_RESPONSE_TIME": {
-        "LABEL": "Próximo tempo de resposta",
+        "LABEL": "Tempo de resposta",
         "PLACEHOLDER": "5"
       },
       "RESOLUTION_TIME": {
@@ -64,45 +64,45 @@
         "PLACEHOLDER": "60"
       },
       "BUSINESS_HOURS": {
-        "LABEL": "Horário de funcionamento",
-        "PLACEHOLDER": ""
+        "LABEL": "Horário comercial",
+        "PLACEHOLDER": "Somente em horário comercial"
       },
       "THRESHOLD_TIME": {
-        "INVALID_FORMAT_ERROR": "O limite deve ser um número e maior que zero"
+        "INVALID_FORMAT_ERROR": "Informe pelo menos um número e maior que zero"
       },
-      "EDIT": "Alterar",
-      "CREATE": "Criar",
+      "EDIT": "Editar",
+      "CREATE": "Salvar",
       "DELETE": "Excluir",
       "CANCEL": "Cancelar"
     },
     "ADD": {
       "TITLE": "Adicionar SLA",
-      "DESC": "Promessas amigáveis ​​para um ótimo serviço!",
+      "DESC": "O SLA irá ajudar sua empresa melhorar a eficiência comercial e levar ao cliente uma experiência de atendimento mais rápida.",
       "API": {
-        "SUCCESS_MESSAGE": "SLA adicionada com sucesso",
-        "ERROR_MESSAGE": "Ocorreu um erro, por favor tente novamente"
+        "SUCCESS_MESSAGE": "Oba! SLA adicionado com sucesso! 🚀",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para adicionar o SLA. Vamos tentar novamente? 🤞"
       }
     },
-    "DELETE": {
-      "TITLE": "Excluir SLA",
+    "EDIT": {
+      "TITLE": "Editar",
       "API": {
-        "SUCCESS_MESSAGE": "SLA excluído com sucesso",
-        "ERROR_MESSAGE": "Ocorreu um erro, por favor tente novamente"
+        "SUCCESS_MESSAGE": "Oba! SLA excluído com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir o SLA. Vamos tentar novamente? 🤞"
       },
       "CONFIRM": {
         "TITLE": "Confirmar exclusão",
-        "MESSAGE": "Tem certeza que deseja excluir ",
-        "YES": "Sim, excluir ",
-        "NO": "Não, Mantenha "
+        "MESSAGE": "Você tem certeza que deseja excluir a automação?",
+        "YES": "Excluir",
+        "NO": "Cancelar"
       }
     },
     "EVENTS": {
-      "TITLE": "Faltas de SLA",
-      "FRT": "Primeira resposta",
-      "NRT": "Próximo tempo de resposta",
+      "TITLE": "Erros de SLA",
+      "FRT": "Tempo de primeira reposta",
+      "NRT": "Tempo de resposta",
       "RT": "Tempo de resolução",
-      "SHOW_MORE": "{count} mais",
-      "HIDE": "Ocultar {count} linhas"
+      "SHOW_MORE": "{count} more",
+      "HIDE": "Hide {count} rows"
     }
   }
 }

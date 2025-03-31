@@ -1,23 +1,23 @@
 {
   "CONTACTS_FILTER": {
-    "TITLE": "Filtrar Contatos",
-    "SUBTITLE": "Adicione filtros abaixo e clique em 'Enviar' para filtrar conversas.",
-    "EDIT_CUSTOM_SEGMENT": "Editar segmento",
-    "CUSTOM_VIEWS_SUBTITLE": "Adicione ou remova filtros e atualize seu segmento.",
+    "TITLE": "Filtrar contatos",
+    "SUBTITLE": "Adicione filtros para personalizar a visualização dos contatos no formato de filtros.",
+    "EDIT_CUSTOM_SEGMENT": "Editar filtro",
+    "CUSTOM_VIEWS_SUBTITLE": "Adicione ou remova filtros personalizados para atualizar o filtro.",
     "ADD_NEW_FILTER": "Adicionar filtro",
-    "CLEAR_ALL_FILTERS": "Limpar Filtros",
-    "FILTER_DELETE_ERROR": "Você deve ter pelo menos um filtro para salvar",
-    "SUBMIT_BUTTON_LABEL": "Enviar",
-    "UPDATE_BUTTON_LABEL": "Atualizar segmento",
+    "CLEAR_ALL_FILTERS": "Limpar filtros",
+    "FILTER_DELETE_ERROR": "Ops! Você deve ter pelo menos um filtro para salvar.",
+    "SUBMIT_BUTTON_LABEL": "Salvar",
+    "UPDATE_BUTTON_LABEL": "Salvar",
     "CANCEL_BUTTON_LABEL": "Cancelar",
-    "CLEAR_BUTTON_LABEL": "Limpar Filtros",
-    "EMPTY_VALUE_ERROR": "Valor obrigatório",
-    "SEGMENT_LABEL": "Nome do segmento",
-    "SEGMENT_QUERY_LABEL": "Consulta de Segmento",
+    "CLEAR_BUTTON_LABEL": "Limpar filtros",
+    "EMPTY_VALUE_ERROR": "Valor obrigatório.",
+    "SEGMENT_LABEL": "Nome do filtro",
+    "SEGMENT_QUERY_LABEL": "Consulta do filtro",
     "TOOLTIP_LABEL": "Filtrar contatos",
     "QUERY_DROPDOWN_LABELS": {
-      "AND": "OU",
-      "OR": "ou"
+      "AND": "E",
+      "OR": "OU"
     },
     "OPERATOR_LABELS": {
       "equal_to": "Igual a",
@@ -31,15 +31,15 @@
       "days_before": "É x dias antes"
     },
     "ERRORS": {
-      "VALUE_REQUIRED": "Valor obrigatório"
+      "VALUE_REQUIRED": "Valor obrigatório."
     },
     "ATTRIBUTES": {
-      "NAME": "Nome",
-      "EMAIL": "e-mail",
-      "PHONE_NUMBER": "Número de telefone",
+      "NAME": "Nome do contato",
+      "EMAIL": "E-mail",
+      "PHONE_NUMBER": "Telefone",
       "IDENTIFIER": "Identificador",
       "CITY": "Cidade",
-      "COUNTRY": "País/região",
+      "COUNTRY": "País",
       "CUSTOM_ATTRIBUTE_LIST": "Lista",
       "CUSTOM_ATTRIBUTE_TEXT": "Texto",
       "CUSTOM_ATTRIBUTE_NUMBER": "Número",
@@ -48,12 +48,12 @@
       "CREATED_AT": "Criado em",
       "LAST_ACTIVITY": "Última atividade",
       "REFERER_LINK": "Link de origem",
-      "BLOCKED": "Bloqueado"
+      "BLOCKED": "Silenciado"
     },
     "GROUPS": {
-      "STANDARD_FILTERS": "Filtros Padrão",
-      "ADDITIONAL_FILTERS": "Filtros adicionais",
-      "CUSTOM_ATTRIBUTES": "Atributos Personalizados"
+      "STANDARD_FILTERS": "Filtro padrão",
+      "ADDITIONAL_FILTERS": "Filtro adicional",
+      "CUSTOM_ATTRIBUTES": "Campo personalizado"
     }
   }
 }
