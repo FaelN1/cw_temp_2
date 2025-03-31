@@ -157,6 +157,12 @@ Rails.application.routes.draw do
               resources :notes
             end
           end
+          resources :proxifier do
+            collection do
+              match :evolution, via: :all
+              match :quepasa, via: :all
+            end
+          end
           resources :csat_survey_responses, only: [:index] do
             collection do
               get :metrics

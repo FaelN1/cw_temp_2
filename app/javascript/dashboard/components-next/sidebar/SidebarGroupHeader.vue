@@ -22,7 +22,7 @@ const emit = defineEmits(['toggle']);
     :to="to"
     :title="label"
     :class="{
-      'n-blue-text bg-n-alpha-2 font-medium': isActive && !hasActiveChild,
+      'bg-orange-500 text-white font-medium': isActive && !hasActiveChild,
       'text-n-slate-12 font-medium': hasActiveChild,
       'text-n-slate-11 hover:bg-n-alpha-2': !isActive && !hasActiveChild,
     }"

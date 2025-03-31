@@ -41,7 +41,7 @@ $header-height: 3.5rem;
 $woot-logo-padding: $space-large $space-two;
 
 // Colors
-$color-woot: #1f93ff;
+$color-woot: #E56C00;
 $color-gray: #6e6f73;
 $color-light-gray: #999a9b;
 
@@ -59,9 +59,9 @@ $color-extra-light-blue: #f5f7f9;
 
 $primary-color: $color-woot;
 $secondary-color: #5d7592;
-$success-color: #44ce4b;
-$warning-color: #ffc532;
-$alert-color: #ff382d;
+$success-color: #E56C00;
+$warning-color: #E56C00;
+$alert-color: #E56C00;
 
 $masked-bg: rgba(0, 0, 0, .4);
 
@@ -83,7 +83,7 @@ $inbox-thumb-size: 3rem;
 
 // Snackbar default
 $woot-snackbar-bg: #323232;
-$woot-snackbar-button: #ffeb3b;
+$woot-snackbar-button: #E56C00;
 
 $swift-ease-out-duration: .4s !default;
 $swift-ease-out-function: cubic-bezier(0.37, 0, 0.63, 1) !default;

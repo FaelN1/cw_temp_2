@@ -26,6 +26,34 @@
         "BODY": "You are all set to go!"
       }
     },
+    "EVOLUTION_API_CONFIG": {
+      "QRCODE": "QRCode",
+      "CONNECT": "Connect",
+      "DISCONNECT": "Disconnect",
+      "REMAININGTIME": "Remaining time: ",
+      "PLEASEWAIT": "Please wait...",
+      "OPTIONS": "Options",
+      "CHOOSEOPTIONS": "Choose options for this instance.",
+      "REJECTCALLS": "Reject calls",
+      "DONOTACCEPTCALLS": "Do not accept calls",
+      "IGNOREGROUPS": "Ignore groups",
+      "ALWAYSONLINE": "Always online",
+      "MARKMESSAGESASREAD": "Mark messages as read",
+      "MARKSTATUSASSEEN": "Mark status as seen",
+      "SYNCFULLHISTORY": "Sync full history",
+      "SIGNMESSAGES": "Sign messages",
+      "REOPENCONVERSATIONS": "Reopen conversations",
+      "STARTCONVERSATIONASPENDING": "Start conversation as pending",
+      "IMPORTCONTACTS": "Import contacts",
+      "IMPORTMESSAGES": "Import messages",
+      "MERGEBRAZILCONTACTS": "Merge contacts from brazil digit 9",
+      "CONNECTWHATSAPP": "Connect your whatsapp using qr code.",
+      "ONLINE": "✅ Online",
+      "SCANQRCODE": "Scan the qr code on your device.",
+      "CONNECTED": "Connected!",
+      "QRCODEEXPIRED": "QrCode expired"
+
+    },
     "ADD": {
       "CHANNEL_NAME": {
         "LABEL": "Inbox Name",
