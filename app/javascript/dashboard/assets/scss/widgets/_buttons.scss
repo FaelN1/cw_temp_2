@@ -31,7 +31,7 @@ button {
 }
 
 .button {
-  @apply items-center bg-woot-500 dark:bg-woot-500 px-2.5 text-white dark:text-white inline-flex h-10 mb-0 gap-2 font-medium;
+  @apply items-center bg-[#ff3900] dark:bg-[#ff3900] px-2.5 text-white dark:text-white inline-flex h-10 mb-0 gap-2 font-medium;
 
   .button__content {
     @apply w-full whitespace-nowrap overflow-hidden text-ellipsis;
@@ -52,7 +52,7 @@ button {
   }
 
   &.success {
-    @apply bg-[#773d1c] dark:bg-[#ff7525] text-white dark:text-white;
+    @apply bg-[#ff3900] dark:bg-[#ff3900] text-white dark:text-white;
   }
 
   &.secondary {

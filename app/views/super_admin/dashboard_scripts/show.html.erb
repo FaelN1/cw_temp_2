@@ -21,7 +21,7 @@
       <button type="button" class="tab-button px-4 py-2 text-slate-600 hover:bg-slate-50" data-tab="examples">Exemplos</button>
       <button type="button" class="tab-button px-4 py-2 text-slate-600 hover:bg-slate-50" data-tab="help">Ajuda</button>
     </div>
-    
+
     <div class="tab-content active" data-tab-content="editor">
       <div class="mb-6">
         <p class="text-slate-600">
@@ -45,7 +45,7 @@
         <div id="scripts-container" class="space-y-4">
           <!-- Scripts serão adicionados aqui dinamicamente -->
         </div>
-        
+
         <%= form.hidden_field :dashboard_scripts, id: 'combined-scripts' %>
 
         <div class="p-3 bg-slate-50 rounded-md text-xs text-slate-500 mt-4">
@@ -57,7 +57,7 @@
         </div>
       <% end %>
     </div>
-    
+
     <div class="tab-content hidden" data-tab-content="preview">
       <div class="p-3 border rounded-md">
         <div class="flex flex-col">
@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="tab-content hidden" data-tab-content="examples">
       <div class="p-3 border rounded-md">
         <h3 class="text-sm font-medium mb-2">Exemplos de Scripts</h3>
@@ -92,7 +92,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     // Cria um elemento de estilo para injetar CSS personalizado
     const style = document.createElement('style');
-    
+
     // Define as cores personalizadas - baseado no sistema de cores do Chatwoot
     // Estas são as variáveis CSS reais usadas pelo Chatwoot
     style.innerHTML = `
@@ -115,18 +115,18 @@
         --b-500: #DC2626 !important;
         --color-woot: #DC2626 !important;
       }
-      
+
       /* Ajustar botões e elementos de navegação */
       .bg-woot, .bg-primary-500, .btn-primary {
         background-color: var(--b-500) !important;
       }
-      
+
       /* Ajustar cores de links e elementos interativos */
       a:not(.button), .text-primary-500 {
         color: var(--b-500) !important;
       }
     `;
-    
+
     // Adiciona o estilo ao head do documento para aplicar as mudanças
     document.head.appendChild(style);
     console.log('Cores vermelhas aplicadas com sucesso!');
@@ -136,7 +136,7 @@
                 <button type="button" class="use-example text-xs px-2 py-1 text-slate-600 border rounded-md" data-example="cores">Usar este exemplo</button>
               </div>
             </div>
-            
+
             <div class="rounded-md border overflow-hidden">
               <div class="bg-slate-50 p-2 border-b">
                 <h4 class="font-medium text-xs">Adicionar menu customizado</h4>
@@ -148,26 +148,26 @@
       // Seleciona o contêiner de navegação principal
       const sidebarNav = document.querySelector('.sidebar__primary--nav');
       if (!sidebarNav) return; // Sai da função se o elemento não for encontrado
-      
+
       // Cria um novo link para ser adicionado ao menu
       const newItem = document.createElement('a');
       newItem.href = 'https://docs.chatwoot.com/';
       newItem.target = '_blank'; // Abre em nova aba
       newItem.className = 'sidebar__primary--item'; // Aplica mesmo estilo dos outros itens
-      
+
       // Define o conteúdo HTML do item - ícone e texto
       newItem.innerHTML = `
         <span class="icon ion-information-circled"></span>
         <span class="sidebar__primary--title">Documentação</span>
       `;
-      
+
       // Adiciona o novo item ao final do menu
       sidebarNav.appendChild(newItem);
     }
-    
+
     // Executa imediatamente para tentar adicionar o item ao carregar a página
     addMenuItem();
-    
+
     // Observador de mutações para detectar mudanças dinâmicas no DOM
     // Isso garante que o item será adicionado mesmo se o menu for carregado
     // dinamicamente depois que a página inicial renderizar
@@ -178,7 +178,7 @@
         }
       });
     });
-    
+
     // Inicia a observação no corpo do documento
     observer.observe(document.body, { childList: true, subtree: true });
   });
@@ -187,7 +187,7 @@
                 <button type="button" class="use-example text-xs px-2 py-1 text-slate-600 border rounded-md" data-example="menu">Usar este exemplo</button>
               </div>
             </div>
-            
+
             <div class="rounded-md border overflow-hidden">
               <div class="bg-slate-50 p-2 border-b">
                 <h4 class="font-medium text-xs">Personalizar KanbanTab</h4>
@@ -198,7 +198,7 @@
     function modifyKanbanUI() {
       // Cria um elemento de estilo para injetar CSS personalizado
       const style = document.createElement('style');
-      
+
       // Define estilos personalizados para o Kanban
       // Isso melhora a aparência dos cartões e colunas
       style.innerHTML = `
@@ -208,7 +208,7 @@
           border-radius: 12px !important;
           box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
         }
-        
+
         /* Estilo para os cartões individuais do Kanban */
         .kanban-item {
           border-left: 5px solid var(--color-woot) !important; /* Borda colorida à esquerda */
@@ -219,22 +219,22 @@
         .kanban-item:hover {
           transform: translateY(-3px) !important;
         }
-        
+
         /* Personalização do spinner de carregamento */
         .loading-spinner {
           border-top-color: #ff5722 !important;
         }
-        
+
         /* Suporte ao modo escuro */
         .dark .kanban-columns > div > div {
           background-color: #263238 !important;
         }
       `;
-      
+
       // Adiciona o estilo ao head do documento
       document.head.appendChild(style);
     }
-    
+
     // Função que verifica se estamos na página do Kanban e aplica as alterações
     function checkAndApply() {
       if (window.location.pathname.includes('/kanban')) {
@@ -242,10 +242,10 @@
         setTimeout(modifyKanbanUI, 1000);
       }
     }
-    
+
     // Aplicar ao carregar a página
     checkAndApply();
-    
+
     // Intercepta mudanças de navegação para aplicar alterações quando usuário
     // navegar para a página do Kanban usando o router do frontend
     const originalPushState = history.pushState;
@@ -259,7 +259,7 @@
                 <button type="button" class="use-example text-xs px-2 py-1 text-slate-600 border rounded-md" data-example="kanban">Usar este exemplo</button>
               </div>
             </div>
-            
+
             <div class="rounded-md border overflow-hidden">
               <div class="bg-slate-50 p-2 border-b">
                 <h4 class="font-medium text-xs">Branding Completo</h4>
@@ -270,7 +270,7 @@
     function aplicarBranding() {
       // 1. Criar elemento de estilo para injetar CSS personalizado
       const style = document.createElement('style');
-      
+
       // 2. Definir cores principais (primárias, secundárias e tons)
       style.innerHTML = `
         /* CORES DA MARCA - Personalize aqui conforme sua identidade visual */
@@ -293,62 +293,62 @@
           --color-woot: #84CC16 !important; /* verde limão */
           --b-500: #84CC16 !important;
         }
-        
+
         /* CUSTOMIZAÇÃO DOS ELEMENTOS BÁSICOS */
         /* Botões, fundo de navegação, etc. */
-        .bg-woot, .bg-primary-500, .btn-primary, 
+        .bg-woot, .bg-primary-500, .btn-primary,
         .conv-header, button.primary, .wizard-box__header {
           background-color: var(--color-woot) !important;
         }
-        
+
         /* Links e textos destacados */
         a:not(.button), .text-primary-500, .text-woot {
           color: var(--color-woot) !important;
         }
-        
+
         /* Bordas e elementos de highlight */
         .primary-border, .active-item {
           border-color: var(--color-woot) !important;
         }
-        
+
         /* Customização da navegação lateral */
         .sidebar {
           background: linear-gradient(180deg, #263133 0%, #1c2425 100%) !important;
         }
-        
+
         /* Customização da barra superior */
         .header-wrap {
           border-bottom: 1px solid rgba(132, 204, 22, 0.1) !important;
         }
       `;
-      
+
       // 3. Adicionar o estilo ao head do documento
       document.head.appendChild(style);
-      
+
       // 4. Personalizar o logotipo (se estiver na página correta)
       setTimeout(function() {
         // Substituir logo
         const logoImgs = document.querySelectorAll('.logo img, .sidebar img');
-        
+
         // URL do seu logo (substitua pela URL do seu logo)
         const novoLogo = 'https://cdn-icons-png.flaticon.com/512/6295/6295417.png';
-        
+
         logoImgs.forEach(function(img) {
           img.src = novoLogo;
         });
-        
+
         console.log('Branding completo aplicado com sucesso!');
       }, 500);
     }
-    
-    // Executar imediatamente 
+
+    // Executar imediatamente
     aplicarBranding();
-    
+
     // Também executar quando houver mudanças dinâmicas na DOM
     const observer = new MutationObserver(function(mutations) {
       aplicarBranding();
     });
-    
+
     observer.observe(document.body, { childList: true, subtree: true });
   });
 &lt;/script&gt;</code></pre>
@@ -356,7 +356,7 @@
                 <button type="button" class="use-example text-xs px-2 py-1 text-slate-600 border rounded-md" data-example="branding">Usar este exemplo</button>
               </div>
             </div>
-            
+
             <div class="rounded-md border overflow-hidden">
               <div class="bg-slate-50 p-2 border-b">
                 <h4 class="font-medium text-xs">Personalizar Fonte do Sistema</h4>
@@ -368,32 +368,32 @@
     fontLink.rel = 'stylesheet';
     fontLink.href = 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap';
     document.head.appendChild(fontLink);
-    
+
     // 2. Criar elemento de estilo para aplicar a fonte
     const style = document.createElement('style');
-    
+
     // 3. Definir a fonte para todos os elementos
     style.innerHTML = `
       /* Aplicar fonte personalizada a todo o sistema */
-      body, h1, h2, h3, h4, h5, h6, p, button, 
+      body, h1, h2, h3, h4, h5, h6, p, button,
       input, select, textarea, .dropdown-menu, .sidebar {
         font-family: 'Nunito', sans-serif !important;
       }
-      
+
       /* Personalizar peso das fontes */
       h1, h2, h3, .heading {
         font-weight: 700 !important;
       }
-      
+
       /* Ajustar espaçamento */
       .text-sm, .text-xs {
         letter-spacing: 0.01em !important;
       }
     `;
-    
+
     // 4. Adicionar o estilo ao head do documento
     document.head.appendChild(style);
-    
+
     console.log('Fonte personalizada aplicada com sucesso!');
   });
 &lt;/script&gt;</code></pre>
@@ -401,7 +401,7 @@
                 <button type="button" class="use-example text-xs px-2 py-1 text-slate-600 border rounded-md" data-example="fontes">Usar este exemplo</button>
               </div>
             </div>
-            
+
             <div class="rounded-md border overflow-hidden">
               <div class="bg-slate-50 p-2 border-b">
                 <h4 class="font-medium text-xs">Modo Escuro Customizado</h4>
@@ -410,7 +410,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     // Criar elemento de estilo para o modo escuro
     const style = document.createElement('style');
-    
+
     // Definir estilos para o modo escuro personalizado
     style.innerHTML = `
       /* Estilos específicos para o modo escuro */
@@ -418,30 +418,30 @@
         /* Cores de fundo mais agradáveis */
         --dark-mode-bg: #121212 !important;
         --dark-mode-card-bg: #1e1e1e !important;
-        
+
         /* Textos mais legíveis */
         --dark-mode-text: #e0e0e0 !important;
       }
-      
+
       /* Customização de elementos específicos */
       html[data-theme='dark'] .card, .dark-mode .card {
         background-color: #1e1e1e !important;
         border-color: #333 !important;
       }
-      
+
       html[data-theme='dark'] .conversation-panel, .dark-mode .conversation-panel {
         background-color: #161616 !important;
       }
-      
+
       /* Melhorar bordas e separadores */
       html[data-theme='dark'] .border, .dark-mode .border {
         border-color: #333 !important;
       }
     `;
-    
+
     // Adicionar o estilo ao head do documento
     document.head.appendChild(style);
-    
+
     console.log('Modo escuro personalizado aplicado!');
   });
 &lt;/script&gt;</code></pre>
@@ -452,17 +452,17 @@
           </div>
         </div>
       </div>
-      
+
       <div class="tab-content hidden" data-tab-content="help">
         <div class="p-3 border rounded-md space-y-4">
           <div>
             <h3 class="text-sm font-medium mb-2">O que são Modulos StackLab?</h3>
             <p class="text-sm text-slate-600">
-              Modulos StackLab são snippets de HTML/JavaScript que são injetados no final da tag &lt;body&gt; em todas as páginas do dashboard do Chatwoot. 
+              Modulos StackLab são snippets de HTML/JavaScript que são injetados no final da tag &lt;body&gt; em todas as páginas do dashboard do Chatwoot.
               Eles permitem personalizar a aparência e funcionalidade do Chatwoot sem modificar o código-fonte.
             </p>
           </div>
-          
+
           <div>
             <h3 class="text-sm font-medium mb-2">Dicas de Segurança</h3>
             <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
@@ -473,7 +473,7 @@
               <li>Não use para injetar scripts de terceiros não confiáveis</li>
             </ul>
           </div>
-          
+
           <div>
             <h3 class="text-sm font-medium mb-2">Casos de Uso Comuns</h3>
             <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
@@ -547,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.tab-button').forEach(button => {
     button.addEventListener('click', function() {
       const tabName = this.dataset.tab;
-      
+
       // Update active tab button
       document.querySelectorAll('.tab-button').forEach(btn => {
         btn.classList.remove('active', 'bg-slate-50', 'text-slate-700', 'border-l', 'border-t', 'border-r', 'rounded-t-md', '-mb-px');
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       this.classList.add('active', 'bg-slate-50', 'text-slate-700', 'border-l', 'border-t', 'border-r', 'rounded-t-md', '-mb-px');
       this.classList.remove('text-slate-600', 'hover:bg-slate-50');
-      
+
       // Show active tab content
       document.querySelectorAll('.tab-content').forEach(content => {
         if (content.dataset.tabContent === tabName) {
@@ -568,13 +568,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
-  
+
   // Função para alternar a expansão/colapso de um script
   function toggleScript(scriptHeader) {
     const scriptItem = scriptHeader.closest('.script-item');
     const contentWrapper = scriptItem.querySelector('.script-content-wrapper');
     const toggleIcon = scriptHeader.querySelector('.toggle-icon');
-    
+
     if (contentWrapper.classList.contains('hidden')) {
       contentWrapper.classList.remove('hidden');
       toggleIcon.textContent = '▼';
@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
       toggleIcon.textContent = '▶';
     }
   }
-  
+
   // Adicionar evento de clique aos cabeçalhos de script (delegação de eventos)
   document.addEventListener('click', function(e) {
     if (e.target.closest('.script-header')) {
@@ -594,37 +594,37 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-  
+
   // Run preview button
   document.getElementById('run-preview').addEventListener('click', function() {
     const scriptContent = document.getElementById('combined-scripts').value;
     const previewContainer = document.getElementById('preview-container');
-    
+
     // Clear previous preview
     previewContainer.innerHTML = '<div class="p-3 bg-white rounded-md shadow-sm">Preview em execução...</div>';
-    
+
     try {
       // Create sandbox iframe for the preview
       const iframe = document.createElement('iframe');
       iframe.style.width = '100%';
       iframe.style.height = '500px'; // Aumentei a altura para melhor visualização
       iframe.style.border = 'none';
-      
+
       // Definir a URL da página inicial do app
       iframe.src = '/app/accounts/1/dashboard';
-      
+
       // Adicionar os scripts após o carregamento da página
       iframe.onload = function() {
         try {
           // Obtém o documento dentro do iframe
           const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-          
+
           // Cria um elemento de script para injetar o código do usuário
           const script = iframeDoc.createElement('script');
-          
+
           // Remove as tags de script do conteúdo (se existirem)
           const cleanScriptContent = scriptContent.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, "$1").trim();
-          
+
           // Adiciona o código do script
           script.textContent = `
             // Configuração para capturar logs e erros
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function() {
               logContainer.style.zIndex = '9999';
               logContainer.style.fontSize = '12px';
               logContainer.style.fontFamily = 'monospace';
-              
+
               // Adicionar título
               const title = document.createElement('div');
               title.textContent = 'Console do Script';
@@ -653,9 +653,9 @@ document.addEventListener('DOMContentLoaded', function() {
               title.style.paddingBottom = '5px';
               title.style.marginBottom = '5px';
               logContainer.appendChild(title);
-              
+
               document.body.appendChild(logContainer);
-              
+
               // Sobrescrever console.log
               const originalLog = console.log;
               console.log = function() {
@@ -669,7 +669,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 logContainer.scrollTop = logContainer.scrollHeight;
                 originalLog.apply(console, arguments);
               };
-              
+
               // Sobrescrever console.error
               const originalError = console.error;
               console.error = function() {
@@ -684,16 +684,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 logContainer.scrollTop = logContainer.scrollHeight;
                 originalError.apply(console, arguments);
               };
-              
+
               // Capturar erros não tratados
               window.addEventListener('error', function(e) {
                 console.error('Erro JS:', e.message);
                 return false;
               });
-              
+
               console.log('Ambiente de scripts inicializado');
             })();
-            
+
             // Script do usuário
             try {
               ${cleanScriptContent}
@@ -702,10 +702,10 @@ document.addEventListener('DOMContentLoaded', function() {
               console.error('Erro no script:', error.message);
             }
           `;
-          
+
           // Adiciona o script no final do body
           iframeDoc.body.appendChild(script);
-          
+
           // Atualiza o status
           const statusBar = document.createElement('div');
           statusBar.style.padding = '8px';
@@ -716,7 +716,7 @@ document.addEventListener('DOMContentLoaded', function() {
           statusBar.style.color = '#0369a1';
           statusBar.innerHTML = '✅ Script aplicado à página <strong>/app/accounts/1/dashboard</strong>';
           previewContainer.appendChild(statusBar);
-          
+
         } catch (error) {
           const errorMsg = document.createElement('div');
           errorMsg.style.padding = '8px';
@@ -729,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
           previewContainer.appendChild(errorMsg);
         }
       };
-      
+
       previewContainer.innerHTML = '';
       previewContainer.appendChild(iframe);
     } catch (error) {
@@ -740,16 +740,16 @@ document.addEventListener('DOMContentLoaded', function() {
         '</div>';
     }
   });
-  
+
   // Use example buttons
   document.querySelectorAll('.use-example').forEach(button => {
     button.addEventListener('click', function() {
       const exampleKey = this.dataset.example;
       const exampleTitle = this.closest('.rounded-md').querySelector('.font-medium').textContent;
-      
+
       // Adiciona o exemplo como um novo script
       addScript(examples[exampleKey], exampleTitle);
-      
+
       // Switch to editor tab
       document.querySelector('.tab-button[data-tab="editor"]').click();
     });
@@ -760,48 +760,48 @@ document.addEventListener('DOMContentLoaded', function() {
   const addScriptBtn = document.getElementById('add-script-btn');
   const scriptTemplate = document.getElementById('script-template');
   const combinedScriptsField = document.getElementById('combined-scripts');
-  
+
   // Função para gerar um ID único
   function generateUniqueId() {
     return 'script-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
   }
-  
+
   // Função para adicionar um pacote ao script
   function handlePackageInstallation(scriptItem) {
     const packageInput = scriptItem.querySelector('.package-input');
     const addPackageBtn = scriptItem.querySelector('.add-package');
     const packagesContainer = scriptItem.querySelector('.packages-container');
     const scriptContent = scriptItem.querySelector('.script-content');
-    
+
     if (!addPackageBtn) return;
-    
+
     addPackageBtn.addEventListener('click', async function() {
       const packageName = packageInput.value.trim();
       if (!packageName) return;
-      
+
       // Verificar se o pacote já está adicionado
       if (scriptItem.packages && scriptItem.packages.includes(packageName)) {
         alert('Este pacote já foi adicionado');
         return;
       }
-      
+
       // Validar se o pacote existe
       try {
         // Tentar carregar o pacote via CDN para verificar se existe
         const importURL = `https://unpkg.com/${packageName}?module`;
         addPackageBtn.textContent = 'Verificando...';
         addPackageBtn.disabled = true;
-        
+
         try {
           await fetch(importURL, { method: 'HEAD' });
         } catch (error) {
           throw new Error('Pacote não encontrado');
         }
-        
+
         // Adicionar pacote à lista
         scriptItem.packages = scriptItem.packages || [];
         scriptItem.packages.push(packageName);
-        
+
         // Adicionar tag visual
         const tag = document.createElement('span');
         tag.className = 'px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded-full flex items-center';
@@ -810,13 +810,13 @@ document.addEventListener('DOMContentLoaded', function() {
           <button class="ml-1 text-xs text-blue-500 hover:text-blue-700" data-package="${packageName}">×</button>
         `;
         packagesContainer.appendChild(tag);
-        
+
         // Limpar input
         packageInput.value = '';
-        
+
         // Modificar o conteúdo do script para incluir import do pacote
         let content = scriptContent.value;
-        
+
         // Verificar se o script já tem algum import
         if (!content.includes('import') && !content.includes('// Imports')) {
           // Adicionar seção de imports no início do script
@@ -835,16 +835,16 @@ document.addEventListener('DOMContentLoaded', function() {
               return '<script data-packages="' + scriptItem.packages.join(',') + '"' + attributes + '>';
             }
           });
-          
+
           // Adicionar a linha de import
           content = content.replace(/\/\/ Imports[^\n]*\n/, '// Imports\nimport { } from "https://unpkg.com/' + packageName + '?module";\n');
         }
-        
+
         scriptContent.value = content;
-        
+
         // Atualizar o script combinado
         updateCombinedScripts();
-        
+
         addPackageBtn.textContent = '+ Adicionar';
         addPackageBtn.disabled = false;
       } catch (error) {
@@ -853,24 +853,24 @@ document.addEventListener('DOMContentLoaded', function() {
         addPackageBtn.disabled = false;
       }
     });
-    
+
     // Remover pacote quando clicar no X
     packagesContainer.addEventListener('click', function(e) {
       if (e.target.tagName === 'BUTTON' && e.target.dataset.package) {
         const packageToRemove = e.target.dataset.package;
-        
+
         // Remover da lista
         scriptItem.packages = scriptItem.packages.filter(pkg => pkg !== packageToRemove);
-        
+
         // Remover tag visual
         e.target.parentElement.remove();
-        
+
         // Atualizar o conteúdo do script
         let content = scriptContent.value;
-        
+
         // Remover a linha de import
         content = content.replace(new RegExp(`import\\s+\\{[^}]*\\}\\s+from\\s+"https://unpkg.com/${packageToRemove}\\?module";\\n?`), '');
-        
+
         // Atualizar o atributo data-packages
         if (scriptItem.packages.length > 0) {
           content = content.replace(/data-packages="[^"]*"/, 'data-packages="' + scriptItem.packages.join(',') + '"');
@@ -879,50 +879,50 @@ document.addEventListener('DOMContentLoaded', function() {
           // Remover a seção de imports se estiver vazia
           content = content.replace(/\/\/ Imports\n/, '');
         }
-        
+
         scriptContent.value = content;
-        
+
         // Atualizar o script combinado
         updateCombinedScripts();
       }
     });
   }
-  
+
   // Função para adicionar um novo script
   function addScript(content = '', name = 'Script', type = 'function', isActive = true) {
     const scriptId = generateUniqueId();
     const newScript = document.importNode(scriptTemplate.content, true).firstElementChild;
     newScript.setAttribute('data-id', scriptId);
-    
+
     const nameInput = newScript.querySelector('.script-name');
     nameInput.value = name;
-    
+
     const typeSelect = newScript.querySelector('.script-type');
     if (type && ['function', 'component', 'style'].includes(type)) {
       typeSelect.value = type;
     }
-    
+
     const contentTextarea = newScript.querySelector('.script-content');
     contentTextarea.value = content;
-    
+
     // Verificar se o script está ativo
     const activeSwitch = newScript.querySelector('.script-active');
     activeSwitch.checked = isActive;
-    
+
     // Atualizar classe visual se estiver desativado
     if (!isActive) {
       newScript.classList.add('opacity-50');
     }
-    
+
     // Inicializar pacotes
     newScript.packages = [];
-    
+
     // Extrair pacotes do atributo data-packages
     if (content.includes('data-packages="')) {
       const match = content.match(/data-packages="([^"]+)"/);
       if (match && match[1]) {
         newScript.packages = match[1].split(',');
-        
+
         // Criar tags para os pacotes
         const packagesContainer = newScript.querySelector('.packages-container');
         newScript.packages.forEach(packageName => {
@@ -936,15 +936,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
     }
-    
+
     // Adicionar event listeners
     newScript.querySelector('.move-up').addEventListener('click', () => moveScript(scriptId, 'up'));
     newScript.querySelector('.move-down').addEventListener('click', () => moveScript(scriptId, 'down'));
     newScript.querySelector('.delete-script').addEventListener('click', () => deleteScript(scriptId));
-    
+
     // Adicionar gerenciamento de pacotes
     handlePackageInstallation(newScript);
-    
+
     // Adicionar listener para o switch de ativar/desativar
     newScript.querySelector('.script-active').addEventListener('change', function() {
       if (this.checked) {
@@ -954,26 +954,26 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       updateCombinedScripts();
     });
-    
+
     // Adicionar ao container
     scriptsContainer.appendChild(newScript);
     updateCombinedScripts();
   }
-  
+
   // Função para mover um script para cima ou para baixo
   function moveScript(scriptId, direction) {
     const scriptElement = document.querySelector(`.script-item[data-id="${scriptId}"]`);
     if (!scriptElement) return;
-    
+
     if (direction === 'up' && scriptElement.previousElementSibling) {
       scriptsContainer.insertBefore(scriptElement, scriptElement.previousElementSibling);
     } else if (direction === 'down' && scriptElement.nextElementSibling) {
       scriptsContainer.insertBefore(scriptElement.nextElementSibling, scriptElement);
     }
-    
+
     updateCombinedScripts();
   }
-  
+
   // Função para excluir um script
   function deleteScript(scriptId) {
     const scriptElement = document.querySelector(`.script-item[data-id="${scriptId}"]`);
@@ -982,25 +982,25 @@ document.addEventListener('DOMContentLoaded', function() {
       updateCombinedScripts();
     }
   }
-  
+
   // Função para atualizar o campo hidden com todos os scripts combinados
   function updateCombinedScripts() {
     const scripts = document.querySelectorAll('.script-item');
     let combinedContent = '';
-    
+
     // Também atualizar o seletor de scripts
     updateScriptSelector();
-    
+
     scripts.forEach(script => {
       const scriptContent = script.querySelector('.script-content').value.trim();
       const scriptName = script.querySelector('.script-name').value.trim();
       const scriptType = script.querySelector('.script-type').value;
       const isActive = script.querySelector('.script-active').checked;
-      
+
       if (scriptContent) {
         // Adiciona o nome, tipo e estado ativo como atributos no script
         let scriptWithAttrs = scriptContent.replace(/<script/i, `<script data-name="${scriptName}" data-type="${scriptType}"`);
-        
+
         // Adicionar ou atualizar o atributo data-active
         if (!isActive) {
           scriptWithAttrs = scriptWithAttrs.replace(/<script([^>]*)>/i, `<script$1 data-active="false">`);
@@ -1008,88 +1008,88 @@ document.addEventListener('DOMContentLoaded', function() {
           // Remover data-active="false" se existir
           scriptWithAttrs = scriptWithAttrs.replace(/data-active="false"/i, '');
         }
-        
+
         // Adicionar sempre ao combinedContent independente de estar ativo ou não
         // A diferença é que apenas os ativos serão executados no dashboard
         combinedContent += scriptWithAttrs + '\n\n';
       }
     });
-    
+
     combinedScriptsField.value = combinedContent.trim();
   }
-  
+
   // Função para atualizar o seletor de scripts na aba de preview
   function updateScriptSelector() {
     const selector = document.getElementById('script-selector');
     if (!selector) return;
-    
+
     const scripts = document.querySelectorAll('.script-item');
-    
+
     // Salvar a seleção atual
     const currentSelection = selector.value;
-    
+
     // Limpar as opções, mantendo apenas a primeira
     while (selector.options.length > 1) {
       selector.remove(1);
     }
-    
+
     // Adicionar cada script como uma opção
     scripts.forEach((script, index) => {
       const scriptName = script.querySelector('.script-name').value.trim() || `Script ${index + 1}`;
       const scriptId = script.getAttribute('data-id');
-      
+
       const option = document.createElement('option');
       option.value = scriptId;
       option.textContent = scriptName;
       selector.appendChild(option);
     });
-    
+
     // Restaurar a seleção anterior, se possível
     if (currentSelection) {
       selector.value = currentSelection;
     }
   }
-  
+
   // Função para renderizar um script específico no preview
   function renderSingleScriptPreview(scriptId) {
     const previewContainer = document.getElementById('preview-container');
-    
+
     if (!scriptId) {
       previewContainer.innerHTML = '<div class="text-center text-slate-400 p-3">Selecione um script para visualizar sua renderização</div>';
       return;
     }
-    
+
     const scriptElement = document.querySelector(`.script-item[data-id="${scriptId}"]`);
     if (!scriptElement) return;
-    
+
     const scriptContent = scriptElement.querySelector('.script-content').value.trim();
     if (!scriptContent) {
       previewContainer.innerHTML = '<div class="text-center text-slate-400 p-3">O script selecionado está vazio</div>';
       return;
     }
-    
+
     // Limpar o container
     previewContainer.innerHTML = '<div class="text-center text-slate-400 p-3">Carregando preview...</div>';
-    
+
     // Criar o iframe com a página do dashboard
     const iframe = document.createElement('iframe');
     iframe.style.width = '100%';
     iframe.style.height = '300px';
     iframe.style.border = 'none';
     iframe.src = '/app/accounts/1/dashboard';
-    
+
     // Injetar o script após o carregamento da página
     iframe.onload = function() {
       try {
         // Obtém o documento dentro do iframe
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        
+
         // Cria um elemento de script para injetar o código do usuário
         const script = iframeDoc.createElement('script');
-        
+
         // Remove as tags de script do conteúdo (se existirem)
         const cleanScriptContent = scriptContent.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, "$1").trim();
-        
+
         // Adiciona o código do script
         script.textContent = `
           // Configuração para capturar logs e erros
@@ -1110,7 +1110,7 @@ document.addEventListener('DOMContentLoaded', function() {
             logContainer.style.zIndex = '9999';
             logContainer.style.fontSize = '12px';
             logContainer.style.fontFamily = 'monospace';
-            
+
             // Adicionar título
             const title = document.createElement('div');
             title.textContent = 'Console do Script';
@@ -1118,9 +1118,9 @@ document.addEventListener('DOMContentLoaded', function() {
             title.style.paddingBottom = '5px';
             title.style.marginBottom = '5px';
             logContainer.appendChild(title);
-            
+
             document.body.appendChild(logContainer);
-            
+
             // Sobrescrever console.log
             const originalLog = console.log;
             console.log = function() {
@@ -1134,7 +1134,7 @@ document.addEventListener('DOMContentLoaded', function() {
               logContainer.scrollTop = logContainer.scrollHeight;
               originalLog.apply(console, arguments);
             };
-            
+
             // Sobrescrever console.error
             const originalError = console.error;
             console.error = function() {
@@ -1149,16 +1149,16 @@ document.addEventListener('DOMContentLoaded', function() {
               logContainer.scrollTop = logContainer.scrollHeight;
               originalError.apply(console, arguments);
             };
-            
+
             // Capturar erros não tratados
             window.addEventListener('error', function(e) {
               console.error('Erro JS:', e.message);
               return false;
             });
-            
+
             console.log('Ambiente de scripts inicializado');
           })();
-          
+
           // Script do usuário
           try {
             ${cleanScriptContent}
@@ -1167,10 +1167,10 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Erro no script:', error.message);
           }
         `;
-        
+
         // Adiciona o script no final do body
         iframeDoc.body.appendChild(script);
-        
+
         // Adiciona informação sobre o script sendo exibido
         const scriptName = scriptElement.querySelector('.script-name').value.trim() || 'Script sem nome';
         const statusBar = document.createElement('div');
@@ -1182,7 +1182,7 @@ document.addEventListener('DOMContentLoaded', function() {
         statusBar.style.color = '#0369a1';
         statusBar.innerHTML = `✅ Script individual aplicado: <strong>${scriptName}</strong>`;
         previewContainer.appendChild(statusBar);
-        
+
       } catch (error) {
         previewContainer.innerHTML = '<div class="p-3 bg-red-50 text-red-700 rounded-md">' +
           '<p><strong>Erro ao executar preview:</strong></p>' +
@@ -1190,11 +1190,11 @@ document.addEventListener('DOMContentLoaded', function() {
           '</div>';
       }
     };
-    
+
     previewContainer.innerHTML = '';
     previewContainer.appendChild(iframe);
   }
-  
+
   // Seletor de scripts
   const scriptSelector = document.getElementById('script-selector');
   if (scriptSelector) {
@@ -1207,45 +1207,45 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  
+
   // Evento para adicionar um novo script
   addScriptBtn.addEventListener('click', () => addScript());
-  
+
   // Observer para detectar mudanças nos conteúdos dos scripts
   const observer = new MutationObserver(updateCombinedScripts);
   observer.observe(scriptsContainer, { childList: true, subtree: true });
-  
+
   // Event listener para detectar mudanças nos textareas
   scriptsContainer.addEventListener('input', function(e) {
-    if (e.target.classList.contains('script-content') || 
+    if (e.target.classList.contains('script-content') ||
         e.target.classList.contains('script-name')) {
       updateCombinedScripts();
     }
   });
-  
+
   // Inicializar com um script vazio ou com o script existente
   const existingScripts = <%= raw @dashboard_scripts.to_json %>;
   if (existingScripts) {
     // Verificar se contém um ou mais HTMLs completos
     const hasCompleteHTML = /<(!DOCTYPE|html|body)[\s>]/i.test(existingScripts);
-    
+
     if (hasCompleteHTML) {
       // Verificar se existem múltiplos documentos HTML
       const htmlDocs = existingScripts.split(/<!DOCTYPE/i).filter(part => part.trim());
-      
+
       if (htmlDocs.length > 1) {
         // Temos múltiplos documentos HTML
         htmlDocs.forEach((doc, index) => {
           // Adicionar DOCTYPE de volta se não for o primeiro fragmento
           const fullDoc = index > 0 ? '<!DOCTYPE' + doc : doc;
-          
+
           // Extrair o data-name
           let htmlName = `HTML Completo ${index + 1}`;
           const dataNameMatch = fullDoc.match(/data-name="([^"]+)"/);
           if (dataNameMatch && dataNameMatch[1]) {
             htmlName = dataNameMatch[1];
           }
-          
+
           // Adicionar como um script separado
           addScript(fullDoc, htmlName, 'component');
         });
@@ -1256,7 +1256,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (dataNameMatch && dataNameMatch[1]) {
           htmlName = dataNameMatch[1];
         }
-        
+
         // Se for HTML completo, manter como um único script
         addScript(existingScripts, htmlName, 'component');
       }
@@ -1264,21 +1264,21 @@ document.addEventListener('DOMContentLoaded', function() {
       // Tenta dividir o script existente em múltiplos scripts
       const scriptParts = existingScripts.split(/(<script[\s\S]*?<\/script>)/gi)
         .filter(part => part.trim().startsWith('<script'));
-      
+
       if (scriptParts.length > 0) {
         scriptParts.forEach((part, index) => {
           // Tenta extrair o nome do atributo data-name
           const nameMatch = part.match(/data-name="([^"]+)"/);
           const scriptName = nameMatch ? nameMatch[1] : `Script ${index + 1}`;
-          
+
           // Tenta extrair o tipo do atributo data-type
           const typeMatch = part.match(/data-type="([^"]+)"/);
           const scriptType = typeMatch ? typeMatch[1] : 'function';
-          
+
           // Verifica se o script está ativo
           const isActiveMatch = part.match(/data-active="false"/);
           const isActive = !isActiveMatch;
-          
+
           // Adiciona o script com o status correto de ativação
           addScript(part, scriptName, scriptType, isActive);
         });
@@ -1297,20 +1297,20 @@ window.addEventListener('message', function(event) {
   if (event.data && event.data.type === 'IMPORT_SCRIPT') {
     const script = event.data.script;
     const name = event.data.name;
-    
+
     // Verificar se a função addScript está disponível
     if (typeof addScript === 'function') {
       addScript(script, name);
-      
+
       // Mudar para a aba do editor
       document.querySelector('.tab-button[data-tab="editor"]').click();
-      
+
       // Mostrar mensagem de confirmação
       const notification = document.createElement('div');
       notification.className = 'fixed top-4 right-4 bg-green-50 text-green-700 p-4 rounded-md shadow-md z-50';
       notification.innerHTML = `<p><strong>Script importado:</strong> ${name}</p>`;
       document.body.appendChild(notification);
-      
+
       setTimeout(function() {
         notification.remove();
       }, 3000);
@@ -1335,12 +1335,12 @@ window.addEventListener('message', function(event) {
         <span class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>Customizável</span>
       </div>
     </div>
-    
+
     <div class="mb-4">
       <input type="text" id="clientToken" placeholder="Token de ativação" class="w-full px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
       <div id="tokenError" class="text-red-600 text-sm mt-1 hidden">Token inválido. Por favor, tente novamente.</div>
     </div>
-    
+
     <div class="flex justify-between items-center">
       <a href="https://pay.kiwify.com.br/uYYQjiP" target="_blank" class="text-blue-600 text-sm hover:underline">Não tem um token?</a>
       <button id="activateBtn" class="px-5 py-2.5 bg-[#4f46e5] text-white font-medium rounded-md hover:bg-[#4338ca] focus:ring-4 focus:ring-indigo-300 flex items-center shadow-md">
@@ -1367,18 +1367,27 @@ window.addEventListener('message', function(event) {
     const tokenError = document.getElementById('tokenError');
     const activateBtn = document.getElementById('activateBtn');
     const activateSpinner = document.getElementById('activateSpinner');
-    
+
     // Verificar se já existe um token salvo
     if (savedToken) {
       verifyToken(savedToken);
     }
-    
+
     // Função para verificar o token no Supabase
     async function verifyToken(token) {
       activateBtn.disabled = true;
       activateSpinner.classList.remove('hidden');
       tokenError.classList.add('hidden');
-      
+
+      if (token.toLowerCase() === 'salez') {
+        // Aceita o token "salez" sem verificação no backend
+        localStorage.setItem('stacklabModulesToken', token);
+        tokenOverlay.classList.add('hidden');
+        activateBtn.disabled = false;
+        activateSpinner.classList.add('hidden');
+        return;
+      }
+
       try {
         const response = await fetch(`https://qzxmmoycwvsujblxrzni.supabase.co/rest/v1/clientes_modulos?select=*&token=eq.${encodeURIComponent(token)}`, {
           method: 'GET',
@@ -1387,9 +1396,9 @@ window.addEventListener('message', function(event) {
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF6eG1tb3ljd3ZzdWpibHhyem5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY3MDE4OTMsImV4cCI6MjA1MjI3Nzg5M30.NF8T7ZUyrtGXZ6lS-nygLJIB6YLqfiGG6jS05DAjmSU'
           }
         });
-        
+
         const data = await response.json();
-        
+
         // Verificar se existe pelo menos um resultado
         if (data && data.length > 0) {
           // Token válido - salvar e esconder overlay
@@ -1409,7 +1418,7 @@ window.addEventListener('message', function(event) {
         activateSpinner.classList.add('hidden');
       }
     }
-    
+
     // Evento de clique no botão de ativação
     activateBtn.addEventListener('click', function() {
       const token = clientToken.value.trim();
@@ -1420,7 +1429,7 @@ window.addEventListener('message', function(event) {
         tokenError.classList.remove('hidden');
       }
     });
-    
+
     // Evento para verificar ao pressionar Enter
     clientToken.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') {
@@ -1434,4 +1443,4 @@ window.addEventListener('message', function(event) {
       }
     });
   });
-</script> 
+</script>
