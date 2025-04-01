@@ -1,73 +1,73 @@
 {
   "AGENT_BOTS": {
-    "HEADER": "Robôs",
-    "LOADING_EDITOR": "Carregando Editor...",
-    "HEADER_BTN_TXT": "Adicionar configuração do robô",
-    "SIDEBAR_TXT": "<p><b>Bots Agentes</b></p> <p>Bots Agentes são como os melhores membros da sua equipe. Eles podem lidar com coisas pequenas, para que você possa se concentrar no que realmente importa. Experimente-os.</p> <p>Você pode gerenciar seus bots desta página ou criar novos usando o botão 'Adicionar configuração de bot'.</p> <p>Abra o <a href=\"https://www.Salez.com/hc/Salez-user-guide-cloud-version/articles/1677497472-how-to-use-agent-bots\" target=\"_blank\">Manual do Bot Agente</a> em outra aba para obter ajuda.</p>",
+    "HEADER": "Chatbots",
+    "LOADING_EDITOR": "Carregando o editor...",
+    "HEADER_BTN_TXT": "Adicionar chatbot",
+    "SIDEBAR_TXT": "<p><b>Chatbots</b></p> <p>Chatbots simulam conversas humanas 24 horas por dia, qualificando os leads, fornecendo suporte, informações e serviços através de automações, para que você possa se concentrar no que realmente importa. </p> <p>Você pode gerenciar seus bots desta página ou criar novos usando o botão 'Adicionar chatbot'.",
     "CSML_BOT_EDITOR": {
       "NAME": {
-        "LABEL": "Nome do Robô",
-        "PLACEHOLDER": "Nomeie seu Robô.",
-        "ERROR": "O nome do bot é obrigatório."
+        "LABEL": "Nome",
+        "PLACEHOLDER": "Nome do chatbot",
+        "ERROR": "Ops! O nome do chatbot é obrigatório."
       },
       "DESCRIPTION": {
-        "LABEL": "Descrição do Robô",
-        "PLACEHOLDER": "O que esse robô faz?"
+        "LABEL": "Descrição do chatbot",
+        "PLACEHOLDER": "O que esse chatbot faz?"
       },
       "BOT_CONFIG": {
-        "ERROR": "Por favor, insira a configuração CSML do bot acima.",
-        "API_ERROR": "Sua configuração CSML é inválida. Por favor, corrija e tente novamente."
+        "ERROR": "Ops! Por favor, insira a configuração CSML do chatbot acima.",
+        "API_ERROR": "Ops! Sua configuração CSML é inválida. Por favor, corrija e tente novamente."
       },
-      "SUBMIT": "Validar e salvar"
+      "SUBMIT": "Salvar"
     },
     "BOT_CONFIGURATION": {
-      "TITLE": "Selecione um robô de agente",
-      "DESC": "Atribua um Agente Robô à sua caixa de entrada. Eles podem lidar com as conversas iniciais e transferi-las para um agente humano quando necessário.",
-      "SUBMIT": "Atualizar",
-      "DISCONNECT": "Desconectar Robô",
-      "SUCCESS_MESSAGE": "Agente de bot atualizado com sucesso.",
-      "DISCONNECTED_SUCCESS_MESSAGE": "Bot desconectado com sucesso.",
-      "ERROR_MESSAGE": "Não foi possível atualizar o agente robô. Por favor, tente novamente mais tarde.",
-      "DISCONNECTED_ERROR_MESSAGE": "Não foi possível desconectar o agente robô. Por favor, tente novamente mais tarde.",
-      "SELECT_PLACEHOLDER": "Selecionar Robô"
+      "TITLE": "Selecione um chatbot",
+      "DESC": "Conecte o chatbot aos seus canais de atendimento. Eles podem iniciar as conversas e transferi-las para o usuário quando necessário.",
+      "SUBMIT": "Conectar",
+      "DISCONNECT": "Desconectar",
+      "SUCCESS_MESSAGE": "Oba! Chatbot conectado com sucesso! 🚀",
+      "DISCONNECTED_SUCCESS_MESSAGE": "Oba! Chatbot desconectado com sucesso!",
+      "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar o chatbot. Vamos tentar novamente? 🤞",
+      "DISCONNECTED_ERROR_MESSAGE": "Ops! Houve alguma falha para desconectar o chatbot. Vamos tentar novamente? 🤞",
+      "SELECT_PLACEHOLDER": "Selecionar chatbot"
     },
     "ADD": {
-      "TITLE": "Configurar novo robô",
+      "TITLE": "Configurar novo chatbot",
       "CANCEL_BUTTON_TEXT": "Cancelar",
       "API": {
-        "SUCCESS_MESSAGE": "Bot adicionado com sucesso.",
-        "ERROR_MESSAGE": "Não foi possível adicionar o agente robô! Por favor, tente novamente mais tarde."
+        "SUCCESS_MESSAGE": "Oba! Chatbot adicionado com sucesso! 🚀",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para adicionar o chatbot. Vamos tentar novamente? 🤞"
       }
     },
     "LIST": {
-      "404": "Nenhum robô encontrado. Você pode criar um robô clicando no botão 'Configurar novo robô' ↗",
-      "LOADING": "Buscando robôs...",
-      "TYPE": "Tipo de Robô"
+      "404": "Ops! Nenhum chatbot encontrado. Você pode criar um bot clicando no botão 'Configurar novo chatbot' ↗",
+      "LOADING": "Carregando chatbots...",
+      "TYPE": "Tipo de Chatbot"
     },
     "DELETE": {
       "BUTTON_TEXT": "Excluir",
-      "TITLE": "Deletar robô",
+      "TITLE": "Excluir chatbot",
       "SUBMIT": "Excluir",
       "CANCEL_BUTTON_TEXT": "Cancelar",
-      "DESCRIPTION": "Tem certeza que deseja excluir este bot? Esta ação é irreversível.",
+      "DESCRIPTION": "Tem certeza que deseja excluir o chatbot?",
       "API": {
-        "SUCCESS_MESSAGE": "Bot excluído com sucesso.",
-        "ERROR_MESSAGE": "Não foi possível excluir o robô. Por favor, tente novamente."
+        "SUCCESS_MESSAGE": "Oba! Chatbot excluído com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir o chatbot. Vamos tentar novamente? 🤞"
       }
     },
     "EDIT": {
       "BUTTON_TEXT": "Alterar",
-      "LOADING": "Buscando robôs...",
-      "TITLE": "Editar Robô",
+      "LOADING": "Carregando chatbots...",
+      "TITLE": "Editar chatbot",
       "CANCEL_BUTTON_TEXT": "Cancelar",
       "API": {
-        "SUCCESS_MESSAGE": "Bot atualizado com sucesso.",
-        "ERROR_MESSAGE": "Não foi possível atualizar o robô. Por favor, tente novamente mais tarde."
+        "SUCCESS_MESSAGE": "Oba! Chatbot editado com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para editar o chatbot. Vamos tentar novamente? 🤞"
       }
     },
     "TYPES": {
-      "WEBHOOK": "Webhook robô",
-      "CSML": "CSML robô"
+      "WEBHOOK": "Webhook Chatbot",
+      "CSML": "CSML Chatbot"
     }
   }
 }

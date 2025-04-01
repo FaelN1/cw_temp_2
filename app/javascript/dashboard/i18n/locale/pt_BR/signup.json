@@ -4,28 +4,28 @@
     "TITLE": "Registrar",
     "TESTIMONIAL_HEADER": "Tudo o que ele leva é um passo para avançar",
     "TESTIMONIAL_CONTENT": "Você está a um passo de engajar seus clientes, mantê-los e encontrar novos.",
-    "TERMS_ACCEPT": "Ao criar uma conta, você concorda com nosso <a href=\"https://www.Salez.com/terms\">T & C</a> e nossa <a href=\"https://www.Salez.com/privacy-policy\">Política de privacidade</a>",
+    "TERMS_ACCEPT": "Ao criar uma conta, você concorda com nossos temos e nossa política de privacidade.</a>",
     "OAUTH": {
       "GOOGLE_SIGNUP": "Cadastre-se com o Google"
     },
     "COMPANY_NAME": {
-      "LABEL": "Nome Empresa",
-      "PLACEHOLDER": "Digite seu nome da sua empresa. Ex: Empresas Wayne",
+      "LABEL": "Nome da empresa",
+      "PLACEHOLDER": "Digite o nome da sua empresa. Por exemplo: Salez",
       "ERROR": "O nome da empresa é muito curto."
     },
     "FULL_NAME": {
       "LABEL": "Nome Completo",
-      "PLACEHOLDER": "Digite seu nome completo. Ex.: Bruce Wayne",
+      "PLACEHOLDER": "Digite seu nome completo. Por exemplo: Bruno Santos",
       "ERROR": "Nome completo é muito curto."
     },
     "EMAIL": {
       "LABEL": "E-mail comercial",
-      "PLACEHOLDER": "Digite seu e-mail de trabalho. Ex.: bruce{'@'}wayne.com.br",
-      "ERROR": "Por favor, insira um endereço de e-mail de trabalho válido."
+      "PLACEHOLDER": "Digite seu e-mail comercial. Por exemplo: seunome@empresa.com.br",
+      "ERROR": "Insira um endereço de e-mail comercial válido."
     },
     "PASSWORD": {
       "LABEL": "Senha",
-      "PLACEHOLDER": "Senha",
+      "PLACEHOLDER": "Digite sua senha",
       "ERROR": "A senha é muito curta.",
       "IS_INVALID_PASSWORD": "A senha deve conter pelo menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial."
     },
@@ -35,8 +35,8 @@
       "ERROR": "As senhas não conferem."
     },
     "API": {
-      "SUCCESS_MESSAGE": "Registro realizado com Sucesso",
-      "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot. Por favor, tente novamente."
+      "SUCCESS_MESSAGE": "Oba! Cadastro realizado com sucesso! 🚀",
+      "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞"
     },
     "SUBMIT": "Criar conta",
     "HAVE_AN_ACCOUNT": "Já possui uma conta?"
