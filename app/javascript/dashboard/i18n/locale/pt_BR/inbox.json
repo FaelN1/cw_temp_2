@@ -1,16 +1,16 @@
 {
   "INBOX": {
     "LIST": {
-      "TITLE": "Caixa de Entrada",
+      "TITLE": "Notificações",
       "DISPLAY_DROPDOWN": "Exibir",
-      "LOADING": "Buscando notificações",
-      "404": "Não há notificações ativas neste grupo.",
-      "NO_NOTIFICATIONS": "Nenhuma notificação",
-      "NOTE": "Notificações de todas as caixas de entrada inscritas",
-      "NO_MESSAGES_AVAILABLE": "Ops! Não foi possível buscar mensagens",
-      "SNOOZED_UNTIL": "Adiado até",
-      "SNOOZED_UNTIL_TOMORROW": "Adiado até amanhã",
-      "SNOOZED_UNTIL_NEXT_WEEK": "Adiado até a próxima semana"
+      "LOADING": "Carregando notificações...",
+      "EOF": "Todas as notificações carregadas ✅",
+      "404": "Ops! Não há notificações nesta aba.",
+      "NO_NOTIFICATIONS": "Todas as notificações foram lidas ✅",
+      "NOTE": "",
+      "SNOOZED_UNTIL": "Retornar até",
+      "SNOOZED_UNTIL_TOMORROW": "Retornar até amanhã",
+      "SNOOZED_UNTIL_NEXT_WEEK": "Retornar até a próxima semana"
     },
     "ACTION_HEADER": {
       "SNOOZE": "Adiar notificação",
@@ -21,16 +21,16 @@
       "CONVERSATION_MENTION": "Você foi mencionado em uma conversa",
       "CONVERSATION_CREATION": "Nova conversa criada",
       "CONVERSATION_ASSIGNMENT": "Uma conversa foi atribuída a você",
-      "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Nova mensagem em uma conversa atribuída",
-      "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Nova mensagem em uma conversa que você está participando",
-      "SLA_MISSED_FIRST_RESPONSE": "Meta de SLA da primeira resposta perdida na conversa",
-      "SLA_MISSED_NEXT_RESPONSE": "Meta de SLA da próxima resposta perdida na conversa",
-      "SLA_MISSED_RESOLUTION": "Meta de SLA de resolução perdida na conversa"
+      "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Nova mensagem (conversa não atribuída à você)",
+      "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Nova mensagem (conversa atribuída a você)",
+      "SLA_MISSED_FIRST_RESPONSE": "Tempo da primeira resposta do SLA expirado na conversa",
+      "SLA_MISSED_NEXT_RESPONSE": "Tempo de resposta do SLA expirado na conversa",
+      "SLA_MISSED_RESOLUTION": "Tempo de resolução do SLA expirado na conversa"
     },
     "MENU_ITEM": {
-      "MARK_AS_READ": "Marcar como lida",
+      "MARK_AS_READ": "Marcar como lido",
       "MARK_AS_UNREAD": "Marcar como não lida",
-      "SNOOZE": "Adiar",
+      "SNOOZE": "Retornar",
       "DELETE": "Excluir",
       "MARK_ALL_READ": "Marcar todas como lidas",
       "DELETE_ALL": "Excluir todas",
@@ -38,17 +38,17 @@
     },
     "DISPLAY_MENU": {
       "SORT": "Ordenar",
-      "DISPLAY": "Exibir:",
+      "DISPLAY": "Exibir :",
       "SORT_OPTIONS": {
-        "NEWEST": "Mais recentes",
-        "OLDEST": "Mais antigas",
+        "NEWEST": "Mais recente",
+        "OLDEST": "Mais antigo",
         "PRIORITY": "Prioridade"
       },
       "DISPLAY_OPTIONS": {
-        "SNOOZED": "Adiadas",
+        "SNOOZED": "Retornos",
         "READ": "Lidas",
-        "LABELS": "Marcadores",
-        "CONVERSATION_ID": "ID da Conversa"
+        "LABELS": "Etiquetas",
+        "CONVERSATION_ID": "Conversas"
       }
     },
     "ALERTS": {
@@ -57,8 +57,8 @@
       "SNOOZE": "Notificação adiada",
       "DELETE": "Notificação excluída",
       "MARK_ALL_READ": "Todas as notificações marcadas como lidas",
-      "DELETE_ALL": "Todas as notificações excluídas",
-      "DELETE_ALL_READ": "Todas as notificações lidas excluídas"
+      "DELETE_ALL": "Todas as notificações foram excluídas",
+      "DELETE_ALL_READ": "Todas as notificações lidas foram excluídas"
     }
   }
 }
