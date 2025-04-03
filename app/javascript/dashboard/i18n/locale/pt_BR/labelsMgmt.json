@@ -1,15 +1,15 @@
 {
   "LABEL_MGMT": {
-    "HEADER": "Etiquetas",
-    "HEADER_BTN_TXT": "Adicionar etiqueta",
-    "LOADING": "Carregando etiquetas...",
-    "DESCRIPTION": "Através das etiquetas fica muito mais fácil de fazer a gestão dos seus leads e clientes de forma categorizada, além de poder criar processos comerciais.",
-    "LEARN_MORE": "Saiba mais sobre as funções das etiquetas",
-    "SEARCH_404": "Não há itens que correspondam a esta consulta.",
+    "HEADER": "Marcadores",
+    "HEADER_BTN_TXT": "Adicionar marcador",
+    "LOADING": "Buscando marcadores",
+    "DESCRIPTION": "Labels help you categorize and prioritize conversations and leads. You can assign a label to a conversation or contact using the side panel.",
+    "LEARN_MORE": "Aprenda mais sobre rótulos",
+    "SEARCH_404": "Não existem itens correspondentes a esta consulta",
     "LIST": {
-      "404": "Ops! Nenhuma etiqueta criada ainda. Vamos criar? 🙌",
-      "TITLE": "Gerenciar etiquetas",
-      "DESC": "Etiquetas permitem agrupar as conversas.",
+      "404": "Não há marcadores disponíveis nesta conta.",
+      "TITLE": "Gerenciar marcadores",
+      "DESC": "Marcadores permitem agrupar as conversas.",
       "TABLE_HEADER": [
         "Nome",
         "Descrição",
@@ -18,24 +18,24 @@
     },
     "FORM": {
       "NAME": {
-        "LABEL": "Nome",
-        "PLACEHOLDER": "nome-da-etiqueta",
-        "REQUIRED_ERROR": "Ops! O nome da etiqueta é obrigatório.",
-        "MINIMUM_LENGTH_ERROR": "Mínimo de 2 caracteres.",
-        "VALID_ERROR": "Somente letras, números, hífen e sublinhado são permitidos."
+        "LABEL": "Nome do marcador",
+        "PLACEHOLDER": "Nome do marcador",
+        "REQUIRED_ERROR": "O nome do marcador é obrigatório",
+        "MINIMUM_LENGTH_ERROR": "Tamanho mínimo 2 é necessário",
+        "VALID_ERROR": "Somente Letras, Números, Hífen e Sublinhado são permitidos"
       },
       "DESCRIPTION": {
         "LABEL": "Descrição",
-        "PLACEHOLDER": "Descrição da etiqueta"
+        "PLACEHOLDER": "Descrição do marcador"
       },
       "COLOR": {
         "LABEL": "Cor"
       },
       "SHOW_ON_SIDEBAR": {
-        "LABEL": "Exibir etiqueta na coluna secundária do painel de conversas"
+        "LABEL": "Exibir marcador na barra lateral"
       },
-      "EDIT": "Editar",
-      "CREATE": "Adicionar",
+      "EDIT": "Alterar",
+      "CREATE": "Criar",
       "DELETE": "Excluir",
       "CANCEL": "Cancelar"
     },
@@ -46,39 +46,39 @@
         "DESELECT": "Desmarcar etiqueta",
         "DISMISS": "Descartar sugestão"
       },
-      "POWERED_BY": "Copiloto",
+      "POWERED_BY": "Salez AI",
       "DISMISS": "Recusar",
       "ADD_SELECTED_LABELS": "Adicionar etiquetas selecionadas",
       "ADD_SELECTED_LABEL": "Adicionar etiqueta selecionada",
       "ADD_ALL_LABELS": "Adicionar todas as etiquetas",
-      "SUGGESTED_LABELS": "Etiquetas sugeridas"
+      "SUGGESTED_LABELS": "Rótulos sugeridos"
     },
     "ADD": {
-      "TITLE": "Adicionar etiqueta",
-      "DESC": "",
+      "TITLE": "Adicionar marcador",
+      "DESC": "Marcadores permitem agrupar as conversas.",
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Etiqueta adicionada com sucesso! 🚀",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para adicionar a etiqueta. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Marcador adicionado com sucesso",
+        "ERROR_MESSAGE": "Ocorreu um erro, por favor tente novamente"
       }
     },
     "EDIT": {
-      "TITLE": "Editar etiqueta",
+      "TITLE": "Editar marcador",
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Etiqueta editada com sucesso!",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para editar a etiqueta. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Marcador atualizado com sucesso",
+        "ERROR_MESSAGE": "Ocorreu um erro, por favor tente novamente"
       }
     },
     "DELETE": {
       "BUTTON_TEXT": "Excluir",
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Etiqueta excluída com sucesso!",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir a etiqueta. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Marcador excluído com sucesso",
+        "ERROR_MESSAGE": "Ocorreu um erro, por favor tente novamente"
       },
       "CONFIRM": {
         "TITLE": "Confirmar exclusão",
-        "MESSAGE": "Você tem certeza que deseja excluir a etiqueta?",
-        "YES": "Excluir",
-        "NO": "Cancelar"
+        "MESSAGE": "Você tem certeza que deseja excluir ",
+        "YES": "Sim, excluir ",
+        "NO": "Não, Mantenha "
       }
     }
   }

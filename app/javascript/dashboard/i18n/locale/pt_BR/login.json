@@ -1,26 +1,26 @@
 {
   "LOGIN": {
-    "TITLE": "Seja bem-vindo à Salez!",
+    "TITLE": "Entrar no Salez",
     "EMAIL": {
-      "LABEL": "E-mail",
-      "PLACEHOLDER": "exemplo@empresa.com.br",
-      "ERROR": "Por favor, insira um e-mail válido."
+      "LABEL": "e-mail",
+      "PLACEHOLDER": "exemplo{'@'}empresa.com",
+      "ERROR": "Digite um endereço de e-mail válido"
     },
     "PASSWORD": {
       "LABEL": "Senha",
       "PLACEHOLDER": "Senha"
     },
     "API": {
-      "SUCCESS_MESSAGE": "Oba! Login realizado com sucesso! 🚀",
-      "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞",
-      "UNAUTH": "Ops! E-mail ou senha incorretos. Vamos tentar novamente? 🤞"
+      "SUCCESS_MESSAGE": "Acesso bem-sucedido",
+      "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot. Tente novamente.",
+      "UNAUTH": "Usuário ou senha incorretos. Por favor, tente novamente."
     },
     "OAUTH": {
-      "GOOGLE_LOGIN": "Login com o Google",
-      "BUSINESS_ACCOUNTS_ONLY": "Por favor, use seu endereço de e-mail corporativo para entrar.",
-      "NO_ACCOUNT_FOUND": "Ops! Não conseguimos encontrar uma conta para seu endereço de e-mail."
+      "GOOGLE_LOGIN": "Entrar com o Google",
+      "BUSINESS_ACCOUNTS_ONLY": "Use o endereço de e-mail da empresa para fazer login",
+      "NO_ACCOUNT_FOUND": "Não encontramos uma conta para seu endereço de e-mail."
     },
-    "FORGOT_PASSWORD": "Esqueceu a senha?",
+    "FORGOT_PASSWORD": "Esqueceu-se da sua senha?",
     "CREATE_NEW_ACCOUNT": "Criar nova conta",
     "SUBMIT": "Entrar"
   }

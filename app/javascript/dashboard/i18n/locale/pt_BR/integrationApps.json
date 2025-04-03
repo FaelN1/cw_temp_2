@@ -1,36 +1,36 @@
 {
   "INTEGRATION_APPS": {
-    "FETCHING": "Carregando aplicativos...",
-    "NO_HOOK_CONFIGURED": "Ops! Nenhum chatbot criado ainda. Vamos criar? 🙌",
-    "HEADER": "Aplicativos",
+    "FETCHING": "Buscando integrações",
+    "NO_HOOK_CONFIGURED": "Não há integrações {integrationId} configuradas nesta conta.",
+    "HEADER": "Aplicações",
     "STATUS": {
       "ENABLED": "Ativado",
       "DISABLED": "Desativado"
     },
-    "CONFIGURE": "Conectar",
-    "ADD_BUTTON": "Conectar",
+    "CONFIGURE": "Configurar",
+    "ADD_BUTTON": "Adicionar um novo hook",
     "DELETE": {
       "TITLE": {
         "INBOX": "Confirmar exclusão",
-        "ACCOUNT": "Confirmar desconexão"
+        "ACCOUNT": "Desconectado"
       },
       "MESSAGE": {
-        "INBOX": "Tem certeza que deseja excluir?",
-        "ACCOUNT": "Você tem certeza que deseja desconectar a integração?"
+        "INBOX": "Você tem certeza que deseja excluir?",
+        "ACCOUNT": "Tem certeza que deseja desconectar?"
       },
       "CONFIRM_BUTTON_TEXT": {
-        "INBOX": "Excluir",
-        "ACCOUNT": "Desconectar"
+        "INBOX": "Sim, excluir",
+        "ACCOUNT": "Sim, Desconectar"
       },
       "CANCEL_BUTTON_TEXT": "Cancelar",
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Webhook excluído com sucesso!",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Webhook excluído com sucesso",
+        "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
       }
     },
     "LIST": {
       "FETCHING": "Buscando integrações",
-      "INBOX": "Canal",
+      "INBOX": "Caixa de Entrada",
       "DELETE": {
         "BUTTON_TEXT": "Excluir"
       }
@@ -38,15 +38,15 @@
     "ADD": {
       "FORM": {
         "INBOX": {
-          "LABEL": "Selecionar canal",
-          "PLACEHOLDER": "Selecionar canal"
+          "LABEL": "Selecionar caixa de entrada",
+          "PLACEHOLDER": "Selecionar caixa de entrada"
         },
-        "SUBMIT": "Salvar",
+        "SUBMIT": "Criar",
         "CANCEL": "Cancelar"
       },
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Integração adicionada com sucesso! 🚀",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Integração adicionada com sucesso",
+        "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
       }
     },
     "CONNECT": {
@@ -56,7 +56,7 @@
       "BUTTON_TEXT": "Desconectado"
     },
     "SIDEBAR_DESCRIPTION": {
-      "DIALOGFLOW": "Construa chatbots usando o Dialogflow e conecte aos seus canais de forma simples."
+      "DIALOGFLOW": "Dialogflow é uma plataforma natural de entendimento em linguagem que torna fácil projetar e integrar uma interface de usuário conversacional em seu aplicativo móvel, aplicativo web, dispositivo, bot, sistema de resposta de voz interativo, etc. <br /> <br /> A integração do fluxo de diálogo com o {installationName} permite que você configure um bot de Dialogflow com suas caixas de entrada, o que permite que o bot lide inicialmente as consultas e entregue-as a um agente quando necessário. O fluxo de diálogo pode ser usado para qualificar as chumbas, reduzir a carga de trabalho dos agentes, fornecendo perguntas frequentes, etc. <br /> <br /> Para adicionar um fluxo de diálogo, você precisa criar uma Conta de Serviço no seu console do projeto Google e compartilhar as credenciais. Por favor, consulte a documentação do fluxo de diálogo para obter mais informações."
     }
   }
 }
