@@ -2,8 +2,9 @@
 import * as types from '../mutation-types';
 import Wavoip from 'wavoip-api';
 import { Logger } from 'dashboard/helpers/logger';
-
 import { useAlert } from 'dashboard/composables';
+import i18n from '../../i18n';
+
 const findRecordById = ($state, id) =>
   $state.records.find(record => record.id === Number(id)) || {};
 const defaultState = {
@@ -64,7 +65,7 @@ export const actions = {
     } catch (error) {
       Logger.error('Erro ao conectar ao Wavoip', { token, error });
       console.error('Error connecting to Wavoip:', error);
-      useAlert('WEBPHONE.CONNECTION_FAILED');
+      useAlert(i18n.t('WEBPHONE.CONNECTION_FAILED'));
       return;
     }
 
@@ -95,7 +96,7 @@ export const actions = {
 
     if (!instances || instances.length === 0) {
       Logger.error('Nenhuma instância disponível para fazer a chamada');
-      throw new Error('WEBPHONE.NO_AVAILABLE_INSTANCES');
+      throw new Error('Nenhuma instância disponível para fazer a chamada');
     }
 
     let token = callInfo.token ?? instances[0];
@@ -144,9 +145,9 @@ export const actions = {
     if (offerResponse.error) {
       let remainingInstances = instances.filter(instance => instance !== token);
       if (offerResponse.message === 'WEBPHONE.NUMBER_NOT_FOUND') {
-        throw new Error(offerResponse.message);
+        throw new Error('Número não existe');
       } else if (offerResponse.message === 'Limite de ligações atingido') {
-        useAlert('WEBPHONE.DAILY_LIMIT_REACHED');
+        throw new Error('Limite de ligações atingido');
       }
       if (remainingInstances.length > 0) {
         dispatch('outcomingCall', {
@@ -155,7 +156,7 @@ export const actions = {
           token: null,
         });
       } else {
-        throw new Error('WEBPHONE.LINE_BUSY_TRY_AGAIN');
+        throw new Error('Linha ocupada, tente mais tarde ou faça um upgrade');
       }
       return;
     }
