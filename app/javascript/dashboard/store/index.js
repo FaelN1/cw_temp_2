@@ -50,6 +50,7 @@ import funnel from './modules/funnel';
 import automationEditor from './modules/automationEditor';
 import scheduleMessages from './modules/scheduleMessages';
 import automationFlow from './modules/automationFlow';
+import webphone from './modules/webphone';
 
 const plugins = [];
 
@@ -104,6 +105,7 @@ export default createStore({
     funnel,
     automationEditor,
     scheduleMessages,
+    webphone,
     automationFlow,
   },
   plugins,

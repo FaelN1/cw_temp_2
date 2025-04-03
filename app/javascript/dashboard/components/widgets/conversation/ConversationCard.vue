@@ -104,6 +104,7 @@ export default {
       activeInbox: 'getSelectedInbox',
       currentUser: 'getCurrentUser',
       accountId: 'getCurrentAccountId',
+      callInfo: 'webphone/getCallInfo',
       isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
     }),
     bulkActionCheck() {
@@ -133,6 +134,17 @@ export default {
 
     hasUnread() {
       return this.unreadCount > 0;
+    },
+
+    callStatusMessage() {
+      const statusMessages = {
+        accept: this.$t('WEBPHONE.ACTIVE'),
+        terminate: this.$t('WEBPHONE.TERMINATE'),
+        reject: this.$t('WEBPHONE.REJECTED'),
+        outgoing_calling: this.$t('WEBPHONE.CONNECT_CALLING'),
+        preaccept: this.$t('WEBPHONE.CALLING'),
+      };
+      return statusMessages[this.callInfo.status] || '';
     },
 
     isInboxNameVisible() {

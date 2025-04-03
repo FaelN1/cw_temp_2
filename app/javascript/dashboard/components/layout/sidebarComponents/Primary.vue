@@ -9,6 +9,7 @@ import { frontendURL } from 'dashboard/helper/URLHelper';
 import { ACCOUNT_EVENTS } from '../../../helper/AnalyticsHelper/events';
 import { useTrack } from 'dashboard/composables';
 import { mapGetters } from 'vuex';
+import WebphoneMinimized from './WebphoneMinimized.vue';
 
 export default {
   components: {
@@ -17,6 +18,7 @@ export default {
     OptionsMenu,
     AgentDetails,
     NotificationBell,
+    WebphoneMinimized,
   },
   props: {
     isACustomBrandedInstance: {
@@ -91,6 +93,7 @@ export default {
         :account-id="accountId"
         class="m-4 mb-10"
       />
+      <WebphoneMinimized />
       <PrimaryNavItem
         v-for="menuItem in menuItems"
         :id="menuItem.key"

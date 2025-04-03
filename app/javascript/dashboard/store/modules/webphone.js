@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import * as types from '../mutation-types';
 import Wavoip from 'wavoip-api';
-import { useI18n } from 'vue-i18n';
+import { Logger } from 'dashboard/helpers/logger';
+
 import { useAlert } from 'dashboard/composables';
 const findRecordById = ($state, id) =>
   $state.records.find(record => record.id === Number(id)) || {};
@@ -44,38 +45,69 @@ export const getters = {
   },
 };
 
-const { t } = useI18n();
-
 export const actions = {
   startWavoip: async ({ commit, state }, { inboxName, token }) => {
+    Logger.info('Iniciando Wavoip', { inboxName, token });
+
     if (state.wavoip[token] && token) {
+      Logger.info('Instância Wavoip já existe para este token', { token });
       return;
     }
+
     const WAV = new Wavoip();
     let whatsapp_instance;
+
     try {
+      Logger.debug('Tentando conectar ao Wavoip', { token });
       whatsapp_instance = WAV.connect(token);
+      Logger.info('Conexão Wavoip bem-sucedida', { token });
     } catch (error) {
+      Logger.error('Erro ao conectar ao Wavoip', { token, error });
       console.error('Error connecting to Wavoip:', error);
-      useAlert(t('WEBPHONE.CONNECTION_FAILED'));
+      useAlert('WEBPHONE.CONNECTION_FAILED');
       return;
     }
+
     commit(types.default.ADD_WAVOIP, {
       token: token,
       whatsapp_instance: whatsapp_instance,
       inboxName: inboxName,
     });
-    whatsapp_instance.socket.on('connect', () => {});
-    whatsapp_instance.socket.on('disconnect', () => {});
+
+    whatsapp_instance.socket.on('connect', () => {
+      Logger.info('Socket Wavoip conectado', { token });
+    });
+
+    whatsapp_instance.socket.on('disconnect', () => {
+      Logger.warn('Socket Wavoip desconectado', { token });
+    });
   },
   outcomingCall: async ({ commit, state, dispatch }, callInfo) => {
+    Logger.info('Iniciando chamada de saída', callInfo);
+
     let { phone, contact_name, chat_id } = callInfo;
     let instances = callInfo.instances ?? Object.keys(state.wavoip);
+
+    Logger.debug('Instâncias disponíveis', {
+      instances,
+      wavoipState: Object.keys(state.wavoip),
+    });
+
     if (!instances || instances.length === 0) {
-      throw new Error(t('WEBPHONE.NO_AVAILABLE_INSTANCES'));
+      Logger.error('Nenhuma instância disponível para fazer a chamada');
+      throw new Error('WEBPHONE.NO_AVAILABLE_INSTANCES');
     }
+
     let token = callInfo.token ?? instances[0];
-    let wavoip = state.wavoip[token].whatsapp_instance;
+    Logger.info('Usando token para chamada', { token });
+
+    let wavoip = state.wavoip[token]?.whatsapp_instance;
+
+    if (!wavoip) {
+      Logger.error('Instância Wavoip não encontrada para o token', { token });
+      throw new Error('WEBPHONE.INSTANCE_NOT_FOUND');
+    }
+
     let inbox_name = state.wavoip[token].inbox_name;
     let offerResponse;
     if (wavoip) {
@@ -111,10 +143,10 @@ export const actions = {
     }
     if (offerResponse.error) {
       let remainingInstances = instances.filter(instance => instance !== token);
-      if (offerResponse.message === t('WEBPHONE.NUMBER_NOT_FOUND')) {
+      if (offerResponse.message === 'WEBPHONE.NUMBER_NOT_FOUND') {
         throw new Error(offerResponse.message);
       } else if (offerResponse.message === 'Limite de ligações atingido') {
-        useAlert(t('WEBPHONE.DAILY_LIMIT_REACHED'));
+        useAlert('WEBPHONE.DAILY_LIMIT_REACHED');
       }
       if (remainingInstances.length > 0) {
         dispatch('outcomingCall', {
@@ -123,7 +155,7 @@ export const actions = {
           token: null,
         });
       } else {
-        throw new Error(t('WEBPHONE.LINE_BUSY_TRY_AGAIN'));
+        throw new Error('WEBPHONE.LINE_BUSY_TRY_AGAIN');
       }
       return;
     }
@@ -229,6 +261,33 @@ export const actions = {
     commit(types.default.SET_WEBPHONE_UI_FLAG, {
       isOpen: isOpen,
     });
+  },
+  diagnosticWavoip: ({ state }) => {
+    Logger.info('Diagnóstico do Webphone:');
+    Logger.info('Estado da chamada atual', state.call);
+    Logger.info('Instâncias Wavoip configuradas', {
+      count: Object.keys(state.wavoip).length,
+      tokens: Object.keys(state.wavoip),
+    });
+
+    // Verificar cada instância
+    Object.entries(state.wavoip).forEach(([token, instance]) => {
+      Logger.info(`Detalhes da instância: ${token}`, {
+        inboxName: instance.inbox_name,
+        connected: instance.whatsapp_instance?.socket?.connected || false,
+      });
+    });
+
+    return {
+      hasInstances: Object.keys(state.wavoip).length > 0,
+      activeCall: state.call.id !== null,
+      instances: Object.keys(state.wavoip).map(token => ({
+        token,
+        inboxName: state.wavoip[token].inbox_name,
+        connected:
+          state.wavoip[token].whatsapp_instance?.socket?.connected || false,
+      })),
+    };
   },
 };
 export const mutations = {
