@@ -1,21 +1,21 @@
 {
   "SCHEDULE_MESSAGES": {
     "FEATURE_DISABLED": "O agendamento de mensagens está desabilitado",
-    "TITLE": "Agendamento de Mensagem",
+    "TITLE": "Agendamento de mensagem",
     "BUTTON_LABEL": "Agendar mensagem",
     "EMPTY": "Nenhuma mensagem agendada",
-    "CREATE": "Agendar Mensagem",
-    "UPDATE": "Atualizar Agendamento",
-    "DELETE": "Excluir Agendamento",
+    "CREATE": "Agendar mensagem",
+    "UPDATE": "Atualizar agendamento",
+    "DELETE": "Excluir agendamento",
     "SUCCESS": {
-      "CREATE": "Mensagem agendada com sucesso",
-      "UPDATE": "Agendamento atualizado com sucesso",
-      "DELETE": "Agendamento excluído com sucesso"
+      "CREATE": "Oba! Mensagem agendada com sucesso! 🚀",
+      "UPDATE": "Oba! Agendamento atualizado com sucesso! 🚀",
+      "DELETE": "Oba! Agendamento excluído com sucesso!"
     },
     "ERROR": {
-      "CREATE": "Erro ao agendar mensagem",
-      "UPDATE": "Erro ao atualizar agendamento",
-      "DELETE": "Erro ao excluir agendamento"
+      "CREATE": "Ops! Houve alguma falha para agendar a mensagem. Vamos tentar novamente? 🤞",
+      "UPDATE": "Ops! Houve alguma falha para atualizar o agendamento. Vamos tentar novamente? 🤞",
+      "DELETE": "Ops! Houve alguma falha para excluir o agendamento. Vamos tentar novamente? 🤞"
     }
   }
 }

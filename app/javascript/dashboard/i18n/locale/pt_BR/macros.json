@@ -1,88 +1,88 @@
 {
   "MACROS": {
-    "HEADER": "Macros",
-    "DESCRIPTION": "A macro is a set of saved actions that help customer service agents easily complete tasks. The agents can define a set of actions like tagging a conversation with a label, sending an email transcript, updating a custom attribute, etc., and they can run these actions in a single click.",
-    "LEARN_MORE": "Learn more about macros",
-    "HEADER_BTN_TXT": "Adicionar uma nova macro",
-    "HEADER_BTN_TXT_SAVE": "Salvar macro",
-    "LOADING": "Obtendo macros",
-    "ERROR": "Algo deu errado. Por favor, tente novamente",
-    "ORDER_INFO": "As macros serão executadas na ordem que você adicionar suas ações. Você pode reorganizá-las arrastando-as pelo identificador ao lado de cada nó.",
+    "HEADER": "Fluxos",
+    "DESCRIPTION": "Os fluxos são um conjunto de ações definidas que apenas com um clique são executadas automaticamente, podendo criar de forma pública para todos usuários ou de forma privada.",
+    "LEARN_MORE": "Saiba mais sobre as funções dos fluxos",
+    "HEADER_BTN_TXT": "Adicionar fluxo",
+    "HEADER_BTN_TXT_SAVE": "Salvar",
+    "LOADING": "Carregando fluxos...",
+    "ERROR": "Não há itens que correspondam a esta consulta.",
+    "ORDER_INFO": "Os fluxos são executados na ordem que você adicionar as ações. Você pode reorganizar a ordem arrastando-as pelo criador ao lado.",
     "ADD": {
       "FORM": {
         "NAME": {
-          "LABEL": "Nome da macro",
-          "PLACEHOLDER": "Digite um nome para sua macro",
-          "ERROR": "Nome é necessário para criar uma macro"
+          "LABEL": "Nome do fluxo",
+          "PLACEHOLDER": "Digite o nome do fluxo",
+          "ERROR": "Ops! O nome do fluxo é obrigatório."
         },
         "ACTIONS": {
           "LABEL": "Ações"
         }
       },
       "API": {
-        "SUCCESS_MESSAGE": "Macro adicionada com sucesso",
-        "ERROR_MESSAGE": "Não é possível criar a macro, por favor, tente novamente mais tarde"
+        "SUCCESS_MESSAGE": "Oba! Fluxo adicionado com sucesso! 🚀",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para adicionar o fluxo. Vamos tentar novamente? 🤞"
       }
     },
     "LIST": {
       "TABLE_HEADER": [
         "Nome",
-        "Criada por",
-        "Ultima atualização por",
+        "Criado por",
+        "Atualizado por",
         "Visibilidade"
       ],
-      "404": "Nenhuma macro encontrada"
+      "404": "Ops! Nenhum fluxo criado ainda. Vamos criar? 🙌"
     },
     "DELETE": {
-      "TOOLTIP": "Excluir macro",
+      "TOOLTIP": "Excluir",
       "CONFIRM": {
-        "MESSAGE": "Você tem certeza que deseja excluir ",
-        "YES": "Sim, excluir",
-        "NO": "Não"
+        "MESSAGE": "Você tem certeza que deseja excluir o fluxo?",
+        "YES": "Excluir",
+        "NO": "Cancelar"
       },
       "API": {
-        "SUCCESS_MESSAGE": "Macro excluída com sucesso",
-        "ERROR_MESSAGE": "Ocorreu um erro ao excluir a macro. Por favor, tente novamente mais tarde"
+        "SUCCESS_MESSAGE": "Oba! Fluxo excluído com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir o fluxo. Vamos tentar novamente? 🤞"
       }
     },
     "EDIT": {
-      "TOOLTIP": "Editar macro",
+      "TOOLTIP": "Editar",
       "API": {
-        "SUCCESS_MESSAGE": "Macro atualizada com sucesso",
-        "ERROR_MESSAGE": "Não foi possível atualizar Macro, Por favor, tente novamente mais tarde"
+        "SUCCESS_MESSAGE": "Oba! Fluxo editado com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para editar o fluxo. Vamos tentar novamente? 🤞"
       }
     },
     "EDITOR": {
       "START_FLOW": "Inicio do fluxo",
-      "END_FLOW": "Fim do Fluxo",
-      "LOADING": "Obtendo macro",
-      "ADD_BTN_TOOLTIP": "Adicionar nova ação",
-      "DELETE_BTN_TOOLTIP": "Excluir Ação",
+      "END_FLOW": "Fim do fluxo",
+      "LOADING": "Buscando fluxo...",
+      "ADD_BTN_TOOLTIP": "Adicionar ação",
+      "DELETE_BTN_TOOLTIP": "Excluir",
       "VISIBILITY": {
-        "LABEL": "Visibilidade da Macro",
+        "LABEL": "Visibilidade do fluxo",
         "GLOBAL": {
-          "LABEL": "Publico",
-          "DESCRIPTION": "Esta macro está disponível publicamente para todos os agentes desta conta."
+          "LABEL": "Público",
+          "DESCRIPTION": "Este fluxo está disponível para todos os usuários da conta."
         },
         "PERSONAL": {
-          "LABEL": "Privada",
-          "DESCRIPTION": "Esta macro será privada para você e não estará disponível para outras pessoas."
+          "LABEL": "Privado",
+          "DESCRIPTION": "Este fluxo está disponível exclusivamente para você."
         }
       }
     },
     "EXECUTE": {
-      "BUTTON_TOOLTIP": "Executar",
-      "PREVIEW": "Pré-visualizar Macro",
-      "EXECUTED_SUCCESSFULLY": "Macro executada com sucesso"
+      "BUTTON_TOOLTIP": "Execute",
+      "PREVIEW": "Pré visualização do fluxo",
+      "EXECUTED_SUCCESSFULLY": "Oba! Fluxo executado com sucesso! 🚀"
     },
     "ERRORS": {
-      "ATTRIBUTE_KEY_REQUIRED": "Attribute key is required",
-      "FILTER_OPERATOR_REQUIRED": "Filter operator is required",
-      "VALUE_REQUIRED": "Valor obrigatório",
-      "VALUE_MUST_BE_BETWEEN_1_AND_998": "Value must be between 1 and 998",
-      "ACTION_PARAMETERS_REQUIRED": "Action parameters are required",
-      "ATLEAST_ONE_CONDITION_REQUIRED": "At least one condition is required",
-      "ATLEAST_ONE_ACTION_REQUIRED": "At least one action is required"
+      "ATTRIBUTE_KEY_REQUIRED": "A chave do campo personalizado é necessário",
+      "FILTER_OPERATOR_REQUIRED": "O usuário de filtro é necessário.",
+      "VALUE_REQUIRED": "Ops! Este campo é obrigatório.",
+      "VALUE_MUST_BE_BETWEEN_1_AND_998": "O valor deve estar entre 1 e 998.",
+      "ACTION_PARAMETERS_REQUIRED": "Parâmetros de ação obrigatórios.",
+      "ATLEAST_ONE_CONDITION_REQUIRED": "Pelo menos uma condição é necessária.",
+      "ATLEAST_ONE_ACTION_REQUIRED": "Pelo menos uma ação é necessária."
     }
   }
 }
