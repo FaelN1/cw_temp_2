@@ -1,153 +1,168 @@
 {
   "INTEGRATION_SETTINGS": {
     "HEADER": "Integrações",
-    "DESCRIPTION": "Salez se integra com várias ferramentas e serviços para melhorar a eficiência da sua equipe. Explore a lista abaixo para configurar seus aplicativos favoritos.",
-    "LEARN_MORE": "Aprenda mais sobre integrações",
-    "LOADING": "Obtendo integrações",
+"DESCRIPTION": "A Salez integra de forma nativa com diversas plataformas do seu dia a dia para sua equipe trabalhar de forma integrada, explore abaixo todos os aplicativos.",
+    "LEARN_MORE": "Saiba mais sobre as funções das integrações",
+    "LOADING": "Carregando integrações...",
     "CAPTAIN": {
-      "DISABLED": "O Captain não está habilitado na sua conta.",
-      "CLICK_HERE_TO_CONFIGURE": "Clique aqui para configurar",
-      "LOADING_CONSOLE": "Carregando Console do Captain...",
-      "FAILED_TO_LOAD_CONSOLE": "Falha ao carregar o Console do Captain"
+      "DISABLED": "Os Agentes I.A não estão habilitados na sua conta.",
+      "CLICK_HERE_TO_CONFIGURE": "Clique aqui para configurar!",
+      "LOADING_CONSOLE": "Carregando Agentes I.A...",
+      "FAILED_TO_LOAD_CONSOLE": "Ops! Houve alguma falha para carregar o console dos Agentes I.A. Vamos tentar novamente? 🤞",
+      "DESCRIPTION": "Construído para o seu produto e treinado na base de conhecimento da sua empresa.",
+      "LEARN_MORE": "Saiba mais sobre as funções dos Agentes I.A",
+      "HEADER_BTN_TXT": "Conectar canal",
+      "ERRORS": {
+        "CREATE_INBOX_IDS": "Selecione pelo menos um canal para habilitar o Agente I.A"
+      },
+      "LIST": {
+        "EMPTY_STATE": "Não há canais configurados com o Agente I.A. Para habilitar o agente, clique em setup.",
+        "TABLE_HEADER": ["Inbox Name", "Type"],
+        "CONFIGURE": "Oba! Agente I.A adicionado com sucesso! 🚀"
+      }
     },
     "WEBHOOK": {
-      "SUBSCRIBED_EVENTS": "Eventos Inscritos",
-      "LEARN_MORE": "Saiba mais sobre webhooks",
+      "SUBSCRIBED_EVENTS": "Eventos inscritos",
+      "LEARN_MORE": "Saiba mais sobre as funções dos webhooks",
       "FORM": {
         "CANCEL": "Cancelar",
-        "DESC": "Webhook Os eventos fornecem informações em tempo real sobre o que está acontecendo na sua conta do Salez. Digite um URL válido para configurar um retorno de chamada.",
+        "DESC": "Os webhooks fornecem dados em tempo real sobre o que está acontecendo na sua conta. Digite uma URL para validar o retorno da chamada.",
         "SUBSCRIPTIONS": {
           "LABEL": "Eventos",
           "EVENTS": {
-            "CONVERSATION_CREATED": "Conversa Criada",
-            "CONVERSATION_STATUS_CHANGED": "Status de conversa alterado",
-            "CONVERSATION_UPDATED": "Conversa Atualizada",
+            "CONVERSATION_CREATED": "Conversa criada",
+            "CONVERSATION_STATUS_CHANGED": "Status da conversa alterado",
+            "CONVERSATION_UPDATED": "Conversa atualizada",
+            "CONVERSATION_RESOLVED": "Conversation Resolved",
             "MESSAGE_CREATED": "Mensagem criada",
             "MESSAGE_UPDATED": "Mensagem atualizada",
-            "WEBWIDGET_TRIGGERED": "Widget de chat aberto pelo usuário",
+            "WEBWIDGET_TRIGGERED": "Ícone do site aberto pelo usuário",
             "CONTACT_CREATED": "Contato criado",
             "CONTACT_UPDATED": "Contato atualizado"
           }
         },
         "END_POINT": {
           "LABEL": "URL do Webhook",
-          "PLACEHOLDER": "Exemplo: https://example/api/webhook",
-          "ERROR": "Por favor, insira uma URL válida"
+          "PLACEHOLDER": "Exemplo: https://exemplo/api/webhook",
+          "ERROR": "Por favor, insira uma URL válida."
         },
         "EDIT_SUBMIT": "Atualizar webhook",
-        "ADD_SUBMIT": "Criar webhook"
+        "ADD_SUBMIT": "Salvar"
       },
       "TITLE": "Webhook",
-      "CONFIGURE": "Configurar",
-      "HEADER": "Configurações do Webhook",
-      "HEADER_BTN_TXT": "Adicionar novo Webhook",
-      "LOADING": "Buscando Webhooks anexados",
-      "SEARCH_404": "Não existem itens correspondentes a esta consulta",
-      "SIDEBAR_TXT": "<p><b>Webhooks</b> </p> <p>Webhooks são retornos de chamada HTTP que podem ser definidos para todas as contas. Eles são acionados por eventos como a criação de mensagens no Salez. Você pode criar mais de um webhook para esta conta. <br /> <br /> Para criar um <b> webhook </b>, clique no botão <b> Adicionar novo webhook </b>. Você também pode remover qualquer webhook existente clicando no botão Excluir.</p>",
+      "CONFIGURE": "Adicionar",
+      "HEADER": "Configurações do webhook",
+      "HEADER_BTN_TXT": "Adicionar webhook",
+      "LOADING": "Carregando Webhooks...",
+      "SEARCH_404": "Ops! Nenhum webhook criado ainda. Vamos criar? 🙌",
+      "SIDEBAR_TXT": "<p><b>Webhooks</b></p> <p> Os webhooks são integrações com outras plataformas e sistemas para que uma ação seja realizada dentro da Salez. </p><p> Clique em <b>Adicionar webhook</b> para criar uma nova integração. </p><p> <b>Exemplos de webhooks:</b> Acionar o gatilho quando uma conversa é criada ou uma mensagem enviada para o cliente.</p>",
       "LIST": {
-        "404": "Não há webhooks configurados para esta conta.",
+        "404": "Ops! Nenhum webhook criado ainda. Vamos criar? 🙌",
         "TITLE": "Gerenciar webhooks",
-        "TABLE_HEADER": ["Webhook URL (endpoint)", "Ações"]
+        "TABLE_HEADER": [
+          "Webhook URL (URL)",
+          "Ações"
+        ]
       },
       "EDIT": {
-        "BUTTON_TEXT": "Alterar",
+        "BUTTON_TEXT": "Editar",
         "TITLE": "Editar webhook",
         "API": {
-          "SUCCESS_MESSAGE": "Configuração de Webhook atualizada com sucesso",
-          "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
+          "SUCCESS_MESSAGE": "Oba! Configuração do webhook editado com sucesso!",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞"
         }
       },
       "ADD": {
         "CANCEL": "Cancelar",
-        "TITLE": "Adicionar novo webhook",
+        "TITLE": "Adicionar webhook",
         "API": {
-          "SUCCESS_MESSAGE": "Configuração de Webhook adicionada com sucesso",
-          "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
+          "SUCCESS_MESSAGE": "Oba! Configuração do webhook adicionada com sucesso!",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞"
         }
       },
       "DELETE": {
         "BUTTON_TEXT": "Excluir",
         "API": {
-          "SUCCESS_MESSAGE": "Webhook excluído com sucesso",
-          "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
+          "SUCCESS_MESSAGE": "Oba! Webhook excluído com sucesso!",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞"
         },
         "CONFIRM": {
           "TITLE": "Confirmar exclusão",
-          "MESSAGE": "Tem certeza que deseja excluir o webhook? ({webhookURL})",
-          "YES": "Sim, excluir ",
-          "NO": "Não, mantenha"
+          "MESSAGE": "Tem certeza que deseja excluir o webhook? (%{webhookURL})",
+          "YES": "Excluir ",
+          "NO": "Cancelar"
         }
       }
     },
     "SLACK": {
       "DELETE": "Excluir",
       "DELETE_CONFIRMATION": {
-        "TITLE": "Excluir integração",
+        "TITLE": "Confirmar exclusão",
         "MESSAGE": "Tem certeza que deseja excluir a integração? Isso resultará na perda de acesso a conversas no seu espaço de trabalho Slack."
       },
       "HELP_TEXT": {
         "TITLE": "Usando a integração com Slack",
-        "BODY": "<br/><p>Salez irá agora sincronizar todas as conversas recebidas no canal de <b><i>conversas com clientes</i></b> dentro de seu local de trabalho de slack.</p><p>A resposta para uma conversa em <b><i>conversas ao cliente</i></b> canal de slack irá criar uma resposta para o cliente através do Salez.</p><p>Inicie as respostas com <b><i>nota:</i></b> para criar notas privadas em vez de respostas.</p><p>Se o remetente do slack tiver um perfil de agente no Salez sob o mesmo e-mail, as respostas serão associadas de acordo.</p><p>Quando o respondente não tiver um perfil de agente associado, as respostas serão dadas a partir do perfil do bot.</p>",
-        "SELECTED": "selecionar"
+        "BODY": "<br/><p>A Salez irá sincronizar todas as conversas recebidas no canal de <b><i>conversas com clientes</i></b> dentro de seu local de trabalho do slack.</p><p> A resposta para uma conversa em <b><i>conversas com o cliente</i></b> no canal do slack irá criar uma resposta para o cliente através da Salez.</p><p> Inicie as respostas com <b><i>nota:</i></b> para criar notas privadas em vez de respostas.</p><p> Se o remetente do slack tiver um perfil de colaborador na Salez sob o mesmo e-mail, as respostas serão associadas de acordo.</p><p>Quando o contato não tiver um perfil de usuário associado, as respostas serão dadas a partir do perfil do chatbot.</p>",
+        "SELECTED": "Selecionar"
       },
       "SELECT_CHANNEL": {
         "OPTION_LABEL": "Selecione um canal",
         "UPDATE": "Atualizar",
         "BUTTON_TEXT": "Conectar canal",
-        "DESCRIPTION": "Seu espaço de trabalho Slack agora está ligado com o Salez. No entanto, a integração está inativa no momento. Para ativar a integração e conectar um canal ao Salez, por favor, clique no botão abaixo.\n\n**Nota:** Se você está tentando conectar-se a um canal privado, adicione o aplicativo Salez no canal do Slack antes de prosseguir com esta etapa.",
+        "DESCRIPTION": "Seu espaço de trabalho Slack agora está conectado com a Salez. No entanto, a integração está inativa no momento. Para ativar a integração e conectar um canal a Salez, por favor, clique no botão abaixo.\n\n**Nota:** Se você está tentando conectar-se a um canal privado, adicione o aplicativo Salez no canal do Slack antes de prosseguir com esta etapa.",
         "ATTENTION_REQUIRED": "Atenção necessária",
-        "EXPIRED": "Sua integração com o Slack expirou. Para continuar recebendo mensagens no Slack, exclua a integração e conecte seu espaço de trabalho novamente."
+        "EXPIRED": "Sua integração com o Slack expirou. Para continuar recebendo mensagens no Slack, exclua a integração e conecte seu espaço de trabalho novamente!"
       },
-      "UPDATE_ERROR": "Ocorreu um erro ao atualizar a integração, por favor, tente novamente",
-      "UPDATE_SUCCESS": "O canal foi conectado com sucesso",
-      "FAILED_TO_FETCH_CHANNELS": "Ocorreu um erro ao obter os canais do Slack, por favor, tente novamente"
+      "UPDATE_ERROR": "Ops! Houve alguma falha para atualizar a integração. Vamos tentar novamente? 🤞",
+      "UPDATE_SUCCESS": "Oba! O canal foi conectado com sucesso! 🚀",
+      "FAILED_TO_FETCH_CHANNELS": "Ops! Houve alguma falha para obter os canais do Slack. Vamos tentar novamente? 🤞"
     },
     "DYTE": {
       "CLICK_HERE_TO_JOIN": "Clique aqui para entrar",
       "LEAVE_THE_ROOM": "Sair da sala",
       "START_VIDEO_CALL_HELP_TEXT": "Iniciar uma nova chamada de vídeo com o cliente",
-      "JOIN_ERROR": "Houve um erro ao entrar na chamada, por favor tente novamente",
-      "CREATE_ERROR": "Houve um erro ao criar o link da reunião, por favor tente novamente"
+      "JOIN_ERROR": "Ops! Houve um erro ao entrar na chamada, por favor tente novamente.",
+      "CREATE_ERROR": "Ops! Houve um erro ao criar o link da reunião, por favor tente novamente."
     },
     "OPEN_AI": {
-      "AI_ASSIST": "Assistente Open AI",
-      "WITH_AI": " {option} com IA ",
+      "AI_ASSIST": "Copiloto",
+      "WITH_AI": " %{option} com I.A ",
       "OPTIONS": {
         "REPLY_SUGGESTION": "Sugestão de resposta",
         "SUMMARIZE": "Resumir",
-        "REPHRASE": "Melhorar Escrita",
-        "FIX_SPELLING_GRAMMAR": "Corrigir Ortografia e Gramática",
-        "SHORTEN": "Encurtar",
+        "REPHRASE": "Melhorar escrita",
+        "FIX_SPELLING_GRAMMAR": "Corrigir ortografia e gramática",
+        "SHORTEN": "Resumir",
         "EXPAND": "Expandir",
-        "MAKE_FRIENDLY": "Alterar o tom de mensagem para amigável",
-        "MAKE_FORMAL": "Usar tom formal",
+        "MAKE_FRIENDLY": "Alterar o tom para amigável",
+        "MAKE_FORMAL": "Alterar o tom para formal",
         "SIMPLIFY": "Simplificar"
       },
       "ASSISTANCE_MODAL": {
         "DRAFT_TITLE": "Conteúdo do rascunho",
         "GENERATED_TITLE": "Conteúdo gerado",
-        "AI_WRITING": "A IA está escrevendo",
+        "AI_WRITING": "O copiloto está escrevendo...",
         "BUTTONS": {
           "APPLY": "Use esta sugestão",
           "CANCEL": "Cancelar"
         }
       },
       "CTA_MODAL": {
-        "TITLE": "Integração com o OpenAI",
-        "DESC": "Traga funcionalidades avançadas de IA para o seu painel com os modelos GPT da OpenAI. Para começar, insira a chave API da sua conta OpenAI.",
+        "TITLE": "Integração com a OpenAI",
+        "DESC": "Traga funcionalidades avançadas de I.A para o seu painel com os modelos GPT da OpenAI. Para começar, insira a chave API da sua conta OpenAI.",
         "KEY_PLACEHOLDER": "Insira sua chave de API da OpenAI",
         "BUTTONS": {
           "NEED_HELP": "Precisa de ajuda?",
-          "DISMISS": "Recusar",
-          "FINISH": "Concluir Configuração"
+          "DISMISS": "Cancelar",
+          "FINISH": "Salvar"
         },
-        "DISMISS_MESSAGE": "Você pode configurar a integração com o OpenAI mais tarde.",
-        "SUCCESS_MESSAGE": "Integração com o OpenAI configurada com sucesso"
+        "DISMISS_MESSAGE": "Você pode configurar a integração com a OpenAI mais tarde.",
+        "SUCCESS_MESSAGE": "Oba! Integração com a OpenAI configurada com sucesso 🚀! "
       },
-      "TITLE": "Melhore com IA",
-      "SUMMARY_TITLE": "Resumo com IA",
-      "REPLY_TITLE": "Responder sugestão com IA",
-      "SUBTITLE": "Uma resposta melhor será gerada usando AI, com base no seu rascunho atual.",
+      "TITLE": "Melhore com I.A",
+      "SUMMARY_TITLE": "Resumo com I.A",
+      "REPLY_TITLE": "Responder sugestão com I.A",
+      "SUBTITLE": "Uma resposta melhor será gerada usando I.A, com base no seu rascunho atual.",
       "TONE": {
         "TITLE": "Tom",
         "OPTIONS": {
@@ -160,144 +175,143 @@
         "GENERATING": "Gerando...",
         "CANCEL": "Cancelar"
       },
-      "GENERATE_ERROR": "Ocorreu um erro ao processar o conteúdo, por favor, tente novamente"
+      "GENERATE_ERROR": "Ops! Houve alguma falha para processar o conteúdo. Vamos tentar novamente? 🤞"
     },
     "DELETE": {
       "BUTTON_TEXT": "Excluir",
       "API": {
-        "SUCCESS_MESSAGE": "Integração excluída com sucesso"
+        "SUCCESS_MESSAGE": "Oba! Integração excluída com sucesso!"
       }
     },
     "CONNECT": {
       "BUTTON_TEXT": "Conectar"
     },
     "DASHBOARD_APPS": {
-      "TITLE": "Apps da Dashboard",
-      "HEADER_BTN_TXT": "Adicionar um novo app da dashboard",
-      "SIDEBAR_TXT": "<p><b>Dashboard Apps</b></p><p>Dashboard Apps permite que as organizações incorporem um aplicativo dentro da dashboard do Salez para fornecer o contexto para agentes de suporte ao cliente. Este recurso permite-lhe criar uma aplicação independente e incorporá-la dentro da dashboard para fornecer informações do usuário, seus pedidos ou seu histórico de pagamentos anteriores.</p><p>Quando você incorpora seu aplicativo usando a dashboard do Salez, sua aplicação irá obter o contexto da conversa e entrar em contato como um evento de janela. Implementar um ouvinte para o evento de mensagem em sua página receber o contexto.</p><p>Para adicionar um novo aplicativo da dashboard, clique no botão 'Adicionar um novo aplicativo da dashboard'.</p>",
-      "DESCRIPTION": "Aplicativos da dashboard permitem que organizações incorporem um aplicativo dentro do painel para fornecer o contexto para agentes de suporte ao cliente. Este recurso permite que você crie uma aplicação independente e incorpore para fornecer informações de usuário, seus pedidos ou seu histórico de pagamentos anteriores.",
-      "LEARN_MORE": "Saiba mais sobre Apps da Dashboard",
+      "TITLE": "Aplicativos",
+      "HEADER_BTN_TXT": "Adicionar aplicativo",
+      "SIDEBAR_TXT": "<p><b>Aplicativos</b></p> <p> Os aplicativos são recursos para trazer as ferramentas mais usadas no dia a dia para dentro da Salez. </p><p> Clique em <b>Adicionar aplicativo</b> para conectar um novo aplicativo. </p><p> <b>Exemplos de aplicativos:</b> Planilha de excel, agenda do Google, CRM, plataforma de ligações e etc.</p>",
+      "DESCRIPTION": "Os aplicativos são recursos para trazer as ferramentas mais usadas no dia a dia da sua empresa para dentro da Salez, no formato de aplicativos no painel de conversas.",
+      "LEARN_MORE": "Saiba mais sobre as funções dos aplicativos",
       "LIST": {
-        "404": "Ainda não há aplicativos da dashboard nesta conta",
-        "LOADING": "Buscando aplicativos da dashboard...",
-        "TABLE_HEADER": ["Nome", "Endpoint"],
-        "EDIT_TOOLTIP": "Editar aplicativo",
-        "DELETE_TOOLTIP": "Excluir aplicativo"
+        "404": "Ops! Nenhum aplicativo criada ainda. Vamos criar? 🙌",
+        "LOADING": "Carregando aplicativos...",
+        "TABLE_HEADER": ["Título", "Link"],
+        "EDIT_TOOLTIP": "Editar",
+        "DELETE_TOOLTIP": "Excluir"
       },
       "FORM": {
-        "TITLE_LABEL": "Nome",
-        "TITLE_PLACEHOLDER": "Digite um nome para o app da dashboard",
-        "TITLE_ERROR": "É necessário um nome para o aplicativo da dashboard",
-        "URL_LABEL": "Endpoint",
-        "URL_PLACEHOLDER": "Digite a URL do endpoint onde seu aplicativo está hospedado",
-        "URL_ERROR": "É necessário uma URL válida",
+        "TITLE_PLACEHOLDER": "Digite o nome do aplicativo",
+        "TITLE_ERROR": "Ops! É necessário um nome para o aplicativo.",
+        "URL_LABEL": "Link",
+        "URL_PLACEHOLDER": "Digite a URL do aplicativo",
+        "URL_ERROR": "É necessário uma URL válida.",
         "NAVIGATION_LABEL": "Navegação",
         "SHOW_IN_NAVIGATION": "Mostrar no menu de navegação",
         "ICON_LABEL": "Ícone",
         "ICON_ERROR": "É necessário selecionar um ícone quando o app está no menu de navegação"
       },
       "CREATE": {
-        "HEADER": "Adicionar um novo app da dashboard",
-        "FORM_SUBMIT": "Enviar",
+        "HEADER": "Adicionar aplicativo",
+        "FORM_SUBMIT": "Salvar",
         "FORM_CANCEL": "Cancelar",
-        "API_SUCCESS": "Aplicativo da dashboard configurado com sucesso",
-        "API_ERROR": "Não conseguimos criar um aplicativo. Por favor, tente novamente mais tarde"
+        "API_SUCCESS": "Oba! Aplicativo adicionado com sucesso! 🚀",
+        "API_ERROR": "Ops! Houve alguma falha para adicionar o aplicativo. Vamos tentar novamente? 🤞"
       },
       "UPDATE": {
-        "HEADER": "Editar aplicativo da dashboard",
-        "FORM_SUBMIT": "Atualizar",
+        "HEADER": "Editar aplicativo",
+        "FORM_SUBMIT": "Salvar",
         "FORM_CANCEL": "Cancelar",
-        "API_SUCCESS": "Aplicativo da dashboard atualizado com sucesso",
-        "API_ERROR": "Não conseguimos atualizar o aplicativo. Por favor, tente novamente mais tarde"
+        "API_SUCCESS": "Oba! Aplicativo editado com sucesso! 🚀",
+        "API_ERROR": "Ops! Houve alguma falha para editar o aplicativo. Vamos tentar novamente? 🤞"
       },
       "DELETE": {
-        "CONFIRM_YES": "Sim, exclua-o",
-        "CONFIRM_NO": "Não, mantenha-o",
+        "CONFIRM_YES": "Excluir",
+        "CONFIRM_NO": "Cancelar",
         "TITLE": "Confirmar exclusão",
-        "MESSAGE": "Tem certeza que deseja excluir o aplicativo - {appName}?",
-        "API_SUCCESS": "Aplicativo da dashboard excluído com sucesso",
-        "API_ERROR": "Não conseguimos excluir o aplicativo. Por favor, tente novamente mais tarde"
+        "MESSAGE": "Você tem certeza que deseja excluir?",
+        "API_SUCCESS": "Oba! Aplicativo excluído com sucesso!",
+        "API_ERROR": "Ops! Houve alguma falha para excluir o aplicativo. Vamos tentar novamente? 🤞"
       }
     },
     "LINEAR": {
-      "ADD_OR_LINK_BUTTON": "Criar/Vincular Issue no Linear",
-      "LOADING": "Buscando issues do Linear...",
-      "LOADING_ERROR": "Houve um erro ao buscar as issues do Linear, por favor tente novamente",
+      "ADD_OR_LINK_BUTTON": "Criar/vincular tarefa",
+      "LOADING": "Carregando tarefas...",
+      "LOADING_ERROR": "Ops! Houve alguma falha para carregar as tarefas. Vamos tentar novamente? 🤞",
       "CREATE": "Criar",
       "LINK": {
-        "SEARCH": "Pesquisar issues",
-        "SELECT": "Selecionar issue",
-        "TITLE": "Vincular",
-        "EMPTY_LIST": "Nenhuma issue encontrada",
-        "LOADING": "Carregando",
-        "ERROR": "Houve um erro ao buscar as issues, por favor tente novamente",
-        "LINK_SUCCESS": "Issue vinculada com sucesso",
-        "LINK_ERROR": "Houve um erro ao vincular a issue, por favor tente novamente",
-        "LINK_TITLE": "Conversa (#{conversationId}) com {name}"
+        "SEARCH": "Tarefas de pesquisa",
+        "SELECT": "Selecione a tarefa",
+        "TITLE": "Link",
+        "EMPTY_LIST": "Nenhuma tarefa encontrada",
+        "LOADING": "Carregando...",
+        "ERROR": "Ops! Houve alguma falha para carregar as tarefas. Vamos tentar novamente? 🤞",
+        "LINK_SUCCESS": "Oba! Tarefa vinculada com sucesso! 🚀",
+        "LINK_ERROR": "Ops! Houve alguma falha para vincular as tarefas. Vamos tentar novamente? 🤞",
+        "LINK_TITLE": "Conversa (#%{conversationId}) com %{name}"
       },
       "ADD_OR_LINK": {
-        "TITLE": "Create/link linear issue",
-        "DESCRIPTION": "Crie issues no Linear a partir de conversas, ou vincule às existentes para um rastreamento integrado.",
+        "TITLE": "Criar/vincular tarefa",
+        "DESCRIPTION": "Crie tarefas a partir de conversas ou vincule os existentes para um acompanhamento perfeito.",
         "FORM": {
           "TITLE": {
             "LABEL": "Título",
-            "PLACEHOLDER": "Insira o título",
-            "REQUIRED_ERROR": "Título é obrigatório"
+            "PLACEHOLDER": "Digite o título",
+            "REQUIRED_ERROR": "Ops! Este campo é obrigatório."
           },
           "DESCRIPTION": {
             "LABEL": "Descrição",
-            "PLACEHOLDER": "Insira a descrição"
+            "PLACEHOLDER": "Digite a descrição"
           },
           "TEAM": {
-            "LABEL": "Times",
-            "PLACEHOLDER": "Selecionar time",
-            "SEARCH": "Pesquisar equipe",
-            "REQUIRED_ERROR": "A equipe é obrigatória"
+            "LABEL": "Equipe",
+            "PLACEHOLDER": "Selecione a equipe",
+            "SEARCH": "Selecione a equipe",
+            "REQUIRED_ERROR": "Ops! Este campo é obrigatório."
           },
           "ASSIGNEE": {
-            "LABEL": "Responsável",
-            "PLACEHOLDER": "Selecionar responsável",
-            "SEARCH": "Pesquisar responsável"
+            "LABEL": "Usuário",
+            "PLACEHOLDER": "Selecione o usuário",
+            "SEARCH": "Selecione o usuário"
           },
           "PRIORITY": {
             "LABEL": "Prioridade",
-            "PLACEHOLDER": "Selecionar prioridade",
-            "SEARCH": "Pesquisar prioridade"
+            "PLACEHOLDER": "Selecione a prioridade",
+            "SEARCH": "Selecione a prioridade"
           },
           "LABEL": {
-            "LABEL": "Nome do campo",
-            "PLACEHOLDER": "Selecione o marcador",
-            "SEARCH": "Search label"
+            "LABEL": "Etiqueta",
+            "PLACEHOLDER": "Selecione a etiqueta",
+            "SEARCH": "Selecione a etiqueta"
           },
           "STATUS": {
-            "LABEL": "SItuação",
-            "PLACEHOLDER": "Select status",
-            "SEARCH": "Search status"
+            "LABEL": "Status",
+            "PLACEHOLDER": "Selecione o status",
+            "SEARCH": "Selecione o status"
           },
           "PROJECT": {
             "LABEL": "Projeto",
-            "PLACEHOLDER": "Selecionar projeto",
-            "SEARCH": "Pesquisar projeto"
+            "PLACEHOLDER": "Selecione o projeto",
+            "SEARCH": "Selecione o projeto"
           }
         },
         "CREATE": "Criar",
         "CANCEL": "Cancelar",
-        "CREATE_SUCCESS": "Issue created successfully",
-        "CREATE_ERROR": "There was an error creating the issue, please try again",
-        "LOADING_TEAM_ERROR": "Houve um erro ao buscar as equipes, por favor, tente novamente",
-        "LOADING_TEAM_ENTITIES_ERROR": "Houve um erro ao buscar as entidades da equipe, por favor, tente novamente"
+        "CREATE_SUCCESS": "Oba! Tarefas criadas com sucesso! 🚀",
+        "CREATE_ERROR": "Ops! Houve alguma falha para criar a tarefa. Vamos tentar novamente? 🤞",
+        "LOADING_TEAM_ERROR": "Ops! Houve alguma falha para buscar a equipe. Vamos tentar novamente? 🤞",
+        "LOADING_TEAM_ENTITIES_ERROR": "Ops! Houve alguma falha para obter as entidades da equipe. Vamos tentar novamente? 🤞"
       },
       "ISSUE": {
-        "STATUS": "SItuação",
+        "STATUS": "Status",
         "PRIORITY": "Prioridade",
-        "ASSIGNEE": "Responsável",
-        "LABELS": "Marcadores",
-        "CREATED_AT": "Criado em {createdAt}"
+        "ASSIGNEE": "Usuário",
+        "LABELS": "Etiqueta",
+        "CREATED_AT": "Criado em %{createdAt}"
       },
       "UNLINK": {
         "TITLE": "Desvincular",
-        "SUCCESS": "Issue desvinculada com sucesso",
-        "ERROR": "Houve um erro ao desvincular o atributo, por favor, tente novamente"
+        "SUCCESS": "Oba! Tarefas desvinculadas com sucesso! 🚀",
+        "ERROR": "Ops! Houve alguma falha para desvincular a tarefa. Vamos tentar novamente? 🤞"
       }
     }
   }
