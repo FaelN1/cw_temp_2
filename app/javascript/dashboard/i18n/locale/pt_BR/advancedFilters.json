@@ -1,31 +1,31 @@
 {
   "FILTER": {
     "TITLE": "Filtrar conversas",
-    "SUBTITLE": "Adicione seus filtros abaixo e clique em 'Aplicar filtros' para reduzir a desordem na conversa.",
-    "EDIT_CUSTOM_FILTER": "Editar Pasta",
-    "CUSTOM_VIEWS_SUBTITLE": "Adicione ou remova filtros e atualize sua pasta.",
+    "SUBTITLE": "Adicione filtros para personalizar a visualização das conversas no formato de filtros.",
+    "EDIT_CUSTOM_FILTER": "Editar filtro",
+    "CUSTOM_VIEWS_SUBTITLE": "Adicione ou remova filtros personalizados para atualizar o filtro.",
     "ADD_NEW_FILTER": "Adicionar filtro",
-    "FILTER_DELETE_ERROR": "Ops! Parece que não podemos salvar nada! Por favor, adicione pelo menos um filtro para salvá-lo.",
-    "SUBMIT_BUTTON_LABEL": "Aplicar filtros",
-    "UPDATE_BUTTON_LABEL": "Atualizar pasta",
+    "FILTER_DELETE_ERROR": "Ops! Por favor, adicione pelo menos um filtro para salvá-lo",
+    "SUBMIT_BUTTON_LABEL": "Salvar",
+    "UPDATE_BUTTON_LABEL": "Salvar",
     "CANCEL_BUTTON_LABEL": "Cancelar",
     "CLEAR_BUTTON_LABEL": "Limpar filtros",
-    "FOLDER_LABEL": "Nome da pasta",
-    "FOLDER_QUERY_LABEL": "Consulta de Pasta",
-    "EMPTY_VALUE_ERROR": "Valor obrigatório.",
+    "FOLDER_LABEL": "Nome do filtro",
+    "FOLDER_QUERY_LABEL": "Consulta de filtros",
+    "EMPTY_VALUE_ERROR": "Ops! Filtro sem preenchimento.",
     "TOOLTIP_LABEL": "Filtrar conversas",
     "QUERY_DROPDOWN_LABELS": {
       "AND": "E",
       "OR": "OU"
     },
-    "INPUT_PLACEHOLDER": "Inserir valor",
+    "INPUT_PLACEHOLDER": "Valor",
     "OPERATOR_LABELS": {
       "equal_to": "Igual a",
       "not_equal_to": "Diferente",
       "contains": "Contém",
       "does_not_contain": "Não contém",
-      "is_present": "Está presente",
-      "is_not_present": "Não está presente",
+      "is_present": "Contém",
+      "is_not_present": "Não contém",
       "is_greater_than": "É maior que",
       "is_less_than": "É menor que",
       "days_before": "É X dias antes",
@@ -36,16 +36,16 @@
       "FALSE": "Falso"
     },
     "ATTRIBUTES": {
-      "STATUS": "SItuação",
-      "ASSIGNEE_NAME": "Nome do responsável",
-      "INBOX_NAME": "Nome da Caixa de Entrada",
-      "TEAM_NAME": "Nome do Time",
-      "CONVERSATION_IDENTIFIER": "Identificador da conversa",
-      "CAMPAIGN_NAME": "Nome da campanha",
-      "LABELS": "Marcadores",
+      "STATUS": "Status",
+      "ASSIGNEE_NAME": "Usuário",
+      "INBOX_NAME": "Canal",
+      "TEAM_NAME": "Equipe",
+      "CONVERSATION_IDENTIFIER": "Identificador",
+      "CAMPAIGN_NAME": "Campanha",
+      "LABELS": "Etiqueta",
       "BROWSER_LANGUAGE": "Idioma do navegador",
       "PRIORITY": "Prioridade",
-      "COUNTRY_NAME": "Nome do País",
+      "COUNTRY_NAME": "Nome do país",
       "REFERER_LINK": "Link de origem",
       "CUSTOM_ATTRIBUTE_LIST": "Lista",
       "CUSTOM_ATTRIBUTE_TEXT": "Texto",
@@ -56,50 +56,50 @@
       "LAST_ACTIVITY": "Última atividade"
     },
     "ERRORS": {
-      "VALUE_REQUIRED": "Valor obrigatório"
+      "VALUE_REQUIRED": "Ops! Filtro sem preenchimento."
     },
     "GROUPS": {
-      "STANDARD_FILTERS": "Filtros padrão",
-      "ADDITIONAL_FILTERS": "Filtros adicionais",
-      "CUSTOM_ATTRIBUTES": "Atributos personalizados"
+      "STANDARD_FILTERS": "Filtro padrão",
+      "ADDITIONAL_FILTERS": "Filtro adicional",
+      "CUSTOM_ATTRIBUTES": "Campo personalizado"
     },
     "CUSTOM_VIEWS": {
       "ADD": {
         "TITLE": "Você quer salvar este filtro?",
-        "LABEL": "Nomear este filtro",
-        "PLACEHOLDER": "Nomeie seu filtro para referenciá-lo posteriormente.",
-        "ERROR_MESSAGE": "O nome é obrigatório.",
-        "SAVE_BUTTON": "Salvar filtro",
+        "LABEL": "Nomeie este filtro",
+        "PLACEHOLDER": "Nomeie seu filtro para buscá-lo posteriormente",
+        "ERROR_MESSAGE": "Ops! O nome é obrigatório.",
+        "SAVE_BUTTON": "Salvar",
         "CANCEL_BUTTON": "Cancelar",
         "API_FOLDERS": {
-          "SUCCESS_MESSAGE": "Pasta criada com sucesso.",
-          "ERROR_MESSAGE": "Erro ao criar pasta."
+          "SUCCESS_MESSAGE": "Oba! Filtro criado com sucesso! 🚀",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para criar o filtro. Vamos tentar novamente? 🤞"
         },
         "API_SEGMENTS": {
-          "SUCCESS_MESSAGE": "Segmento criado com sucesso.",
-          "ERROR_MESSAGE": "Erro ao criar segmento."
+          "SUCCESS_MESSAGE": "Oba! Filtro criado com sucesso! 🚀",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para criar o filtro. Vamos tentar novamente? 🤞"
         }
       },
       "EDIT": {
-        "EDIT_BUTTON": "Editar Pasta"
+        "EDIT_BUTTON": "Editar"
       },
       "DELETE": {
-        "DELETE_BUTTON": "Excluir filtro",
+        "DELETE_BUTTON": "Excluir",
         "MODAL": {
           "CONFIRM": {
             "TITLE": "Confirmar exclusão",
-            "MESSAGE": "Tem certeza que deseja excluir o filtro?",
-            "YES": "Sim, excluir",
-            "NO": "Não, mantenha-o"
+            "MESSAGE": "Você tem certeza que deseja excluir o filtro?",
+            "YES": "Excluir",
+            "NO": "Cancelar"
           }
         },
         "API_FOLDERS": {
-          "SUCCESS_MESSAGE": "Pasta excluída com sucesso.",
-          "ERROR_MESSAGE": "Erro ao excluir pasta."
+          "SUCCESS_MESSAGE": "Oba! Filtro excluído com sucesso!",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir o filtro. Vamos tentar novamente? 🤞"
         },
         "API_SEGMENTS": {
-          "SUCCESS_MESSAGE": "Segmento apagado com sucesso.",
-          "ERROR_MESSAGE": "Erro ao excluir segmento."
+          "SUCCESS_MESSAGE": "Oba! Filtro excluído com sucesso!",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir o filtro. Vamos tentar novamente? 🤞"
         }
       }
     }
