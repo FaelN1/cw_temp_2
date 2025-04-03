@@ -1,201 +1,202 @@
 {
   "PROFILE_SETTINGS": {
-    "LINK": "Configurações do Perfil",
-    "TITLE": "Configurações do Perfil",
-    "BTN_TEXT": "Atualizar o Perfil",
-    "DELETE_AVATAR": "Apagar Avatar",
-    "AVATAR_DELETE_SUCCESS": "Avatar apagado com sucesso",
-    "AVATAR_DELETE_FAILED": "Ocorreu um erro ao excluir o avatar. Tente novamente",
-    "UPDATE_SUCCESS": "Seu perfil foi atualizado com sucesso",
-    "PASSWORD_UPDATE_SUCCESS": "A sua senha foi alterada com sucesso",
-    "AFTER_EMAIL_CHANGED": "Seu perfil foi atualizado com sucesso. Faça login novamente, pois suas credenciais de login foram alteradas",
+    "LINK": "Configurações do perfil",
+    "TITLE": "Configurações do perfil",
+    "BTN_TEXT": "Atualizar perfil",
+    "DELETE_AVATAR": "Apagar imagem",
+    "AVATAR_DELETE_SUCCESS": "Oba! Imagem apagada com sucesso!",
+    "AVATAR_DELETE_FAILED": "Ops! Houve alguma falha para apagar o imagem. Vamos tentar novamente? 🤞",
+    "UPDATE_SUCCESS": "Oba! Seu perfil foi atualizado com sucesso! 🚀",
+    "PASSWORD_UPDATE_SUCCESS": "Oba! A sua senha foi alterada com sucesso! 🚀",
+    "AFTER_EMAIL_CHANGED": "Oba! Seu perfil foi atualizado com sucesso. Faça login novamente, pois suas credenciais de login foram alteradas.",
     "FORM": {
-      "PICTURE": "Foto do perfil",
-      "AVATAR": "Imagem de Perfil",
-      "ERROR": "Por favor, corrija os erros",
+      "PICTURE": "Imagem de perfil",
+      "AVATAR": "Imagem de perfil",
+      "ERROR": "Por favor, corrija os erros.",
       "REMOVE_IMAGE": "Excluir",
       "UPLOAD_IMAGE": "Carregar imagem",
-      "UPDATE_IMAGE": "Atualizar Imagem",
+      "UPDATE_IMAGE": "Atualizar imagem",
       "PROFILE_SECTION": {
         "TITLE": "Perfil",
-        "NOTE": "Seu endereço de e-mail é sua identidade e é usado para fazer login."
+        "NOTE": "Mantenha o seu perfil atualizado. O nome para exibição é o seu nome que aparecerá ao cliente caso seja assinado a mensagem."
       },
       "SEND_MESSAGE": {
-        "TITLE": "Tecla de atalho para enviar mensagens",
-        "NOTE": "Você pode selecionar uma tecla de atalho (Enter ou Cmd/Ctrl+Enter) com base na sua preferência de escrita.",
-        "UPDATE_SUCCESS": "Suas configurações foram atualizadas com sucesso",
+        "TITLE": "Tecla para enviar mensagens",
+        "NOTE": "Selecione o atalho (Enter ou Cmd/Ctrl+Enter) com base na sua preferência.",
+        "UPDATE_SUCCESS": "Suas configurações foram atualizadas com sucesso!",
         "CARD": {
           "ENTER_KEY": {
-            "HEADING": "Inserir (↵)",
-            "CONTENT": "Enviar mensagens pressionando a tecla Enter em vez de clicar no botão de enviar."
+            "HEADING": "Enter",
+            "CONTENT": "Enviar mensagens pressionando a tecla 'Enter' (Recomendado)"
           },
           "CMD_ENTER_KEY": {
-            "HEADING": "Cmd/Ctrl + Enter (⌘ + ↵)",
-            "CONTENT": "Pressione a tecla Cmd/Ctrl + Enter ao invés de clicar no botão enviar."
+            "HEADING": "Cmd/Ctrl + Enter",
+            "CONTENT": "Pressione a tecla Cmd/Ctrl + Enter ao invés de clicar no botão enviar"
           }
         }
       },
       "MESSAGE_SIGNATURE_SECTION": {
-        "TITLE": "Assinatura de mensagens pessoais",
-        "NOTE": "Crie uma assinatura de mensagem única para aparecer no final de cada mensagem que você enviar de qualquer caixa de entrada. Você também pode incluir uma imagem anexada, suportada em live-chat, e-mail e caixas de entrada de API.",
-        "BTN_TEXT": "Salvar assinatura da mensagem",
-        "API_ERROR": "Não foi possível salvar a assinatura! Tente novamente",
-        "API_SUCCESS": "Assinatura salva com sucesso",
-        "IMAGE_UPLOAD_ERROR": "Não foi possível fazer o upload da imagem! Tente novamente",
-        "IMAGE_UPLOAD_SUCCESS": "Imagem adicionada com sucesso. Por favor clique em salvar para salvar a assinatura",
+        "TITLE": "Assinatura de e-mail",
+        "NOTE": "Personalize a assinatura de e-mail ou carregue uma imagem que você utiliza.",
+        "BTN_TEXT": "Salvar assinatura",
+        "API_ERROR": "Ops! Houve alguma falha para salvar a assinatura. Vamos tentar novamente? 🤞",
+        "API_SUCCESS": "Oba! Assinatura salva com sucesso!",
+        "IMAGE_UPLOAD_ERROR": "Ops! Houve alguma falha para fazer o upload da imagem. Vamos tentar novamente? 🤞",
+        "IMAGE_UPLOAD_SUCCESS": "Oba! Imagem adicionada com sucesso. Por favor clique em salvar para salvar a assinatura!",
         "IMAGE_UPLOAD_SIZE_ERROR": "O tamanho da imagem deve ser menor que {size}MB"
       },
       "MESSAGE_SIGNATURE": {
-        "LABEL": "Assinatura da mensagem",
-        "ERROR": "Assinatura da mensagem não pode estar vazia",
-        "PLACEHOLDER": "Insira aqui a assinatura de sua mensagem pessoal."
+        "LABEL": "Assinatura de e-mail",
+        "ERROR": "Ops! Assinatura da mensagem não pode estar vazia.",
+        "PLACEHOLDER": "Insira aqui a sua assinatura de e-mail profissional"
       },
       "PASSWORD_SECTION": {
         "TITLE": "Senha",
-        "NOTE": "A atualização da sua senha redefiniria o seu login em vários dispositivos.",
-        "BTN_TEXT": "Mudar Senha"
+        "NOTE": "A atualização da senha redefine o seu login em todos os dispositivos logados.",
+        "BTN_TEXT": "Redefinir senha"
       },
       "ACCESS_TOKEN": {
         "TITLE": "Token de acesso",
-        "NOTE": "Esse token pode ser usado se você estiver criando uma integração baseada em API",
+        "NOTE": "Esse token pode ser usado se você estiver criando uma integração baseada em API.",
         "COPY": "Copiar"
       },
       "AUDIO_NOTIFICATIONS_SECTION": {
-        "TITLE": "Notificações de Áudio",
-        "NOTE": "Habilitar notificações de áudio no painel para novas mensagens e conversas.",
+        "TITLE": "Notificações por áudio",
+        "NOTE": "Habilite notificações de áudio no painel para novas mensagens e conversas.",
         "ALERT_TYPES": {
-          "NONE": "Nenhuma",
-          "MINE": "Atribuído",
-          "ALL": "Todos",
+          "NONE": "Nenhum",
+          "MINE": "Atribuídas",
+          "ALL": "Geral",
           "UNASSIGNED": "Conversas não atribuídas",
           "NOTME": "Conversas abertas atribuídas a outros",
           "ASSIGNED": "Minhas conversas atribuídas"
         },
         "ALERT_TYPE": {
-          "TITLE": "Eventos de alerta para conversas:",
+          "TITLE": "Tipo de Alerta:",
           "NONE": "Nenhuma",
           "ASSIGNED": "Conversas atribuídas",
           "ALL_CONVERSATIONS": "Todas as conversas"
         },
         "DEFAULT_TONE": {
-          "TITLE": "Titulo:"
+          "TITLE": "Som:"
         },
         "CONDITIONS": {
           "TITLE": "Condições:",
-          "CONDITION_ONE": "Enviar alertas de áudio apenas se a janela do navegador não estiver ativa",
-          "CONDITION_TWO": "Enviar alertas a cada 30 segundos até que todas as conversas atribuídas sejam lidas"
+          "CONDITION_ONE": "Enviar notificações por áudio apenas se a plataforma não estiver aberta",
+          "CONDITION_TWO": "Enviar notificações por áudio a cada 30 segundos até que todas as conversas atribuídas sejam lidas"
         },
         "PLAY": "Reproduzir som"
       },
       "EMAIL_NOTIFICATIONS_SECTION": {
         "TITLE": "Notificações por e-mail",
-        "NOTE": "Atualize suas preferências de notificação por e-mail aqui",
-        "CONVERSATION_ASSIGNMENT": "Enviar notificações por email quando uma conversa for atribuída a mim",
-        "CONVERSATION_CREATION": "Enviar notificações por email quando uma nova conversa for criada",
-        "CONVERSATION_MENTION": "Enviar notificações por email quando você for mencionado em uma conversa",
-        "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Envie notificações por e-mail quando uma nova mensagem for criada numa conversa já atribuída",
-        "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Enviar notificações por email quando uma nova mensagem é criada em uma conversa que você participa",
-        "SLA_MISSED_FIRST_RESPONSE": "Enviar notificações por e-mail quando uma conversa perder a primeira resposta SLA",
-        "SLA_MISSED_NEXT_RESPONSE": "Enviar notificações por e-mail quando uma conversa perder a próxima resposta SLA",
-        "SLA_MISSED_RESOLUTION": "Enviar notificações por e-mail quando uma conversa perder resolução de resolução SLA"
+        "NOTE": "Habilite suas preferências de notificações por e-mail para novas mensagens e conversas.",
+        "CONVERSATION_ASSIGNMENT": "Enviar quando uma conversa for atribuída a mim",
+        "CONVERSATION_CREATION": "Enviar quando uma nova conversa for criada",
+        "CONVERSATION_MENTION": "Enviar quando você for mencionado em uma conversa",
+        "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Enviar quando uma nova mensagem é enviada em uma conversa já atribuída",
+        "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Enviar quando uma nova mensagem é enviada em uma conversa que você participa",
+        "SLA_MISSED_FIRST_RESPONSE": "Envie notificações por e-mail quando uma conversa perder o SLA de primeira resposta",
+        "SLA_MISSED_NEXT_RESPONSE": "Envie notificações por e-mail quando uma conversa perder o próximo SLA de resposta",
+        "SLA_MISSED_RESOLUTION": "Envie notificações por e-mail quando uma conversa não tiver SLA de resolução"
       },
       "NOTIFICATIONS": {
         "TITLE": "Preferências de notificação",
         "TYPE_TITLE": "Tipo de notificação",
-        "EMAIL": "e-mail",
-        "PUSH": "Notificação ",
+        "EMAIL": "Email",
+        "PUSH": "Push",
         "TYPES": {
-          "CONVERSATION_CREATED": "Uma nova conversa foi criada",
-          "CONVERSATION_ASSIGNED": "Uma conversa foi atribuída a você",
-          "CONVERSATION_MENTION": "Você foi mencionado em uma conversa",
-          "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Uma nova mensagem foi criada e atribuída",
-          "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Uma nova mensagem foi criada em uma conversa participante",
-          "SLA_MISSED_FIRST_RESPONSE": "Uma conversa perdeu o SLA de primeira resposta",
-          "SLA_MISSED_NEXT_RESPONSE": "Uma conversa perdeu o SLA de próxima resposta",
-          "SLA_MISSED_RESOLUTION": "Uma conversa perdeu o SLA de resolução"
+          "CONVERSATION_CREATED": "Novo contato criado",
+          "CONVERSATION_ASSIGNED": "Conversa atribuída a você",
+          "CONVERSATION_MENTION": "Você foi mencionado na conversa",
+          "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Nova mensagem (conversa não atribuída à você)",
+          "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Nova mensagem (conversa atribuída a você)",
+          "SLA_MISSED_FIRST_RESPONSE": "Tempo de primeira resposta do SLA expirado",
+          "SLA_MISSED_NEXT_RESPONSE": "Tempo de resposta do SLA expirado",
+          "SLA_MISSED_RESOLUTION": "Tempo de resolução do SLA expirado"
         },
-        "BROWSER_PERMISSION": "Habilite as notificações push do seu navegador para poder recebê-las"
+        "BROWSER_PERMISSION": "Ativar notificações no navegador"
       },
       "API": {
-        "UPDATE_SUCCESS": "Suas preferências de notificação foram atualizadas com sucesso",
-        "UPDATE_ERROR": "Ocorreu um erro ao atualizar as preferências, por favor, tente novamente"
+        "UPDATE_SUCCESS": "Oba! Suas preferências de notificações foram atualizadas com sucesso! 🚀",
+        "UPDATE_ERROR": "Ops! Houve alguma falha para atualizar as preferências por e-mail. Vamos tentar novamente? 🤞"
       },
       "PUSH_NOTIFICATIONS_SECTION": {
-        "TITLE": "Notificações via Push",
-        "NOTE": "Atualize suas preferências de notificação Push aqui",
-        "CONVERSATION_ASSIGNMENT": "Enviar notificações push quando uma conversa é atribuída a mim",
-        "CONVERSATION_CREATION": "Enviar notificações push quando uma nova conversa é criada",
-        "CONVERSATION_MENTION": "Enviar notificações push quando você for mencionado em uma conversa",
-        "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Envie notificações quando uma nova mensagem for criada numa conversa já atribuída",
-        "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Enviar notificações push quando uma nova mensagem é criada em uma conversa que você participa",
-        "HAS_ENABLED_PUSH": "Você ativou push para este navegador.",
+        "TITLE": "Notificações via push",
+        "NOTE": "Habilite suas preferências de notificação via push para novas mensagens e conversas.",
+        "CONVERSATION_ASSIGNMENT": "Enviar quando uma conversa for atribuída a mim",
+        "CONVERSATION_CREATION": "Enviar quando uma nova conversa for criada",
+        "CONVERSATION_MENTION": "Enviar quando você for mencionado em uma conversa",
+        "ASSIGNED_CONVERSATION_NEW_MESSAGE": "Enviar quando uma nova mensagem é enviada em uma conversa já atribuída",
+        "PARTICIPATING_CONVERSATION_NEW_MESSAGE": "Enviar quando uma nova mensagem é enviada em uma conversa que você participa",
+        "HAS_ENABLED_PUSH": "Você ativou push para este navegador!",
         "REQUEST_PUSH": "Habilitar notificações push",
-        "SLA_MISSED_FIRST_RESPONSE": "Enviar notificações quando uma conversa perder a primeira resposta SLA",
-        "SLA_MISSED_NEXT_RESPONSE": "Enviar notificações quando uma conversa perder a próxima resposta SLA",
-        "SLA_MISSED_RESOLUTION": "Enviar notificações quando uma conversa perder resolução de resolução SLA"
+        "SLA_MISSED_FIRST_RESPONSE": "Envie notificações push quando uma conversa perder o SLA de primeira resposta",
+        "SLA_MISSED_NEXT_RESPONSE": "Envie notificações push quando uma conversa perder o próximo SLA de resposta",
+        "SLA_MISSED_RESOLUTION": "Envie notificações push quando uma conversa não tiver SLA de resolução"
       },
       "PROFILE_IMAGE": {
-        "LABEL": "Imagem do Perfil"
+        "LABEL": "Imagem do perfil"
       },
       "NAME": {
-        "LABEL": "Seu nome completo",
-        "ERROR": "Por favor, insira um nome completo válido",
-        "PLACEHOLDER": "Por favor, digite seu nome completo"
+        "LABEL": "Nome completo",
+        "ERROR": "Ops! Insira um nome completo válido.",
+        "PLACEHOLDER": "Digite o seu nome completo"
       },
       "DISPLAY_NAME": {
         "LABEL": "Nome para exibição",
-        "ERROR": "Por favor, insira um nome de exibição válido",
-        "PLACEHOLDER": "Por favor, insira um nome de exibição para ser exibido em conversas"
+        "ERROR": "Ops! Insira um nome de exibição válido para ser exibido em conversas.",
+        "PLACEHOLDER": "Digite o seu nome para exibição"
       },
       "AVAILABILITY": {
         "LABEL": "Disponibilidade",
-        "STATUS": {
-          "ONLINE": "Online",
-          "BUSY": "Ocupado",
-          "OFFLINE": "Offline"
-        },
-        "SET_AVAILABILITY_SUCCESS": "Disponibilidade definida com sucesso",
-        "SET_AVAILABILITY_ERROR": "Não foi possível definir a disponibilidade, tente novamente"
+        "STATUSES_LIST": [
+          "Online",
+          "Ausente",
+          "Desconectado"
+        ],
+        "SET_AVAILABILITY_SUCCESS": "Oba! Disponibilidade foi definida com sucesso!",
+        "SET_AVAILABILITY_ERROR": "Ops! Houve alguma falha para definir a disponibilidade. Vamos tentar novamente? 🤞"
       },
       "EMAIL": {
-        "LABEL": "Seu e-mail",
-        "ERROR": "Por favor, insira um endereço de e-mail válido",
-        "PLACEHOLDER": "Por favor, insira seu endereço de e-mail, que será exibido em conversas"
+        "LABEL": "E-mail",
+        "ERROR": "Ops! Digite um e-mail válido.",
+        "PLACEHOLDER": "Digite o seu e-mail corporativo"
       },
       "CURRENT_PASSWORD": {
         "LABEL": "Senha atual",
-        "ERROR": "Por favor, digite a senha atual",
-        "PLACEHOLDER": "Por favor, digite a senha atual"
+        "ERROR": "Ops! A senha informada é diferente da senha atual. Favor digitar novamente.",
+        "PLACEHOLDER": "Digite a senha atual"
       },
       "PASSWORD": {
         "LABEL": "Nova senha",
-        "ERROR": "Por favor, digite uma senha de comprimento 6 ou mais",
-        "PLACEHOLDER": "Por favor, digite uma nova senha"
+        "ERROR": "Ops! Insira uma senha válida.",
+        "PLACEHOLDER": "Digite uma senha com mais de 6 caracteres"
       },
       "PASSWORD_CONFIRMATION": {
         "LABEL": "Confirme a nova senha",
-        "ERROR": "A confirmação da senha é diferente. Favor digitar novamente",
-        "PLACEHOLDER": "Por favor, digite sua nova senha "
+        "ERROR": "Ops! A confirmação da senha é diferente. Favor digitar novamente.",
+        "PLACEHOLDER": "Digite sua nova senha novamente"
       }
     }
   },
   "SIDEBAR_ITEMS": {
     "CHANGE_AVAILABILITY_STATUS": "Trocar",
     "CHANGE_ACCOUNTS": "Trocar Conta",
-    "CONTACT_SUPPORT": "Contatar suporte",
+    "CONTACT_SUPPORT": "Contate o Suporte",
     "SELECTOR_SUBTITLE": "Selecione uma conta da lista a seguir",
     "PROFILE_SETTINGS": "Configurações do Perfil",
-    "KEYBOARD_SHORTCUTS": "Atalhos de teclado",
-    "APPEARANCE": "Mudar aparência",
-    "SUPER_ADMIN_CONSOLE": "Console de Super Admin",
+    "KEYBOARD_SHORTCUTS": "Atalhos do Teclado",
+    "APPEARANCE": "Alterar Tema",
+    "SUPER_ADMIN_CONSOLE": "Super Admin",
+    "DOCS": "Central de Ajuda",
     "LOGOUT": "Sair",
     "SWITCH_WORKSPACE": "Trocar área de trabalho"
   },
   "APP_GLOBAL": {
     "TRIAL_MESSAGE": "dias de teste restantes.",
     "TRAIL_BUTTON": "Comprar agora",
-    "DELETED_USER": "Deletar Usuário",
-    "EMAIL_VERIFICATION_PENDING": "Parece que você ainda não verificou seu endereço de e-mail. Por favor, verifique sua caixa de entrada pelo e-mail de verificação.",
+    "DELETED_USER": "Excluir usuário",
+    "EMAIL_VERIFICATION_PENDING": "Parece que você ainda não verificou seu e-mail. Por favor, acesse seu e-mail e realize a verificação.",
     "RESEND_VERIFICATION_MAIL": "Reenviar email de verificação",
     "EMAIL_VERIFICATION_SENT": "O e-mail de verificação foi enviado. Por favor, verifique sua caixa de entrada.",
     "ACCOUNT_SUSPENDED": {
@@ -207,11 +208,11 @@
     "CODE": {
       "BUTTON_TEXT": "Copiar",
       "CODEPEN": "Abrir em CodePen",
-      "COPY_SUCCESSFUL": "Código copiado para área de transferência com sucesso"
+      "COPY_SUCCESSFUL": "Código copiado para área de transferência com sucesso!"
     },
     "SHOW_MORE_BLOCK": {
-      "SHOW_MORE": "Mostrar Mais",
-      "SHOW_LESS": "Mostrar Menos"
+      "SHOW_MORE": "Mostrar mais",
+      "SHOW_LESS": "Mostrar menos"
     },
     "FILE_BUBBLE": {
       "DOWNLOAD": "Baixar",
@@ -219,7 +220,7 @@
       "INSTAGRAM_STORY_UNAVAILABLE": "Este story não está mais disponível."
     },
     "LOCATION_BUBBLE": {
-      "SEE_ON_MAP": "Ver Localização"
+      "SEE_ON_MAP": "Ver localização"
     },
     "FORM_BUBBLE": {
       "SUBMIT": "Enviar"
@@ -237,71 +238,70 @@
   "CONFIRM_EMAIL": "Verificando...",
   "SETTINGS": {
     "INBOXES": {
-      "NEW_INBOX": "Adicionar Caixa de Entrada"
+      "NEW_INBOX": "Adicionar canal"
     }
   },
   "SIDEBAR": {
     "CURRENTLY_VIEWING_ACCOUNT": "Visualização atual:",
     "SWITCH": "Trocar",
-    "INBOX_VIEW": "Visualização da Caixa de Entrada",
-    "CONVERSATIONS": "Conversas",
-    "INBOX": "Caixa de Entrada",
-    "ALL_CONVERSATIONS": "Todas as conversas",
+    "INBOX_VIEW": "Notificações",
+    "INBOX": "Canais",
+    "ALL_CONVERSATIONS": "Todas conversas",
     "MENTIONED_CONVERSATIONS": "Menções",
-    "PARTICIPATING_CONVERSATIONS": "Conversas participantes",
-    "UNATTENDED_CONVERSATIONS": "Conversas não atendidas",
+    "PARTICIPATING_CONVERSATIONS": "Participantes",
+    "UNATTENDED_CONVERSATIONS": "Não respondidas",
     "REPORTS": "Relatórios",
     "SETTINGS": "Configurações",
-    "CONTACTS": "Contato",
-    "CAPTAIN": "Capitão",
+    "CONTACTS": "Contatos",
+    "CAPTAIN": "Agentes I.A",
     "HOME": "Principal",
-    "AGENTS": "Agentes",
-    "AGENT_BOTS": "Bots",
-    "AUDIT_LOGS": "Logs de Auditoria",
-    "INBOXES": "Caixas de Entrada",
+    "AGENTS": "Usuários",
+    "AGENT_BOTS": "Chatbots",
+    "AUDIT_LOGS": "Registros",
+    "INBOXES": "Canais",
     "NOTIFICATIONS": "Notificações",
-    "CANNED_RESPONSES": "Atalhos",
+    "CANNED_RESPONSES": "Respostas",
     "INTEGRATIONS": "Integrações",
-    "PROFILE_SETTINGS": "Configurações do Perfil",
-    "ACCOUNT_SETTINGS": "Configurações da conta",
+    "PROFILE_SETTINGS": "Configurações do perfil",
+    "ACCOUNT_SETTINGS": "Conta",
     "APPLICATIONS": "Aplicativos",
-    "LABELS": "Marcadores",
-    "CUSTOM_ATTRIBUTES": "Atributos Personalizados",
-    "AUTOMATION": "Automação",
-    "MACROS": "Macros",
-    "TEAMS": "Times",
-    "BILLING": "Cobrança",
-    "CUSTOM_VIEWS_FOLDER": "Pastas",
-    "CUSTOM_VIEWS_SEGMENTS": "Segmentos",
-    "ALL_CONTACTS": "Todos os Contatos",
-    "TAGGED_WITH": "Marcado com",
+    "LABELS": "Etiquetas",
+    "CUSTOM_ATTRIBUTES": "Campos",
+    "AUTOMATION": "Automações",
+    "MACROS": "Fluxos",
+    "TEAMS": "Equipes",
+    "BILLING": "Assinaturas",
+    "CUSTOM_VIEWS_FOLDER": "Filtros",
+    "CUSTOM_VIEWS_SEGMENTS": "Filtros",
+    "ALL_CONTACTS": "Todos os contatos",
+    "TAGGED_WITH": "Etiquetas",
     "NEW_LABEL": "Nova etiqueta",
-    "NEW_TEAM": "Novo time",
-    "NEW_INBOX": "Nova caixa de entrada",
+    "NEW_TEAM": "Nova equipe",
+    "NEW_INBOX": "Novo canal",
     "REPORTS_CONVERSATION": "Conversas",
     "CSAT": "CSAT",
     "CAMPAIGNS": "Campanhas",
-    "ONGOING": "Em andamento",
-    "ONE_OFF": "Única",
+    "ONGOING": "Recorrente",
+    "ONE_OFF": "Pontual",
     "REPORTS_SLA": "SLA",
-    "REPORTS_BOT": "Bot",
-    "REPORTS_AGENT": "Agentes",
-    "REPORTS_LABEL": "Marcadores",
-    "REPORTS_INBOX": "Caixa de Entrada",
-    "REPORTS_TEAM": "Times",
+    "REPORTS_BOT": "Chatbot",
+    "REPORTS_AGENT": "Usuários",
+    "REPORTS_LABEL": "Etiquetas",
+    "REPORTS_INBOX": "Canais",
+    "REPORTS_TEAM": "Equipes",
     "SET_AVAILABILITY_TITLE": "Defina como",
-    "SLA": "SLA",
-    "CUSTOM_ROLES": "Custom Roles",
-    "BETA": "Beta",
-    "REPORTS_OVERVIEW": "Visão geral",
-    "REAUTHORIZE": "A conexão com a sua caixa de entrada expirou. Por favor, reconecte para continuar recebendo e enviando mensagens",
+    "SLA": "SLAs",
+    "CUSTOM_ROLES": "Permissões",
+    "BETA": "Novo",
+    "REPORTS_OVERVIEW": "Dashboard",
+    "FACEBOOK_REAUTHORIZE": "Sua conexão com o Facebook expirou! Por favor, reconecte sua página da Meta.",
     "HELP_CENTER": {
-      "TITLE": "Central de Ajuda",
-      "ALL_ARTICLES": "Todos os artigos",
-      "MY_ARTICLES": "Meus Artigos",
-      "DRAFT": "Rascunho",
-      "ARCHIVED": "Arquivado",
-      "CATEGORY": "Categoria",
+      "TITLE": "Manuais",
+      "ALL_ARTICLES": "Todos conteúdos",
+      "MY_ARTICLES": "Meus conteúdos",
+      "DRAFT": "Rascunhos",
+      "ARCHIVED": "Arquivados",
+      "CATEGORY": "Categorias",
       "SETTINGS": "Configurações",
       "CATEGORY_EMPTY_MESSAGE": "Nenhuma categoria encontrada",
       "ARTICLES": "Artigos",
@@ -310,11 +310,11 @@
     },
     "SET_AUTO_OFFLINE": {
       "TEXT": "Marcar offline automaticamente",
-      "INFO_TEXT": "Deixe o sistema marcar você automaticamente quando você não estiver usando o app ou o painel de controle."
+      "INFO_TEXT": "Deixe o sistema marcar você automaticamente quando você não estiver usando a plataforma."
     },
     "DOCS": "Ler documentos",
-    "KANBAN_BOARD": "Quadro Kanban",
-    "REPORTS_KANBAN": "Kanban",
+    "KANBAN_BOARD": "Pipelines",
+    "REPORTS_KANBAN": "Pipelines",
     "NO_ITEMS": "Nenhum item",
     "LIVE_CHAT": "Chat ao vivo",
     "SMS": "SMS",
@@ -325,31 +325,31 @@
     "INFO_SHORT": "Marcar automaticamente como offline quando você não estiver usando o aplicativo."
   },
   "BILLING_SETTINGS": {
-    "TITLE": "Cobrança",
+    "TITLE": "Assinaturas",
     "CURRENT_PLAN": {
       "TITLE": "Plano Atual",
       "PLAN_NOTE": "Você está atualmente inscrito no plano **{plan}** com **{quantity}** licenças"
     },
     "MANAGE_SUBSCRIPTION": {
       "TITLE": "Gerencie sua assinatura",
-      "DESCRIPTION": "Veja suas faturas anteriores, edite seus detalhes de cobrança, ou cancele sua assinatura.",
-      "BUTTON_TXT": "Ir para o portal de cobrança"
+      "DESCRIPTION": "Veja suas faturas anteriores, atualize dados de pagamento e faça upgrades na sua assinatura.",
+      "BUTTON_TXT": "Ir para o portal do cliente"
     },
     "CHAT_WITH_US": {
       "TITLE": "Precisa de ajuda?",
-      "DESCRIPTION": "Você está com algum problema de cobrança? Nós estamos aqui para ajudar.",
+      "DESCRIPTION": "Você está com algum problema de pagamento? Nós estamos aqui para ajudar.",
       "BUTTON_TXT": "Fale conosco no chat"
     },
-    "NO_BILLING_USER": "A sua conta de cobrança está sendo configurada. Atualize a página e tente novamente."
+    "NO_BILLING_USER": "A sua assinatura está sendo configurada. Atualize a página e tente novamente."
   },
   "CREATE_ACCOUNT": {
-    "NO_ACCOUNT_WARNING": "Ah oh! Não conseguimos encontrar nenhuma conta. Por favor, crie uma nova conta para continuar.",
+    "NO_ACCOUNT_WARNING": "Ops! Não conseguimos encontrar nenhuma conta. Por favor, crie uma nova conta para continuar.",
     "NEW_ACCOUNT": "Nova conta",
     "SELECTOR_SUBTITLE": "Criar nova conta",
     "API": {
-      "SUCCESS_MESSAGE": "Conta criada com sucesso",
-      "EXIST_MESSAGE": "Esta conta já existe",
-      "ERROR_MESSAGE": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde"
+      "SUCCESS_MESSAGE": "Oba! Conta criada com sucesso! 🚀",
+      "EXIST_MESSAGE": "ops! Esta conta já existe!",
+      "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar ao servidor. Vamos tentar novamente? 🤞"
     },
     "FORM": {
       "NAME": {
@@ -365,15 +365,15 @@
       "OPEN_CONVERSATION": "Abrir conversa",
       "RESOLVE_AND_NEXT": "Resolver e ir para o próximo",
       "NAVIGATE_DROPDOWN": "Navegar pelos itens suspensos",
-      "RESOLVE_CONVERSATION": "Resolver Conversa",
-      "GO_TO_CONVERSATION_DASHBOARD": "Ir para Painel de Conversação",
+      "RESOLVE_CONVERSATION": "Resolver conversa",
+      "GO_TO_CONVERSATION_DASHBOARD": "Ir para o painel das conversas",
       "ADD_ATTACHMENT": "Adicionar anexo",
-      "GO_TO_CONTACTS_DASHBOARD": "Ir para Painel de Contatos",
+      "GO_TO_CONTACTS_DASHBOARD": "Ir para o painel de contatos",
       "TOGGLE_SIDEBAR": "Alternar barra lateral",
-      "GO_TO_REPORTS_SIDEBAR": "Ir para a barra lateral de Relatórios",
+      "GO_TO_REPORTS_SIDEBAR": "Ir para a barra lateral de relatórios",
       "MOVE_TO_NEXT_TAB": "Mover para a próxima aba da lista de conversas",
-      "GO_TO_SETTINGS": "Ir para Configurações",
-      "SWITCH_TO_PRIVATE_NOTE": "Mudar para Nota Privada",
+      "GO_TO_SETTINGS": "Ir para configurações",
+      "SWITCH_TO_PRIVATE_NOTE": "Mudar para nota privada",
       "SWITCH_TO_REPLY": "Mudar para resposta",
       "TOGGLE_SNOOZE_DROPDOWN": "Ativar/desativar soneca"
     },
@@ -384,79 +384,79 @@
     }
   },
   "KANBAN_REPORTS": {
-    "HEADER": "Relatórios Kanban",
+    "HEADER": "Relatório dos Pipelines",
     "DOWNLOAD": "Baixar Relatório",
     "LOADING": "Carregando métricas...",
     "METRICS": {
-      "PERIOD_SUMMARY": "Resumo do Período",
+      "PERIOD_SUMMARY": "Resumo do período",
       "TODAY": "Hoje",
-      "THIS_WEEK": "Esta Semana",
-      "THIS_MONTH": "Este Mês",
+      "THIS_WEEK": "Esta semana",
+      "THIS_MONTH": "Este mês",
       "TOTAL": "Total",
-      "FINANCIAL_METRICS": "Métricas Financeiras",
-      "TOTAL_ITEMS": "Total de Itens",
-      "ITEMS_BY_STAGE": "Itens por Estágio",
-      "AVERAGE_VALUE": "Valor Médio",
-      "TOTAL_VALUE": "Valor Total",
-      "AVG_TIME_IN_STAGE": "Tempo Médio por Estágio",
-      "CONVERSION_RATES": "Taxa de Conversão entre Estágios",
-      "FUNNEL_OVERVIEW": "Visão Geral dos Funis",
-      "TOTAL_FUNNELS": "Total de Funis",
-      "ACTIVE_STAGES": "Estágios Ativos",
-      "AVG_STAGES_PER_FUNNEL": "Média de Estágios por Funil",
-      "STAGE_DISTRIBUTION": "Distribuição por Estágio",
+      "FINANCIAL_METRICS": "Métricas financeiras",
+      "TOTAL_ITEMS": "Total de itens",
+      "ITEMS_BY_STAGE": "Itens por etapa",
+      "AVERAGE_VALUE": "Valor médio",
+      "TOTAL_VALUE": "Valor total",
+      "AVG_TIME_IN_STAGE": "Tempo médio por etapa",
+      "CONVERSION_RATES": "Taxa de conversão entre etapas",
+      "FUNNEL_OVERVIEW": "Visão geral dos pipelines",
+      "TOTAL_FUNNELS": "Total de pipelines",
+      "ACTIVE_STAGES": "Etapas ativas",
+      "AVG_STAGES_PER_FUNNEL": "Média de etapas por pipeline",
+      "STAGE_DISTRIBUTION": "Distribuição por etapa",
       "VALUE": "Valor",
-      "VELOCITY_EFFICIENCY": "Velocidade e Eficiência",
-      "MESSAGE_TEMPLATES": "Templates de Mensagem",
-      "CHECKLIST_METRICS": "Métricas de Checklist",
-      "TOTAL_TASKS": "Total de Tarefas",
-      "COMPLETED_TASKS": "Tarefas Concluídas",
-      "COMPLETION_RATE": "Taxa de Conclusão",
-      "ITEMS_WITH_CHECKLISTS": "Itens com Checklist",
-      "AVG_TASKS_PER_ITEM": "Média de Tarefas por Item",
-      "ACTIVITY_METRICS": "Métricas de Atividades",
-      "TOTAL_ACTIVITIES": "Total de Atividades",
-      "AVG_ACTIVITIES_PER_ITEM": "Média de Atividades por Item",
-      "ITEMS_WITH_NOTES": "Itens com Notas",
-      "ITEMS_WITH_ATTACHMENTS": "Itens com Anexos",
-      "STAGE_CHANGES": "Mudanças de Estágio",
-      "VALUE_CHANGES": "Alterações de Valor",
-      "ACTIVITIES_BY_TYPE": "Atividades por Tipo",
-      "ITEMS_EVOLUTION": "Evolução de Itens",
-      "VALUE_BY_STAGE": "Valor por Estágio",
-      "STAGE_EFFICIENCY": "Eficiência por Estágio",
-      "ACTIVITY_CALENDAR": "Calendário de Atividades",
+      "VELOCITY_EFFICIENCY": "Velocidade e eficiência",
+      "MESSAGE_TEMPLATES": "Templates de mensagem",
+      "CHECKLIST_METRICS": "Métricas de checklist",
+      "TOTAL_TASKS": "Total de tarefas",
+      "COMPLETED_TASKS": "Tarefas concluídas",
+      "COMPLETION_RATE": "Taxa de conclusão",
+      "ITEMS_WITH_CHECKLISTS": "Itens com checklist",
+      "AVG_TASKS_PER_ITEM": "Média de tarefas por item",
+      "ACTIVITY_METRICS": "Métricas de atividades",
+      "TOTAL_ACTIVITIES": "Total de atividades",
+      "AVG_ACTIVITIES_PER_ITEM": "Média de atividades por item",
+      "ITEMS_WITH_NOTES": "Itens com notas",
+      "ITEMS_WITH_ATTACHMENTS": "Itens com anexos",
+      "STAGE_CHANGES": "Mudanças de etapa",
+      "VALUE_CHANGES": "Alterações de valor",
+      "ACTIVITIES_BY_TYPE": "Atividades por tipo",
+      "ITEMS_EVOLUTION": "Evolução de itens",
+      "VALUE_BY_STAGE": "Valor por etapa",
+      "STAGE_EFFICIENCY": "Eficiência por etapa",
+      "ACTIVITY_CALENDAR": "Calendário de atividades",
       "HEATMAP_TOOLTIP": "{hour}h: {changes} mudanças",
       "LESS": "Menos",
       "MORE": "Mais",
       "COMING_SOON": "Em breve",
-      "PREDICTIVE_ANALYSIS": "Análise Preditiva e Insights",
-      "COMPLETION_FORECAST": "Previsão de Conclusão",
-      "BOTTLENECKS": "Gargalos Identificados",
+      "PREDICTIVE_ANALYSIS": "Análise preditiva e insights",
+      "COMPLETION_FORECAST": "Previsão de conclusão",
+      "BOTTLENECKS": "Gargalos identificados",
       "LOW_EFFICIENCY_BOTTLENECK": "Baixa eficiência no processamento",
       "TIME_BOTTLENECK": "Tempo de permanência elevado",
-      "OPTIMIZATION_SUGGESTIONS": "Recomendações de Otimização",
+      "OPTIMIZATION_SUGGESTIONS": "Recomendações de otimização",
       "WORKLOAD_SUGGESTION": "Distribuição desbalanceada em {stage}",
-      "WORKLOAD_SUGGESTION_DESC": "Considere redistribuir o trabalho ou aumentar a capacidade neste estágio",
+      "WORKLOAD_SUGGESTION_DESC": "Considere redistribuir o trabalho ou aumentar a capacidade nesta etapa",
       "EFFICIENCY_SUGGESTION": "Oportunidade de melhoria na eficiência",
-      "EFFICIENCY_SUGGESTION_DESC": "Alguns estágios apresentam baixa eficiência. Analise os processos e recursos",
-      "VALUE_SUGGESTION": "Otimização de valor por estágio",
-      "VALUE_SUGGESTION_DESC": "Existem estágios com valor abaixo da média. Considere priorizar itens de maior valor",
-      "VELOCITY_METRICS": "Métricas de Velocidade",
-      "CYCLE_TIME": "Tempo de Ciclo Médio",
-      "THROUGHPUT": "Vazão Semanal"
+      "EFFICIENCY_SUGGESTION_DESC": "Algumas etapas apresentam baixa eficiência. Analise os processos e recursos",
+      "VALUE_SUGGESTION": "Otimização de valor por etapa",
+      "VALUE_SUGGESTION_DESC": "Existem etapas com valor abaixo da média. Considere priorizar itens de maior valor",
+      "VELOCITY_METRICS": "Métricas de velocidade",
+      "CYCLE_TIME": "Tempo de ciclo médio",
+      "THROUGHPUT": "Vazão semanal"
     },
-    "METRICS_FETCH_ERROR": "Erro ao carregar métricas do Kanban",
-    "FUNNEL_FETCH_ERROR": "Erro ao carregar dados dos funis",
-    "DOWNLOAD_ERROR": "Erro ao baixar relatório do Kanban",
+    "METRICS_FETCH_ERROR": "Ops! Houve alguma falha para carregar as métricas. Vamos tentar novamente? 🤞",
+    "FUNNEL_FETCH_ERROR": "Ops! Houve alguma falha para carregar os dados. Vamos tentar novamente? 🤞",
+    "DOWNLOAD_ERROR": "Ops! Houve alguma falha para baixar o relatório. Vamos tentar novamente? 🤞",
     "CSV": {
       "HEADERS": {
         "ID": "ID",
-        "STAGE": "Estágio",
+        "STAGE": "Etapa",
         "TITLE": "Título",
         "VALUE": "Valor",
-        "CREATED_AT": "Data de Criação",
-        "STAGE_ENTERED_AT": "Data de Entrada no Estágio",
+        "CREATED_AT": "Data de criação",
+        "STAGE_ENTERED_AT": "Data de Entrada na etapa",
         "DESCRIPTION": "Descrição"
       }
     },
