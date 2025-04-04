@@ -1,4 +1,6 @@
-<!-- eslint-disable vue/no-unused-emit-declarations -->
+<!-- eslint-disable vue/no-bare-strings-in-template -->
+<!-- eslint-disable vue/no-bare-strings-in-template -->
+<!-- eslint-disable vue/no-bare-strings-in-template -->
 <!-- eslint-disable no-console -->
 <script>
 import SoundCalling from 'dashboard/assets/audio/calling.mp3';
@@ -17,39 +19,7 @@ import PhoneTransfer from './icons/PhoneTransfer.vue';
 import Phone from './icons/Phone.vue';
 import { mapGetters } from 'vuex';
 
-// import WavoipInstance from 'wavoip-api';
-
 import parsePhoneNumber from 'libphonenumber-js';
-// import { useSound } from '@vueuse/sound';
-// import { useChatStore } from 'src/stores/chatStore';
-
-// import useUtils from "src/composables/UseUtils";
-// import { useVModel } from 'src/composables/useVModel';
-
-// const CScreensState = {
-//   AVAILABLE_SCREEN: 'Pronto', // 0,
-//   CALL_SCREEN: 'Chamando', // 1,
-//   CONNECTING_DEVICE: 'Conectando', // 2,
-//   QRCODE_SCREEN: 'QR Code', // 3,
-//   INCOMING_CALL_SCREEN: 'Recebendo', // 4,
-//   NO_INTERNET: 'Sem Internet', // 5,
-//   TOKEN_INCORRECT: 'Bad Token', // 6,
-// };
-
-// const keypadLayout = [
-//   { key: '1', letters: '' },
-//   { key: '2', letters: 'ABC' },
-//   { key: '3', letters: 'DEF' },
-//   { key: '4', letters: 'GHI' },
-//   { key: '5', letters: 'JKL' },
-//   { key: '6', letters: 'MNO' },
-//   { key: '7', letters: 'PQRS' },
-//   { key: '8', letters: 'TUV' },
-//   { key: '9', letters: 'WXYZ' },
-//   { key: '*', letters: '' },
-//   { key: '0', letters: '+' },
-//   { key: '#', letters: '' },
-// ];
 
 export default {
   components: {
@@ -64,8 +34,6 @@ export default {
     NumpadVue,
     PhoneTransfer,
   },
-  props: {},
-  emits: ['update:modelValue', 'update:call-state'],
   data() {
     return {
       elapsedTime: 0,
@@ -105,8 +73,14 @@ export default {
   },
   watch: {
     inboxes(newInboxes) {
+      // Garante que não crie múltiplas conexões para o mesmo token
       newInboxes.forEach(inbox => {
-        if (inbox.external_token) {
+        if (inbox.external_token && !this.wavoip[inbox.external_token]) {
+          console.log(
+            '[watch -> inboxes] startWavoip:',
+            inbox.name,
+            inbox.external_token
+          );
           this.startWavoip(inbox.name, inbox.external_token);
         }
       });
@@ -143,17 +117,28 @@ export default {
     },
   },
   mounted() {
-    // this.$store.dispatch(
-    //   'webphone/startWavoip',
-    //   'b8018d84-dfed-45a0-9513-1877596ac8c6'
-    // );
-    // this.$store.dispatch(
-    //   'webphone/startWavoip',
-    //   'b0d3785b-2ef2-43e3-8d57-fbce592bfb3a'
-    // );
+    console.log('[mounted] Componente Webphone inicou');
+    console.log('[mounted] Inboxes disponíveis:', this.inboxes);
+
+    // Inicialização forçada logo na montagem
+    if (this.inboxes && this.inboxes.length) {
+      this.inboxes.forEach(inbox => {
+        if (inbox.external_token && !this.wavoip[inbox.external_token]) {
+          console.log(
+            '[mounted] startWavoip:',
+            inbox.name,
+            inbox.external_token
+          );
+          this.startWavoip(inbox.name, inbox.external_token);
+        }
+      });
+    } else {
+      console.warn('[mounted] Nenhum inbox disponível');
+    }
   },
   methods: {
     startWavoip(inboxName, token) {
+      console.log('startWavoip', inboxName, token);
       this.$store.dispatch('webphone/startWavoip', {
         token,
         inboxName,
@@ -211,12 +196,9 @@ export default {
         );
         return;
       }
-
       whatsapp_instance.socket.off('signaling');
-
       whatsapp_instance.socket.on('signaling', (...args) => {
         const data = args[0];
-
         this.$store.dispatch('webphone/updateCallStatus', data?.tag);
 
         if (data?.tag === 'offer') {
@@ -331,43 +313,43 @@ export default {
           v-if="callInfo.status === 'accept_elsewhere'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.ACCEPT_ELSEWHERE') }}
+          Aceite por outro utilizador
         </p>
         <p
           v-if="callInfo.status === 'reject_elsewhere'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.REJECT_ELSEWHERE') }}
+          Rejeitado por outro utilizador
         </p>
         <p
           v-if="callInfo.status === 'terminate'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.TERMINATE') }}
+          Terminado
         </p>
         <p
           v-if="callInfo.status === 'reject'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.TERMINATE') }}
+          Terminado
         </p>
         <p
           v-if="callInfo.status === 'outcoming_calling'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.CONNECT_CALLING') }}
+          Conectando
         </p>
         <p
           v-if="callInfo.status === 'preaccept'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.CALLING') }}
+          Chamando
         </p>
         <p
           v-if="callInfo.status === 'relaylatency'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.CALLING') }}
+          Chamando
         </p>
       </div>
       <div class="flex justify-center align-center gap-x-5 my-2">
@@ -478,13 +460,13 @@ export default {
           v-if="callInfo.status === 'terminate'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.TERMINATE') }}
+          Terminado
         </p>
         <p
           v-if="callInfo.status === 'reject'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.TERMINATE') }}
+          Terminado
         </p>
         <p
           v-if="callInfo.status === 'outcoming_calling'"
@@ -496,13 +478,13 @@ export default {
           v-if="callInfo.status === 'preaccept'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.CALLING') }}
+          Chamando
         </p>
         <p
           v-if="callInfo.status === 'relaylatency'"
           class="text-lg font-medium text-slate-800 dark:text-slate-100 m-0 text-center"
         >
-          {{ $t('WEBPHONE.CALLING') }}
+          Chamando
         </p>
       </div>
       <div class="flex justify-center align-center my-4 gap-x-4">

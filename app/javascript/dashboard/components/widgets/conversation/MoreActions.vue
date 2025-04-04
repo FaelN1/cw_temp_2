@@ -1,8 +1,9 @@
-<!-- eslint-disable vue/no-unused-properties -->
+<!-- eslint-disable no-restricted-syntax -->
+<!-- eslint-disable no-await-in-loop -->
+<!-- eslint-disable no-console -->
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
-import { emitter } from 'shared/helpers/mitt';
 import EmailTranscriptModal from './EmailTranscriptModal.vue';
 import ResolveAction from '../../buttons/ResolveAction.vue';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
@@ -22,7 +23,6 @@ export default {
       showEmailActionsModal: false,
     };
   },
-
   computed: {
     ...mapGetters({
       currentChat: 'getSelectedChat',
@@ -43,27 +43,87 @@ export default {
     },
   },
   mounted() {
-    emitter.on(CMD_MUTE_CONVERSATION, this.mute);
-    emitter.on(CMD_UNMUTE_CONVERSATION, this.unmute);
-    emitter.on(CMD_SEND_TRANSCRIPT, this.toggleEmailActionsModal);
+    // Verificar se this.$emitter existe antes de usar
+    if (this.$emitter) {
+      this.$emitter.on(CMD_MUTE_CONVERSATION, this.mute);
+      this.$emitter.on(CMD_UNMUTE_CONVERSATION, this.unmute);
+      this.$emitter.on(CMD_SEND_TRANSCRIPT, this.toggleEmailActionsModal);
+    } else {
+      console.warn(
+        '$emitter não está disponível. Alguns recursos podem não funcionar corretamente.'
+      );
+    }
+
+    // Inicializar o Wavoip se necessário
+    if (this.isWavoipFeatureEnabled && !this.callInfo.id) {
+      console.log(
+        'Verificando se é necessário inicializar o Wavoip no MoreActions mounted'
+      );
+      // Este é um bom lugar para forçar a inicialização do componente Webphone, se necessário
+    }
   },
   unmounted() {
-    emitter.off(CMD_MUTE_CONVERSATION, this.mute);
-    emitter.off(CMD_UNMUTE_CONVERSATION, this.unmute);
-    emitter.off(CMD_SEND_TRANSCRIPT, this.toggleEmailActionsModal);
-  },
-  currentContact() {
-    return this.$store.getters['contacts/getContact'](
-      this.currentChat.meta.sender.id
-    );
+    // Verificar se this.$emitter existe antes de usar
+    if (this.$emitter) {
+      this.$emitter.off(CMD_MUTE_CONVERSATION, this.mute);
+      this.$emitter.off(CMD_UNMUTE_CONVERSATION, this.unmute);
+      this.$emitter.off(CMD_SEND_TRANSCRIPT, this.toggleEmailActionsModal);
+    }
   },
   methods: {
     async startCall() {
-      if (!this.currentContact) {
-        useAlert(this.$t('WEBPHONE.CONTACT_NOT_FOUND'));
-        return;
-      }
+      console.log('startCall');
+      console.log('CallInfo', this.callInfo);
+
       try {
+        if (this.callInfo && this.callInfo.id) {
+          console.log('Call already in progress');
+          useAlert(this.$t('WEBPHONE.CALL_ALREADY_IN_PROGRESS'));
+          return;
+        }
+
+        if (!this.currentContact) {
+          console.log('No contact found');
+          useAlert(this.$t('WEBPHONE.CONTACT_NOT_FOUND'));
+          return;
+        }
+
+        console.log('currentContact', this.currentContact);
+        console.log(
+          'currentContact.phone_number',
+          this.currentContact.phone_number
+        );
+
+        if (!this.currentContact.phone_number) {
+          console.log('Número de telefone não encontrado no contato');
+          useAlert(this.$t('WEBPHONE.CONTACT_PHONE_NOT_FOUND'));
+          return;
+        }
+
+        // Verifica se o Wavoip já está inicializado
+        const wavoipInstances = this.$store.state.webphone.wavoip;
+        console.log('Instâncias Wavoip disponíveis:', wavoipInstances);
+
+        if (!Object.keys(wavoipInstances).length) {
+          console.log(
+            'Nenhuma instância Wavoip disponível, tentando inicializar...'
+          );
+          // Se não há instâncias, tenta inicializar a partir dos inboxes disponíveis
+          const inboxes = this.$store.getters['inboxes/getInboxes'];
+          if (inboxes && inboxes.length) {
+            for (const inbox of inboxes) {
+              if (inbox.external_token) {
+                console.log('Inicializando Wavoip para:', inbox.name);
+                await this.$store.dispatch('webphone/startWavoip', {
+                  inboxName: inbox.name,
+                  token: inbox.external_token,
+                });
+                break; // Inicializa apenas o primeiro disponível por enquanto
+              }
+            }
+          }
+        }
+
         await this.$store.dispatch('webphone/outcomingCall', {
           contact_name: this.currentContact.name,
           profile_picture: this.currentContact.thumbnail,
@@ -71,6 +131,7 @@ export default {
           chat_id: this.currentChat.id,
         });
       } catch (error) {
+        console.log('Erro ao fazer chamada:', error);
         if (error.message === 'Número não existe') {
           useAlert(this.$t('WEBPHONE.CONTACT_INVALID'));
         } else if (
@@ -79,12 +140,13 @@ export default {
           useAlert(this.$t('WEBPHONE.ALL_INSTANCE_BUSY'));
         } else if (error.message === 'Limite de ligações atingido') {
           useAlert(this.$t('WEBPHONE.CALL_LIMIT'));
+        } else if (error.message === 'NO_AVAILABLE_INSTANCES') {
+          useAlert(this.$t('WEBPHONE.NO_AVAILABLE_INSTANCES'));
         } else {
           useAlert(this.$t('WEBPHONE.ERROR_TO_MADE_CALL'));
         }
       }
     },
-
     mute() {
       this.$store.dispatch('muteConversation', this.currentChat.id);
       useAlert(this.$t('CONTACT_PANEL.MUTED_SUCCESS'));

@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import * as types from '../mutation-types';
 import Wavoip from 'wavoip-api';
-import { Logger } from 'dashboard/helpers/logger';
 import { useAlert } from 'dashboard/composables';
 import i18n from '../../i18n';
 
@@ -45,72 +44,65 @@ export const getters = {
     return $state.wavoip;
   },
 };
-
 export const actions = {
-  startWavoip: async ({ commit, state }, { inboxName, token }) => {
-    Logger.info('Iniciando Wavoip', { inboxName, token });
+  startWavoip: async ({ commit, state }, params, secondParam) => {
+    // Correção para aceitar tanto objeto como parâmetros separados
+    const inboxName = params.inboxName || params;
+    const token = params.token || secondParam;
+
+    console.log('startWavoip action:', { inboxName, token });
+    console.log('state.wavoip:', state.wavoip);
+    console.log('State Token ' + state.wavoip[token] + ': token ' + token);
 
     if (state.wavoip[token] && token) {
-      Logger.info('Instância Wavoip já existe para este token', { token });
+      console.log('Wavoip já conectado para este token.');
       return;
     }
-
     const WAV = new Wavoip();
     let whatsapp_instance;
-
     try {
-      Logger.debug('Tentando conectar ao Wavoip', { token });
       whatsapp_instance = WAV.connect(token);
-      Logger.info('Conexão Wavoip bem-sucedida', { token });
+      console.log('Wavoip conectado com sucesso:', whatsapp_instance);
     } catch (error) {
-      Logger.error('Erro ao conectar ao Wavoip', { token, error });
       console.error('Error connecting to Wavoip:', error);
       useAlert(i18n.t('WEBPHONE.CONNECTION_FAILED'));
       return;
     }
-
     commit(types.default.ADD_WAVOIP, {
       token: token,
       whatsapp_instance: whatsapp_instance,
       inboxName: inboxName,
     });
+    console.log('Wavoip adicionado ao estado:', { token, inboxName });
+    console.log('state.wavoip após adicionar:', state.wavoip);
 
     whatsapp_instance.socket.on('connect', () => {
-      Logger.info('Socket Wavoip conectado', { token });
+      console.log('Socket conectado para o token:', token);
     });
-
     whatsapp_instance.socket.on('disconnect', () => {
-      Logger.warn('Socket Wavoip desconectado', { token });
+      console.log('Socket desconectado para o token:', token);
     });
   },
   outcomingCall: async ({ commit, state, dispatch }, callInfo) => {
-    Logger.info('Iniciando chamada de saída', callInfo);
-
     let { phone, contact_name, chat_id } = callInfo;
+    console.log('Estado completo do wavoip:', state.wavoip);
     let instances = callInfo.instances ?? Object.keys(state.wavoip);
 
-    Logger.debug('Instâncias disponíveis', {
-      instances,
-      wavoipState: Object.keys(state.wavoip),
-    });
-
-    if (!instances || instances.length === 0) {
-      Logger.error('Nenhuma instância disponível para fazer a chamada');
-      throw new Error('Nenhuma instância disponível para fazer a chamada');
-    }
-
-    let token = callInfo.token ?? instances[0];
-    Logger.info('Usando token para chamada', { token });
-
-    let wavoip = state.wavoip[token]?.whatsapp_instance;
-
-    if (!wavoip) {
-      Logger.error('Instância Wavoip não encontrada para o token', { token });
-      throw new Error('WEBPHONE.INSTANCE_NOT_FOUND');
-    }
-
-    let inbox_name = state.wavoip[token].inbox_name;
+    console.log('Instâncias disponíveis:', instances);
     let offerResponse;
+    console.log('Passando aqui');
+    if (!instances || instances.length === 0) {
+      throw new Error(i18n.t('WEBPHONE.NO_AVAILABLE_INSTANCES'));
+    }
+    let token = callInfo.token ?? instances[0];
+    // Adicione este log para verificar o valor de token
+    console.log('Token sendo usado:', token);
+    let wavoip = state.wavoip[token]?.whatsapp_instance;
+    let inbox_name = state.wavoip[token]?.inbox_name;
+
+    // Adicione este log para verificar se wavoip está definido
+    console.log('Instância Wavoip:', wavoip);
+
     if (wavoip) {
       offerResponse = await wavoip
         .callStart({
@@ -144,10 +136,10 @@ export const actions = {
     }
     if (offerResponse.error) {
       let remainingInstances = instances.filter(instance => instance !== token);
-      if (offerResponse.message === 'WEBPHONE.NUMBER_NOT_FOUND') {
-        throw new Error('Número não existe');
+      if (offerResponse.message === i18n.t('WEBPHONE.NUMBER_NOT_FOUND')) {
+        throw new Error(offerResponse.message);
       } else if (offerResponse.message === 'Limite de ligações atingido') {
-        throw new Error('Limite de ligações atingido');
+        useAlert(i18n.t('WEBPHONE.DAILY_LIMIT_REACHED'));
       }
       if (remainingInstances.length > 0) {
         dispatch('outcomingCall', {
@@ -156,7 +148,7 @@ export const actions = {
           token: null,
         });
       } else {
-        throw new Error('Linha ocupada, tente mais tarde ou faça um upgrade');
+        throw new Error(i18n.t('WEBPHONE.LINE_BUSY_TRY_AGAIN'));
       }
       return;
     }
@@ -263,33 +255,6 @@ export const actions = {
       isOpen: isOpen,
     });
   },
-  diagnosticWavoip: ({ state }) => {
-    Logger.info('Diagnóstico do Webphone:');
-    Logger.info('Estado da chamada atual', state.call);
-    Logger.info('Instâncias Wavoip configuradas', {
-      count: Object.keys(state.wavoip).length,
-      tokens: Object.keys(state.wavoip),
-    });
-
-    // Verificar cada instância
-    Object.entries(state.wavoip).forEach(([token, instance]) => {
-      Logger.info(`Detalhes da instância: ${token}`, {
-        inboxName: instance.inbox_name,
-        connected: instance.whatsapp_instance?.socket?.connected || false,
-      });
-    });
-
-    return {
-      hasInstances: Object.keys(state.wavoip).length > 0,
-      activeCall: state.call.id !== null,
-      instances: Object.keys(state.wavoip).map(token => ({
-        token,
-        inboxName: state.wavoip[token].inbox_name,
-        connected:
-          state.wavoip[token].whatsapp_instance?.socket?.connected || false,
-      })),
-    };
-  },
 };
 export const mutations = {
   [types.default.SET_WEBPHONE_UI_FLAG]($state, data) {
@@ -306,6 +271,8 @@ export const mutations = {
         inbox_name: data.inboxName,
       },
     };
+    console.log('Mutation ADD_WAVOIP executada:', data);
+    console.log('Estado atualizado:', $state.wavoip);
   },
   [types.default.SET_WEBPHONE_CALL]($state, data) {
     $state.call = {

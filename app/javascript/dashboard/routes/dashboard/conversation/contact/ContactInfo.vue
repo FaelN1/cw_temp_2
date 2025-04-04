@@ -247,13 +247,13 @@ export default {
             :title="$t('CONTACT_PANEL.PHONE_NUMBER')"
             show-copy
           />
-          <ContactInfoRow
+          <!-- <ContactInfoRow
             v-if="contact.identifier"
             :value="contact.identifier"
             icon="contact-identify"
             emoji="🪪"
             :title="$t('CONTACT_PANEL.IDENTIFIER')"
-          />
+          /> -->
           <ContactInfoRow
             :value="additionalAttributes.company_name"
             icon="building-bank"

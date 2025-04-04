@@ -14,6 +14,7 @@ import WootSnackbarBox from './components/SnackbarContainer.vue';
 import { setColorTheme } from './helper/themeHelper';
 import { isOnOnboardingView } from 'v3/helpers/RouteHelper';
 import { useAccount } from 'dashboard/composables/useAccount';
+import Webphone from './components/layout/webphoneComponents/Webphone.vue';
 import {
   registerSubscription,
   verifyServiceWorkerExistence,
@@ -32,6 +33,7 @@ export default {
     WootSnackbarBox,
     UpgradeBanner,
     PendingEmailVerificationBanner,
+    Webphone,
   },
   setup() {
     const router = useRouter();
@@ -134,6 +136,7 @@ export default {
     :class="{ 'app-rtl--wrapper': isRTL }"
     :dir="isRTL ? 'rtl' : 'ltr'"
   >
+    <Webphone />
     <UpdateBanner :latest-chatwoot-version="latestChatwootVersion" />
     <template v-if="currentAccountId">
       <PendingEmailVerificationBanner v-if="hideOnOnboardingView" />
