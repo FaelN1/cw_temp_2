@@ -36,7 +36,7 @@
       "FALSE": "Falso"
     },
     "ATTRIBUTES": {
-      "STATUS": "Situação",
+      "STATUS": "Status",
       "ASSIGNEE_NAME": "Nome do titular",
       "INBOX_NAME": "Nome da caixa de entrada",
       "TEAM_NAME": "Nome da equipa",

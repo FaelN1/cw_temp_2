@@ -489,7 +489,7 @@
       "LOADING_MESSAGE": "A gerar métricas dos agentes...",
       "NO_AGENTS": "Não existem conversas por agentes",
       "TABLE_HEADER": {
-        "AGENT": "Agente",
+        "AGENT": "Colaborador",
         "OPEN": "ABERTAS",
         "UNATTENDED": "Por responder",
         "STATUS": "Estado"
@@ -556,7 +556,7 @@
       "HEADER": {
         "POLICY": "Política",
         "CONVERSATION": "Conversa",
-        "AGENT": "Agente"
+        "AGENT": "Colaborador"
       },
       "VIEW_DETAILS": "Ver detalhes"
     }

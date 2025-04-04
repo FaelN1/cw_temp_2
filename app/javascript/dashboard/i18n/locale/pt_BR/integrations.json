@@ -106,7 +106,7 @@
         "SELECTED": "Selecionar"
       },
       "SELECT_CHANNEL": {
-        "OPTION_LABEL": "Selecione um canal",
+        "OPTION_LABEL": "Selecione o canal",
         "UPDATE": "Atualizar",
         "BUTTON_TEXT": "Conectar canal",
         "DESCRIPTION": "Seu espaço de trabalho Slack agora está conectado com a Salez. No entanto, a integração está inativa no momento. Para ativar a integração e conectar um canal a Salez, por favor, clique no botão abaixo.\n\n**Nota:** Se você está tentando conectar-se a um canal privado, adicione o aplicativo Salez no canal do Slack antes de prosseguir com esta etapa.",

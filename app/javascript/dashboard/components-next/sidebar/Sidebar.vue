@@ -182,12 +182,12 @@ const menuItems = computed(() => {
       children: [
         {
           name: 'Documents',
-          label: 'Documents',
+          label: 'Documentos',
           to: accountScopedRoute('captain', { page: 'documents' }),
         },
         {
           name: 'Responses',
-          label: 'Responses',
+          label: 'Respostas',
           to: accountScopedRoute('captain', { page: 'responses' }),
         },
         {

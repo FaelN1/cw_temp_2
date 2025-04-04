@@ -10,7 +10,7 @@
       <div class="modal-header">
         <div class="header-content">
           <div class="title-group">
-            <h1 class="modal-title">Agendamento de Mensagem</h1>
+            <h1 class="modal-title">Agendamento de mensagem</h1>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
                 v-model="title"
                 type="text"
                 class="form-input dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"
-                placeholder="Digite um título para identificar este agendamento"
+                placeholder="Digite um título para o agendamento"
                 required
               />
             </div>
@@ -46,13 +46,13 @@
             </div>
 
             <div class="form-group">
-              <label class="dark:text-slate-100">Selecione um canal</label>
+              <label class="dark:text-slate-100">Selecione o canal</label>
               <select
                 v-model="selectedInbox"
                 class="form-input dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600"
                 required
               >
-                <option value="">Selecione um canal</option>
+                <option value="">Selecione o canal</option>
                 <option
                   v-for="inbox in inboxes"
                   :key="inbox.id"
@@ -64,7 +64,7 @@
             </div>
 
             <div class="form-group">
-              <label class="dark:text-slate-100">Data e Hora do Envio</label>
+              <label class="dark:text-slate-100">Selecione a data e horário</label>
               <input
                 v-model="scheduledTime"
                 type="datetime-local"
@@ -113,7 +113,7 @@
               <div class="header-content">
                 <div class="title-group">
                   <h3 class="dark:text-slate-100">
-                    Mensagens Agendadas
+                    Mensagens agendadas
                     <span v-if="scheduledMessages.length > 0" class="counter">
                       {{ pendingMessagesCount }}
                     </span>
@@ -137,9 +137,9 @@
             <div v-if="scheduledMessages.length === 0" class="empty-state">
               <div class="empty-state-content">
                 <fluent-icon icon="calendar" size="32" class="empty-icon" />
-                <p class="empty-text">Nenhuma mensagem agendada</p>
+                <p class="empty-text">Ops! Nenhuma mensagem agendada ainda. Vamos agendar? 🙌</p>
                 <p class="empty-subtext">
-                  As mensagens agendadas aparecerão aqui
+                  As mensagens agendadas aparecerão aqui!
                 </p>
               </div>
             </div>
@@ -421,13 +421,13 @@ export default {
         );
         console.log('Resposta da API:', response);
 
-        // Acessando corretamente o array de mensagens agendadas
+        // Acessando corretamente o array de Mensagens agendadas
         this.scheduledMessages = response.data.payload || [];
 
         console.log('Mensagens agendadas:', this.scheduledMessages);
       } catch (error) {
         console.error('Erro ao buscar mensagens:', error);
-        useAlert('Erro ao carregar mensagens agendadas', 'error');
+        useAlert('Erro ao carregar Mensagens agendadas', 'error');
       }
     },
 

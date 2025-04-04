@@ -1,9 +1,9 @@
-API DE MENSAGENS AGENDADAS
+API DE Mensagens agendadas
 =========================
 
-Documentação dos endpoints para gerenciamento de mensagens agendadas no Chatwoot.
+Documentação dos endpoints para gerenciamento de Mensagens agendadas no Chatwoot.
 
-1. LISTAR MENSAGENS AGENDADAS
+1. LISTAR Mensagens agendadas
 ----------------------------
 GET /api/v1/accounts/{account_id}/conversations/{conversation_id}/scheduled_messages
 
@@ -80,7 +80,7 @@ DELETE /api/v1/accounts/{account_id}/conversations/{conversation_id}/scheduled_m
 
 Resposta (204 No Content)
 
-5. CONTAR MENSAGENS AGENDADAS
+5. CONTAR Mensagens agendadas
 ----------------------------
 GET /api/v1/accounts/{account_id}/conversations/{conversation_id}/scheduled_messages/count
 
@@ -112,7 +112,7 @@ OBSERVAÇÕES
 
 EXEMPLOS DE USO (cURL)
 ---------------------
-# Listar mensagens agendadas
+# Listar Mensagens agendadas
 curl -X GET \
   'https://seu-chatwoot.com/api/v1/accounts/1/conversations/123/scheduled_messages' \
   -H 'Authorization: Bearer seu-token'

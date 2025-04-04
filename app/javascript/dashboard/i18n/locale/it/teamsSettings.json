@@ -71,7 +71,7 @@
       "ERROR_MESSAGE": "Impossibile salvare i dettagli del team. Riprova."
     },
     "AGENTS": {
-      "AGENT": "AGENTE",
+      "AGENT": "Colaborador",
       "EMAIL": "EMAIL",
       "BUTTON_TEXT": "Aggiungi agenti",
       "ADD_AGENTS": "Aggiunta di agenti al tuo team...",

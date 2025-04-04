@@ -26,7 +26,7 @@
       "MAX": "Max"
     },
     "AGENT": {
-      "LABEL": "Assigned Agent",
+      "LABEL": "Usuário responsável",
       "ALL": "All"
     },
     "SHARE": {
@@ -132,7 +132,7 @@
             "PLACEHOLDER": "Select a priority"
           },
           "AGENT": {
-            "LABEL": "Assigned Agent",
+            "LABEL": "Usuário responsável",
             "PLACEHOLDER": "Select an agent"
           }
         }
@@ -189,7 +189,7 @@
         "LABEL": "Priority"
       },
       "AGENT": {
-        "LABEL": "Assigned Agent",
+        "LABEL": "Usuário responsável",
         "PLACEHOLDER": "Select an agent"
       },
       "SCHEDULING": {

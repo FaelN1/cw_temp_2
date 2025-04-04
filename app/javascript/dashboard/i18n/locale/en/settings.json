@@ -73,7 +73,7 @@
           "NOTME": "Open conversations assigned to others"
         },
         "ALERT_COMBINATIONS": {
-          "NONE": "You haven't selected any options, you won't receive any audio alerts.",
+          "NONE": "Você não selecionou nenhuma opção e não receberá nenhum alerta de áudio.",
           "ASSIGNED": "You'll receive alerts for conversations assigned to you.",
           "UNASSIGNED": "You'll receive alerts for any unassigned conversations.",
           "NOTME": "You'll receive alerts for conversations assigned to others.",

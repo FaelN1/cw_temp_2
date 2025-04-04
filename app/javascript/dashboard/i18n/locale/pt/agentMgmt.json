@@ -7,7 +7,7 @@
     "LEARN_MORE": "Saber mais sobre os papéis de utilizadores",
     "AGENT_TYPES": {
       "ADMINISTRATOR": "Administrador",
-      "AGENT": "Agente"
+      "AGENT": "Colaborador"
     },
     "LIST": {
       "404": "Não há agentes associados a esta conta",
@@ -15,7 +15,7 @@
       "DESC": "Pode adicionar/remover agentes para/da sua equipa.",
       "NAME": "Nome:",
       "EMAIL": "E-mail:",
-      "STATUS": "Situação",
+      "STATUS": "Status",
       "ACTIONS": "Ações",
       "VERIFIED": "Verificada",
       "VERIFICATION_PENDING": "Verificação pendente",

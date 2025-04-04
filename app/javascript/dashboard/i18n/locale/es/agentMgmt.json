@@ -7,7 +7,7 @@
     "LEARN_MORE": "Learn about user roles",
     "AGENT_TYPES": {
       "ADMINISTRATOR": "Administrador",
-      "AGENT": "Agente"
+      "AGENT": "Colaborador"
     },
     "LIST": {
       "404": "No hay agentes asociados a esta cuenta",

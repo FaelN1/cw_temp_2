@@ -144,7 +144,7 @@ export default {
       return [
         {
           confirmed: true,
-          name: 'None',
+          name: 'Nenhum',
           id: null,
           role: 'agent',
           account_id: 0,

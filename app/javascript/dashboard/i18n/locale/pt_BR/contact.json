@@ -200,7 +200,7 @@
       "INBOX": {
         "LABEL": "Canal",
         "PLACEHOLDER": "Escolher o canal de origem",
-        "ERROR": "Selecione um canal."
+        "ERROR": "Selecione o canal."
       },
       "SUBJECT": {
         "LABEL": "Assunto",
