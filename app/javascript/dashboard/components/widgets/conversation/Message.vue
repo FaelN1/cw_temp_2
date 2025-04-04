@@ -671,10 +671,10 @@ export default {
         @apply text-red-50 dark:text-red-50;
       }
     }
-    
+
     &.is-deleted {
       @apply bg-slate-700 dark:bg-slate-700;
-      
+
       .message-text--metadata .time {
         @apply text-red-50 dark:text-red-50;
       }
@@ -747,6 +747,10 @@ li.right {
     @apply flex items-end ml-auto;
   }
 }
+
+/* li.right .bubble {
+  @apply bg-green-500 dark:bg-green-600;  // Use a cor desejada aqui
+} */
 
 .has-context-menu {
   @apply bg-slate-50 dark:bg-slate-700;

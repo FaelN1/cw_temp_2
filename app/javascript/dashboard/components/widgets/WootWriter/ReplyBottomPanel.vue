@@ -335,9 +335,7 @@ export default {
         variant="outline"
         size="small"
         @click="$emit('openScheduleModal')"
-      >
-        {{ $t('SCHEDULE_MESSAGES.BUTTON_LABEL') }}
-      </woot-button>
+      />
       <woot-button
         v-if="hasWhatsappTemplates"
         v-tooltip.top-end="$t('CONVERSATION.FOOTER.WHATSAPP_TEMPLATES')"
