@@ -41,7 +41,7 @@ const categories = [
     items: [
       { id: 'send_message', label: 'Enviar mensagem' },
       { id: 'change_status', label: 'Mudar status' },
-      { id: 'assign_agent', label: 'Atribuir agente' },
+      { id: 'assign_agent', label: 'Atribuir usuário' },
       { id: 'add_label', label: 'Adicionar etiqueta' },
       { id: 'move_to_column', label: 'Mover para coluna' },
       { id: 'change_priority', label: 'Alterar prioridade' },
@@ -207,7 +207,7 @@ const redo = () => {
 
     <!-- Categorias de nós -->
     <div class="tools-section">
-      <h4 class="section-title">Elementos</h4>
+      <h4 class="section-title">Itens</h4>
 
       <div
         v-for="category in categories"
@@ -347,7 +347,7 @@ const redo = () => {
 }
 
 .control-button {
-  @apply p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 
+  @apply p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700
     text-slate-500 dark:text-slate-400 transition-colors;
 
   &:disabled {
@@ -401,7 +401,7 @@ const redo = () => {
 }
 
 .tool-category {
-  @apply mx-3 mb-1 rounded-md overflow-hidden bg-white dark:bg-slate-800 
+  @apply mx-3 mb-1 rounded-md overflow-hidden bg-white dark:bg-slate-800
     border border-slate-200 dark:border-slate-700;
 }
 

@@ -50,7 +50,7 @@ onMounted(async () => {
 // Computed para obter todos os funis
 const funnels = computed(() => store.getters['funnel/getFunnels']);
 
-// Computed para obter o funil selecionado
+// Computed para obter o pipeline selecionado
 const selectedFunnel = computed(
   () => store.getters['funnel/getSelectedFunnel']
 );
@@ -58,9 +58,9 @@ const selectedFunnel = computed(
 // Função para garantir que o valor é uma string
 const ensureString = value => (value ? String(value) : '');
 
-// Computed para obter as etapas do funil selecionado
+// Computed para obter as etapas do pipeline selecionado
 const funnelStages = computed(() => {
-  // Busca o funil diretamente dos records usando o ID atual
+  // Busca o pipeline diretamente dos records usando o ID atual
   const currentFunnel = funnels.value.find(
     f => String(f.id) === formData.value.funnel_id
   );
@@ -151,7 +151,7 @@ const validateForm = () => {
   return Object.keys(errors.value).length === 0;
 };
 
-// Atualiza o handler de submit para incluir o funil e etapa
+// Atualiza o handler de submit para incluir o pipeline e etapa
 const handleSubmit = async () => {
   try {
     if (!validateForm()) return;
@@ -162,10 +162,10 @@ const handleSubmit = async () => {
     );
 
     if (!currentFunnel) {
-      throw new Error('Funil não encontrado');
+      throw new Error('Pipeline não encontrado');
     }
 
-    // Cria uma cópia do funil mantendo a estrutura original
+    // Cria uma cópia do pipeline mantendo a estrutura original
     const updatedFunnel = {
       ...currentFunnel,
       stages: { ...currentFunnel.stages }, // Clona stages para preservar IDs
@@ -220,7 +220,7 @@ const fetchKanbanItems = async () => {
     const currentFunnel = store.getters['funnel/getSelectedFunnel'];
 
     if (!currentFunnel?.id) {
-      console.error('Nenhum funil selecionado');
+      console.error('Nenhum pipeline selecionado');
       return;
     }
 
@@ -251,10 +251,10 @@ const availableFields = computed(() => {
     { value: 'item_details.title', label: 'Título' },
     { value: 'item_details.description', label: 'Descrição' },
     { value: 'item_details.priority', label: 'Prioridade' },
-    { value: 'item_details.agent_id', label: 'Agente' },
+    { value: 'item_details.agent_id', label: 'Usuário' },
     { value: 'item_details.conversation_id', label: 'Conversa' },
     { value: 'item_details.value', label: 'Valor' },
-    { value: 'funnel_stage', label: 'Etapa do Funil' },
+    { value: 'funnel_stage', label: 'Etapa do pipeline' },
   ].sort((a, b) => a.label.localeCompare(b.label));
 });
 
@@ -307,28 +307,28 @@ const removeConditionRule = index => {
   formData.value.conditions.rules.splice(index, 1);
 };
 
-// Handler para quando um funil é selecionado
+// Handler para quando um pipeline é selecionado
 const handleFunnelChange = async value => {
   try {
     console.log('handleFunnelChange chamado com valor:', value);
-    // Atualiza o ID do funil no formData
+    // Atualiza o ID do pipeline no formData
     formData.value.funnel_id = ensureString(value);
     console.log('FormData após atualizar funnel_id:', formData.value);
 
-    // Busca o funil completo dos records do store
+    // Busca o pipeline completo dos records do store
     const selectedFunnel = funnels.value.find(
       f => String(f.id) === formData.value.funnel_id
     );
-    console.log('Funil encontrado no handleFunnelChange:', selectedFunnel);
+    console.log('Pipeline encontrado no handleFunnelChange:', selectedFunnel);
 
     if (selectedFunnel) {
-      // Atualiza o funil selecionado no store
+      // Atualiza o pipeline selecionado no store
       await store.dispatch('funnel/setSelectedFunnel', selectedFunnel);
-      console.log('Funil atualizado no store');
+      console.log('Pipeline atualizado no store');
 
       await nextTick();
 
-      // Só limpa a etapa se não estiver editando ou se mudar o funil
+      // Só limpa a etapa se não estiver editando ou se mudar o pipeline
       if (
         !props.isEditing ||
         formData.value.funnel_id !== ensureString(props.initialData.funnel_id)
@@ -341,7 +341,7 @@ const handleFunnelChange = async value => {
       }
     }
   } catch (error) {
-    console.error('Erro ao mudar funil:', error);
+    console.error('Erro ao mudar pipeline:', error);
   }
 };
 
@@ -374,18 +374,18 @@ onMounted(async () => {
 
     // Se houver um funil_id inicial, seleciona ele
     if (props.initialData.funnel_id) {
-      console.log('Tentando selecionar funil:', props.initialData.funnel_id);
+      console.log('Tentando selecionar pipeline:', props.initialData.funnel_id);
       const funnel = funnels.value.find(
         f => String(f.id) === ensureString(props.initialData.funnel_id)
       );
-      console.log('Funil encontrado:', funnel);
+      console.log('Pipeline encontrado:', funnel);
 
       if (funnel) {
-        // Atualiza o funil selecionado no store
+        // Atualiza o pipeline selecionado no store
         await store.dispatch('funnel/setSelectedFunnel', funnel);
-        console.log('Funil selecionado no store');
+        console.log('Pipeline selecionado no store');
 
-        // Verifica se a stage_id existe nas stages do funil
+        // Verifica se a stage_id existe nas stages do pipeline
         const stages = Object.keys(funnel.stages || {});
         console.log('Stages disponíveis:', stages);
 
@@ -443,7 +443,7 @@ onMounted(async () => {
       {{
         t(
           isEditing
-            ? 'KANBAN.MESSAGE_TEMPLATES.EDIT.TITLE'
+            ? 'Editar modelo'
             : 'KANBAN.MESSAGE_TEMPLATES.NEW'
         )
       }}
@@ -451,7 +451,7 @@ onMounted(async () => {
     <div class="form-grid">
       <!-- Coluna Esquerda -->
       <div class="left-column">
-        <!-- Seleção de Etapa do Funil -->
+        <!-- Seleção da etapa do pipeline -->
         <div class="form-section">
           <h3 class="section-title">
             {{ t('KANBAN.MESSAGE_TEMPLATES.FORM.FUNNEL_INFO') }}

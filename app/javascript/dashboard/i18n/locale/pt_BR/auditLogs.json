@@ -11,11 +11,11 @@
       "404": "Ops! Não há nenhum registro ainda.",
       "TITLE": "Gerenciar registros",
       "DESC": "Os registros informam todas as atividades de todos os usuários da conta dentro da Salez.",
-      "TABLE_HEADER": {
-        "ACTIVITY": "Atividade",
-        "TIME": "Data/Hora",
-        "IP_ADDRESS": "Endereço de IP"
-      }
+      "TABLE_HEADER": [
+        "Atividade",
+        "Data/Hora",
+        "Endereço de IP"
+      ]
     },
     "API": {
       "SUCCESS_MESSAGE": "Oba! Registros recuperados com sucesso!",

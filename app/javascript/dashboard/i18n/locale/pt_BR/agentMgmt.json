@@ -3,7 +3,7 @@
     "HEADER": "Campos",
     "HEADER_BTN_TXT": "Adicionar campo",
     "LOADING": "Carregando campos...",
-    "DESCRIPTION": "Os campos personalizados rastreiam informações chaves sobre seus contatos/conversas, ficando disponíveis na parte de detalhes do contato na seção de conversas.",
+    "DESCRIPTION": "Os campos rastreiam informações chaves sobre seus contatos/conversas, ficando disponíveis na parte de detalhes do contato na seção de conversas.",
     "LEARN_MORE": "Saiba mais sobre as funções dos campos",
     "ADD": {
       "TITLE": "Adicionar campo",
@@ -43,11 +43,11 @@
         },
         "REGEX_PATTERN": {
           "LABEL": "Padrão personalizado",
-          "PLACEHOLDER": "Insira o padrão de expressão regular para campo. (Opcional)"
+          "PLACEHOLDER": "Insira o padrão de expressão regular para campo (Opcional)"
         },
         "REGEX_CUE": {
           "LABEL": "Sugestão personalizada",
-          "PLACEHOLDER": "Insira uma sugestão para o padrão de expressão regular. (Opcional)"
+          "PLACEHOLDER": "Insira a sugestão para o padrão de expressão regular (Opcional)"
         },
         "ENABLE_REGEX": {
           "LABEL": "Habilitar validação personalizada"

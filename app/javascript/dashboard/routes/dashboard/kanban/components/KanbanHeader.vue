@@ -1,1224 +1,1920 @@
 <script setup>
-import { ref, computed, nextTick, watch, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { useStore } from 'vuex';
-import Modal from '../../../../components/Modal.vue';
-import KanbanItemForm from './KanbanItemForm.vue';
-import FunnelSelector from './FunnelSelector.vue';
-import KanbanSettings from './KanbanSettings.vue';
-import BulkDeleteModal from './BulkDeleteModal.vue';
-import BulkMoveModal from './BulkMoveModal.vue';
-import BulkAddModal from './BulkAddModal.vue';
+import AIConfigModal from './AIConfigModal.vue';
+import ContactAPI from '../../../../api/contacts';
+import ConversationAPI from '../../../../api/conversations';
 import KanbanAPI from '../../../../api/kanban';
-import KanbanFilter from './KanbanFilter.vue';
-import KanbanAI from './KanbanAI.vue';
-import Avatar from 'dashboard/components-next/avatar/Avatar.vue';
 import FunnelAPI from '../../../../api/funnel';
-import FunnelForm from './FunnelForm.vue';
-import SendMessageTemplate from './SendMessageTemplate.vue';
-import BulkSendMessageModal from './BulkSendMessageModal.vue';
+import store from '../../../../store';
+import Modal from '../../../../components/Modal.vue';
 
-// Função utilitária de debounce
-const debounce = (fn, delay) => {
-  let timeoutId;
-  return (...args) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn(...args), delay);
-  };
+const router = useRouter();
+const { t } = useI18n();
+const accountId = router.currentRoute.value.params.accountId;
+const messages = ref([
+  {
+    type: 'ai',
+    content: t('KANBAN.AI.WELCOME_MESSAGE'),
+  },
+]);
+const inputMessage = ref('');
+const isLoading = ref(false);
+const showConfigModal = ref(false);
+const messagesContainer = ref(null);
+const openAIConfig = ref(null);
+const isProcessingItems = ref(false);
+const selectedSource = ref(null);
+const showSourceSelector = ref(false);
+const showFunnelSelector = ref(false);
+const selectedFunnel = ref(null);
+const funnels = ref([]);
+const selectedStage = ref(null);
+const showConfirmationModal = ref(false);
+const selectedSuggestion = ref(null);
+const pendingChanges = ref(null);
+
+// Carrega a configuração do OpenAI
+const loadOpenAIConfig = async () => {
+  try {
+    const response = await window.axios.get(
+      `/api/v1/accounts/${accountId}/integrations/apps`
+    );
+
+    const openaiIntegration = response.data?.payload?.find(
+      integration => integration.id === 'openai'
+    );
+
+    if (openaiIntegration?.enabled && openaiIntegration?.hooks?.[0]?.settings) {
+      openAIConfig.value = openaiIntegration.hooks[0].settings;
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('Erro ao carregar configuração OpenAI:', error);
+    return false;
+  }
 };
 
-const { t } = useI18n();
-const store = useStore();
-const emit = defineEmits([
-  'filter',
-  'itemCreated',
-  'search',
-  'itemsUpdated',
-  'switchView',
-  'newToastMessage',
-]);
+// Função para buscar funis
+const fetchFunnels = async () => {
+  try {
+    const { data } = await FunnelAPI.get();
+    funnels.value = data;
+  } catch (error) {
+    console.error('Erro ao carregar funis:', error);
+    messages.value.push({
+      type: 'ai',
+      content: 'Desculpe, ocorreu um erro ao carregar os funis.',
+    });
+  }
+};
 
-const showAddModal = ref(false);
-const selectedFunnel = computed(
-  () => store.getters['funnel/getSelectedFunnel']
-);
+// Função auxiliar para obter o primeiro estágio do pipeline
+const getFirstStage = funnel => {
+  // Converte o objeto stages em um array de [key, value]
+  const stagesArray = Object.entries(funnel.stages);
 
-const props = defineProps({
-  currentStage: {
-    type: String,
-    default: '',
-  },
-  searchResults: {
-    type: Object,
-    default: () => ({ total: 0, stages: {} }),
-  },
-  columns: {
-    type: Array,
-    default: () => [],
-  },
-  activeFilters: {
-    type: Object,
-    default: null,
-  },
-  currentView: {
-    type: String,
-    default: 'kanban',
-  },
-  kanbanItems: {
-    type: Array,
-    required: true,
-  },
+  // Ordena pelo position e pega o primeiro
+  const firstStage = stagesArray.sort(
+    (a, b) => a[1].position - b[1].position
+  )[0];
+
+  // Retorna a chave do estágio (ex: 'lead', 'new', 'detec_o')
+  return firstStage[0];
+};
+
+// Função para buscar mensagens de uma conversa
+const fetchConversationMessages = async conversationId => {
+  try {
+    const response = await window.axios.get(
+      `/api/v1/accounts/${accountId}/conversations/${conversationId}/messages?before=100`
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar mensagens:', error);
+    return null;
+  }
+};
+
+// Função para processar a criação de itens a partir de contatos
+const createItemsFromContacts = async contacts => {
+  const firstStage = getFirstStage(selectedFunnel.value);
+
+  try {
+    const items = await Promise.all(
+      contacts.slice(0, 10).map(async (contact, index) => {
+        // Cria um título apenas com o nome do contato
+        const title = contact.name || 'Novo Contato';
+
+        // Gera apenas a descrição usando a IA
+        const response = await fetch(
+          'https://api.openai.com/v1/chat/completions',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${openAIConfig.value.api_key}`,
+            },
+            body: JSON.stringify({
+              model: 'gpt-4o-mini',
+              messages: [
+                {
+                  role: 'system',
+                  content:
+                    'Você é um assistente que gera descrições concisas para leads em um pipeline de vendas. Gere apenas uma descrição curta sem formatação.',
+                },
+                {
+                  role: 'user',
+                  content: `Gere uma descrição curta para um lead com os seguintes dados:
+                  Nome: ${contact.name}
+                  Email: ${contact.email || 'Não informado'}
+                  Telefone: ${contact.phone_number || 'Não informado'}`,
+                },
+              ],
+              temperature: 0.7,
+            }),
+          }
+        );
+
+        const aiData = await response.json();
+        const description = aiData.choices[0].message.content.trim();
+
+        return {
+          funnel_id: selectedFunnel.value.id,
+          funnel_stage: firstStage,
+          position: index,
+          item_details: {
+            title,
+            description:
+              description ||
+              `Contato via ${contact.email ? 'email' : 'telefone'}`,
+            value: null,
+            priority: 'medium',
+            email: contact.email,
+            phone: contact.phone_number,
+            contact_id: contact.id,
+            custom_attributes: {},
+          },
+        };
+      })
+    );
+
+    for (const item of items) {
+      await KanbanAPI.createItem(item);
+    }
+
+    return items.length;
+  } catch (error) {
+    console.error('Erro ao criar itens:', error);
+    throw error;
+  }
+};
+
+// Modifica a função createItemsFromConversations
+const createItemsFromConversations = async conversations => {
+  if (!conversations || conversations.length === 0) {
+    console.log('Nenhuma conversa encontrada');
+    return 0;
+  }
+
+  const firstStage = getFirstStage(selectedFunnel.value);
+
+  try {
+    const items = await Promise.all(
+      conversations.slice(0, 10).map(async (conversation, index) => {
+        if (!conversation?.meta?.sender) {
+          console.log('Conversa sem dados necessários:', conversation);
+          return null;
+        }
+
+        // Busca todas as mensagens da conversa
+        const messagesData = await fetchConversationMessages(conversation.id);
+        if (!messagesData) return null;
+
+        // Prepara os dados da conversa para análise
+        const conversationData = {
+          contact: conversation.meta.sender,
+          messages: messagesData.payload
+            .filter(msg => msg.content_type === 'text')
+            .map(msg => ({
+              content: msg.content,
+              sender_type: msg.sender?.type || 'system',
+              created_at: new Date(msg.created_at * 1000).toLocaleDateString(),
+            })),
+          status: conversation.status,
+          priority: conversation.priority,
+          assignee: conversation.meta.assignee,
+          channel: conversation.meta.channel,
+          created_at: new Date(
+            conversation.created_at * 1000
+          ).toLocaleDateString(),
+          last_activity: new Date(
+            conversation.last_activity_at * 1000
+          ).toLocaleDateString(),
+        };
+
+        // Gera análise usando a IA
+        const response = await fetch(
+          'https://api.openai.com/v1/chat/completions',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${openAIConfig.value.api_key}`,
+            },
+            body: JSON.stringify({
+              model: 'gpt-4o-mini',
+              messages: [
+                {
+                  role: 'system',
+                  content:
+                    'Você é um assistente que analisa conversas de vendas e suporte. Retorne APENAS um objeto JSON válido (sem formatação markdown ou código) com os campos: title (string), description (string), value (number ou null - extraia qualquer valor monetário mencionado em reais), priority (string: low, medium, high, urgent), scheduling_type (string: deadline ou scheduled), scheduled_at (data ISO ou null), deadline_at (data ISO ou null), offers (array de objetos com value e description). Se houver menção a valores em reais, crie uma oferta com esse valor. Se houver múltiplos valores mencionados, crie múltiplas ofertas.',
+                },
+                {
+                  role: 'user',
+                  content: `Analise esta conversa e extraia as informações relevantes, prestando especial atenção a valores monetários e prazos mencionados:
+                  Cliente: ${conversationData.contact.name}
+                  Email: ${conversationData.contact.email}
+                  Telefone: ${conversationData.contact.phone_number}
+                  Canal: ${conversationData.channel}
+                  Status: ${conversationData.status}
+                  Mensagens:
+                  ${conversationData.messages
+                    .map(
+                      msg =>
+                        `[${msg.sender_type}] ${msg.created_at}: ${msg.content}`
+                    )
+                    .join('\n')}
+                  Prioridade: ${conversationData.priority || 'normal'}
+                  Atendente: ${conversationData.assignee?.name}`,
+                },
+              ],
+              temperature: 0.7,
+            }),
+          }
+        );
+
+        const aiData = await response.json();
+        let analysis;
+
+        try {
+          // Remove qualquer formatação markdown ou código que a IA possa ter adicionado
+          const cleanJson = aiData.choices[0].message.content
+            .replace(/```json\n?/g, '')
+            .replace(/```\n?/g, '')
+            .trim();
+
+          analysis = JSON.parse(cleanJson);
+        } catch (parseError) {
+          console.error('Erro ao parsear JSON da IA:', parseError);
+          // Usa valores padrão em caso de erro
+          analysis = {
+            title: `Conversa com ${conversation.meta.sender.name}`,
+            description:
+              conversationData.messages[conversationData.messages.length - 1]
+                .content || 'Nova conversa',
+            value: null,
+            priority: conversation.priority || 'medium',
+            scheduling_type: 'deadline',
+            scheduled_at: null,
+            deadline_at: null,
+            offers: [],
+          };
+        }
+
+        // Retorna o item formatado com os dados da IA
+        return {
+          funnel_id: selectedFunnel.value.id,
+          funnel_stage: firstStage,
+          position: index,
+          item_details: {
+            title: analysis.title,
+            description: analysis.description,
+            value: analysis.value,
+            priority: analysis.priority || conversation.priority || 'medium',
+            conversation_id: conversation.id,
+            agent_id: conversation.meta.assignee?.id,
+            contact_id: conversation.meta.sender.id,
+            channel: conversation.meta.channel,
+            status: conversation.status,
+            scheduling_type: analysis.scheduling_type || 'deadline',
+            scheduled_at: analysis.scheduled_at,
+            deadline_at: analysis.deadline_at,
+            offers: analysis.offers || [],
+            currency:
+              analysis.value || (analysis.offers && analysis.offers.length > 0)
+                ? {
+                    code: 'BRL',
+                    locale: 'pt-BR',
+                    symbol: 'R$',
+                  }
+                : null,
+            custom_attributes: {},
+          },
+        };
+      })
+    );
+
+    const validItems = items.filter(item => item !== null);
+
+    for (const item of validItems) {
+      await KanbanAPI.createItem(item);
+    }
+
+    return validItems.length;
+  } catch (error) {
+    console.error('Erro ao criar itens:', error);
+    throw error;
+  }
+};
+
+// Modifica a função sendMessage para processar a criação de itens
+const sendMessage = async () => {
+  if (!inputMessage.value.trim() || isLoading.value) return;
+
+  // Send telemetry for message sent
+  await sendTelemetryEvent('message_sent', { message: inputMessage.value });
+
+  // Verifica configuração OpenAI...
+  if (!openAIConfig.value) {
+    const hasConfig = await loadOpenAIConfig();
+    if (!hasConfig) {
+      showConfigModal.value = true;
+      return;
+    }
+  }
+
+  const userMessage = inputMessage.value;
+  inputMessage.value = '';
+  isLoading.value = true;
+
+  messages.value.push({
+    type: 'user',
+    content: userMessage,
+  });
+
+  try {
+    // Se a mensagem contém pedido para gerar itens
+    if (
+      userMessage.toLowerCase().includes('gerar') ||
+      userMessage.toLowerCase().includes('criar')
+    ) {
+      await fetchFunnels();
+      if (funnels.value.length === 0) {
+        messages.value.push({
+          type: 'ai',
+          content:
+            'Nenhum pipeline encontrado. Por favor, crie um pipeline primeiro.',
+        });
+        return;
+      }
+      showFunnelSelector.value = true;
+      messages.value.push({
+        type: 'ai',
+        content: 'Primeiro, selecione o pipeline onde deseja criar os itens:',
+      });
+      isLoading.value = false;
+      return;
+    }
+
+    // Para outras mensagens, usa a API do OpenAI
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${openAIConfig.value.api_key}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content: `Você é um assistente especializado em metodologia kanban e gestão ágil de projetos. 
+                     Para criar itens no pipeline, o usuário deve usar as palavras "gerar" ou "criar".
+                     Exemplo: "Gerar itens para o pipeline" ou "Criar itens no pipeline"`,
+          },
+          {
+            role: 'user',
+            content: userMessage,
+          },
+        ],
+        temperature: 0.7,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error?.message || 'Erro ao processar mensagem');
+    }
+
+    messages.value.push({
+      type: 'ai',
+      content: data.choices[0].message.content,
+    });
+  } catch (error) {
+    console.error('Erro ao processar mensagem:', error);
+    messages.value.push({
+      type: 'ai',
+      content: 'Desculpe, ocorreu um erro ao processar sua mensagem.',
+    });
+  } finally {
+    isLoading.value = false;
+    scrollToBottom();
+  }
+};
+
+// Nova função para lidar com a seleção da fonte
+const handleSourceSelection = async source => {
+  // Send telemetry for source selection
+  await sendTelemetryEvent('source_selected', { source });
+
+  showSourceSelector.value = false;
+  selectedSource.value = source;
+  isProcessingItems.value = true;
+
+  try {
+    if (source === 'contacts') {
+      messages.value.push({
+        type: 'ai',
+        content: 'Ok, vou criar itens a partir dos contatos. Processando...',
+      });
+
+      const { data } = await ContactAPI.get(1);
+      const count = await createItemsFromContacts(data.payload);
+
+      messages.value.push({
+        type: 'ai',
+        content: `✅ Criei ${count} itens pipeline a partir dos contatos! Posso ajudar com mais alguma coisa?`,
+      });
+    } else if (source === 'conversations') {
+      messages.value.push({
+        type: 'ai',
+        content: 'Ok, vou criar itens a partir das conversas. Processando...',
+      });
+
+      const response = await ConversationAPI.get();
+      // Ajusta o acesso aos dados da conversa considerando a estrutura correta
+      const conversations = response.data?.data?.payload || [];
+      const count = await createItemsFromConversations(conversations);
+
+      messages.value.push({
+        type: 'ai',
+        content: `✅ Criei ${count} itens no pipeline a partir das conversas! Posso ajudar com mais alguma coisa?`,
+      });
+    }
+  } catch (error) {
+    console.error('Erro ao processar itens:', error);
+    messages.value.push({
+      type: 'ai',
+      content: 'Desculpe, ocorreu um erro ao criar os itens.',
+    });
+  } finally {
+    isProcessingItems.value = false;
+    selectedSource.value = null;
+  }
+};
+
+// Nova função para selecionar pipeline
+const handleFunnelSelection = async funnel => {
+  // Send telemetry for funnel selection
+  await sendTelemetryEvent('funnel_selected', {
+    funnel_id: funnel.id,
+    funnel_name: funnel.name,
+  });
+
+  selectedFunnel.value = funnel;
+  showFunnelSelector.value = false;
+
+  // Se não houver fonte selecionada, significa que é uma análise
+  if (!selectedSource.value) {
+    await analyzeFunnelFlow(funnel);
+  } else {
+    // Caso contrário, continua com o fluxo de criação de itens
+    showSourceSelector.value = true;
+    messages.value.push({
+      type: 'ai',
+      content: 'Agora, selecione a fonte dos dados para criar os itens:',
+    });
+  }
+  scrollToBottom();
+};
+
+const scrollToBottom = () => {
+  if (messagesContainer.value) {
+    setTimeout(() => {
+      messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight;
+    }, 100);
+  }
+};
+
+onMounted(async () => {
+  await loadOpenAIConfig();
 });
 
-const showSettingsModal = ref(false);
-
-const showSearchInput = ref(false);
-const searchQuery = ref('');
-const showResultsDetails = ref(false);
-
-const showBulkActions = ref(false);
-
-const showHiddenStages = ref(false);
-
-const bulkActions = [
+const quickPrompts = [
   {
-    id: 'add',
-    label: t('KANBAN.BULK_ACTIONS.ADD'),
+    id: 'generate',
+    title: 'Gerar Itens',
     icon: 'add',
+    description: 'Crie novos itens no pipeline baseados em seus requisitos',
+    action: 'generate_items',
   },
   {
-    id: 'move',
-    label: t('KANBAN.BULK_ACTIONS.MOVE'),
-    icon: 'arrow-right',
+    id: 'optimize',
+    title: 'Otimizar Fluxo',
+    icon: 'arrow-clockwise',
+    description: 'Receba sugestões para melhorar seu fluxo de trabalho',
+    action: 'analyze_flow',
   },
   {
-    id: 'delete',
-    label: t('KANBAN.BULK_ACTIONS.DELETE.TITLE'),
-    icon: 'delete',
+    id: 'schedule',
+    title: 'Agenda Inteligente',
+    icon: 'calendar',
+    description: 'Agendamento e priorização de tarefas com I.A',
+    prompt: 'Ajude-me a agendar e priorizar meus itens do pipeline',
+    disabled: true,
+    comingSoon: true,
   },
   {
-    id: 'show_hidden',
-    label: t('KANBAN.BULK_ACTIONS.SHOW_HIDDEN'),
-    icon: 'eye-show',
-  },
-  {
-    id: 'send_message',
-    label: t('KANBAN.BULK_ACTIONS.SEND_MESSAGE.TITLE'),
-    icon: 'chat',
+    id: 'analyze',
+    title: 'Analisar Pipeline',
+    icon: 'arrow-trending-lines',
+    description: 'Obtenha insights sobre o desempenho do seu pipeline',
+    prompt: 'Analise as métricas do meu pipeline e forneça insights',
+    disabled: true,
+    comingSoon: true,
   },
 ];
 
-const showBulkDeleteModal = ref(false);
-const showBulkMoveModal = ref(false);
-const showBulkAddModal = ref(false);
+const handleQuickAction = async action => {
+  // Send telemetry for quick action
+  await sendTelemetryEvent('quick_action_used', { action_id: action.id });
 
-const showSettingsDropdown = ref(false);
-
-const userIsAdmin = computed(() => {
-  const currentUser = store.getters.getCurrentUser;
-  return currentUser?.role === 'administrator';
-});
-
-const settingsOptions = computed(() => {
-  const options = [
-    {
-      id: 'kanban_settings',
-      label: t('KANBAN.MORE_OPTIONS.KANBAN_SETTINGS'),
-      icon: 'settings',
-    },
-    {
-      id: 'message_templates',
-      label: t('KANBAN.MORE_OPTIONS.MESSAGE_TEMPLATES'),
-      icon: 'document',
-    },
-  ];
-
-  if (userIsAdmin.value) {
-    options.unshift({
-      id: 'manage_funnels',
-      label: t('KANBAN.MORE_OPTIONS.MANAGE_FUNNELS'),
-      icon: 'task',
-    });
-
-    // options.unshift({
-    //   id: 'automations',
-    //   label: t('KANBAN.MORE_OPTIONS.AUTOMATIONS'),
-    //   icon: 'star-emphasis',
-    // });
-  }
-
-  return options;
-});
-
-const handleSettingsOption = option => {
-  if (option.id === 'kanban_settings') {
-    showSettingsModal.value = true;
-  } else if (option.id === 'manage_funnels') {
-    emit('switchView', 'funnels');
-  } else if (option.id === 'automations') {
-    emit('switchView', 'automation-editor');
-  } else if (option.id === 'message_templates') {
-    handleMessageTemplates();
-  }
-  showSettingsDropdown.value = false;
-};
-
-const handleSettingsClick = () => {
-  showSettingsDropdown.value = !showSettingsDropdown.value;
-};
-
-const handleBulkActions = () => {
-  showBulkActions.value = !showBulkActions.value;
-};
-
-const selectBulkAction = action => {
-  if (action.id === 'show_hidden') {
-    showHiddenStages.value = !showHiddenStages.value;
-
-    // Verifica se existem colunas ocultas antes de alterar
-    const hasHiddenColumns = props.columns.some(column => {
-      const settings = JSON.parse(
-        localStorage.getItem(`kanban_column_${column.id}_settings`) || '{}'
-      );
-      return settings.hideColumn === true;
-    });
-
-    // Só altera se existirem colunas ocultas ou se estiver desativando
-    if (hasHiddenColumns || !showHiddenStages.value) {
-      props.columns.forEach(column => {
-        const settings = JSON.parse(
-          localStorage.getItem(`kanban_column_${column.id}_settings`) || '{}'
-        );
-
-        // Só altera se a coluna estiver oculta
-        if (settings.hideColumn === true) {
-          settings.hideColumn = !showHiddenStages.value;
-          localStorage.setItem(
-            `kanban_column_${column.id}_settings`,
-            JSON.stringify(settings)
-          );
-        }
-      });
-
-      emit('itemsUpdated');
-    }
-  } else if (action.id === 'delete') {
-    showBulkDeleteModal.value = true;
-  } else if (action.id === 'move') {
-    showBulkMoveModal.value = true;
-  } else if (action.id === 'add') {
-    showBulkAddModal.value = true;
-  } else if (action.id === 'send_message') {
-    if (itemsWithConversation.value.length === 0) {
-      emit('newToastMessage', {
-        message: 'Nenhum item com conversa vinculada',
-        action: { type: 'warning' },
+  if (action.action === 'generate_items') {
+    await fetchFunnels();
+    if (funnels.value.length === 0) {
+      messages.value.push({
+        type: 'ai',
+        content: 'Nenhum pipeline encontrado. Por favor, crie um pipeline primeiro.',
       });
       return;
     }
-    showSendMessageModal.value = true;
-  }
-  showBulkActions.value = false;
-};
-
-const showFilterModal = ref(false);
-
-const handleFilterApply = filters => {
-  emit('filter', filters);
-  showFilterModal.value = false;
-};
-
-const handleFilter = () => {
-  showFilterModal.value = true;
-};
-
-const handleSettings = () => {
-  showSettingsModal.value = true;
-};
-
-const handleCloseSettings = () => {
-  showSettingsModal.value = false;
-};
-
-const showAddDropdown = ref(false);
-const showNewFunnelModal = ref(false);
-
-const handleAdd = () => {
-  showAddDropdown.value = !showAddDropdown.value;
-};
-
-const handleNewItem = () => {
-  if (!selectedFunnel.value?.id) {
-    emit('newToastMessage', {
-      message: t('KANBAN.ERRORS.NO_FUNNEL_SELECTED'),
-      action: { type: 'error' },
+    selectedSource.value = 'generate'; // Indica que é geração de itens
+    showFunnelSelector.value = true;
+    messages.value.push({
+      type: 'ai',
+      content: 'Primeiro, selecione o pipeline onde deseja criar os itens:',
     });
-    return;
-  }
-  showAddModal.value = true;
-  showAddDropdown.value = false;
-};
-
-const handleNewFunnel = () => {
-  showNewFunnelModal.value = true;
-  showAddDropdown.value = false;
-};
-
-const handleFunnelSaved = funnel => {
-  showNewFunnelModal.value = false;
-  emit('itemsUpdated');
-};
-
-const handleItemCreated = async item => {
-  emit('itemCreated', item);
-  showAddModal.value = false;
-};
-
-const handleSearch = () => {
-  showSearchInput.value = !showSearchInput.value;
-  if (showSearchInput.value) {
-    nextTick(() => {
-      document.getElementById('kanban-search').focus();
+    scrollToBottom();
+  } else if (action.id === 'optimize') {
+    messages.value.push({
+      type: 'ai',
+      content: 'Vou ajudar você a otimizar seu fluxo de trabalho.',
     });
+    await analyzeFunnels();
+    scrollToBottom();
   } else {
-    // Limpa a busca ao fechar
-    searchQuery.value = '';
-    emit('search', '');
+    inputMessage.value = action.prompt;
+    sendMessage();
   }
 };
 
-// Watch para manter o input visível enquanto houver busca
-watch(searchQuery, newValue => {
-  if (newValue) {
-    showSearchInput.value = true;
-  }
-});
+const openConfigModal = () => {
+  console.log('Abrindo modal de configuração');
+  showConfigModal.value = true;
+};
 
-const onSearch = debounce(e => {
-  const query = e.target.value;
-  searchQuery.value = query;
-  emit('search', query);
-}, 300);
-
-const handleBulkDelete = async selectedIds => {
+// Modifica a função para aplicar tanto mudanças de estrutura quanto templates
+const applyFunnelSuggestions = async (funnelId, suggestion = null) => {
   try {
-    await Promise.all(selectedIds.map(id => KanbanAPI.deleteItem(id)));
-    showBulkDeleteModal.value = false;
-    emit('itemsUpdated');
-  } catch (error) {
-    console.error('Erro ao excluir itens:', error);
-  }
-};
+    const currentFunnel = funnels.value.find(
+      f => String(f.id) === String(funnelId)
+    );
 
-const handleBulkMove = async ({ itemIds, stageId }) => {
-  try {
-    await Promise.all(itemIds.map(id => KanbanAPI.moveToStage(id, stageId)));
-    showBulkMoveModal.value = false;
-    emit('itemsUpdated');
-  } catch (error) {
-    console.error('Erro ao mover itens:', error);
-  }
-};
-
-const handleBulkItemsCreated = async () => {
-  showBulkAddModal.value = false;
-  emit('itemsUpdated');
-};
-
-// Função para obter a cor da etapa
-const getStageColor = stageName => {
-  const column = props.columns.find(col => col.title === stageName);
-  return column?.color ? `${column.color}` : '#64748B';
-};
-
-const handleMessageTemplates = () => {
-  emit('switchView', 'templates');
-};
-
-// Computed para contar filtros ativos
-const activeFiltersCount = computed(() => {
-  if (!props.activeFilters) return 0;
-
-  let count = 0;
-  if (props.activeFilters.priority?.length) count++;
-  if (props.activeFilters.value?.min || props.activeFilters.value?.max) count++;
-  if (props.activeFilters.agent_id) count++;
-  if (props.activeFilters.date?.start || props.activeFilters.date?.end) count++;
-
-  return count;
-});
-
-const handleViewChange = view => {
-  emit('switchView', view);
-};
-
-const showAIModal = ref(false);
-
-// Usar getter do store para obter agentes
-const filteredAgents = computed(() => {
-  // Usar os agentes do funil atual
-  const agentsFromFunnel = selectedFunnel.value?.settings?.agents || [];
-
-  if (!searchQuery.value) return agentsFromFunnel;
-
-  const query = searchQuery.value.toLowerCase();
-  return agentsFromFunnel.filter(
-    agent =>
-      agent.name.toLowerCase().includes(query) ||
-      agent.email.toLowerCase().includes(query)
-  );
-});
-
-const handleAIClick = () => {
-  showAIModal.value = true;
-};
-
-const toggleAgent = async agent => {
-  try {
-    const currentAgents = selectedFunnel.value.settings?.agents || [];
-    const index = currentAgents.findIndex(a => a.id === agent.id);
-
-    let updatedAgents;
-    if (index === -1) {
-      updatedAgents = [...currentAgents, agent];
-    } else {
-      updatedAgents = currentAgents.filter(a => a.id !== agent.id);
+    if (!currentFunnel) {
+      throw new Error('Pipeline não encontrado');
     }
 
-    // Prepara o payload mantendo todos os dados existentes
-    const payload = {
-      ...selectedFunnel.value,
-      settings: {
-        ...selectedFunnel.value.settings,
-        agents: updatedAgents,
-        optimization_history:
-          selectedFunnel.value.settings?.optimization_history || [],
-      },
-      stages: Object.entries(selectedFunnel.value.stages || {}).reduce(
-        (acc, [id, stage]) => ({
-          ...acc,
-          [id]: {
-            ...stage,
-            message_templates: stage.message_templates || [], // Mantém os templates
+    let updatedStages = { ...currentFunnel.stages };
+
+    if (suggestion.category === 'ESTRUTURA') {
+      const stageId = suggestion.stage_data.name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_');
+
+      if (suggestion.title.toLowerCase().includes('adicionar')) {
+        // Adiciona nova etapa
+        updatedStages = {
+          ...updatedStages,
+          [stageId]: {
+            name: suggestion.stage_data.name,
+            color: suggestion.stage_data.color,
+            position: suggestion.stage_data.position,
+            description: suggestion.stage_data.description,
           },
-        }),
-        {}
-      ),
+        };
+      } else if (suggestion.title.toLowerCase().includes('remover')) {
+        // Remove etapa existente
+        const { [stageId]: _, ...remainingStages } = updatedStages;
+        updatedStages = remainingStages;
+      } else if (suggestion.title.toLowerCase().includes('atualizar')) {
+        // Atualiza etapa existente
+        updatedStages[stageId] = {
+          ...updatedStages[stageId],
+          ...suggestion.stage_data,
+        };
+      }
+    } else if (suggestion.category === 'TEMPLATE') {
+      // Encontra a etapa alvo
+      const targetStage = Object.entries(currentFunnel.stages).find(
+        ([stageId, stage]) => {
+          const stageName = stage.name.toLowerCase();
+          const targetName = suggestion.target_stage.toLowerCase();
+          return (
+            stageName.includes(targetName) || targetName.includes(stageName)
+          );
+        }
+      );
+
+      if (!targetStage) {
+        throw new Error(`Etapa "${suggestion.target_stage}" não encontrada`);
+      }
+
+      const [stageId, stage] = targetStage;
+
+      // Adiciona o template
+      updatedStages[stageId] = {
+        ...stage,
+        message_templates: [
+          ...(stage.message_templates || []),
+          {
+            id: Date.now(),
+            title: suggestion.title,
+            content: suggestion.description,
+            webhook: suggestion.webhook || {
+              url: '',
+              method: 'POST',
+              enabled: false,
+            },
+            stage_id: stageId,
+            funnel_id: String(funnelId),
+            conditions: {
+              rules: [],
+              enabled: false,
+            },
+            created_at: new Date().toISOString(),
+          },
+        ],
+      };
+    }
+
+    // Atualiza o pipeline
+    const updatedFunnel = {
+      ...currentFunnel,
+      stages: updatedStages,
     };
 
-    // Atualiza o funil
-    await FunnelAPI.update(selectedFunnel.value.id, payload);
+    await FunnelAPI.update(currentFunnel.id, updatedFunnel);
     await store.dispatch('funnel/fetch');
+
+    messages.value.push({
+      type: 'ai',
+      content: `✅ ${
+        suggestion.category === 'ESTRUTURA'
+          ? 'Pipeline atualizado'
+          : 'Template adicionado'
+      } com sucesso!`,
+    });
   } catch (error) {
-    console.error('Erro ao atualizar agentes:', error);
+    console.error('Erro ao aplicar sugestão:', error);
+    messages.value.push({
+      type: 'ai',
+      content:
+        error.message || 'Desculpe, ocorreu um erro ao aplicar a sugestão.',
+    });
   }
 };
 
-onMounted(() => {
-  // Remover: store.dispatch('agents/get');
-});
+// Modifica a função analyzeFunnels para incluir seleção de pipeline
+const analyzeFunnels = async () => {
+  try {
+    // Busca os funis primeiro
+    await fetchFunnels();
 
-// Adicionar ref para controlar modal
-const showSendMessageModal = ref(false);
-// Adicionar ref para controlar modal de compartilhamento
-const showShareModal = ref(false);
+    if (!funnels.value || funnels.value.length === 0) {
+      messages.value.push({
+        type: 'ai',
+        content: 'Nenhum pipeline encontrado para análise.',
+      });
+      return;
+    }
 
-// Função para filtrar itens com conversa
-const itemsWithConversation = computed(() => {
-  return props.kanbanItems.filter(item => item.item_details?.conversation_id);
-});
+    messages.value.push({
+      type: 'ai',
+      content: 'Primeiro, selecione o pipeline que você deseja analisar:',
+    });
 
-// Função para enviar mensagem em massa
-const handleMessageSent = async () => {
-  showSendMessageModal.value = false;
-  emit('newToastMessage', {
-    message: 'Mensagens enviadas com sucesso',
-    action: { type: 'success' },
-  });
+    // Mostra o seletor de pipeline
+    showFunnelSelector.value = true;
+    selectedFunnel.value = null;
+    selectedSource.value = null; // Limpa a fonte para indicar que é uma análise
+  } catch (error) {
+    console.error('Erro ao carregar funis:', error);
+    messages.value.push({
+      type: 'ai',
+      content: 'Desculpe, ocorreu um erro ao carregar os funis.',
+    });
+  }
 };
 
-// Adicionar ref para controlar modal de visualização
-const showViewModal = ref(false);
+// Modifica o prompt do sistema para incluir sugestões de pipeline e templates
+const analyzeFunnelFlow = async funnel => {
+  try {
+    // Array de etapas fictícias para o loading
+    const analysisSteps = [
+      'Analisando estrutura do pipeline...',
+      'Verificando fluxo de trabalho...',
+      'Identificando oportunidades de melhoria...',
+      'Gerando sugestões personalizadas...',
+      'Finalizando análise...',
+    ];
+
+    // Adiciona mensagem inicial com loading
+    messages.value.push({
+      type: 'ai',
+      isLoading: true,
+      content: {
+        title: `Analisando o pipeline "${funnel.name}"`,
+        steps: analysisSteps,
+        currentStep: 0,
+        progress: 0,
+      },
+    });
+
+    // Simula progresso através das etapas
+    for (let i = 0; i < analysisSteps.length; i++) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      messages.value[messages.value.length - 1].content.currentStep = i;
+      messages.value[messages.value.length - 1].content.progress =
+        ((i + 1) / analysisSteps.length) * 100;
+    }
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${openAIConfig.value.api_key}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content: `Você é um especialista em otimização de pipelines.
+                     Analise o pipeline e sugira melhorias em duas categorias:
+
+                     1. ESTRUTURA (como no FunnelForm):
+                     - Adicionar/Remover etapas
+                     - Reordenar etapas
+                     - Atualizar nomes e descrições
+                     - Campos disponíveis: name, color, position, description
+                     
+                     2. TEMPLATE (como no MessageTemplateForm):
+                     - Templates de mensagem para cada etapa
+                     - Campos: title, content, webhook (opcional)
+                     - Variáveis disponíveis:
+                       {contact.name}, {contact.email}, {contact.phone}
+                       {agent.name}, {stage.name}
+
+                     IMPORTANTE: Retorne um JSON com o seguinte formato:
+                     {
+                       "suggestions": [
+                         {
+                           "title": "Título da sugestão",
+                           "description": "Detalhes da implementação",
+                           "category": "ESTRUTURA|TEMPLATE",
+                           "target_stage": "nome_da_etapa", // Para TEMPLATE
+                           "stage_data": {  // Para ESTRUTURA
+                             "name": "Nome da Etapa",
+                             "color": "#HEX",
+                             "position": 1,
+                             "description": "Descrição"
+                           },
+                           "current_state": "Estado atual",
+                           "expected_state": "Estado após implementação",
+                           "impact": "HIGH|MEDIUM|LOW",
+                           "implementation": "EASY|MEDIUM|HARD"
+                         }
+                       ]
+                     }`,
+          },
+          {
+            role: 'user',
+            content: `Analise este pipeline e sugira melhorias:
+                     ${JSON.stringify(funnel, null, 2)}
+                     
+                     Considere:
+                     - Tipo do pipeline: ${funnel.name}
+                     - Etapas atuais: ${Object.values(funnel.stages)
+                       .map(s => s.name)
+                       .join(', ')}
+                     - Etapas sem descrição: ${
+                       Object.values(funnel.stages).filter(s => !s.description)
+                         .length
+                     }
+                     - Etapas com templates: ${
+                       Object.values(funnel.stages).filter(
+                         s => s.message_templates?.length > 0
+                       ).length
+                     }
+                     
+                     Sugira tanto melhorias na estrutura do pipeline quanto templates de mensagem apropriados.`,
+          },
+        ],
+        temperature: 0.3,
+      }),
+    });
+
+    const aiData = await response.json();
+    const cleanContent = aiData.choices[0].message.content
+      .replace(/```json\s*/g, '')
+      .replace(/```\s*/g, '')
+      .replace(/^\s*{\s*/, '{')
+      .replace(/\s*}\s*$/, '}')
+      .trim();
+
+    let analysis;
+    try {
+      analysis = JSON.parse(cleanContent);
+    } catch (parseError) {
+      console.error('Erro ao parsear JSON:', parseError);
+      console.log('Conteúdo que falhou:', cleanContent);
+      throw new Error('Falha ao processar resposta da IA');
+    }
+
+    // Atualiza o template para mostrar o estado atual vs. esperado
+    messages.value.push({
+      type: 'ai',
+      content: 'Aqui estão os problemas identificados e suas soluções:',
+    });
+
+    analysis.suggestions.forEach((suggestion, index) => {
+      messages.value.push({
+        type: 'ai',
+        isCard: true,
+        content: {
+          title: suggestion.title,
+          description: suggestion.description,
+          category: suggestion.category,
+          impact: suggestion.impact,
+          implementation: suggestion.implementation,
+          currentState: suggestion.current_state,
+          expectedState: suggestion.expected_state,
+        },
+        actions: [
+          {
+            label: 'Aplicar esta solução',
+            value: `apply_${index}`,
+            style: 'primary',
+            suggestion,
+          },
+          {
+            label: 'Ignorar',
+            value: `ignore_${index}`,
+            style: 'secondary',
+          },
+        ],
+      });
+    });
+  } catch (error) {
+    console.error('Erro ao analisar pipeline:', error);
+    messages.value.push({
+      type: 'ai',
+      content:
+        'Desculpe, ocorreu um erro ao analisar o pipeline. Por favor, tente novamente.',
+    });
+  }
+};
+
+// Modifica o handler de ações para lidar com as sugestões individuais
+const handleMessageAction = async (action, message) => {
+  if (action.value === 'apply_all') {
+    await applyFunnelSuggestions(selectedFunnel.value.id);
+  } else if (action.value.startsWith('apply_')) {
+    selectedSuggestion.value = action.suggestion;
+    // Prepara visualização das mudanças
+    pendingChanges.value = prepareChangesPreview(action.suggestion);
+    showConfirmationModal.value = true;
+  }
+};
+
+// Função para preparar preview das mudanças
+const prepareChangesPreview = suggestion => {
+  if (!suggestion) {
+    throw new Error('Sugestão inválida');
+  }
+
+  const changes = {
+    type: suggestion.category,
+    fields: [],
+  };
+
+  try {
+    switch (suggestion.category) {
+      case 'ESTRUTURA': {
+        const actionType = suggestion.action?.toLowerCase() || t('AI.ADD');
+        changes.fields.push({
+          type: actionType,
+          field: 'Etapa',
+          details: [
+            {
+              label: 'Nome',
+              value: suggestion.stage_data?.name || 'Não definido',
+            },
+            {
+              label: 'Descrição',
+              value: suggestion.stage_data?.description || 'Não definida',
+            },
+            {
+              label: 'Posição',
+              value:
+                suggestion.stage_data?.position?.toString() || 'Não definida',
+            },
+            { label: 'Cor', value: suggestion.stage_data?.color || '#000000' },
+          ],
+        });
+        break;
+      }
+
+      case 'TEMPLATE': {
+        changes.fields.push({
+          type: 'add',
+          field: 'Template de Mensagem',
+          details: [
+            { label: 'Título', value: suggestion.title || 'Não definido' },
+            { label: 'Conteúdo', value: suggestion.content || 'Não definido' },
+            {
+              label: 'Etapa',
+              value: suggestion.target_stage || 'Não definida',
+            },
+            {
+              label: 'Webhook',
+              value: suggestion.webhook?.enabled ? 'Ativado' : 'Desativado',
+            },
+          ],
+        });
+        break;
+      }
+
+      default:
+        throw new Error(
+          `Tipo de sugestão desconhecido: ${suggestion.category}`
+        );
+    }
+
+    return changes;
+  } catch (error) {
+    console.error('Erro ao preparar preview das mudanças:', error);
+    throw new Error('Não foi possível preparar o preview das mudanças');
+  }
+};
+
+// Funções auxiliares para classes dos badges
+const getCategoryClass = category => {
+  return category?.toLowerCase().replace('_', '-') || '';
+};
+
+const getImpactClass = impact => {
+  return impact?.toLowerCase() || '';
+};
+
+const getImplementationClass = implementation => {
+  return implementation?.toLowerCase() || '';
+};
+
+// Função para confirmar e aplicar as mudanças
+const confirmChanges = async () => {
+  try {
+    await applyFunnelSuggestions(
+      selectedFunnel.value.id,
+      selectedSuggestion.value
+    );
+    showConfirmationModal.value = false;
+    selectedSuggestion.value = null;
+    pendingChanges.value = null;
+  } catch (error) {
+    console.error('Erro ao aplicar mudanças:', error);
+  }
+};
+
+const sendTelemetryEvent = async (eventName, eventData = {}) => {
+  try {
+    const baseUrl = 'https://api.os.stacklab.digital/api';
+    const eventsUrl = `${baseUrl}/events`;
+    const installationData = {
+      installation_identifier:
+        window.installationConfig?.installationIdentifier ||
+        store.state.globalConfig.installationIdentifier,
+      installation_version:
+        window.installationConfig?.version || store.state.globalConfig.version,
+      installation_host: window.location.hostname,
+      installation_env: process.env.NODE_ENV,
+      edition:
+        window.installationConfig?.edition || store.state.globalConfig.edition,
+      account_id: accountId,
+      user_id: store.state.auth.currentUser?.id,
+      user_role: store.state.auth.currentUser?.role,
+    };
+
+    const info = {
+      event_name: `kanban_ai_${eventName}`,
+      event_data: {
+        ...eventData,
+        ...installationData,
+        component: 'KanbanAI',
+        timestamp: new Date().toISOString(),
+      },
+    };
+
+    await fetch(eventsUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(info),
+    });
+  } catch (error) {
+    // Silently fail to not disrupt user experience
+    console.error('Telemetry error:', error);
+  }
+};
 </script>
 
 <template>
-  <header class="kanban-header">
-    <div class="header-left">
-      <button class="kanban-ai-button md:flex hidden" @click="handleAIClick">
-        <svg
-          class="lightning-icon"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M13 3L4 14H12L11 21L20 10H12L13 3Z" fill="currentColor" />
-        </svg>
-        <span class="lg:inline hidden">Kanban AI</span>
-      </button>
-
-      <!-- Botão para selecionar visualização no mobile -->
-      <button
-        class="view-select-btn md:hidden flex items-center gap-1 px-2 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700"
-        @click="showViewModal = true"
-      >
-        <fluent-icon
-          :icon="
-            currentView === 'kanban'
-              ? 'task'
-              : currentView === 'list'
-                ? 'list'
-                : 'calendar'
-          "
-          size="16"
-        />
-        <fluent-icon icon="chevron-down" size="12" />
-      </button>
-
-      <!-- Esconder completamente em mobile -->
-      <div class="view-toggle-buttons hidden md:flex">
-        <woot-button
-          variant="clear"
-          size="small"
-          :class="{ active: currentView === 'kanban' }"
-          @click="emit('switchView', 'kanban')"
-        >
-          <fluent-icon icon="task" size="16" />
-        </woot-button>
-        <woot-button
-          variant="clear"
-          size="small"
-          :class="{ active: currentView === 'list' }"
-          @click="emit('switchView', 'list')"
-        >
-          <fluent-icon icon="list" size="16" />
-        </woot-button>
-        <woot-button
-          variant="clear"
-          size="small"
-          :class="{ active: currentView === 'agenda' }"
-          @click="emit('switchView', 'agenda')"
-        >
-          <fluent-icon icon="calendar" size="16" />
-        </woot-button>
-      </div>
-      <funnel-selector class="md:block hidden" />
-      <div
-        class="search-container md:flex hidden"
-        :class="{ 'is-active': showSearchInput }"
-      >
-        <woot-button variant="clear" size="small" @click="handleSearch">
-          <fluent-icon icon="search" size="16" />
-        </woot-button>
-        <div v-show="showSearchInput" class="search-input-wrapper">
-          <input
-            id="kanban-search"
-            v-model="searchQuery"
-            type="search"
-            class="search-input"
-            :placeholder="t('KANBAN.SEARCH.INPUT_PLACEHOLDER')"
-            @input="onSearch"
-            @blur="!searchQuery && (showSearchInput = false)"
+  <div class="kanban-ai-container">
+    <!-- Header -->
+    <header class="ai-header">
+      <div class="flex items-center gap-3">
+        <div class="header-avatar">
+          <img
+            src="https://img.freepik.com/free-psd/cute-3d-robot-waving-hand-cartoon-vector-icon-illustration-people-technology-isolated-flat-vector_138676-10649.jpg"
+            alt="AI Avatar"
+            class="header-avatar-image"
           />
-          <div
-            v-if="searchQuery && searchResults.total > 0"
-            class="search-results-tags"
+        </div>
+        <div class="header-text">
+          <h2
+            class="text-lg relative z-10 font-semibold tracking-wide text-white"
           >
-            <div class="search-results-tag">
-              {{ searchResults.total }} resultado(s)
-            </div>
-            <div
-              v-for="(count, stageName) in searchResults.stages"
-              :key="stageName"
-              class="search-results-tag"
-              :style="{ backgroundColor: getStageColor(stageName) }"
-            >
-              <span class="stage-name">{{ stageName }}</span>
-              <span class="count-badge">{{ count }}</span>
-            </div>
-          </div>
+            Assistente AI
+          </h2>
+          <p class="text-sm text-white/80 font-normal">
+            Otimize seu fluxo de trabalho com ajuda da IA
+          </p>
         </div>
       </div>
-    </div>
-    <div class="header-right">
-      <div class="bulk-actions-selector md:block hidden">
-        <woot-button variant="link" size="small" @click="handleBulkActions">
-          <fluent-icon icon="list" size="16" class="mr-1" />
-          <span class="lg:inline hidden">{{
-            t('KANBAN.BULK_ACTIONS.TITLE')
-          }}</span>
-          <fluent-icon icon="chevron-down" size="16" class="ml-1" />
-        </woot-button>
+    </header>
 
-        <div v-if="showBulkActions" class="dropdown-menu">
-          <div
-            v-for="action in bulkActions"
+    <!-- Main Content -->
+    <div class="ai-content">
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="section-title">Ações Rápidas</h3>
+          <button
+            @click="openConfigModal"
+            class="text-xs text-slate-500/50 dark:text-slate-400/50 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+          >
+            Credenciais
+          </button>
+        </div>
+        <div class="actions-grid -mt-1">
+          <button
+            v-for="action in quickPrompts"
             :key="action.id"
-            class="dropdown-item"
-            @click="selectBulkAction(action)"
+            class="action-card group"
+            :class="{ disabled: action.disabled }"
+            @click="handleQuickAction(action)"
+            :disabled="action.disabled"
           >
-            <fluent-icon :icon="action.icon" size="16" class="mr-2" />
-            <span>{{ action.label }}</span>
-            <span
-              v-if="action.id === 'show_hidden'"
-              class="ml-2 text-xs px-1.5 rounded-full"
-              :class="{
-                'bg-woot-500 text-white': showHiddenStages,
-                'bg-slate-100 text-slate-600': !showHiddenStages,
-              }"
+            <div class="action-icon">
+              <fluent-icon :icon="action.icon" size="18" />
+            </div>
+            <div class="action-content">
+              <div class="flex items-center justify-between gap-2 mb-1">
+                <span class="action-title">{{ action.title }}</span>
+                <span v-if="action.comingSoon" class="coming-soon-badge">
+                  Em breve
+                </span>
+              </div>
+              <p class="action-description">{{ action.description }}</p>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- AI Chat -->
+      <div class="ai-chat">
+        <h3 class="section-title">Assistente IA</h3>
+        <div class="chat-container">
+          <div class="chat-messages" ref="messagesContainer">
+            <div
+              v-for="(message, index) in messages"
+              :key="index"
+              :class="['message', message.type]"
             >
-              {{ showHiddenStages ? 'Ativo' : 'Inativo' }}
-            </span>
-          </div>
-        </div>
-      </div>
+              <div v-if="message.type === 'ai'" class="avatar">
+                <img
+                  src="https://img.freepik.com/free-psd/cute-3d-robot-waving-hand-cartoon-vector-icon-illustration-people-technology-isolated-flat-vector_138676-10649.jpg"
+                  alt="AI Avatar"
+                  class="avatar-image"
+                />
+              </div>
+              <div class="message-content">
+                <!-- Card interativo para sugestões -->
+                <div v-if="message.isCard" class="suggestion-card">
+                  <div class="suggestion-header">
+                    <h4 class="suggestion-title">
+                      {{ message.content.title }}
+                    </h4>
+                    <div class="suggestion-badges">
+                      <span
+                        class="badge category-badge"
+                        :class="getCategoryClass(message.content.category)"
+                      >
+                        {{ message.content.category }}
+                      </span>
 
-      <woot-button
-        variant="clear"
-        color-scheme="secondary"
-        class="relative"
-        @click="$emit('filter')"
-      >
-        <fluent-icon icon="filter" />
-        <span v-if="activeFiltersCount > 0" class="filter-badge">
-          {{ activeFiltersCount }}
-        </span>
-      </woot-button>
-      <div class="share-button-container md:flex hidden">
-        <div
-          class="agents-stack"
-          v-if="selectedFunnel?.settings?.agents?.length"
-        >
-          <Avatar
-            v-for="(agent, index) in selectedFunnel.settings.agents.slice(0, 3)"
-            :key="agent.id"
-            :name="agent.name"
-            :src="agent.avatar_url"
-            :size="24"
-            class="agent-avatar"
-            :style="{ zIndex: 3 - index }"
-          />
-          <div
-            v-if="selectedFunnel.settings.agents.length > 3"
-            class="more-agents"
-          >
-            +{{ selectedFunnel.settings.agents.length - 3 }}
-          </div>
-        </div>
-        <woot-button
-          variant="clear"
-          size="small"
-          class="share-button"
-          @click="showShareModal = true"
-        >
-          <div class="share-button-content">
-            <fluent-icon icon="share" size="16" class="share-icon" />
-            <span class="share-button-text lg:inline hidden">{{
-              t('KANBAN.SHARE.TITLE')
-            }}</span>
-          </div>
-        </woot-button>
-      </div>
-      <div class="relative md:block hidden">
-        <woot-button
-          variant="smooth"
-          color-scheme="primary"
-          size="small"
-          class="add-item-btn"
-          @click="handleAdd"
-        >
-          <fluent-icon icon="add" size="16" class="mr-1" />
-        </woot-button>
+                      <span
+                        class="badge impact-badge"
+                        :class="getImpactClass(message.content.impact)"
+                      >
+                        {{ message.content.impact }}
+                      </span>
 
-        <div
-          v-if="showAddDropdown"
-          class="absolute right-0 top-full mt-1 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-2 w-48 z-10"
-          @click.stop
-        >
-          <div
-            class="px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer"
-            @click="handleNewItem"
-          >
-            <span class="flex items-center gap-2">
-              <fluent-icon icon="add" size="16" />
-              {{ t('KANBAN.ADD_ITEM') }}
-            </span>
-          </div>
-          <div
-            class="px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer"
-            @click="handleNewFunnel"
-          >
-            <span class="flex items-center gap-2">
-              <fluent-icon icon="task" size="16" />
-              {{ t('KANBAN.FUNNELS.ACTIONS.NEW') }}
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="settings-selector">
-        <woot-button
-          variant="clear"
-          size="small"
-          @click="handleSettingsClick"
-          :title="
-            !userIsAdmin ? 'Apenas administradores podem gerenciar funis' : ''
-          "
-        >
-          <fluent-icon icon="more-vertical" size="16" />
-        </woot-button>
+                      <span
+                        class="badge implementation-badge"
+                        :class="
+                          getImplementationClass(message.content.implementation)
+                        "
+                      >
+                        {{ message.content.implementation }}
+                      </span>
+                    </div>
+                  </div>
 
-        <div
-          v-if="showSettingsDropdown"
-          class="dropdown-menu"
-          @mouseleave="showSettingsDropdown = false"
-        >
-          <div
-            v-for="option in settingsOptions"
-            :key="option.id"
-            class="dropdown-item"
-            @click="handleSettingsOption(option)"
-          >
-            <fluent-icon :icon="option.icon" size="16" class="mr-2" />
-            {{ option.label }}
+                  <div class="suggestion-states">
+                    <div class="current-state">
+                      <span class="state-label">Estado Atual:</span>
+                      <p class="state-description">
+                        {{ message.content.currentState }}
+                      </p>
+                    </div>
+                    <div class="expected-state">
+                      <span class="state-label">Estado Esperado:</span>
+                      <p class="state-description">
+                        {{ message.content.expectedState }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="suggestion-solution">
+                    <span class="solution-label">Solução Proposta:</span>
+                    <p class="solution-description">
+                      {{ message.content.description }}
+                    </p>
+                  </div>
+
+                  <div class="suggestion-actions">
+                    <woot-button
+                      v-for="action in message.actions"
+                      :key="action.value"
+                      :variant="action.style"
+                      size="small"
+                      class="action-button"
+                      @click="handleMessageAction(action, message)"
+                    >
+                      {{ action.label }}
+                    </woot-button>
+                  </div>
+                </div>
+                <!-- Conteúdo normal da mensagem -->
+                <div v-else-if="message.isLoading" class="loading-analysis">
+                  <h4 class="loading-title">{{ message.content.title }}</h4>
+                  <div class="loading-steps">
+                    <div
+                      v-for="(step, index) in message.content.steps"
+                      :key="index"
+                      class="loading-step"
+                      :class="{
+                        completed: index < message.content.currentStep,
+                        current: index === message.content.currentStep,
+                      }"
+                    >
+                      <div class="step-indicator">
+                        <span
+                          v-if="index < message.content.currentStep"
+                          class="check-icon"
+                        >
+                          ✓
+                        </span>
+                        <span
+                          v-else-if="index === message.content.currentStep"
+                          class="pulse-icon"
+                        />
+                        <span v-else class="waiting-icon" />
+                      </div>
+                      <span class="step-text">{{ step }}</span>
+                    </div>
+                  </div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-fill"
+                      :style="{ width: `${message.content.progress}%` }"
+                    />
+                  </div>
+                </div>
+                <p v-else>{{ message.content }}</p>
+                <!-- Adiciona o seletor de pipeline -->
+                <div
+                  v-if="
+                    showFunnelSelector &&
+                    message === messages[messages.length - 1]
+                  "
+                  class="source-selector"
+                >
+                  <button
+                    v-for="funnel in funnels"
+                    :key="funnel.id"
+                    class="source-button"
+                    @click="handleFunnelSelection(funnel)"
+                  >
+                    <span class="icon">📊</span>
+                    {{ funnel.name }}
+                  </button>
+                </div>
+                <!-- Seletor de fonte existente -->
+                <div
+                  v-if="
+                    showSourceSelector &&
+                    message === messages[messages.length - 1]
+                  "
+                  class="source-selector"
+                >
+                  <button
+                    class="source-button"
+                    @click="handleSourceSelection('contacts')"
+                  >
+                    <span class="icon">👥</span>
+                    Contatos
+                  </button>
+                  <button
+                    class="source-button"
+                    @click="handleSourceSelection('conversations')"
+                  >
+                    <span class="icon">💬</span>
+                    Conversas
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-input-container">
+            <div class="typing-indicator" v-if="isLoading">
+              IA está pensando...
+            </div>
+            <div class="chat-input">
+              <input
+                v-model="inputMessage"
+                type="text"
+                placeholder="Pergunte qualquer coisa sobre seu pipeline..."
+                class="ai-input"
+                @keyup.enter="sendMessage"
+              />
+              <button
+                class="send-button"
+                :disabled="isLoading || !inputMessage.trim()"
+                @click="sendMessage"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="send-icon"
+                >
+                  <path
+                    d="M22 2L11 13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M22 2L15 22L11 13L2 9L22 2Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Menu móvel para elementos ocultos -->
-    <!-- Navbar inferior removida conforme solicitado -->
+    <!-- Add modal component -->
+    <AIConfigModal v-if="showConfigModal" @close="showConfigModal = false" />
 
-    <!-- Modal para seleção de visualização -->
+    <!-- Add confirmation modal component -->
     <Modal
-      v-model:show="showViewModal"
-      :on-close="() => (showViewModal = false)"
-      size="tiny"
+      v-if="showConfirmationModal"
+      :show="showConfirmationModal"
+      :on-close="() => (showConfirmationModal = false)"
     >
-      <div class="p-4">
-        <h3 class="text-lg font-medium mb-4">Selecionar visualização</h3>
-        <div class="flex flex-col gap-3">
-          <button
-            class="flex items-center gap-3 p-3 rounded-lg text-left"
-            :class="{
-              'bg-woot-50 text-woot-600 dark:bg-woot-900/20 dark:text-woot-300':
-                currentView === 'kanban',
-              'hover:bg-slate-50 dark:hover:bg-slate-700':
-                currentView !== 'kanban',
-            }"
-            @click="
-              emit('switchView', 'kanban');
-              showViewModal = false;
-            "
-          >
-            <fluent-icon icon="task" size="20" />
-            <div>
-              <div class="font-medium">Kanban</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">
-                Visualização em quadro
-              </div>
-            </div>
-          </button>
-
-          <button
-            class="flex items-center gap-3 p-3 rounded-lg text-left"
-            :class="{
-              'bg-woot-50 text-woot-600 dark:bg-woot-900/20 dark:text-woot-300':
-                currentView === 'list',
-              'hover:bg-slate-50 dark:hover:bg-slate-700':
-                currentView !== 'list',
-            }"
-            @click="
-              emit('switchView', 'list');
-              showViewModal = false;
-            "
-          >
-            <fluent-icon icon="list" size="20" />
-            <div>
-              <div class="font-medium">Lista</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">
-                {{ t('VIEW_MODES.LIST') }}
-              </div>
-            </div>
-          </button>
-
-          <button
-            class="flex items-center gap-3 p-3 rounded-lg text-left"
-            :class="{
-              'bg-woot-50 text-woot-600 dark:bg-woot-900/20 dark:text-woot-300':
-                currentView === 'agenda',
-              'hover:bg-slate-50 dark:hover:bg-slate-700':
-                currentView !== 'agenda',
-            }"
-            @click="
-              emit('switchView', 'agenda');
-              showViewModal = false;
-            "
-          >
-            <fluent-icon icon="calendar" size="20" />
-            <div>
-              <div class="font-medium">Agenda</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">
-                {{ t('KANBAN.VIEW_MODES.AGENDA') }}
-              </div>
-            </div>
-          </button>
-        </div>
-      </div>
-    </Modal>
-
-    <Modal
-      v-model:show="showAddModal"
-      :on-close="() => (showAddModal = false)"
-      size="large"
-    >
-      <div class="w-full p-6">
-        <h3 class="text-lg font-medium mb-6">
-          {{ t('KANBAN.ADD_ITEM') }}
-        </h3>
-        <KanbanItemForm
-          v-if="selectedFunnel"
-          :funnel-id="selectedFunnel.id"
-          :stage="currentStage"
-          @saved="handleItemCreated"
-          @close="showAddModal = false"
-        />
-        <div v-else class="text-center text-red-500">
-          {{ t('KANBAN.ERRORS.NO_FUNNEL_SELECTED') }}
-        </div>
-      </div>
-    </Modal>
-
-    <KanbanSettings :show="showSettingsModal" @close="handleCloseSettings" />
-
-    <Modal
-      v-model:show="showBulkDeleteModal"
-      :on-close="() => (showBulkDeleteModal = false)"
-    >
-      <BulkDeleteModal
-        :items="kanbanItems"
-        @close="showBulkDeleteModal = false"
-        @confirm="handleBulkDelete"
-      />
-    </Modal>
-
-    <Modal
-      v-model:show="showBulkMoveModal"
-      :on-close="() => (showBulkMoveModal = false)"
-    >
-      <BulkMoveModal
-        :items="kanbanItems"
-        @close="showBulkMoveModal = false"
-        @confirm="handleBulkMove"
-      />
-    </Modal>
-
-    <Modal
-      v-model:show="showBulkAddModal"
-      :on-close="() => (showBulkAddModal = false)"
-    >
-      <BulkAddModal
-        :current-stage="currentStage"
-        @close="showBulkAddModal = false"
-        @items-created="handleBulkItemsCreated"
-      />
-    </Modal>
-
-    <KanbanFilter
-      :show="showFilterModal"
-      @close="showFilterModal = false"
-      @apply="handleFilterApply"
-    />
-
-    <!-- AI Modal -->
-    <Modal
-      v-model:show="showAIModal"
-      :on-close="() => (showAIModal = false)"
-      size="large"
-      class="ai-modal"
-      hide-close-button
-    >
-      <KanbanAI @close="showAIModal = false" />
-    </Modal>
-
-    <!-- Modal de compartilhamento -->
-    <Modal
-      v-model:show="showShareModal"
-      :on-close="() => (showShareModal = false)"
-      size="tiny"
-    >
-      <div class="p-4 space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-lg font-medium">
-            {{ t('KANBAN.SHARE.TITLE') }}
-          </h3>
+      <div class="p-6">
+        <div class="mb-6">
+          <h3 class="text-lg font-medium mb-2">Confirmar Alterações</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-400">
+            As seguintes alterações serão aplicadas ao pipeline:
+          </p>
         </div>
 
-        <div class="relative">
-          <input
-            v-model="searchQuery"
-            type="text"
-            class="w-full px-3 py-2 border rounded-lg pr-8"
-            placeholder="Buscar agentes..."
-          />
-          <fluent-icon
-            icon="search"
-            size="16"
-            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400"
-          />
-        </div>
+        <div class="changes-preview mb-6">
+          <!-- Tipo de Alteração -->
+          <div class="change-category mb-4">
+            <span
+              class="badge category-badge"
+              :class="getCategoryClass(pendingChanges?.type)"
+            >
+              {{ pendingChanges?.type }}
+            </span>
+          </div>
 
-        <div class="max-h-[300px] overflow-y-auto space-y-2">
+          <!-- Lista de Alterações -->
           <div
-            v-for="agent in filteredAgents"
-            :key="agent.id"
-            class="flex items-center gap-3 p-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg cursor-pointer"
-            :class="{
-              'bg-woot-50 dark:bg-woot-900/20':
-                selectedFunnel.settings?.agents?.some(a => a.id === agent.id),
-            }"
-            @click="toggleAgent(agent)"
+            v-for="(field, index) in pendingChanges?.fields"
+            :key="index"
+            class="change-field"
           >
-            <Avatar
-              :name="agent.name"
-              :src="agent.avatar_url"
-              :size="32"
-              :status="agent.availability_status"
-            />
-            <div class="flex-1 min-w-0">
-              <div class="font-medium text-sm truncate">
-                {{ agent.name }}
-              </div>
-              <div class="text-xs text-slate-500 dark:text-slate-400 truncate">
-                {{ agent.email }}
+            <div class="change-field-header">
+              <span class="change-type-badge" :class="field.type">
+                {{ field.type === 'add' ? 'Adicionar' : 'Atualizar' }}
+              </span>
+              <span class="field-name">{{ field.field }}</span>
+            </div>
+
+            <div class="change-details">
+              <div
+                v-for="(detail, idx) in field.details"
+                :key="idx"
+                class="detail-item"
+              >
+                <span class="detail-label">{{ detail.label }}:</span>
+                <span class="detail-value">{{ detail.value }}</span>
+                <span v-if="detail.affected" class="detail-affected">
+                  Afeta: {{ detail.affected }}
+                </span>
               </div>
             </div>
-            <fluent-icon
-              v-if="
-                selectedFunnel.settings?.agents?.some(a => a.id === agent.id)
-              "
-              icon="checkmark"
-              size="16"
-              class="text-woot-500"
-            />
           </div>
         </div>
-      </div>
-    </Modal>
 
-    <!-- Modal de Novo Funil -->
-    <Modal
-      v-model:show="showNewFunnelModal"
-      :on-close="() => (showNewFunnelModal = false)"
-      size="large"
-    >
-      <div class="p-6">
-        <h3 class="text-lg font-medium mb-4">
-          {{ t('KANBAN.FUNNELS.ACTIONS.NEW') }}
-        </h3>
-        <FunnelForm
-          @saved="handleFunnelSaved"
-          @close="showNewFunnelModal = false"
-        />
+        <div class="flex justify-end gap-2">
+          <woot-button variant="clear" @click="showConfirmationModal = false">
+            Cancelar
+          </woot-button>
+          <woot-button variant="primary" @click="confirmChanges">
+            Confirmar e Aplicar
+          </woot-button>
+        </div>
       </div>
     </Modal>
-
-    <!-- Modal de Envio de Mensagem -->
-    <Modal
-      v-model:show="showSendMessageModal"
-      :on-close="() => (showSendMessageModal = false)"
-      size="medium"
-    >
-      <div class="p-6">
-        <h3 class="text-lg font-medium mb-4">Enviar Mensagens em Massa</h3>
-        <BulkSendMessageModal
-          :items="itemsWithConversation"
-          @close="showSendMessageModal = false"
-          @send="handleMessageSent"
-        />
-      </div>
-    </Modal>
-  </header>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.kanban-header {
-  position: relative;
-  z-index: 50;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-normal);
-  border-bottom: 1px solid var(--color-border);
-
-  @apply dark:border-slate-800 flex-wrap;
-
-  @media (max-width: 768px) {
-    padding: var(--space-small);
-    gap: var(--space-small);
-  }
+.kanban-ai-container {
+  @apply flex flex-col h-full bg-white dark:bg-slate-900;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: var(--space-normal);
+.ai-header {
+  @apply flex items-center justify-between p-6 relative overflow-hidden;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
 
-  @media (max-width: 768px) {
-    gap: var(--space-small);
-    flex-wrap: wrap;
+  &::before {
+    content: '';
+    @apply absolute inset-0 opacity-10;
+    background-image: radial-gradient(
+      circle at 50% 0,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
   }
-}
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: var(--space-small);
-
-  @media (max-width: 768px) {
-    gap: 4px;
+  &::after {
+    content: '';
+    @apply absolute inset-0 border-b border-white/10;
   }
-}
 
-.search-container {
-  @apply flex items-center relative;
+  .header-text {
+    @apply flex flex-col gap-0.5;
 
-  &.is-active {
-    @apply bg-slate-50 dark:bg-slate-800 rounded-lg;
+    h2 {
+      @apply text-lg relative z-10 font-semibold tracking-wide;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
 
-    .search-input-wrapper {
-      width: auto;
-      min-width: 300px;
-      @apply flex items-center gap-2;
+    p {
+      @apply relative z-10;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
   }
 }
 
-.search-input-wrapper {
-  @apply overflow-hidden transition-all duration-200;
-  width: 0;
-}
+.header-avatar {
+  @apply flex-shrink-0 relative z-10;
 
-.search-input {
-  @apply h-8 px-2 m-0 text-sm text-slate-800 dark:text-slate-100;
-
-  &:focus {
-    @apply outline-none ring-0;
-  }
-
-  &::placeholder {
-    @apply text-slate-500;
+  .header-avatar-image {
+    @apply w-10 h-10 rounded-lg object-cover bg-white/10
+      ring-2 ring-white/20 shadow-lg;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   }
 }
 
-.bulk-actions-selector {
-  position: relative;
-  display: inline-block;
+.ai-content {
+  @apply flex-1 p-6 space-y-6 overflow-y-auto;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 99999;
-  min-width: 200px;
-  margin-top: var(--space-micro);
-  padding: var(--space-micro);
-  background: var(--white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-normal);
-  box-shadow: var(--shadow-dropdown);
-
-  @apply dark:bg-slate-800 dark:border-slate-700;
+.section-title {
+  @apply text-base font-medium text-slate-800 dark:text-slate-200;
 }
 
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  padding: var(--space-small) var(--space-normal);
-  cursor: pointer;
-  border-radius: var(--border-radius-small);
-
-  @apply dark:text-slate-100;
-
-  &:hover {
-    background: var(--color-background);
-    @apply dark:bg-slate-700;
-  }
+.actions-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3;
 }
 
-.settings-selector {
-  position: relative;
-  display: inline-block;
+.action-card {
+  @apply flex items-start gap-3 p-4 rounded-xl border border-slate-200/50
+    dark:border-slate-700/50 hover:border-woot-500/50 dark:hover:border-woot-500/50
+    transition-all duration-300 bg-white dark:bg-slate-800/90 text-left
+    hover:shadow-lg hover:shadow-slate-200/20 dark:hover:shadow-slate-900/30
+    relative overflow-hidden min-h-[110px];
 
-  .dropdown-menu {
-    right: 0;
-    left: auto;
-    transform: translateY(4px);
-    z-index: 99999;
-  }
-}
+  &.disabled {
+    @apply opacity-80 cursor-not-allowed hover:border-slate-200/50
+      dark:hover:border-slate-700/50 hover:shadow-none;
 
-.search-results-tags {
-  @apply flex items-center gap-1 flex-wrap;
-}
-
-.search-results-tag {
-  @apply flex items-center px-2 py-0.5 text-xs font-medium rounded-full
-    bg-woot-500 text-white whitespace-nowrap gap-1;
-
-  &:first-child {
-    @apply bg-slate-600;
+    .action-icon {
+      @apply opacity-50;
+    }
   }
 
-  .stage-name {
-    @apply text-[10px];
+  .action-icon {
+    @apply flex items-center justify-center w-8 h-8 rounded-md flex-shrink-0
+      bg-gradient-to-br from-indigo-50 to-purple-50 
+      dark:from-indigo-900/20 dark:to-purple-900/20
+      text-indigo-600 dark:text-indigo-400
+      transition-transform duration-300
+      ring-1 ring-slate-200/50 dark:ring-slate-700/50;
+
+    .group:not(.disabled) &:hover {
+      @apply scale-110;
+    }
   }
 
-  .count-badge {
-    @apply bg-white/20 px-1.5 rounded-full text-[10px] min-w-[18px] text-center;
-  }
-}
+  .action-content {
+    @apply flex-1 min-w-0 flex flex-col justify-center gap-2;
 
-.message-templates-btn {
-  @apply border border-dashed border-woot-500 text-woot-500 hover:bg-woot-50 
-    dark:hover:bg-woot-800/20 transition-colors;
-
-  &:hover {
-    @apply border-woot-600 text-woot-600;
-  }
-}
-
-.add-item-btn {
-  @apply bg-woot-500 text-white p-2;
-
-  .mr-1 {
-    @apply m-0;
-  }
-}
-
-.filter-badge {
-  @apply absolute -top-1 -right-1 min-w-[16px] h-4 px-1
-    flex items-center justify-center
-    text-[10px] font-medium
-    bg-woot-500 text-white
-    rounded-full;
-}
-
-// Adicione estilos específicos para selects
-select {
-  @apply bg-white dark:bg-slate-800 cursor-pointer;
-  @apply border border-slate-200 dark:border-slate-700;
-  @apply rounded-lg px-3 py-2;
-  @apply text-slate-800 dark:text-slate-100;
-  @apply hover:border-slate-300 dark:hover:border-slate-600;
-  @apply focus:ring-2 focus:ring-woot-500/20 focus:border-woot-500;
-  @apply disabled:opacity-50 disabled:cursor-not-allowed;
-}
-
-.view-toggle-buttons {
-  @apply border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden;
-
-  .woot-button {
-    @apply px-2 py-1.5 border-0 rounded-none;
-
-    &:first-child {
-      @apply border-r border-slate-200 dark:border-slate-700;
+    .action-title {
+      @apply text-xs font-semibold text-slate-900 dark:text-slate-100
+        transition-colors duration-300 truncate;
     }
 
-    &.active {
-      @apply bg-slate-100 dark:bg-slate-700 text-woot-500;
+    .action-description {
+      @apply text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2
+        transition-colors duration-300;
     }
 
-    &:hover:not(.active) {
-      @apply bg-slate-50 dark:bg-slate-800;
+    .coming-soon-badge {
+      @apply inline-flex items-center px-2 py-0.5 text-[9px] font-medium 
+        rounded-full bg-gradient-to-r from-amber-100 to-yellow-100 
+        dark:from-amber-900/30 dark:to-yellow-900/30
+        text-amber-800 dark:text-amber-200
+        ring-1 ring-amber-200/50 dark:ring-amber-800/50
+        flex-shrink-0
+        transition-all duration-300;
     }
   }
 }
 
-.kanban-ai-button {
-  @apply flex items-center gap-2 px-3 py-1.5 rounded-lg font-medium text-white text-sm;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  transition: all 0.2s ease;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  .lightning-icon {
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
-  }
+.chat-container {
+  @apply flex flex-col h-[400px] bg-slate-50 dark:bg-slate-800/50 rounded-xl border
+    border-slate-200 dark:border-slate-700;
+  height: calc(100vh - 400px);
+  min-height: 450px;
+  max-height: 600px;
 }
 
-.ai-modal {
-  :deep(.modal__content) {
-    @apply w-[85vw] h-[85vh] max-w-[1400px] p-0;
-  }
+.chat-messages {
+  @apply flex-1 p-6 space-y-6 overflow-y-auto;
+  height: calc(100% - 80px);
 }
 
-.share-button {
-  @apply flex items-center px-3 py-1.5 rounded-lg font-medium text-white text-sm;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  transition: all 0.2s ease;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+.message {
+  @apply flex gap-2 mb-4;
 
-  .share-button-content {
-    @apply flex items-center gap-2;
-  }
+  &.ai {
+    @apply flex-row;
+    .message-content {
+      @apply shadow-sm
+        border border-slate-200/50 dark:border-slate-700/50
+        backdrop-blur-sm;
+      background: linear-gradient(120deg, #ffffff 0%, #f8f9ff 100%);
 
-  &:hover {
-    filter: brightness(1.1);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  .share-icon {
-    @apply text-white;
-  }
-
-  .share-button-text {
-    @apply text-white;
-  }
-}
-
-.share-button-container {
-  @apply flex items-center gap-2;
-}
-
-.agents-stack {
-  @apply flex items-center;
-
-  .agent-avatar {
-    @apply border-2 border-white dark:border-slate-800;
-    margin-left: -8px;
-
-    &:first-child {
-      margin-left: 0;
+      &.dark {
+        background: linear-gradient(120deg, #1e293b 0%, #1e1f2d 100%);
+      }
     }
   }
 
-  .more-agents {
-    @apply flex items-center justify-center
-    w-6 h-6 rounded-full
-    bg-slate-100 dark:bg-slate-700
-    text-xs font-medium
-    border-2 border-white dark:border-slate-800
-    ml-[-8px];
+  &.user {
+    @apply flex-row-reverse;
+    .message-content {
+      @apply bg-gradient-to-br from-indigo-500 to-purple-500 text-white;
+    }
+  }
+
+  .avatar {
+    @apply flex-shrink-0;
+
+    .avatar-image {
+      @apply w-8 h-8 rounded-full object-cover bg-white
+        ring-2 ring-purple-100 dark:ring-purple-900/30;
+    }
+  }
+
+  .message-content {
+    @apply px-4 py-3 rounded-2xl max-w-[80%] relative
+      transition-all duration-200;
+
+    /* Triângulo do bubble */
+    &::before {
+      content: '';
+      @apply absolute top-3 w-2 h-2 transform rotate-45;
+    }
+  }
+
+  /* Posicionamento do triângulo baseado no tipo de mensagem */
+  &.ai .message-content::before {
+    @apply -left-1 bg-white dark:bg-slate-800
+      border-l border-b border-slate-200/50 dark:border-slate-700/50;
+  }
+
+  &.user .message-content::before {
+    @apply -right-1 bg-purple-500;
   }
 }
 
-.view-select-btn {
-  @apply text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600;
+.chat-input-container {
+  @apply flex items-center p-4 border-t border-slate-200 dark:border-slate-700;
+}
 
-  &:hover {
-    @apply bg-slate-200 dark:bg-slate-600;
+.typing-indicator {
+  @apply text-sm text-slate-500 dark:text-slate-400 mb-2 animate-pulse;
+}
+
+.chat-input {
+  @apply flex w-full;
+
+  .ai-input {
+    @apply flex-1 px-4 text-sm rounded-xl my-auto
+      bg-white dark:bg-slate-800
+      border border-slate-200 dark:border-slate-700
+      focus:ring-2 focus:ring-woot-500/20 focus:border-woot-500;
+    height: 40px;
   }
 
-  &:active {
-    @apply bg-slate-300 dark:bg-slate-500;
+  .send-button {
+    @apply flex items-center justify-center text-white rounded-xl ml-2 my-auto
+      bg-gradient-to-r from-indigo-500 to-purple-500
+      hover:from-indigo-600 hover:to-purple-600
+      disabled:opacity-50 disabled:cursor-not-allowed
+      transition-all duration-300;
+    height: 40px;
+    width: 40px;
+  }
+
+  .send-icon {
+    @apply transition-transform duration-300;
+  }
+
+  &:hover:not(:disabled) {
+    @apply shadow-lg shadow-indigo-500/25;
+    .send-icon {
+      @apply -translate-y-px scale-110;
+    }
+  }
+
+  &:active:not(:disabled) {
+    @apply shadow-md shadow-indigo-500/20;
+    .send-icon {
+      @apply translate-y-0 scale-105;
+    }
+  }
+}
+
+.source-selector {
+  @apply flex flex-wrap gap-2 mt-4;
+}
+
+.source-button {
+  @apply flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium
+    bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600
+    hover:border-woot-500 dark:hover:border-woot-500 transition-colors;
+
+  .icon {
+    @apply text-lg;
+  }
+}
+
+.message-actions {
+  @apply flex gap-2 mt-4;
+}
+
+.action-button {
+  @apply text-sm;
+}
+
+.suggestion-card {
+  @apply bg-white dark:bg-slate-800 rounded-lg p-4 border border-slate-200
+    dark:border-slate-700 hover:border-woot-500 dark:hover:border-woot-500
+    transition-all duration-200;
+}
+
+.suggestion-title {
+  @apply text-lg font-medium text-slate-900 dark:text-slate-100 mb-2;
+}
+
+.suggestion-description {
+  @apply text-sm text-slate-600 dark:text-slate-400 mb-4 whitespace-pre-line;
+}
+
+.suggestion-actions {
+  @apply flex gap-2 justify-end;
+}
+
+.suggestion-header {
+  @apply flex flex-wrap items-start justify-between gap-2 mb-3;
+}
+
+.suggestion-badges {
+  @apply flex flex-wrap gap-2;
+}
+
+.badge {
+  @apply px-2 py-1 text-xs font-medium rounded-full;
+}
+
+/* Estilos para badges de categoria */
+.category-badge {
+  &.estrutura {
+    @apply bg-woot-50/50 text-woot-700;
+    &.dark {
+      @apply bg-woot-700/20 text-woot-300;
+    }
+  }
+  &.descricao {
+    @apply bg-green-50/50 text-green-700;
+    &.dark {
+      @apply bg-green-700/20 text-green-300;
+    }
+  }
+  &.gargalo {
+    @apply bg-red-50/50 text-red-700;
+    &.dark {
+      @apply bg-red-700/20 text-red-300;
+    }
+  }
+  &.automacao {
+    @apply bg-purple-50/50 text-purple-700;
+    &.dark {
+      @apply bg-purple-700/20 text-purple-300;
+    }
+  }
+  &.boa-pratica {
+    @apply bg-yellow-50/50 text-yellow-700;
+    &.dark {
+      @apply bg-yellow-700/20 text-yellow-300;
+    }
+  }
+}
+
+/* Estilos para badges de impacto */
+.impact-badge {
+  &.high {
+    @apply bg-red-50/50 text-red-700;
+    &.dark {
+      @apply bg-red-700/20 text-red-300;
+    }
+  }
+  &.medium {
+    @apply bg-yellow-50/50 text-yellow-700;
+    &.dark {
+      @apply bg-yellow-700/20 text-yellow-300;
+    }
+  }
+  &.low {
+    @apply bg-green-50/50 text-green-700;
+    &.dark {
+      @apply bg-green-700/20 text-green-300;
+    }
+  }
+}
+
+/* Estilos para badges de implementação */
+.implementation-badge {
+  &.easy {
+    @apply bg-green-50/50 text-green-700;
+    &.dark {
+      @apply bg-green-700/20 text-green-300;
+    }
+  }
+  &.medium {
+    @apply bg-yellow-50/50 text-yellow-700;
+    &.dark {
+      @apply bg-yellow-700/20 text-yellow-300;
+    }
+  }
+  &.hard {
+    @apply bg-red-50/50 text-red-700;
+    &.dark {
+      @apply bg-red-700/20 text-red-300;
+    }
+  }
+}
+
+.suggestion-states {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 mb-4;
+}
+
+.current-state,
+.expected-state {
+  @apply p-3 rounded-lg;
+}
+
+.current-state {
+  @apply bg-red-50/50 dark:bg-red-900/20;
+}
+
+.expected-state {
+  @apply bg-green-50/50 dark:bg-green-900/20;
+}
+
+.state-label,
+.solution-label {
+  @apply block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1;
+}
+
+.state-description,
+.solution-description {
+  @apply text-sm text-slate-600 dark:text-slate-400;
+}
+
+.suggestion-solution {
+  @apply mb-4 p-3 rounded-lg bg-slate-50 dark:bg-slate-800/20;
+}
+
+.changes-preview {
+  @apply bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4;
+}
+
+.change-field {
+  @apply mb-4 last:mb-0;
+}
+
+.change-field-header {
+  @apply flex items-center gap-2 mb-2;
+}
+
+.change-type-badge {
+  @apply px-2 py-1 text-xs font-medium rounded-full;
+
+  &.add {
+    @apply bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-300;
+  }
+
+  &.update {
+    @apply bg-woot-100 text-woot-700 dark:bg-woot-900/20 dark:text-woot-300;
+  }
+}
+
+.field-name {
+  @apply text-sm font-medium text-slate-700 dark:text-slate-300;
+}
+
+.change-details {
+  @apply bg-white dark:bg-slate-800 rounded-lg p-3 space-y-2;
+}
+
+.detail-item {
+  @apply flex flex-col text-sm;
+}
+
+.detail-label {
+  @apply text-slate-500 dark:text-slate-400;
+}
+
+.detail-value {
+  @apply font-medium text-slate-700 dark:text-slate-300;
+}
+
+.detail-affected {
+  @apply text-xs text-slate-500 dark:text-slate-400 mt-1;
+}
+
+.coming-soon-badge {
+  @apply inline-flex px-2 py-0.5 text-[9px] font-medium rounded-full
+    bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200
+    self-start;
+}
+
+.loading-analysis {
+  @apply space-y-4;
+
+  .loading-title {
+    @apply text-lg font-medium text-slate-900 dark:text-slate-100;
+  }
+
+  .loading-steps {
+    @apply space-y-3;
+  }
+
+  .loading-step {
+    @apply flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400;
+
+    &.completed {
+      @apply text-green-600 dark:text-green-400;
+      .step-indicator {
+        @apply bg-green-100 dark:bg-green-900/30;
+        .check-icon {
+          @apply text-green-600 dark:text-green-400;
+        }
+      }
+    }
+
+    &.current {
+      @apply text-woot-600 dark:text-woot-400;
+      .step-indicator {
+        @apply bg-woot-100 dark:bg-woot-900/30;
+      }
+    }
+  }
+
+  .step-indicator {
+    @apply w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800
+      flex items-center justify-center;
+  }
+
+  .check-icon {
+    @apply text-sm font-medium;
+  }
+
+  .pulse-icon {
+    @apply w-2 h-2 rounded-full bg-woot-500;
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .waiting-icon {
+    @apply w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600;
+  }
+
+  .progress-bar {
+    @apply h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full bg-gradient-to-r from-indigo-500 to-purple-500;
+    transition: width 0.5s ease-out;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
   }
 }
 </style>

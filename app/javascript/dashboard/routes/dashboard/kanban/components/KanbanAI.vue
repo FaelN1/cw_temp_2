@@ -71,7 +71,7 @@ const fetchFunnels = async () => {
   }
 };
 
-// Função auxiliar para obter o primeiro estágio do funil
+// Função auxiliar para obter o primeiro estágio do pipeline
 const getFirstStage = funnel => {
   // Converte o objeto stages em um array de [key, value]
   const stagesArray = Object.entries(funnel.stages);
@@ -123,7 +123,7 @@ const createItemsFromContacts = async contacts => {
                 {
                   role: 'system',
                   content:
-                    'Você é um assistente que gera descrições concisas para leads em um funil de vendas. Gere apenas uma descrição curta sem formatação.',
+                    'Você é um assistente que gera descrições concisas para leads em um pipeline de vendas. Gere apenas uma descrição curta sem formatação.',
                 },
                 {
                   role: 'user',
@@ -366,14 +366,14 @@ const sendMessage = async () => {
         messages.value.push({
           type: 'ai',
           content:
-            'Nenhum funil encontrado. Por favor, crie um funil primeiro.',
+            'Nenhum pipeline encontrado. Por favor, crie um pipeline primeiro.',
         });
         return;
       }
       showFunnelSelector.value = true;
       messages.value.push({
         type: 'ai',
-        content: 'Primeiro, selecione o funil onde deseja criar os itens:',
+        content: 'Primeiro, selecione o pipeline onde deseja criar os itens:',
       });
       isLoading.value = false;
       return;
@@ -391,9 +391,9 @@ const sendMessage = async () => {
         messages: [
           {
             role: 'system',
-            content: `Você é um assistente especializado em metodologia Kanban e gestão ágil de projetos. 
-                     Para criar itens no quadro, o usuário deve usar as palavras "gerar" ou "criar".
-                     Exemplo: "Gerar itens para o quadro" ou "Criar itens no kanban"`,
+            content: `Você é um assistente especializado em metodologia kanban e gestão ágil de projetos.
+                     Para criar itens no pipeline, o usuário deve usar as palavras "gerar" ou "criar".
+                     Exemplo: "Gerar itens para o pipeline" ou "Criar itens no pipeline"`,
           },
           {
             role: 'user',
@@ -447,7 +447,7 @@ const handleSourceSelection = async source => {
 
       messages.value.push({
         type: 'ai',
-        content: `✅ Criei ${count} itens Kanban a partir dos contatos! Posso ajudar com mais alguma coisa?`,
+        content: `✅ Criei ${count} itens pipeline a partir dos contatos! Posso ajudar com mais alguma coisa?`,
       });
     } else if (source === 'conversations') {
       messages.value.push({
@@ -462,7 +462,7 @@ const handleSourceSelection = async source => {
 
       messages.value.push({
         type: 'ai',
-        content: `✅ Criei ${count} itens Kanban a partir das conversas! Posso ajudar com mais alguma coisa?`,
+        content: `✅ Criei ${count} itens no pipeline a partir das conversas! Posso ajudar com mais alguma coisa?`,
       });
     }
   } catch (error) {
@@ -477,7 +477,7 @@ const handleSourceSelection = async source => {
   }
 };
 
-// Nova função para selecionar funil
+// Nova função para selecionar pipeline
 const handleFunnelSelection = async funnel => {
   // Send telemetry for funnel selection
   await sendTelemetryEvent('funnel_selected', {
@@ -519,7 +519,7 @@ const quickPrompts = [
     id: 'generate',
     title: 'Gerar Itens',
     icon: 'add',
-    description: 'Crie novos itens Kanban baseados em seus requisitos',
+    description: 'Crie novos itens no pipeline baseados em seus requisitos',
     action: 'generate_items',
   },
   {
@@ -533,17 +533,17 @@ const quickPrompts = [
     id: 'schedule',
     title: 'Agenda Inteligente',
     icon: 'calendar',
-    description: 'Agendamento e priorização de tarefas com IA',
-    prompt: 'Ajude-me a agendar e priorizar meus itens Kanban',
+    description: 'Agendamento e priorização de tarefas com I.A',
+    prompt: 'Ajude-me a agendar e priorizar meus itens do pipeline',
     disabled: true,
     comingSoon: true,
   },
   {
     id: 'analyze',
-    title: 'Analisar Quadro',
+    title: 'Analisar Pipeline',
     icon: 'arrow-trending-lines',
-    description: 'Obtenha insights sobre o desempenho do seu quadro',
-    prompt: 'Analise as métricas do meu quadro Kanban e forneça insights',
+    description: 'Obtenha insights sobre o desempenho do seu pipeline',
+    prompt: 'Analise as métricas do meu pipeline e forneça insights',
     disabled: true,
     comingSoon: true,
   },
@@ -558,7 +558,7 @@ const handleQuickAction = async action => {
     if (funnels.value.length === 0) {
       messages.value.push({
         type: 'ai',
-        content: 'Nenhum funil encontrado. Por favor, crie um funil primeiro.',
+        content: 'Nenhum pipeline encontrado. Por favor, crie um pipeline primeiro.',
       });
       return;
     }
@@ -566,7 +566,7 @@ const handleQuickAction = async action => {
     showFunnelSelector.value = true;
     messages.value.push({
       type: 'ai',
-      content: 'Primeiro, selecione o funil onde deseja criar os itens:',
+      content: 'Primeiro, selecione o pipeline onde deseja criar os itens:',
     });
     scrollToBottom();
   } else if (action.id === 'optimize') {
@@ -595,7 +595,7 @@ const applyFunnelSuggestions = async (funnelId, suggestion = null) => {
     );
 
     if (!currentFunnel) {
-      throw new Error('Funil não encontrado');
+      throw new Error('Pipeline não encontrado');
     }
 
     let updatedStages = { ...currentFunnel.stages };
@@ -671,7 +671,7 @@ const applyFunnelSuggestions = async (funnelId, suggestion = null) => {
       };
     }
 
-    // Atualiza o funil
+    // Atualiza o pipeline
     const updatedFunnel = {
       ...currentFunnel,
       stages: updatedStages,
@@ -684,7 +684,7 @@ const applyFunnelSuggestions = async (funnelId, suggestion = null) => {
       type: 'ai',
       content: `✅ ${
         suggestion.category === 'ESTRUTURA'
-          ? 'Funil atualizado'
+          ? 'Pipeline atualizado'
           : 'Template adicionado'
       } com sucesso!`,
     });
@@ -698,7 +698,7 @@ const applyFunnelSuggestions = async (funnelId, suggestion = null) => {
   }
 };
 
-// Modifica a função analyzeFunnels para incluir seleção de funil
+// Modifica a função analyzeFunnels para incluir seleção de pipeline
 const analyzeFunnels = async () => {
   try {
     // Busca os funis primeiro
@@ -707,17 +707,17 @@ const analyzeFunnels = async () => {
     if (!funnels.value || funnels.value.length === 0) {
       messages.value.push({
         type: 'ai',
-        content: 'Nenhum funil encontrado para análise.',
+        content: 'Nenhum pipeline encontrado para análise.',
       });
       return;
     }
 
     messages.value.push({
       type: 'ai',
-      content: 'Primeiro, selecione o funil que você deseja analisar:',
+      content: 'Primeiro, selecione o pipeline que você deseja analisar:',
     });
 
-    // Mostra o seletor de funil
+    // Mostra o seletor de pipeline
     showFunnelSelector.value = true;
     selectedFunnel.value = null;
     selectedSource.value = null; // Limpa a fonte para indicar que é uma análise
@@ -730,12 +730,12 @@ const analyzeFunnels = async () => {
   }
 };
 
-// Modifica o prompt do sistema para incluir sugestões de funil e templates
+// Modifica o prompt do sistema para incluir sugestões de pipeline e templates
 const analyzeFunnelFlow = async funnel => {
   try {
     // Array de etapas fictícias para o loading
     const analysisSteps = [
-      'Analisando estrutura do funil...',
+      'Analisando estrutura do pipeline...',
       'Verificando fluxo de trabalho...',
       'Identificando oportunidades de melhoria...',
       'Gerando sugestões personalizadas...',
@@ -747,7 +747,7 @@ const analyzeFunnelFlow = async funnel => {
       type: 'ai',
       isLoading: true,
       content: {
-        title: `Analisando o funil "${funnel.name}"`,
+        title: `Analisando o pipeline "${funnel.name}"`,
         steps: analysisSteps,
         currentStep: 0,
         progress: 0,
@@ -773,15 +773,15 @@ const analyzeFunnelFlow = async funnel => {
         messages: [
           {
             role: 'system',
-            content: `Você é um especialista em otimização de funis Kanban.
-                     Analise o funil e sugira melhorias em duas categorias:
+            content: `Você é um especialista em otimização de pipelines.
+                     Analise o pipeline e sugira melhorias em duas categorias:
 
                      1. ESTRUTURA (como no FunnelForm):
                      - Adicionar/Remover etapas
                      - Reordenar etapas
                      - Atualizar nomes e descrições
                      - Campos disponíveis: name, color, position, description
-                     
+
                      2. TEMPLATE (como no MessageTemplateForm):
                      - Templates de mensagem para cada etapa
                      - Campos: title, content, webhook (opcional)
@@ -813,11 +813,11 @@ const analyzeFunnelFlow = async funnel => {
           },
           {
             role: 'user',
-            content: `Analise este funil e sugira melhorias:
+            content: `Analise este pipeline e sugira melhorias:
                      ${JSON.stringify(funnel, null, 2)}
-                     
+
                      Considere:
-                     - Tipo do funil: ${funnel.name}
+                     - Tipo do pipeline: ${funnel.name}
                      - Etapas atuais: ${Object.values(funnel.stages)
                        .map(s => s.name)
                        .join(', ')}
@@ -830,8 +830,8 @@ const analyzeFunnelFlow = async funnel => {
                          s => s.message_templates?.length > 0
                        ).length
                      }
-                     
-                     Sugira tanto melhorias na estrutura do funil quanto templates de mensagem apropriados.`,
+
+                     Sugira tanto melhorias na estrutura do pipeline quanto templates de mensagem apropriados.`,
           },
         ],
         temperature: 0.3,
@@ -890,11 +890,11 @@ const analyzeFunnelFlow = async funnel => {
       });
     });
   } catch (error) {
-    console.error('Erro ao analisar funil:', error);
+    console.error('Erro ao analisar pipeline:', error);
     messages.value.push({
       type: 'ai',
       content:
-        'Desculpe, ocorreu um erro ao analisar o funil. Por favor, tente novamente.',
+        'Desculpe, ocorreu um erro ao analisar o pipeline. Por favor, tente novamente.',
     });
   }
 };
@@ -1070,7 +1070,7 @@ const sendTelemetryEvent = async (eventName, eventData = {}) => {
           <h2
             class="text-lg relative z-10 font-semibold tracking-wide text-white"
           >
-            Assistente Kanban AI
+            Assistente AI
           </h2>
           <p class="text-sm text-white/80 font-normal">
             Otimize seu fluxo de trabalho com ajuda da IA
@@ -1239,7 +1239,7 @@ const sendTelemetryEvent = async (eventName, eventData = {}) => {
                   </div>
                 </div>
                 <p v-else>{{ message.content }}</p>
-                <!-- Adiciona o seletor de funil -->
+                <!-- Adiciona o seletor de pipeline -->
                 <div
                   v-if="
                     showFunnelSelector &&
@@ -1292,7 +1292,7 @@ const sendTelemetryEvent = async (eventName, eventData = {}) => {
               <input
                 v-model="inputMessage"
                 type="text"
-                placeholder="Pergunte qualquer coisa sobre seu quadro Kanban..."
+                placeholder="Pergunte qualquer coisa sobre seu pipeline..."
                 class="ai-input"
                 @keyup.enter="sendMessage"
               />
@@ -1344,7 +1344,7 @@ const sendTelemetryEvent = async (eventName, eventData = {}) => {
         <div class="mb-6">
           <h3 class="text-lg font-medium mb-2">Confirmar Alterações</h3>
           <p class="text-sm text-slate-600 dark:text-slate-400">
-            As seguintes alterações serão aplicadas ao funil:
+            As seguintes alterações serão aplicadas ao pipeline:
           </p>
         </div>
 
@@ -1481,7 +1481,7 @@ const sendTelemetryEvent = async (eventName, eventData = {}) => {
 
   .action-icon {
     @apply flex items-center justify-center w-8 h-8 rounded-md flex-shrink-0
-      bg-gradient-to-br from-indigo-50 to-purple-50 
+      bg-gradient-to-br from-indigo-50 to-purple-50
       dark:from-indigo-900/20 dark:to-purple-900/20
       text-indigo-600 dark:text-indigo-400
       transition-transform duration-300
@@ -1506,8 +1506,8 @@ const sendTelemetryEvent = async (eventName, eventData = {}) => {
     }
 
     .coming-soon-badge {
-      @apply inline-flex items-center px-2 py-0.5 text-[9px] font-medium 
-        rounded-full bg-gradient-to-r from-amber-100 to-yellow-100 
+      @apply inline-flex items-center px-2 py-0.5 text-[9px] font-medium
+        rounded-full bg-gradient-to-r from-amber-100 to-yellow-100
         dark:from-amber-900/30 dark:to-yellow-900/30
         text-amber-800 dark:text-amber-200
         ring-1 ring-amber-200/50 dark:ring-amber-800/50

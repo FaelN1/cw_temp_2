@@ -19,7 +19,7 @@
     "NEW_MESSAGE": "Nova mensagem",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Não há conversas anteriores associadas a este contacto.",
-      "TITLE": "Conversas anteriores"
+      "TITLE": "Histórico de conversas"
     },
     "LABELS": {
       "CONTACT": {
@@ -48,7 +48,7 @@
     "SIDEBAR_SECTIONS": {
       "CUSTOM_ATTRIBUTES": "Atributos personalizados",
       "CONTACT_LABELS": "Etiquetas de contacto",
-      "PREVIOUS_CONVERSATIONS": "Conversas anteriores",
+      "PREVIOUS_CONVERSATIONS": "Histórico de conversas",
       "NO_RECORDS_FOUND": "Nenhum atributo encontrado"
     }
   },

@@ -103,7 +103,7 @@ const handleDeleteTemplate = async () => {
     );
 
     if (!currentFunnel) {
-      throw new Error('Funil não encontrado');
+      throw new Error('Pipeline não encontrado');
     }
 
     const updatedFunnel = { ...currentFunnel };

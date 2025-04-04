@@ -471,7 +471,7 @@ const handleDetailsUpdate = async () => {
     >
       <i class="icon-funnel text-3xl text-slate-400 dark:text-slate-500"></i>
       <p class="text-sm text-slate-500 dark:text-slate-400">
-        Nenhum item do Kanban associado
+        Nenhuma etapa do pipeline associado
       </p>
       <woot-button
         variant="smooth"
@@ -480,7 +480,7 @@ const handleDetailsUpdate = async () => {
         @click="showKanbanForm = true"
       >
         <i class="icon-plus mr-1"></i>
-        Definir Funil
+        Definir pipeline
       </woot-button>
     </div>
 
@@ -498,7 +498,7 @@ const handleDetailsUpdate = async () => {
       <div class="p-6">
         <h3 class="text-lg font-medium mb-4 flex items-center gap-2">
           <i class="icon-funnel text-slate-600 dark:text-slate-400"></i>
-          {{ kanbanItem ? 'Editar Item do Kanban' : 'Criar Item do Kanban' }}
+         {{ kanbanItem ? 'Editar item do pipeline' : 'Criar item do pipeline' }}
         </h3>
         <KanbanItemForm
           v-if="funnels[0]"

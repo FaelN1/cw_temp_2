@@ -522,7 +522,7 @@ watch(
 
         <!-- Agentes do Funil -->
         <div class="border rounded-lg p-4 space-y-4">
-          <h4 class="text-lg font-medium mb-4">Agentes do Funil</h4>
+          <h4 class="text-lg font-medium mb-4">Usuários do Pipeline</h4>
 
           <div class="space-y-4">
             <!-- Lista de Todos os Agentes -->
@@ -585,7 +585,7 @@ watch(
               class="flex flex-col items-center justify-center py-8 text-slate-400"
             >
               <fluent-icon icon="people" size="32" class="mb-2" />
-              <p class="text-sm">Nenhum agente disponível</p>
+              <p class="text-sm">Ops! Nenhum usuário disponível.</p>
             </div>
 
             <!-- Contador de Selecionados -->

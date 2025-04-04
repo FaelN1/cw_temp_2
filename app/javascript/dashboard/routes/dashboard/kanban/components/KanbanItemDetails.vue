@@ -191,17 +191,17 @@ const formattedValue = computed(() => {
   }).format(props.item.item_details.value);
 });
 
-// Ref para armazenar os dados do agente
+// Ref para armazenar os dados do usuário
 const agentData = ref(null);
 const loadingAgent = ref(false);
 
-// Função para buscar dados do agente
+// Função para buscar dados do usuário
 const fetchAgent = async agentId => {
   if (!agentId) return;
 
   try {
     loadingAgent.value = true;
-    // Verificar se o agente já está disponível no item
+    // Verificar se o usuário já está disponível no item
     if (props.item.item_details?.agent) {
       agentData.value = props.item.item_details.agent;
     } else {
@@ -217,7 +217,7 @@ const fetchAgent = async agentId => {
   }
 };
 
-// Computed para formatar os dados do agente
+// Computed para formatar os dados do usuário
 const agentInfo = computed(() => {
   if (!agentData.value) return null;
 
@@ -995,7 +995,7 @@ const getAllAttachments = computed(() => {
 onMounted(() => {
   fetchCustomAttributes();
 
-  // Carregar dados do agente se existir ID
+  // Carregar dados do usuário se existir ID
   if (props.item.item_details?.agent_id) {
     fetchAgent(props.item.item_details.agent_id);
   }
@@ -1023,7 +1023,7 @@ onMounted(() => {
     checklistItems.value = props.item.item_details.checklist;
   }
 
-  // Verificar se o agente já está nos detalhes
+  // Verificar se o usuário já está nos detalhes
   if (props.item.item_details?.agent) {
     agentData.value = props.item.item_details.agent;
     loadingAgent.value = false;
@@ -1063,7 +1063,7 @@ onMounted(() => {
     checklistItems.value = props.item.item_details.checklist;
   }
 
-  // Verificar se o agente já está nos detalhes
+  // Verificar se o usuário já está nos detalhes
   if (props.item.item_details?.agent) {
     agentData.value = props.item.item_details.agent;
     loadingAgent.value = false;
@@ -1817,7 +1817,7 @@ onMounted(() => {
 
         <!-- Grid de informações principais -->
         <div class="info-grid">
-          <!-- Agente Responsável -->
+          <!-- Usuário Responsável -->
           <div class="info-card">
             <span class="info-label">
               {{ t('KANBAN.ITEM_DETAILS.AGENT_RESPONSIBLE') }}
@@ -1915,7 +1915,7 @@ onMounted(() => {
             </div>
           </div>
 
-          <!-- Valor -->
+          <!-- Valor Negociado -->
           <div v-if="formattedValue" class="info-card">
             <span class="info-label">
               {{ t('KANBAN.FORM.VALUE.LABEL') }}
@@ -1925,7 +1925,7 @@ onMounted(() => {
             </span>
           </div>
 
-          <!-- Estágio Atual -->
+          <!-- Etapa Atual -->
           <div class="info-card">
             <span class="info-label">
               {{ t('KANBAN.FORM.STAGE.LABEL') }}
