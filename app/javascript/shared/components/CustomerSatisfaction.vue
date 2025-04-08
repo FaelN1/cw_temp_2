@@ -44,7 +44,7 @@ export default {
         ?.feedback_message;
     },
     isButtonDisabled() {
-      return !(this.selectedRating && this.feedback);
+      return !this.selectedRating;
     },
     inputColor() {
       return `${this.getThemeClass('bg-white', 'dark:bg-slate-600')}

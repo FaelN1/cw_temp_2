@@ -1,0 +1,6 @@
+<div class="field-unit__label">
+  <%= f.label field.attribute %>
+</div>
+<div class="field-unit__field">
+  <%= f.select field.attribute, field.selectable_plans, { include_blank: "Selecione um plano" }, class: "select" %>
+</div>

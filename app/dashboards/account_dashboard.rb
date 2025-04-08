@@ -27,7 +27,14 @@ class AccountDashboard < Administrate::BaseDashboard
     locale: Field::Select.with_options(collection: LANGUAGES_CONFIG.map { |_x, y| y[:iso_639_1_code] }),
     status: Field::Select.with_options(collection: [%w[Active active], %w[Suspended suspended]]),
     account_users: Field::HasMany,
-    custom_attributes: Field::String
+    custom_attributes: Field::String,
+    selected_plan: Field::Select.with_options(
+      collection: -> {
+        installation_config = InstallationConfig.find_by(name: 'CHATWOOT_CLOUD_PLANS')
+        plans = installation_config&.value || []
+        plans.map { |plan| [plan['name'], plan['name']] }
+      }
+    )
   }.merge(enterprise_attribute_types).freeze
 
   # COLLECTION_ATTRIBUTES
@@ -64,6 +71,7 @@ class AccountDashboard < Administrate::BaseDashboard
   enterprise_form_attributes = ChatwootApp.enterprise? ? %i[limits all_features] : []
   FORM_ATTRIBUTES = (%i[
     name
+    selected_plan
     locale
     status
   ] + enterprise_form_attributes).freeze
@@ -90,7 +98,9 @@ class AccountDashboard < Administrate::BaseDashboard
   # We do not use the action parameter but we still need to define it
   # to prevent an error from being raised (wrong number of arguments)
   # Reference: https://github.com/thoughtbot/administrate/pull/2356/files#diff-4e220b661b88f9a19ac527c50d6f1577ef6ab7b0bed2bfdf048e22e6bfa74a05R204
-  def permitted_attributes(action)
-    super + [limits: {}]
+  def permitted_attributes(action = nil)
+    attrs = super(action) + [:selected_plan]
+    attrs += [{ limits: {} }] if action.in?([:create, :update, :new])
+    attrs
   end
 end

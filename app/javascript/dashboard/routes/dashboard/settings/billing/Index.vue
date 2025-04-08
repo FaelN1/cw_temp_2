@@ -21,19 +21,32 @@ export default {
       uiFlags: 'accounts/getUIFlags',
     }),
     currentAccount() {
-      return this.getAccount(this.accountId) || {};
+      const account = this.getAccount(this.accountId) || {};
+      console.log('Current Account:', account);
+      return account;
     },
     customAttributes() {
-      return this.currentAccount.custom_attributes || {};
+      const attributes = this.currentAccount.custom_attributes || {};
+      console.log('Custom Attributes:', attributes);
+      return attributes;
     },
     hasABillingPlan() {
-      return !!this.planName;
+      const hasPlan = !!this.planName;
+      console.log('Has Billing Plan:', hasPlan);
+      return hasPlan;
     },
     planName() {
-      return this.customAttributes.plan_name || '';
+      const plan =
+        this.customAttributes.plan_name ||
+        this.customAttributes.selected_plan ||
+        '';
+      console.log('Plan Name:', plan);
+      return plan;
     },
     subscribedQuantity() {
-      return this.customAttributes.subscribed_quantity || 0;
+      const quantity = this.customAttributes.subscribed_quantity || 0;
+      console.log('Subscribed Quantity:', quantity);
+      return quantity;
     },
   },
   mounted() {

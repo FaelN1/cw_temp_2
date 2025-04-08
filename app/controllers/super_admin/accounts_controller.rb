@@ -34,9 +34,38 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
   # and `dashboard`:
   #
   def resource_params
-    permitted_params = super
-    permitted_params[:limits] = permitted_params[:limits].to_h.compact
-    permitted_params[:selected_feature_flags] = params[:enabled_features].keys.map(&:to_sym) if params[:enabled_features].present?
+    # Extrair parâmetros da conta do namespace "account"
+    account_params = params[:account] || {}
+
+    # Processar os limites para remover valores vazios
+    limits = {}
+    if account_params[:limits].present?
+      limits = account_params[:limits].transform_values do |v|
+        v.present? ? v : nil
+      end.compact
+    end
+
+    # Criar parâmetros permitidos com valores dos campos recebidos
+    permitted_params = ActionController::Parameters.new(
+      name: account_params[:name],
+      locale: account_params[:locale],
+      status: account_params[:status],
+      limits: limits
+    ).permit!
+
+    # Processar feature flags selecionadas
+    if params[:enabled_features].present?
+      permitted_params[:selected_feature_flags] = params[:enabled_features].keys.map(&:to_sym)
+    end
+
+    # Processar plano selecionado
+    if account_params[:selected_plan].present?
+      permitted_params[:custom_attributes] = {
+        'selected_plan' => account_params[:selected_plan]
+      }
+    end
+
+    Rails.logger.info("Parâmetros finais: #{permitted_params.inspect}")
     permitted_params
   end
 
@@ -64,5 +93,40 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
     # rubocop:disable Rails/I18nLocaleTexts
     redirect_back(fallback_location: [namespace, requested_resource], notice: 'Account deletion is in progress.')
     # rubocop:enable Rails/I18nLocaleTexts
+  end
+
+  def create
+    Rails.logger.info("Account Creation Params: #{params.inspect}")
+    resource = resource_class.new(resource_params)
+
+    Rails.logger.info("Resource Params Processed: #{resource_params.inspect}")
+    Rails.logger.info("New Account Object: #{resource.inspect}")
+
+    authorize_resource(resource)
+
+    if resource.save
+      Rails.logger.info("Account saved successfully with ID: #{resource.id}")
+
+      # Processamento do plano selecionado
+      if params[:account] && params[:account][:selected_plan].present?
+        plan_name = params[:account][:selected_plan]
+        Rails.logger.info("Selected Plan: #{plan_name}")
+
+        # Iniciar job para criar cliente Stripe com o plano selecionado
+        Enterprise::CreateStripeCustomerJob.perform_later(resource, plan_name)
+
+        Rails.logger.info("Plan processing completed for account #{resource.id}")
+      end
+
+      redirect_to(
+        [namespace, resource],
+        notice: translate_with_resource("create.success")
+      )
+    else
+      Rails.logger.error("Account creation failed: #{resource.errors.full_messages.join(', ')}")
+      render :new, locals: {
+        page: Administrate::Page::Form.new(dashboard, resource)
+      }, status: :unprocessable_entity
+    end
   end
 end

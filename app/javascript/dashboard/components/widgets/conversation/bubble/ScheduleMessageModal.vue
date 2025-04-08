@@ -451,11 +451,14 @@ export default {
     async onSubmit() {
       try {
         this.isLoading = true;
+        // Ajuste para garantir que o horário seja enviado considerando o fuso horário
+        const scheduledDate = new Date(this.scheduledTime);
+
         const data = {
           scheduled_message: {
             inbox_id: this.selectedInbox,
             content: this.message,
-            scheduled_at: new Date(this.scheduledTime).toISOString(),
+            scheduled_at: scheduledDate.toISOString(),
             title: this.title,
           },
         };
@@ -482,10 +485,13 @@ export default {
     async updateScheduledMessage() {
       try {
         this.isLoading = true;
+        // Ajuste para garantir que o horário seja enviado considerando o fuso horário
+        const scheduledDate = new Date(this.scheduledTime);
+
         const data = {
           inbox_id: this.selectedInbox,
           content: this.message,
-          scheduled_at: new Date(this.scheduledTime).toISOString(),
+          scheduled_at: scheduledDate.toISOString(),
           title: this.title,
         };
 
@@ -543,8 +549,18 @@ export default {
       this.selectedInbox = message.inbox_id;
 
       // Converte o timestamp para o formato datetime-local
+      // Ajusta para considerar a diferença de fuso horário
       const date = new Date(message.scheduled_at * 1000);
-      this.scheduledTime = date.toISOString().slice(0, 16);
+
+      // Formato AAAA-MM-DDThh:mm que o input datetime-local espera
+      // Garantindo que estamos no fuso horário local
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+
+      this.scheduledTime = `${year}-${month}-${day}T${hours}:${minutes}`;
 
       this.isEditing = true;
       this.editingMessageId = message.id;

@@ -103,6 +103,16 @@ class Account < ApplicationRecord
   after_create_commit :notify_creation
   after_destroy :remove_account_sequences
 
+  # Métodos virtuais para seleção de plano
+  def selected_plan
+    custom_attributes&.dig('selected_plan')
+  end
+
+  def selected_plan=(value)
+    self.custom_attributes ||= {}
+    self.custom_attributes['selected_plan'] = value
+  end
+
   def agents
     users.where(account_users: { role: :agent })
   end
@@ -148,14 +158,6 @@ class Account < ApplicationRecord
 
   def notify_creation
     Rails.configuration.dispatcher.dispatch(ACCOUNT_CREATED, Time.zone.now, account: self)
-  end
-
-  trigger.after(:insert).for_each(:row) do
-    "execute format('create sequence IF NOT EXISTS conv_dpid_seq_%s', NEW.id);"
-  end
-
-  trigger.name('camp_dpid_before_insert').after(:insert).for_each(:row) do
-    "execute format('create sequence IF NOT EXISTS camp_dpid_seq_%s', NEW.id);"
   end
 
   def validate_limit_keys

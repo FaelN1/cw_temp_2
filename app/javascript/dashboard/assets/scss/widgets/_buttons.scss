@@ -156,14 +156,14 @@ button {
 
   // Smooth style
   &.smooth {
-    @apply bg-woot-50 dark:bg-woot-800 text-woot-700 dark:text-woot-100 hover:text-woot-700 dark:hover:text-woot-700 hover:bg-woot-100 dark:hover:bg-woot-900;
+    @apply bg-woot-800 dark:bg-woot-800 text-woot-700 dark:text-woot-100 hover:text-woot-700 dark:hover:text-woot-700 hover:bg-woot-100 dark:hover:bg-woot-900;
 
     &.secondary {
       @apply bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800;
     }
 
     &.success {
-      @apply bg-green-50 dark:bg-green-700 text-green-700 dark:text-green-100 hover:bg-green-100 dark:hover:bg-green-800 hover:text-green-800 dark:hover:text-green-100;
+      @apply bg-woot-800 dark:bg-woot-800 text-green-700 dark:text-green-100 hover:bg-green-100 dark:hover:bg-green-800 hover:text-green-800 dark:hover:text-green-100;
     }
 
     &.alert {
