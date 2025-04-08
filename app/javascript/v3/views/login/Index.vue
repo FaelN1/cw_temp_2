@@ -242,5 +242,15 @@ export default {
         <Spinner color-scheme="primary" size="" />
       </div>
     </section>
+    <footer
+      class="max-w-5xl mx-auto mt-8 text-center text-slate-600 dark:text-slate-400"
+    >
+      <a
+        href="https://salez.com.br/politica-de-privacidade"
+        class="text-sm text-link"
+      >
+        © 2025 Salez. Todos os direitos reservados. Política de privacidade.
+      </a>
+    </footer>
   </main>
 </template>

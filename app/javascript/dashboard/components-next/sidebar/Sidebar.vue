@@ -295,6 +295,11 @@ const menuItems = computed(() => {
           to: accountScopedRoute('team_reports'),
         },
         {
+          name: 'Reports Kanban',
+          label: t('SIDEBAR.REPORTS_KANBAN'),
+          to: accountScopedRoute('kanban_reports'),
+        },
+        {
           name: 'Reports SLA',
           label: t('SIDEBAR.REPORTS_SLA'),
           to: accountScopedRoute('sla_reports'),
