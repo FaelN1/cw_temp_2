@@ -1,3 +1,133 @@
+<script>
+import { mapGetters } from 'vuex';
+import { useAlert } from 'dashboard/composables';
+import TimeAgo from 'components/ui/TimeAgo.vue';
+
+const DEFAULT_PAGE = 1;
+
+export default {
+  components: {
+    TimeAgo,
+  },
+  props: {
+    message: {
+      type: Object,
+    },
+  },
+  data() {
+    return {
+      searchQuery: '',
+    };
+  },
+  computed: {
+    ...mapGetters({
+      contacts: 'contacts/getContacts',
+    }),
+    showEmptySearchResult() {
+      return !!this.searchQuery && this.contacts.length === 0;
+    },
+  },
+  mounted() {
+    this.fetchContacts(DEFAULT_PAGE);
+  },
+  methods: {
+    async onSubmit() {
+      const contactIds = this.contacts
+        .filter(contact => contact.selected)
+        .map(contact => contact.id);
+
+      if (!contactIds.length) return;
+
+      try {
+        await this.$store.dispatch('conversations/forwardMessage', {
+          conversationId: this.message.conversation_id,
+          messageId: this.message.id,
+          contacts: contactIds,
+        });
+        useAlert('Encaminhado com sucesso');
+      } catch (error) {
+        useAlert(error.message || 'Erro ao encaminhar mensagem', true);
+      } finally {
+        // Limpar a seleção antes de fechar
+        this.contacts.forEach(contact => {
+          contact.selected = false;
+        });
+        this.searchQuery = '';
+
+        // Pequeno delay para garantir que o estado seja atualizado antes de fechar
+        setTimeout(() => {
+          this.onClose();
+          // Forçar atualização da lista de conversas
+          this.$store.dispatch('conversations/fetchAllConversations');
+        }, 100);
+      }
+    },
+
+    onClose() {
+      // Reset do estado interno antes de fechar
+      this.contacts = [];
+      this.searchQuery = '';
+      this.showModal = false;
+
+      // Notificar componente pai para atualizar a UI
+      this.$emit('close');
+
+      // Força rerender da conversa atual, se existir
+      if (this.$store.getters['conversationMetadata/getSelectedConversation']) {
+        const currentId =
+          this.$store.getters['conversationMetadata/getSelectedConversation']
+            .id;
+        if (currentId) {
+          this.$store.dispatch('fetchConversation', { id: currentId });
+        }
+      }
+    },
+
+    updatePageParam(page) {
+      window.history.pushState({}, null, `${this.$route.path}?page=${page}`);
+    },
+    fetchContacts(page) {
+      this.updatePageParam(page);
+      let value = this.searchQuery;
+      if (this.searchQuery.charAt(0) === '+') {
+        value = this.searchQuery.substring(1);
+      }
+      const requestParams = {
+        page,
+        sortAttr: '-last_activity_at',
+      };
+      if (!value) {
+        this.$store.dispatch('contacts/get', requestParams);
+      } else {
+        this.$store.dispatch('contacts/search', {
+          search: encodeURIComponent(value),
+          ...requestParams,
+        });
+      }
+    },
+    onSearchSubmit() {
+      if (!this.searchQuery) return;
+      this.fetchContacts(DEFAULT_PAGE);
+    },
+    onInputSearch(event) {
+      const newQuery = event.target.value;
+      const refetchAllContacts = !!this.searchQuery && newQuery === '';
+      this.searchQuery = newQuery;
+      if (refetchAllContacts) {
+        this.fetchContacts(DEFAULT_PAGE);
+      }
+    },
+    resetSearch(event) {
+      const newQuery = event.target.value;
+      if (!newQuery) {
+        this.searchQuery = newQuery;
+        this.fetchContacts(DEFAULT_PAGE);
+      }
+    },
+  },
+};
+</script>
+
 <template>
   <woot-modal modal-type="right-aligned" show :on-close="onClose">
     <div class="forward">
@@ -12,8 +142,7 @@
           <label
             for="Procurar um contato"
             class="text-sm font-medium mb-1 block"
-            >Procurar um contato</label
-          >
+            >Procurar um contato</label>
           <div class="relative">
             <span
               class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500"
@@ -21,12 +150,12 @@
               <fluent-icon icon="search" size="16" />
             </span>
             <input
+              id="contact"
+              v-model="searchQuery"
               type="search"
               name="contact"
-              id="contact"
               class="w-full pl-10 pr-3 py-2 border border-slate-200 dark:border-slate-700 rounded-md bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-woot-500 focus:border-woot-500 transition-colors"
               placeholder="Digite o nome ou telefone"
-              v-model="searchQuery"
               @keyup.enter="onSearchSubmit"
               @input="onInputSearch"
               @search="resetSearch"
@@ -71,9 +200,9 @@
                 <p>Nenhum contato encontrado</p>
               </div>
               <div
-                class="contact hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
                 v-for="contact in contacts"
                 :key="contact.id"
+                class="contact hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
               >
                 <div class="contact-id">
                   <label class="flex items-center justify-center h-full">
@@ -112,7 +241,7 @@
                   {{ contact.phone_number || '—' }}
                 </div>
                 <div class="contact-date text-slate-500 dark:text-slate-500">
-                  <time-ago
+                  <TimeAgo
                     :last-activity-timestamp="contact.last_activity_at"
                     :created-at-timestamp="contact.created_at"
                   />
@@ -137,98 +266,6 @@
     </div>
   </woot-modal>
 </template>
-
-<script>
-import { mapGetters } from 'vuex';
-import { useAlert } from 'dashboard/composables';
-import TimeAgo from 'components/ui/TimeAgo.vue';
-
-const DEFAULT_PAGE = 1;
-
-export default {
-  components: {
-    TimeAgo,
-  },
-  props: {
-    message: {
-      type: Object,
-    },
-  },
-  data() {
-    return {
-      searchQuery: '',
-    };
-  },
-  computed: {
-    ...mapGetters({
-      contacts: 'contacts/getContacts',
-    }),
-    showEmptySearchResult() {
-      return !!this.searchQuery && this.contacts.length === 0;
-    },
-  },
-  mounted() {
-    this.fetchContacts(DEFAULT_PAGE);
-  },
-  methods: {
-    onClose() {
-      this.$emit('close');
-    },
-    updatePageParam(page) {
-      window.history.pushState({}, null, `${this.$route.path}?page=${page}`);
-    },
-    fetchContacts(page) {
-      this.updatePageParam(page);
-      let value = this.searchQuery;
-      if (this.searchQuery.charAt(0) === '+') {
-        value = this.searchQuery.substring(1);
-      }
-      const requestParams = {
-        page,
-        sortAttr: '-last_activity_at',
-      };
-      if (!value) {
-        this.$store.dispatch('contacts/get', requestParams);
-      } else {
-        this.$store.dispatch('contacts/search', {
-          search: encodeURIComponent(value),
-          ...requestParams,
-        });
-      }
-    },
-    onSearchSubmit() {
-      if (!this.searchQuery) return;
-      this.fetchContacts(DEFAULT_PAGE);
-    },
-    onInputSearch(event) {
-      const newQuery = event.target.value;
-      const refetchAllContacts = !!this.searchQuery && newQuery === '';
-      this.searchQuery = newQuery;
-      if (refetchAllContacts) {
-        this.fetchContacts(DEFAULT_PAGE);
-      }
-    },
-    resetSearch(event) {
-      const newQuery = event.target.value;
-      if (!newQuery) {
-        this.searchQuery = newQuery;
-        this.fetchContacts(DEFAULT_PAGE);
-      }
-    },
-    onSubmit(event) {
-      const formData = new FormData(event.target);
-      const contactIds = formData.getAll('contactIds[]');
-      this.$store.dispatch('forwardMessage', {
-        conversationId: this.message.conversation_id,
-        messageId: this.message.id,
-        contacts: contactIds,
-      });
-      useAlert('Encaminhando mensagem...');
-      this.onClose();
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 .modal-mask .modal--close {
