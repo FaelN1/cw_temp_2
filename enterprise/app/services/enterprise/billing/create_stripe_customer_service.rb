@@ -6,6 +6,11 @@ class Enterprise::Billing::CreateStripeCustomerService
   def perform
     customer_id = prepare_customer_id
 
+    # Configurar Boleto como método de pagamento padrão se o cliente foi recém-criado
+    if @customer_created
+      configure_boleto_payment_method(customer_id)
+    end
+
     # Usar o plano especificado ou o plano padrão
     plan = find_plan(plan_name) || default_plan
 
@@ -42,8 +47,42 @@ class Enterprise::Billing::CreateStripeCustomerService
     if customer_id.blank?
       customer = Stripe::Customer.create({ name: account.name, email: billing_email })
       customer_id = customer.id
+      @customer_created = true
+    else
+      @customer_created = false
     end
     customer_id
+  end
+
+  def configure_boleto_payment_method(customer_id)
+    begin
+      # Criar um método de pagamento do tipo boleto
+      payment_method = Stripe::PaymentMethod.create({
+        type: 'boleto',
+        boleto: {
+          tax_id: '' # Pode ser preenchido posteriormente pelo cliente
+        },
+        billing_details: {
+          email: billing_email,
+        }
+      })
+
+      # Anexar o método de pagamento ao cliente
+      Stripe::PaymentMethod.attach(
+        payment_method.id,
+        { customer: customer_id }
+      )
+
+      # Definir como método de pagamento padrão
+      Stripe::Customer.update(
+        customer_id,
+        { invoice_settings: { default_payment_method: payment_method.id } }
+      )
+
+    rescue => e
+      Rails.logger.error("Erro ao configurar método de pagamento Boleto: #{e.message}")
+      # Continuamos o fluxo mesmo se falhar a configuração do boleto
+    end
   end
 
   def find_plan(plan_name)
@@ -69,6 +108,13 @@ class Enterprise::Billing::CreateStripeCustomerService
   end
 
   def billing_email
-    account.administrators.first.email
+    email = account.users.find_by(account_users: { role: 'administrator' })&.email
+
+    # Extrair apenas o endereço de email se estiver no formato "Nome <email>"
+    if email.present? && email.include?('<') && email.include?('>')
+      email = email.match(/<(.+)>/)[1]
+    end
+
+    email || "account-#{account.id}@placeholder.chatwoot.com"
   end
 end

@@ -4,12 +4,17 @@ class Enterprise::Api::V1::AccountsController < Api::BaseController
   before_action :check_authorization
   before_action :check_cloud_env, only: [:limits]
 
+  # Certifique-se de que este método retorne dados úteis e não cause redirecionamentos
   def subscription
-    if stripe_customer_id.blank? && @account.custom_attributes['is_creating_customer'].blank?
-      @account.update(custom_attributes: { is_creating_customer: true })
-      Enterprise::CreateStripeCustomerJob.perform_later(@account)
-    end
-    head :no_content
+    account_id = params[:id]
+    account = Account.find(account_id)
+
+    render json: {
+      stripe_customer_id: account.stripe_customer_id,
+      stripe_subscription_id: account.stripe_subscription_id,
+      stripe_price_id: account.stripe_price_id,
+      custom_attributes: account.custom_attributes
+    }
   end
 
   def limits

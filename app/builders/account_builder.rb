@@ -53,6 +53,12 @@ class AccountBuilder
   def create_account
     @account = Account.create!(name: account_name, locale: I18n.locale)
     Current.account = @account
+
+    # Removendo a criação automática de cliente Stripe
+    # Apenas marcando a conta para futura integração com o Stripe
+    if InstallationConfig.find_by(name: 'DEPLOYMENT_ENV')&.value == 'cloud'
+      @account.update(custom_attributes: { pending_stripe_setup: true })
+    end
   end
 
   def create_and_link_user

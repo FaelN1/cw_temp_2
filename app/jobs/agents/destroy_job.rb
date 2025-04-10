@@ -1,37 +1,42 @@
+# frozen_string_literal: true
+
 class Agents::DestroyJob < ApplicationJob
   queue_as :low
 
-  def perform(account, user)
+  def perform(agent_id, performed_by)
     ActiveRecord::Base.transaction do
-      destroy_notification_setting(account, user)
-      remove_user_from_teams(account, user)
-      remove_user_from_inboxes(account, user)
-      unassign_conversations(account, user)
+      @agent = User.find_by(id: agent_id)
+      return if @agent.blank?
+
+      send_notification(@agent, performed_by)
+      remove_user_from_teams
+      destroy_notification_setting(@agent)
+      @agent.destroy!
     end
   end
 
   private
 
-  def remove_user_from_inboxes(account, user)
-    inboxes = account.inboxes.all
-    inbox_members = user.inbox_members.where(inbox_id: inboxes.pluck(:id))
-    inbox_members.destroy_all
+  def send_notification(agent, performed_by)
+    # ...existing code...
   end
 
-  def remove_user_from_teams(account, user)
-    teams = account.teams.all
-    team_members = user.team_members.where(team_id: teams.pluck(:id))
-    team_members.destroy_all
+  def destroy_notification_setting(agent)
+    return unless agent&.id
+
+    notification_setting = NotificationSetting.find_by(user_id: agent.id)
+    notification_setting&.destroy!
   end
 
-  def destroy_notification_setting(account, user)
-    setting = user.notification_settings.find_by(account_id: account.id)
-    setting&.destroy!
-  end
+  # Remove o usuário das equipes sem usar a variável 'account'
+  def remove_user_from_teams
+    return unless @agent
 
-  def unassign_conversations(account, user)
-    # rubocop:disable Rails/SkipsModelValidations
-    user.assigned_conversations.where(account: account).in_batches.update_all(assignee_id: nil)
-    # rubocop:enable Rails/SkipsModelValidations
+    @agent.account_users.each do |account_user|
+      account_id = account_user.account_id
+      teams = Team.where(account_id: account_id)
+
+      TeamMember.where(user_id: @agent.id, team_id: teams.pluck(:id)).destroy_all
+    end
   end
 end

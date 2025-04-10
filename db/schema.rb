@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_04_03_034359) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_09_060200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -66,10 +66,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_03_034359) do
     t.string "asaas_customer_id"
     t.string "asaas_subscription_id"
     t.string "billing_status"
+    t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
+    t.string "stripe_price_id"
     t.index ["asaas_customer_id"], name: "index_accounts_on_asaas_customer_id"
     t.index ["asaas_subscription_id"], name: "index_accounts_on_asaas_subscription_id"
     t.index ["billing_status"], name: "index_accounts_on_billing_status"
     t.index ["status"], name: "index_accounts_on_status"
+    t.index ["stripe_customer_id"], name: "index_accounts_on_stripe_customer_id"
+    t.index ["stripe_subscription_id"], name: "index_accounts_on_stripe_subscription_id"
     t.index ["subscription_status"], name: "index_accounts_on_subscription_status"
     t.index ["subscription_type"], name: "index_accounts_on_subscription_type"
   end

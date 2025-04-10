@@ -61,10 +61,10 @@ const onClickTabChange = index => {
     :no-records-message="$t('ATTRIBUTES_MGMT.LIST.EMPTY_RESULT.404')"
   >
     <template #header>
+      <p>Locale atual: {{ $i18n.locale }}</p>
       <BaseSettingsHeader
         :title="$t('ATTRIBUTES_MGMT.HEADER')"
         :description="$t('ATTRIBUTES_MGMT.DESCRIPTION')"
-        :link-text="$t('ATTRIBUTES_MGMT.LEARN_MORE')"
         feature-name="custom_attributes"
       >
         <template #actions>

@@ -56,6 +56,32 @@ class Api::V1::AccountsController < Api::BaseController
     head :ok
   end
 
+  def subscription
+    render json: {
+      stripe_customer_id: Current.account.stripe_customer_id,
+      stripe_subscription_id: Current.account.stripe_subscription_id,
+      stripe_price_id: Current.account.stripe_price_id,
+      custom_attributes: Current.account.custom_attributes
+    }
+  end
+
+  def checkout
+    begin
+      # Cria uma sessão no portal de faturamento do Stripe
+      if Current.account.stripe_customer_id.present?
+        session = Stripe::BillingPortal::Session.create({
+          customer: Current.account.stripe_customer_id,
+          return_url: "#{ENV.fetch('FRONTEND_URL', '')}/accounts/#{Current.account.id}/settings/billing"
+        })
+        render json: { url: session.url }
+      else
+        render json: { error: 'No Stripe customer found' }, status: :unprocessable_entity
+      end
+    rescue => e
+      render json: { error: e.message }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def ensure_account_name

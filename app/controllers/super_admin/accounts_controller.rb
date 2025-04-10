@@ -112,10 +112,13 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
         plan_name = params[:account][:selected_plan]
         Rails.logger.info("Selected Plan: #{plan_name}")
 
-        # Iniciar job para criar cliente Stripe com o plano selecionado
-        Enterprise::CreateStripeCustomerJob.perform_later(resource, plan_name)
+        # Alteração aqui: Apenas salvar o plano selecionado nos atributos customizados
+        resource.update(custom_attributes: resource.custom_attributes.merge({
+          selected_plan: plan_name,
+          pending_stripe_setup: true  # Marcar como pendente de configuração
+        }))
 
-        Rails.logger.info("Plan processing completed for account #{resource.id}")
+        # Não chamar CreateStripeCustomerJob agora
       end
 
       redirect_to(

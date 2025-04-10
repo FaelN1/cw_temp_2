@@ -48,6 +48,7 @@ Rails.application.routes.draw do
         member do
           post :update_active_at
           get :cache_keys
+          get :subscription
         end
 
         scope module: :accounts do
@@ -407,12 +408,14 @@ Rails.application.routes.draw do
               post :checkout
               post :subscription
               get :limits
+              get :subscription
             end
           end
         end
       end
 
       post 'webhooks/stripe', to: 'webhooks/stripe#process_payload'
+      get 'accounts/checkout', to: 'accounts#checkout'
     end
   end
 
@@ -507,6 +510,9 @@ Rails.application.routes.draw do
 
   get 'microsoft/callback', to: 'microsoft/callbacks#show'
   get 'google/callback', to: 'google/callbacks#show'
+
+  # Adiciona rota para o SDK.js
+  get '/packs/js/sdk.js', to: 'sdk#index'
 
   # ----------------------------------------------------------------------
   # Routes for external service verifications

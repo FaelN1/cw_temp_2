@@ -12,7 +12,7 @@ import ContactEmptyState from './ContactEmptyState.vue';
       <ContactEmptyState
         title="No contacts found"
         subtitle="Create your first contact to get started"
-        button-label="Add Contact"
+        button-label="Novo contato"
       />
     </Variant>
 

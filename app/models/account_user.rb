@@ -6,7 +6,7 @@
 #  active_at          :datetime
 #  auto_offline       :boolean          default(TRUE), not null
 #  availability       :integer          default("online"), not null
-#  role               :integer          default("agent")
+#  role               :integer          default("administrator")
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  account_id         :bigint
@@ -26,12 +26,13 @@
 
 class AccountUser < ApplicationRecord
   include AvailabilityStatusable
+  include Enterprise::Concerns::AccountUserStripeConcern if defined?(Enterprise::Concerns::AccountUserStripeConcern)
 
   belongs_to :account
   belongs_to :user
   belongs_to :inviter, class_name: 'User', optional: true
 
-  enum role: { agent: 0, administrator: 1 }
+  enum role: { administrator: 0, agent: 1 }
   enum availability: { online: 0, offline: 1, busy: 2 }
 
   accepts_nested_attributes_for :account
