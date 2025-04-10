@@ -27,9 +27,10 @@ module Enterprise::Billing
           items: [
             {
               price: @price_id,
-              quantity: quantity
+              quantity: 1
             }
-          ]
+          ],
+          trial_period_days: 30 # Adiciona período de avaliação de 30 dias
         })
 
         Rails.logger.info("Assinatura criada com sucesso: #{subscription.id}")
