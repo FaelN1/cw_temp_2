@@ -41,8 +41,14 @@ class Enterprise::Api::V1::AccountsController < Api::BaseController
   end
 
   def checkout
-    return create_stripe_billing_session(stripe_customer_id) if stripe_customer_id.present?
+    Rails.logger.info("Iniciando processo de checkout para a conta #{@account.id}")
 
+    if stripe_customer_id.present?
+      Rails.logger.info("Cliente Stripe encontrado: #{stripe_customer_id}")
+      return create_stripe_billing_session(stripe_customer_id)
+    end
+
+    Rails.logger.warn("Nenhum ID de cliente Stripe encontrado para a conta #{@account.id}")
     render_invalid_billing_details
   end
 
@@ -59,19 +65,23 @@ class Enterprise::Api::V1::AccountsController < Api::BaseController
   end
 
   def stripe_customer_id
-    @account.custom_attributes['stripe_customer_id']
+    @account.stripe_customer_id
   end
 
   def render_invalid_billing_details
+    Rails.logger.error("Não foi possível processar checkout - detalhes de faturamento inválidos para a conta #{@account.id}")
     render_could_not_create_error('Please subscribe to a plan before viewing the billing details')
   end
 
   def create_stripe_billing_session(customer_id)
+    Rails.logger.info("Criando sessão de faturamento Stripe para o cliente: #{customer_id}")
     session = Enterprise::Billing::CreateSessionService.new.create_session(customer_id)
+    Rails.logger.info("Sessão Stripe criada com sucesso. URL de redirecionamento: #{session.url}")
     render_redirect_url(session.url)
   end
 
   def render_redirect_url(redirect_url)
+    Rails.logger.info("Retornando URL de redirecionamento: #{redirect_url}")
     render json: { redirect_url: redirect_url }
   end
 

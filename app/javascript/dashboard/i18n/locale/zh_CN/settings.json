@@ -297,7 +297,7 @@
     "TITLE": "计费方式",
     "CURRENT_PLAN": {
       "TITLE": "当前计划",
-      "PLAN_NOTE": "You are currently subscribed to the **{plan}** plan with **{quantity}** licenses"
+      "PLAN_NOTE": "You are currently subscribed to the **{plan}**."
     },
     "MANAGE_SUBSCRIPTION": {
       "TITLE": "管理您的订阅",

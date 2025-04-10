@@ -68,6 +68,11 @@ class Api::V1::AccountsController < Api::BaseController
   def checkout
     begin
       # Cria uma sessão no portal de faturamento do Stripe
+
+      Rails.logger.info "Stripe customer ID: #{Current.account.stripe_customer_id}"
+      Rails.logger.info "Stripe subscription ID: #{Current.account.stripe_subscription_id}"
+      Rails.logger.info "Stripe price ID: #{Current.account.stripe_price_id}"
+
       if Current.account.stripe_customer_id.present?
         session = Stripe::BillingPortal::Session.create({
           customer: Current.account.stripe_customer_id,
