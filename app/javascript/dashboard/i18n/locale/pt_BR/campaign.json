@@ -121,6 +121,67 @@
       "HEADER": "Campanhas recorrentes",
       "404": "Ops! Nenhuma campanha recorrente criada ainda. Vamos criar? 🙌",
       "INBOXES_NOT_FOUND": "Ops! Nenhuma campanha recorrente criada ainda. Vamos criar? 🙌"
+    },
+    "WHATSAPP": {
+      "HEADER_TITLE": "Campanhas WhatsApp",
+      "NEW_CAMPAIGN": "Nova campanha WhatsApp",
+      "CREATE": {
+        "TITLE": "Criar campanha WhatsApp",
+        "FORM": {
+          "TITLE": {
+            "LABEL": "Título da campanha",
+            "PLACEHOLDER": "Digite o título da campanha WhatsApp",
+            "ERROR": "Ops! O título da campanha é obrigatório."
+          },
+          "SCHEDULED_AT": {
+            "LABEL": "Data e hora",
+            "PLACEHOLDER": "Selecione a data e hora",
+            "CONFIRM": "Confirmar",
+            "ERROR": "Ops! A data e hora são obrigatórias."
+          },
+          "AUDIENCE": {
+            "LABEL": "Etiquetas",
+            "PLACEHOLDER": "Selecionar etiquetas",
+            "ERROR": "Ops! As etiquetas são obrigatórias."
+          },
+          "INBOX": {
+            "LABEL": "Canal",
+            "PLACEHOLDER": "Selecionar canal",
+            "ERROR": "Ops! O canal é obrigatório."
+          },
+          "MESSAGE": {
+            "LABEL": "Mensagem",
+            "PLACEHOLDER": "Digite a mensagem da campanha WhatsApp",
+            "ERROR": "Ops! A mensagem é obrigatória."
+          },
+          "SENT_BY": {
+            "LABEL": "Enviado por",
+            "PLACEHOLDER": "Selecione o remetente",
+            "ERROR": "Ops! O remetente é obrigatório."
+          },
+          "END_POINT": {
+            "LABEL": "URL:",
+            "PLACEHOLDER": "Digite a URL do site",
+            "ERROR": "Ops! Digite uma URL válida."
+          },
+          "TIME_ON_PAGE": {
+            "LABEL": "Aparecer no site após quanto tempo (segundos)",
+            "PLACEHOLDER": "Insira o tempo em segundos",
+            "ERROR": "Ops! O tempo na página é obrigatório."
+          },
+          "ENABLED": "Ativar campanha",
+          "TRIGGER_ONLY_BUSINESS_HOURS": "Ativar somente durante o horário comercial",
+          "SUBMIT": "Salvar"
+        },
+        "API": {
+          "SUCCESS_MESSAGE": "Oba! Campanha WhatsApp criada com sucesso! 🚀",
+          "ERROR_MESSAGE": "Ops! Houve alguma falha para criar a campanha. Vamos tentar novamente? 🤞"
+        }
+      },
+      "EMPTY_STATE": {
+        "TITLE": "Nenhuma campanha WhatsApp",
+        "SUBTITLE": "Parece que você ainda não criou nenhuma campanha WhatsApp. Vamos criar?"
+      }
     }
   }
 }

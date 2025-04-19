@@ -3,6 +3,7 @@ import types from '../mutation-types';
 import CampaignsAPI from '../../api/campaigns';
 import AnalyticsHelper from '../../helper/AnalyticsHelper';
 import { CAMPAIGNS_EVENTS } from '../../helper/AnalyticsHelper/events';
+import { CAMPAIGN_TYPES, CAMPAIGN_CHANNEL_TYPES } from 'shared/constants/campaign';
 
 export const state = {
   records: [],
@@ -16,9 +17,30 @@ export const getters = {
   getUIFlags(_state) {
     return _state.uiFlags;
   },
-  getCampaigns: _state => campaignType => {
+  getCampaigns: _state => (campaignType, channelType = null) => {
+    let filteredRecords = _state.records
+      .filter(record => record.campaign_type === campaignType);
+
+    // Se um tipo de canal for especificado, filtra ainda mais as campanhas
+    if (channelType) {
+      filteredRecords = filteredRecords.filter(record => {
+        // Para WhatsApp, verifica se o inbox é do tipo WhatsApp
+        if (channelType === CAMPAIGN_CHANNEL_TYPES.WHATSAPP) {
+          return record.inbox?.channel_type === 'Channel::Whatsapp';
+        }
+        // Para SMS, verifica se o inbox NÃO é do tipo WhatsApp (é SMS ou Twilio SMS)
+        if (channelType === CAMPAIGN_CHANNEL_TYPES.SMS) {
+          return record.inbox?.channel_type !== 'Channel::Whatsapp';
+        }
+        return true;
+      });
+    }
+
+    return filteredRecords.sort((a1, a2) => a1.id - a2.id);
+  },
+  getWhatsAppCampaigns: (_state) => {
     return _state.records
-      .filter(record => record.campaign_type === campaignType)
+      .filter(record => record.inbox?.channel_type === 'Channel::Whatsapp')
       .sort((a1, a2) => a1.id - a2.id);
   },
   getAllCampaigns: _state => {
@@ -39,14 +61,32 @@ export const actions = {
     }
   },
   create: async function createCampaign({ commit }, campaignObj) {
+    console.log('=== INICIANDO CRIAÇÃO DE CAMPANHA ===');
+    console.log('Payload de entrada:', campaignObj);
     commit(types.SET_CAMPAIGN_UI_FLAG, { isCreating: true });
     try {
+      console.log('Enviando requisição para a API...');
       const response = await CampaignsAPI.create(campaignObj);
+      console.log('Resposta da API:', response);
+      console.log('Dados da campanha criada:', response.data);
       commit(types.ADD_CAMPAIGN, response.data);
+      console.log('=== CAMPANHA CRIADA COM SUCESSO ===');
+      return response.data;
     } catch (error) {
-      throw new Error(error);
+      console.error('=== ERRO AO CRIAR CAMPANHA ===');
+      console.error('Objeto do erro:', error);
+      console.error('Detalhes da resposta:', error.response);
+      console.error('Mensagem:', error.message);
+
+      if (error.response && error.response.data) {
+        console.error('Dados do erro:', error.response.data);
+        console.error('Status do erro:', error.response.status);
+      }
+
+      throw error;
     } finally {
       commit(types.SET_CAMPAIGN_UI_FLAG, { isCreating: false });
+      console.log('=== FINALIZADO PROCESSAMENTO DE CAMPANHA ===');
     }
   },
   update: async ({ commit }, { id, ...updateObj }) => {

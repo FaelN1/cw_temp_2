@@ -67,7 +67,27 @@ class Campaign < ApplicationRecord
   def validate_campaign_inbox
     return unless inbox
 
-    errors.add :inbox, 'Unsupported Inbox type' unless ['Website', 'Twilio SMS', 'Sms'].include? inbox.inbox_type
+    # Modificar esta validação para incluir API e WhatsApp como tipos válidos
+    valid_types = ['Website', 'Twilio SMS', 'Sms', 'API', 'Whatsapp']
+    unless valid_types.include?(inbox.inbox_type)
+      errors.add :inbox, 'Unsupported Inbox type'
+    end
+  end
+
+  def valid_campaign_inbox
+    return unless inbox_id.present?
+
+    inbox = account.inboxes.find_by(id: inbox_id)
+    unless inbox
+      errors.add(:inbox, I18n.t('errors.campaign.inbox.not_found'))
+      return
+    end
+
+    # Modificação aqui para aceitar inboxes API e WhatsApp
+    allowed_inbox_types = ['Channel::Api', 'Channel::Whatsapp']
+    return if allowed_inbox_types.include?(inbox.channel_type)
+
+    errors.add(:inbox, I18n.t('errors.campaign.inbox.unsupported_inbox_type'))
   end
 
   # TO-DO we clean up with better validations when campaigns evolve into more inboxes

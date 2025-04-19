@@ -210,3 +210,29 @@ export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
     updated_at: '2024-10-30T16:15:03.157Z',
   },
 ];
+
+export const WHATSAPP_CAMPAIGN_EMPTY_STATE_CONTENT = [
+  {
+    id: 1,
+    title: 'Exemplo de Campanha WhatsApp',
+    message: 'Olá! Obrigado por se inscrever em nossa lista. Confira nossas promoções!',
+    enabled: true,
+    campaign_status: 'active',
+    sender: {
+      name: 'John Doe',
+    },
+    inbox: {
+      name: 'WhatsApp Business',
+      channel_type: 'Channel::Whatsapp',
+    },
+    scheduled_at: new Date(
+      new Date().getTime() + 24 * 60 * 60 * 1000
+    ).toISOString(),
+  },
+];
+
+export default {
+  ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT,
+  ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT,
+  WHATSAPP_CAMPAIGN_EMPTY_STATE_CONTENT,
+};
