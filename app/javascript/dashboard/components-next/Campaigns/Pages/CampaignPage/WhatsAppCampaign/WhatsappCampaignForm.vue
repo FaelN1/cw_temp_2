@@ -288,6 +288,7 @@ const prepareCampaignDetails = () => {
         language: state.selectedTemplate.language || 'pt_BR',
         processed_params: processedParams,
       },
+      message: '', // Campo obrigatório, mesmo que vazio para templates
     };
   }
   return {

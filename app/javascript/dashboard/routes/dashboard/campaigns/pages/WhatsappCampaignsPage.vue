@@ -23,10 +23,10 @@ const isFetchingCampaigns = computed(() => uiFlags.value.isFetching);
 
 const confirmDeleteCampaignDialogRef = ref(null);
 
-// Modificar para usar o parâmetro adicional do canal WhatsApp
+// Modificado para passar null como tipo de campanha e retornar todas (ONGOING e ONE_OFF)
 const WhatsAppCampaigns = computed(() =>
   getters['campaigns/getCampaigns'].value(
-    CAMPAIGN_TYPES.ONGOING,
+    null, // Passando null ao invés de CAMPAIGN_TYPES.ONGOING
     CAMPAIGN_CHANNEL_TYPES.WHATSAPP
   )
 );

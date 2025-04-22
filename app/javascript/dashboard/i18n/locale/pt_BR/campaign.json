@@ -126,61 +126,80 @@
       "HEADER_TITLE": "Campanhas WhatsApp",
       "NEW_CAMPAIGN": "Nova campanha WhatsApp",
       "CREATE": {
-        "TITLE": "Criar campanha WhatsApp",
+        "TITLE": "Criar Campanha WhatsApp",
         "FORM": {
           "TITLE": {
-            "LABEL": "Título da campanha",
-            "PLACEHOLDER": "Digite o título da campanha WhatsApp",
-            "ERROR": "Ops! O título da campanha é obrigatório."
-          },
-          "SCHEDULED_AT": {
-            "LABEL": "Data e hora",
-            "PLACEHOLDER": "Selecione a data e hora",
-            "CONFIRM": "Confirmar",
-            "ERROR": "Ops! A data e hora são obrigatórias."
-          },
-          "AUDIENCE": {
-            "LABEL": "Etiquetas",
-            "PLACEHOLDER": "Selecionar etiquetas",
-            "ERROR": "Ops! As etiquetas são obrigatórias."
+            "LABEL": "Título",
+            "PLACEHOLDER": "Digite um título para a campanha",
+            "ERROR": "O título é obrigatório"
           },
           "INBOX": {
-            "LABEL": "Canal",
-            "PLACEHOLDER": "Selecionar canal",
-            "ERROR": "Ops! O canal é obrigatório."
+            "LABEL": "Selecionar Inbox",
+            "PLACEHOLDER": "Selecione um inbox",
+            "ERROR": "Por favor selecione um inbox"
           },
           "MESSAGE": {
             "LABEL": "Mensagem",
-            "PLACEHOLDER": "Digite a mensagem da campanha WhatsApp",
-            "ERROR": "Ops! A mensagem é obrigatória."
+            "PLACEHOLDER": "Digite a mensagem da campanha",
+            "ERROR": "A mensagem é obrigatória"
           },
-          "SENT_BY": {
-            "LABEL": "Enviado por",
-            "PLACEHOLDER": "Selecione o remetente",
-            "ERROR": "Ops! O remetente é obrigatório."
+          "TEMPLATE": {
+            "LABEL": "Selecionar Template",
+            "PLACEHOLDER": "Selecione um template",
+            "ERROR": "Por favor selecione um template"
           },
-          "END_POINT": {
-            "LABEL": "URL:",
-            "PLACEHOLDER": "Digite a URL do site",
-            "ERROR": "Ops! Digite uma URL válida."
+          "VARIABLES": {
+            "TITLE": "Variáveis do Template"
           },
-          "TIME_ON_PAGE": {
-            "LABEL": "Aparecer no site após quanto tempo (segundos)",
-            "PLACEHOLDER": "Insira o tempo em segundos",
-            "ERROR": "Ops! O tempo na página é obrigatório."
+          "FILE": {
+            "LABEL": "Anexar arquivo"
           },
-          "ENABLED": "Ativar campanha",
-          "TRIGGER_ONLY_BUSINESS_HOURS": "Ativar somente durante o horário comercial",
-          "SUBMIT": "Salvar"
-        },
-        "API": {
-          "SUCCESS_MESSAGE": "Oba! Campanha WhatsApp criada com sucesso! 🚀",
-          "ERROR_MESSAGE": "Ops! Houve alguma falha para criar a campanha. Vamos tentar novamente? 🤞"
+          "AUDIENCE": {
+            "LABEL": "Selecione a Audiência",
+            "PLACEHOLDER": "Selecione uma audiência",
+            "ERROR": "Por favor selecione uma audiência"
+          },
+          "SCHEDULED_AT": {
+            "LABEL": "Agendar para",
+            "PLACEHOLDER": "Selecione uma data",
+            "ERROR": "Por favor selecione uma data"
+          },
+          "BUTTONS": {
+            "CANCEL": "Cancelar",
+            "CREATE": "Criar Campanha"
+          },
+          "API": {
+            "SUCCESS_MESSAGE": "Campanha criada com sucesso",
+            "ERROR_MESSAGE": "Erro ao criar a campanha. Por favor, verifique os campos e tente novamente."
+          }
         }
       },
       "EMPTY_STATE": {
         "TITLE": "Nenhuma campanha WhatsApp",
         "SUBTITLE": "Parece que você ainda não criou nenhuma campanha WhatsApp. Vamos criar?"
+      }
+    },
+    "SMS": {
+      "CREATE": {
+        "FORM": {
+          "API": {
+            "SUCCESS_MESSAGE": "Campanha SMS criada com sucesso",
+            "ERROR_MESSAGE": "Ocorreu um erro ao criar a campanha SMS"
+          },
+          "BUTTONS": {
+            "CANCEL": "Cancelar",
+            "CREATE": "Criar Campanha"
+          }
+        }
+      }
+    },
+    "CONFIRM_DELETE": {
+      "TITLE": "Confirmar exclusão",
+      "DESCRIPTION": "Tem certeza que deseja excluir esta campanha?",
+      "CONFIRM": "Sim, excluir",
+      "API": {
+        "SUCCESS_MESSAGE": "Campanha excluída com sucesso",
+        "ERROR_MESSAGE": "Ocorreu um erro ao excluir a campanha"
       }
     }
   }

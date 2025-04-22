@@ -1,12 +1,10 @@
+/* eslint-disable no-console */
 import * as MutationHelpers from 'shared/helpers/vuex/mutationHelpers';
 import types from '../mutation-types';
 import CampaignsAPI from '../../api/campaigns';
 import AnalyticsHelper from '../../helper/AnalyticsHelper';
 import { CAMPAIGNS_EVENTS } from '../../helper/AnalyticsHelper/events';
-import {
-  CAMPAIGN_TYPES,
-  CAMPAIGN_CHANNEL_TYPES,
-} from 'shared/constants/campaign';
+import { CAMPAIGN_CHANNEL_TYPES } from 'shared/constants/campaign';
 
 export const state = {
   records: [],
@@ -23,9 +21,10 @@ export const getters = {
   getCampaigns:
     _state =>
     (campaignType, channelType = null) => {
-      let filteredRecords = _state.records.filter(
-        record => record.campaign_type === campaignType
-      );
+      // Se campaignType for null, não aplica filtro de tipo
+      let filteredRecords = campaignType
+        ? _state.records.filter(record => record.campaign_type === campaignType)
+        : _state.records;
 
       // Se um tipo de canal for especificado, filtra ainda mais as campanhas
       if (channelType) {
@@ -93,6 +92,14 @@ export const actions = {
       if (error.response && error.response.data) {
         console.error('Dados do erro:', error.response.data);
         console.error('Status do erro:', error.response.status);
+      }
+
+      if (error.response?.data?.message) {
+        throw new Error(error.response.data.message);
+      }
+
+      if (error.response?.data?.error) {
+        throw new Error(error.response.data.error);
       }
 
       throw error;

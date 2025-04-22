@@ -27,7 +27,7 @@ class Campaigns::TriggerOneoffCampaignJob < ApplicationJob
       Rails.logger.info("Disparando campanha SMS ##{campaign.id}")
       Sms::OneoffSmsCampaignService.new(campaign: campaign).perform
     when 'Channel::Whatsapp'
-      Rails.logger.info("Disparando campanha WhatsApp ##{campaign.id}")
+      Rails.logger.info("Disparando campanha WhatsApp ##{campaign.id} (tipo: #{campaign.campaign_type})")
       # WhatsApp pode ser tanto ONGOING quanto ONE_OFF
       Whatsapp::OneoffWhatsappCampaignService.new(campaign: campaign).perform
     when 'Channel::Api'
@@ -38,7 +38,8 @@ class Campaigns::TriggerOneoffCampaignJob < ApplicationJob
     end
 
     # Marcar campanha como concluída se for do tipo one_off
-    if campaign.one_off?
+    # (Campanha WhatsApp já é marcada como concluída dentro do serviço)
+    if campaign.one_off? && channel.class.name != 'Channel::Whatsapp'
       campaign.update(campaign_status: :completed)
       Rails.logger.info("Campanha ##{campaign.id} marcada como concluída")
     end

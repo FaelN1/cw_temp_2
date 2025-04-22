@@ -33,7 +33,10 @@ class Campaign < ApplicationRecord
   validates :account_id, presence: true
   validates :inbox_id, presence: true
   validates :title, presence: true
-  validates :message, presence: true
+
+  # Alterando a validação para verificar se template_params está presente no hash de params
+  # durante a criação/atualização, em vez de verificar a coluna já salva
+  validate :message_or_template_params_present
   validate :validate_campaign_inbox
   validate :validate_url
   validate :prevent_completed_campaign_from_update, on: :update
@@ -77,6 +80,14 @@ class Campaign < ApplicationRecord
   end
 
   private
+
+  # Corrigimos o método message_or_template_params_present para verificar template_params corretamente
+  def message_or_template_params_present
+    # Não deve exigir mensagem se template_params estiver presente
+    if template_params.blank? || template_params.empty?
+      errors.add(:message, :blank) if message.blank?
+    end
+  end
 
   def set_display_id
     reload
