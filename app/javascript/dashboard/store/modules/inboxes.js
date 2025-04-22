@@ -5,6 +5,7 @@ import InboxesAPI from '../../api/inboxes';
 import WebChannel from '../../api/channel/webChannel';
 import FBChannel from '../../api/channel/fbChannel';
 import TwilioChannel from '../../api/channel/twilioChannel';
+import WhatsAppTemplatesAPI from '../../api/channel/whatsappTemplates';
 import { throwErrorMessage } from '../utils/api';
 import AnalyticsHelper from '../../helper/AnalyticsHelper';
 import camelcaseKeys from 'camelcase-keys';
@@ -275,6 +276,18 @@ export const actions = {
       throw new Error(error);
     }
   },
+  fetchWhatsAppTemplates({ commit }, inboxId) {
+    return new Promise((resolve, reject) => {
+      WhatsAppTemplatesAPI.getTemplates(inboxId)
+        .then(response => {
+          commit('setWhatsAppTemplates', { inboxId, templates: response.data });
+          resolve(response.data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
 };
 
 export const mutations = {
@@ -286,6 +299,15 @@ export const mutations = {
   [types.default.ADD_INBOXES]: MutationHelpers.create,
   [types.default.EDIT_INBOXES]: MutationHelpers.update,
   [types.default.DELETE_INBOXES]: MutationHelpers.destroy,
+  setWhatsAppTemplates(state, { inboxId, templates }) {
+    const inboxIndex = state.inboxes.findIndex(inbox => inbox.id === inboxId);
+    if (inboxIndex !== -1) {
+      state.inboxes[inboxIndex] = {
+        ...state.inboxes[inboxIndex],
+        message_templates: templates,
+      };
+    }
+  },
 };
 
 export default {

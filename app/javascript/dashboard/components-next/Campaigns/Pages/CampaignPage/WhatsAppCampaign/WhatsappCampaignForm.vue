@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, computed } from 'vue';
+import { reactive, computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
@@ -30,18 +30,158 @@ const initialState = {
   inboxId: null,
   scheduledAt: null,
   selectedAudience: [],
-  file: null, // novo campo para armazenar o arquivo
+  file: null,
+  selectedTemplate: null,
+  templateVariables: {}, // Armazenar valores das variáveis do template
 };
 
 const state = reactive({ ...initialState });
 
-const rules = {
-  title: { required, minLength: minLength(1) },
-  message: { required, minLength: minLength(1) },
-  inboxId: { required },
-  scheduledAt: { required },
-  selectedAudience: { required },
+// Template options state
+const availableTemplates = ref([]);
+const loadingTemplates = ref(false);
+const templateVariableFields = ref([]); // Armazena os campos de variáveis detectados
+
+// Determina o tipo de canal baseado no inbox selecionado
+const selectedInboxType = computed(() => {
+  if (!state.inboxId) return null;
+
+  const selectedInbox = formState.allInboxes.value.find(
+    inbox => inbox.id === state.inboxId
+  );
+
+  return selectedInbox ? selectedInbox.channel_type : null;
+});
+
+// Verifica se é um canal API
+const isAPIChannel = computed(() => {
+  return selectedInboxType.value === 'Channel::Api';
+});
+
+// Verifica se é um canal WhatsApp
+const isWhatsAppChannel = computed(() => {
+  return selectedInboxType.value === 'Channel::Whatsapp';
+});
+
+// Carrega os templates quando um canal WhatsApp é selecionado
+watch(
+  () => state.inboxId,
+  async newInboxId => {
+    if (newInboxId && isWhatsAppChannel.value) {
+      await loadWhatsAppTemplates(newInboxId);
+    } else {
+      availableTemplates.value = [];
+      state.selectedTemplate = null;
+      templateVariableFields.value = [];
+      state.templateVariables = {};
+    }
+  }
+);
+
+// Função para carregar os templates do WhatsApp
+const loadWhatsAppTemplates = async inboxId => {
+  try {
+    loadingTemplates.value = true;
+    // Aqui assumimos que os templates estão disponíveis no store
+    // Se não estiverem, você precisará fazer uma requisição à API
+    const templates =
+      store.getters['inboxes/getWhatsAppTemplates'](inboxId) || [];
+    availableTemplates.value = templates.map(template => ({
+      value: template.id,
+      label: template.name,
+      template: template,
+    }));
+  } catch (error) {
+    console.error('Erro ao carregar templates:', error);
+    availableTemplates.value = [];
+  } finally {
+    loadingTemplates.value = false;
+  }
 };
+
+// Detecta variáveis em um texto de template
+const extractTemplateVariables = text => {
+  const regex = /{{(\d+)}}/g;
+  const variables = [];
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    variables.push({
+      key: match[1], // O número dentro dos colchetes
+      fullMatch: match[0], // A expressão completa {{n}}
+    });
+  }
+
+  return variables;
+};
+
+// Função para lidar com a seleção de template
+const handleTemplateChange = templateId => {
+  const selectedTemplate =
+    availableTemplates.value.find(t => t.value === templateId)?.template ||
+    null;
+
+  state.selectedTemplate = selectedTemplate;
+  state.templateVariables = {}; // Resetar variáveis quando trocar o template
+
+  // Se encontrou o template, extrair variáveis
+  if (selectedTemplate) {
+    // Procurar componentes do tipo BODY para extrair variáveis
+    const bodyComponent = selectedTemplate.components?.find(
+      c => c.type === 'BODY'
+    );
+
+    if (bodyComponent && bodyComponent.text) {
+      const extractedVars = extractTemplateVariables(bodyComponent.text);
+
+      // Criar campos para cada variável encontrada
+      templateVariableFields.value = extractedVars.map(v => ({
+        id: v.key,
+        name: `var_${v.key}`,
+        label: `Variável {{${v.key}}}`,
+        placeholder: `Valor para {{${v.key}}}`,
+        value: '',
+      }));
+    } else {
+      templateVariableFields.value = [];
+    }
+  } else {
+    templateVariableFields.value = [];
+  }
+};
+
+// Atualizar valor da variável quando alterado
+const updateTemplateVariable = (id, value) => {
+  state.templateVariables[id] = value;
+};
+
+// Atualiza as regras de validação de acordo com o tipo de canal
+const rules = computed(() => {
+  const baseRules = {
+    title: { required, minLength: minLength(1) },
+    inboxId: { required },
+    scheduledAt: { required },
+    selectedAudience: { required },
+  };
+
+  // Se for canal WhatsApp, requer um template selecionado
+  if (isWhatsAppChannel.value) {
+    return {
+      ...baseRules,
+      selectedTemplate: { required },
+    };
+  }
+
+  // Se for canal API, requer uma mensagem
+  if (isAPIChannel.value) {
+    return {
+      ...baseRules,
+      message: { required, minLength: minLength(1) },
+    };
+  }
+
+  return baseRules;
+});
 
 const v$ = useVuelidate(rules, state);
 
@@ -78,7 +218,7 @@ const inboxOptions = computed(() => {
 
 const getErrorMessage = (field, errorKey) => {
   const baseKey = 'CAMPAIGN.WHATSAPP.CREATE.FORM';
-  return v$.value[field].$error ? t(`${baseKey}.${errorKey}.ERROR`) : '';
+  return v$.value[field]?.$error ? t(`${baseKey}.${errorKey}.ERROR`) : '';
 };
 
 const formErrors = computed(() => ({
@@ -87,15 +227,29 @@ const formErrors = computed(() => ({
   inbox: getErrorMessage('inboxId', 'INBOX'),
   scheduledAt: getErrorMessage('scheduledAt', 'SCHEDULED_AT'),
   audience: getErrorMessage('selectedAudience', 'AUDIENCE'),
+  template:
+    isWhatsAppChannel.value && !state.selectedTemplate
+      ? t('CAMPAIGN.WHATSAPP.CREATE.FORM.TEMPLATE.ERROR')
+      : '',
 }));
 
-const isSubmitDisabled = computed(() => v$.value.$invalid);
+const isSubmitDisabled = computed(() => {
+  // Verificar se todos os campos de variáveis foram preenchidos quando aplicável
+  if (isWhatsAppChannel.value && templateVariableFields.value.length > 0) {
+    const allVariablesFilled = templateVariableFields.value.every(
+      field => !!state.templateVariables[field.id]
+    );
+    return v$.value.$invalid || !allVariablesFilled;
+  }
+  return v$.value.$invalid;
+});
 
 const formatToUTCString = localDateTime =>
   localDateTime ? new Date(localDateTime).toISOString() : null;
 
 const resetState = () => {
   Object.assign(state, { ...initialState });
+  templateVariableFields.value = [];
 };
 
 const handleCancel = () => emit('cancel');
@@ -106,17 +260,42 @@ const handleFileChange = event => {
   state.file = file;
 };
 
-const prepareCampaignDetails = () => ({
-  title: state.title,
-  message: state.message,
-  inbox_id: state.inboxId,
-  scheduled_at: formatToUTCString(state.scheduledAt),
-  audience: state.selectedAudience?.map(id => ({
-    id,
-    type: 'Label',
-  })),
-  file: state.file, // inclusão do arquivo no payload
-});
+const prepareCampaignDetails = () => {
+  const commonDetails = {
+    title: state.title,
+    inbox_id: state.inboxId,
+    scheduled_at: formatToUTCString(state.scheduledAt),
+    audience: state.selectedAudience?.map(id => ({
+      id,
+      type: 'Label',
+    })),
+  };
+
+  if (isWhatsAppChannel.value && state.selectedTemplate) {
+    // Preparar os parâmetros do template incluindo as variáveis preenchidas
+    const processedParams = {};
+
+    // Transformar variáveis para o formato esperado pela API
+    Object.keys(state.templateVariables).forEach(key => {
+      processedParams[key] = state.templateVariables[key];
+    });
+
+    return {
+      ...commonDetails,
+      template_params: {
+        name: state.selectedTemplate.name,
+        namespace: state.selectedTemplate.namespace || '',
+        language: state.selectedTemplate.language || 'pt_BR',
+        processed_params: processedParams,
+      },
+    };
+  }
+  return {
+    ...commonDetails,
+    message: state.message,
+    file: state.file,
+  };
+};
 
 const handleSubmit = async () => {
   const isFormValid = await v$.value.$validate();
@@ -127,6 +306,7 @@ const handleSubmit = async () => {
   handleCancel();
 };
 
+// Translation keys
 const titleLabel = t('CAMPAIGN.WHATSAPP.CREATE.FORM.TITLE.LABEL');
 const titlePlaceholder = t('CAMPAIGN.WHATSAPP.CREATE.FORM.TITLE.PLACEHOLDER');
 const messageLabel = t('CAMPAIGN.WHATSAPP.CREATE.FORM.MESSAGE.LABEL');
@@ -142,6 +322,22 @@ const audiencePlaceholder = t(
 const scheduledAtLabel = t('CAMPAIGN.WHATSAPP.CREATE.FORM.SCHEDULED_AT.LABEL');
 const scheduledAtPlaceholder = t(
   'CAMPAIGN.WHATSAPP.CREATE.FORM.SCHEDULED_AT.PLACEHOLDER'
+);
+const templateLabel = t(
+  'CAMPAIGN.WHATSAPP.CREATE.FORM.TEMPLATE.LABEL',
+  'Selecionar Template'
+);
+const templatePlaceholder = t(
+  'CAMPAIGN.WHATSAPP.CREATE.FORM.TEMPLATE.PLACEHOLDER',
+  'Escolha um template'
+);
+const fileLabel = t(
+  'CAMPAIGN.WHATSAPP.CREATE.FORM.FILE.LABEL',
+  'Adicionar arquivo único'
+);
+const variablesTitle = t(
+  'CAMPAIGN.WHATSAPP.CREATE.FORM.VARIABLES.TITLE',
+  'Variáveis do Template'
 );
 </script>
 
@@ -170,20 +366,88 @@ const scheduledAtPlaceholder = t(
       />
     </div>
 
-    <TextArea
-      v-model="state.message"
-      :label="messageLabel"
-      :placeholder="messagePlaceholder"
-      show-character-count
-      :message="formErrors.message"
-      :message-type="formErrors.message ? 'error' : 'info'"
-    />
+    <!-- Campos específicos para Canal API -->
+    <template v-if="isAPIChannel">
+      <TextArea
+        v-model="state.message"
+        :label="messageLabel"
+        :placeholder="messagePlaceholder"
+        show-character-count
+        :message="formErrors.message"
+        :message-type="formErrors.message ? 'error' : 'info'"
+      />
 
-    <div class="flex flex-col gap-1">
-      <label class="mb-0.5 text-sm font-medium text-n-slate-12">
-        Adicionar arquivo único
+      <div class="flex flex-col gap-1">
+        <label class="mb-0.5 text-sm font-medium text-n-slate-12">
+          {{ fileLabel }}
+        </label>
+        <input type="file" accept="*/*" @change="handleFileChange" />
+      </div>
+    </template>
+
+    <!-- Campos específicos para Canal WhatsApp -->
+    <div v-if="isWhatsAppChannel" class="flex flex-col gap-1">
+      <label for="template" class="mb-0.5 text-sm font-medium text-n-slate-12">
+        {{ templateLabel }}
       </label>
-      <input type="file" accept="*/*" @change="handleFileChange" />
+      <ComboBox
+        id="template"
+        v-model="state.selectedTemplate"
+        :options="availableTemplates"
+        :has-error="!!formErrors.template"
+        :placeholder="templatePlaceholder"
+        :message="formErrors.template"
+        :loading="loadingTemplates"
+        class="[&>div>button]:bg-n-alpha-black2 [&>div>button:not(.focused)]:dark:outline-n-weak [&>div>button:not(.focused)]:hover:!outline-n-slate-6"
+        @update:model-value="handleTemplateChange"
+      />
+
+      <!-- Exibe detalhes do template selecionado -->
+      <div
+        v-if="state.selectedTemplate"
+        class="mt-2 p-3 bg-slate-50 dark:bg-slate-800 rounded-md"
+      >
+        <h4 class="font-medium text-sm">{{ state.selectedTemplate.name }}</h4>
+        <div v-if="state.selectedTemplate.components" class="mt-1 text-sm">
+          <div
+            v-for="(component, index) in state.selectedTemplate.components"
+            :key="index"
+          >
+            <div
+              v-if="component.type === 'BODY'"
+              class="text-slate-700 dark:text-slate-300"
+            >
+              {{ component.text }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campos de variáveis do template -->
+      <div
+        v-if="templateVariableFields.length > 0"
+        class="mt-4 p-3 bg-slate-50 dark:bg-slate-800 rounded-md"
+      >
+        <h4 class="font-medium text-sm mb-2">{{ variablesTitle }}</h4>
+        <div
+          v-for="field in templateVariableFields"
+          :key="field.id"
+          class="mb-3"
+        >
+          <label
+            :for="field.name"
+            class="mb-0.5 text-sm font-medium text-n-slate-12"
+          >
+            {{ field.label }}
+          </label>
+          <Input
+            :id="field.name"
+            v-model="state.templateVariables[field.id]"
+            :placeholder="field.placeholder"
+            required
+          />
+        </div>
+      </div>
     </div>
 
     <div class="flex flex-col gap-1">
@@ -209,8 +473,6 @@ const scheduledAtPlaceholder = t(
       :message="formErrors.scheduledAt"
       :message-type="formErrors.scheduledAt ? 'error' : 'info'"
     />
-
-    <!-- Novo campo para upload de arquivo -->
 
     <div class="flex items-center justify-between w-full gap-3">
       <Button
