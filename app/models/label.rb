@@ -46,6 +46,20 @@ class Label < ApplicationRecord
     account.reporting_events.where(conversation_id: conversations.pluck(:id))
   end
 
+  # Garantir que usamos contacts_count consistentemente
+  def contacts_count
+    # Busca contatos associados à conversas que tenham esta etiqueta
+    conversation_ids = account.conversations.tagged_with(title).pluck(:id)
+
+    if conversation_ids.any?
+      # Conta contatos únicos associados a essas conversas
+      account.contacts.where(id: account.conversations.where(id: conversation_ids).select(:contact_id)).distinct.count
+    else
+      # Tenta busca direta de contatos com a etiqueta (método original)
+      account.contacts.tagged_with(title).count
+    end
+  end
+
   private
 
   def update_associated_models

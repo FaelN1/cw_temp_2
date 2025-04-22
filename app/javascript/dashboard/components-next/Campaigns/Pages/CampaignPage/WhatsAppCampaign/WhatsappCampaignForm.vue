@@ -60,8 +60,12 @@ const mapToOptions = (items, valueKey, labelKey) =>
     label: item[labelKey],
   })) ?? [];
 
-const audienceList = computed(() =>
-  mapToOptions(formState.labels.value, 'id', 'title')
+const audienceList = computed(
+  () =>
+    formState.labels.value.map(label => ({
+      value: label.id,
+      label: `${label.title}`,
+    })) || []
 );
 
 // Filtra inboxes para mostrar apenas os tipos suportados (API e WhatsApp)
@@ -151,6 +155,21 @@ const scheduledAtPlaceholder = t(
       :message-type="formErrors.title ? 'error' : 'info'"
     />
 
+    <div class="flex flex-col gap-1">
+      <label for="inbox" class="mb-0.5 text-sm font-medium text-n-slate-12">
+        {{ inboxLabel }}
+      </label>
+      <ComboBox
+        id="inbox"
+        v-model="state.inboxId"
+        :options="inboxOptions"
+        :has-error="!!formErrors.inbox"
+        :placeholder="inboxPlaceholder"
+        :message="formErrors.inbox"
+        class="[&>div>button]:bg-n-alpha-black2 [&>div>button:not(.focused)]:dark:outline-n-weak [&>div>button:not(.focused)]:hover:!outline-n-slate-6"
+      />
+    </div>
+
     <TextArea
       v-model="state.message"
       :label="messageLabel"
@@ -165,21 +184,6 @@ const scheduledAtPlaceholder = t(
         Adicionar arquivo único
       </label>
       <input type="file" accept="*/*" @change="handleFileChange" />
-    </div>
-
-    <div class="flex flex-col gap-1">
-      <label for="inbox" class="mb-0.5 text-sm font-medium text-n-slate-12">
-        {{ inboxLabel }}
-      </label>
-      <ComboBox
-        id="inbox"
-        v-model="state.inboxId"
-        :options="inboxOptions"
-        :has-error="!!formErrors.inbox"
-        :placeholder="inboxPlaceholder"
-        :message="formErrors.inbox"
-        class="[&>div>button]:bg-n-alpha-black2 [&>div>button:not(.focused)]:dark:outline-n-weak [&>div>button:not(.focused)]:hover:!outline-n-slate-6"
-      />
     </div>
 
     <div class="flex flex-col gap-1">
@@ -201,7 +205,6 @@ const scheduledAtPlaceholder = t(
       v-model="state.scheduledAt"
       :label="scheduledAtLabel"
       type="datetime-local"
-      :min="currentDateTime"
       :placeholder="scheduledAtPlaceholder"
       :message="formErrors.scheduledAt"
       :message-type="formErrors.scheduledAt ? 'error' : 'info'"

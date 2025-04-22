@@ -51,7 +51,9 @@ class Contacts::ContactableInboxesService
     return unless @contact.phone_number
 
     # Remove the plus since thats the format 360 dialog uses
-    { source_id: @contact.phone_number.delete('+'), inbox: inbox }
+    # Certifique-se de que o telefone está no formato correto para o provedor
+    phone_number = @contact.phone_number.delete('+')
+    { source_id: phone_number, inbox: inbox }
   end
 
   def sms_contactable_inbox(inbox)

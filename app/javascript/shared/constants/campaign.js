@@ -6,6 +6,8 @@ export const CAMPAIGN_TYPES = {
 export const CAMPAIGN_CHANNEL_TYPES = {
   SMS: 'sms',
   WHATSAPP: 'whatsapp',
+  LIVE_CHAT: 'live_chat',
+  API: 'api',
 };
 
 export default {

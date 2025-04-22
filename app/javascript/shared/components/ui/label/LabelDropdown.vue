@@ -66,6 +66,15 @@ export default {
     parsedSearch() {
       return sanitizeLabel(this.search);
     },
+
+    // Formatar título com contagem de contatos para exibição
+    formattedLabelTitle() {
+      return (label) => {
+        return label.contacts_count > 0
+          ? `${label.title} (${label.contacts_count})`
+          : label.title;
+      };
+    },
   },
 
   mounted() {
@@ -131,6 +140,25 @@ export default {
         autofocus="true"
         :placeholder="$t('CONTACT_PANEL.LABELS.LABEL_SELECT.PLACEHOLDER')"
       />
+    </div>
+
+    <!-- Modificar a lista de etiquetas para exibir a contagem -->
+    <div v-if="filteredActiveLabels.length" class="flex-1 overflow-y-auto">
+      <button
+        v-for="label in filteredActiveLabels"
+        :key="label.id"
+        class="flex items-center w-full px-3 py-1.5 hover:bg-slate-50 dark:hover:bg-slate-700 text-sm cursor-pointer"
+        @click="onAddRemove(label)"
+      >
+        <span
+          class="size-3 rounded-sm mr-2 flex-shrink-0"
+          :style="{ backgroundColor: label.color }"
+        ></span>
+        <span class="flex-grow text-left">{{ formattedLabelTitle(label) }}</span>
+        <span v-if="selectedLabels.includes(label.title)" class="text-woot-500">
+          <fluent-icon icon="checkmark" size="16" />
+        </span>
+      </button>
     </div>
     <div
       class="flex items-start justify-start flex-auto flex-grow flex-shrink overflow-auto"

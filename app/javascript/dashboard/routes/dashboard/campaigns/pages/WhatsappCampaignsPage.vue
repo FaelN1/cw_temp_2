@@ -26,7 +26,7 @@ const confirmDeleteCampaignDialogRef = ref(null);
 // Modificar para usar o parâmetro adicional do canal WhatsApp
 const WhatsAppCampaigns = computed(() =>
   getters['campaigns/getCampaigns'].value(
-    CAMPAIGN_TYPES.ONE_OFF,
+    CAMPAIGN_TYPES.ONGOING,
     CAMPAIGN_CHANNEL_TYPES.WHATSAPP
   )
 );

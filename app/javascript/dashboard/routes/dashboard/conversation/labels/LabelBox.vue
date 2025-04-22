@@ -74,6 +74,15 @@ export default {
     ...mapGetters({
       conversationUiFlags: 'conversationLabels/getUIFlags',
     }),
+
+    // Formatar título com contagem de contatos para exibição
+    formattedLabelTitle() {
+      return (label) => {
+        return label.contacts_count > 0
+          ? `${label.title} (${label.contacts_count})`
+          : label.title;
+      };
+    },
   },
 };
 </script>
@@ -93,7 +102,7 @@ export default {
         <woot-label
           v-for="label in activeLabels"
           :key="label.id"
-          :title="label.title"
+          :title="formattedLabelTitle(label)"
           :description="label.description"
           show-close
           :color="label.color"

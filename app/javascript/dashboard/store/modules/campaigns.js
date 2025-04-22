@@ -3,7 +3,10 @@ import types from '../mutation-types';
 import CampaignsAPI from '../../api/campaigns';
 import AnalyticsHelper from '../../helper/AnalyticsHelper';
 import { CAMPAIGNS_EVENTS } from '../../helper/AnalyticsHelper/events';
-import { CAMPAIGN_TYPES, CAMPAIGN_CHANNEL_TYPES } from 'shared/constants/campaign';
+import {
+  CAMPAIGN_TYPES,
+  CAMPAIGN_CHANNEL_TYPES,
+} from 'shared/constants/campaign';
 
 export const state = {
   records: [],
@@ -17,28 +20,37 @@ export const getters = {
   getUIFlags(_state) {
     return _state.uiFlags;
   },
-  getCampaigns: _state => (campaignType, channelType = null) => {
-    let filteredRecords = _state.records
-      .filter(record => record.campaign_type === campaignType);
+  getCampaigns:
+    _state =>
+    (campaignType, channelType = null) => {
+      let filteredRecords = _state.records.filter(
+        record => record.campaign_type === campaignType
+      );
 
-    // Se um tipo de canal for especificado, filtra ainda mais as campanhas
-    if (channelType) {
-      filteredRecords = filteredRecords.filter(record => {
-        // Para WhatsApp, verifica se o inbox é do tipo WhatsApp
-        if (channelType === CAMPAIGN_CHANNEL_TYPES.WHATSAPP) {
-          return record.inbox?.channel_type === 'Channel::Whatsapp';
-        }
-        // Para SMS, verifica se o inbox NÃO é do tipo WhatsApp (é SMS ou Twilio SMS)
-        if (channelType === CAMPAIGN_CHANNEL_TYPES.SMS) {
-          return record.inbox?.channel_type !== 'Channel::Whatsapp';
-        }
-        return true;
-      });
-    }
+      // Se um tipo de canal for especificado, filtra ainda mais as campanhas
+      if (channelType) {
+        filteredRecords = filteredRecords.filter(record => {
+          // Para WhatsApp ou API, verifica os tipos de canal correspondentes
+          if (
+            channelType === CAMPAIGN_CHANNEL_TYPES.WHATSAPP ||
+            channelType === CAMPAIGN_CHANNEL_TYPES.API
+          ) {
+            return (
+              record.inbox?.channel_type === 'Channel::Whatsapp' ||
+              record.inbox?.channel_type === 'Channel::Api'
+            );
+          }
+          // Para SMS, verifica se o inbox NÃO é do tipo WhatsApp (é SMS ou Twilio SMS)
+          if (channelType === CAMPAIGN_CHANNEL_TYPES.SMS) {
+            return record.inbox?.channel_type !== 'Channel::Sms';
+          }
+          return true;
+        });
+      }
 
-    return filteredRecords.sort((a1, a2) => a1.id - a2.id);
-  },
-  getWhatsAppCampaigns: (_state) => {
+      return filteredRecords.sort((a1, a2) => a1.id - a2.id);
+    },
+  getWhatsAppCampaigns: _state => {
     return _state.records
       .filter(record => record.inbox?.channel_type === 'Channel::Whatsapp')
       .sort((a1, a2) => a1.id - a2.id);

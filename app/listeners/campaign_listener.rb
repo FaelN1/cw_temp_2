@@ -1,16 +1,22 @@
 class CampaignListener < BaseListener
   def campaign_triggered(event)
-    contact_inbox = event.data[:contact_inbox]
-    campaign_display_id = event.data[:event_info][:campaign_id]
-    custom_attributes = event.data[:event_info][:custom_attributes]
+    campaign = extract_campaign(event)
+    return if campaign.blank?
 
-    return if campaign_display_id.blank?
+    campaign.trigger!
+  end
 
-    ::Campaigns::CampaignConversationBuilder.new(
-      contact_inbox_id: contact_inbox.id,
-      campaign_display_id: campaign_display_id,
-      conversation_additional_attributes: event.data[:event_info].except(:campaign_id, :custom_attributes),
-      custom_attributes: custom_attributes
-    ).perform
+  def campaign_scheduled(event)
+    # Este evento é para futuras implementações de agendamento
+    # Será acionado quando uma campanha for agendada
+  end
+
+  private
+
+  def extract_campaign(event)
+    campaign = event.data[:campaign]
+    return campaign if campaign.is_a?(Campaign)
+
+    Campaign.find_by(id: campaign[:id])
   end
 end

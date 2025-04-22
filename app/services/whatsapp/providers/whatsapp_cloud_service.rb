@@ -159,4 +159,21 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
 
     process_response(response)
   end
+
+  def send_text_message(phone_number, content)
+    message_content = content.is_a?(Message) ? content.content : content
+
+    response = HTTParty.post(
+      "#{phone_id_path}/messages",
+      headers: api_headers,
+      body: {
+        messaging_product: 'whatsapp',
+        to: phone_number,
+        text: { body: message_content },
+        type: 'text'
+      }.to_json
+    )
+
+    process_response(response)
+  end
 end

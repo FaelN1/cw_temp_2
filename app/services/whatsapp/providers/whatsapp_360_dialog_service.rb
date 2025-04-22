@@ -130,4 +130,20 @@ class Whatsapp::Providers::Whatsapp360DialogService < Whatsapp::Providers::BaseS
 
     process_response(response)
   end
+
+  def send_text_message(phone_number, content)
+    message_content = content.is_a?(Message) ? content.content : content
+
+    response = HTTParty.post(
+      "#{api_base_path}/messages",
+      headers: api_headers,
+      body: {
+        to: phone_number,
+        text: { body: message_content },
+        type: 'text'
+      }.to_json
+    )
+
+    process_response(response)
+  end
 end

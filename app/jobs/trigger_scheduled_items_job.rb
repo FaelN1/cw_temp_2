@@ -2,10 +2,23 @@ class TriggerScheduledItemsJob < ApplicationJob
   queue_as :scheduled_jobs
 
   def perform
-    # trigger the scheduled campaign jobs
-    Campaign.where(campaign_type: :one_off,
-                   campaign_status: :active).where(scheduled_at: 3.days.ago..Time.current).all.find_each(batch_size: 100) do |campaign|
+    Rails.logger.info("Iniciando verificação de campanhas agendadas em #{Time.current}")
+
+    # Buscar todas as campanhas ativas e habilitadas, sem filtro de data
+    campaigns = Campaign.where(campaign_status: :active, enabled: true)
+                       .includes(:inbox) # Pré-carrega os inboxes para evitar consultas N+1
+
+    Rails.logger.info("Encontradas #{campaigns.size} campanhas agendadas")
+
+    # Processar cada campanha individualmente
+    campaigns.find_each do |campaign|
+      # Verifica o tipo de inbox sem usar a coluna diretamente
+      inbox_type = campaign.inbox.try(:channel).try(:class).try(:name)
+      Rails.logger.info("Verificando campanha ##{campaign.id}: inbox_channel_type=#{inbox_type}")
+
+      # Acionar o job de processamento
       Campaigns::TriggerOneoffCampaignJob.perform_later(campaign)
+      Rails.logger.info("Agendado processamento para campanha ##{campaign.id}")
     end
 
     # Job to reopen snoozed conversations

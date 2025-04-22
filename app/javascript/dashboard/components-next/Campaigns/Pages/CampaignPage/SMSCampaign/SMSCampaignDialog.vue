@@ -4,6 +4,7 @@ import { useStore } from 'dashboard/composables/store';
 import { useAlert, useTrack } from 'dashboard/composables';
 import { CAMPAIGN_TYPES } from 'shared/constants/campaign.js';
 import { CAMPAIGNS_EVENTS } from 'dashboard/helper/AnalyticsHelper/events.js';
+import CampaignHelper from 'dashboard/helper/CampaignHelper';
 
 import SMSCampaignForm from 'dashboard/components-next/Campaigns/Pages/CampaignPage/SMSCampaign/SMSCampaignForm.vue';
 
@@ -14,7 +15,20 @@ const { t } = useI18n();
 
 const addCampaign = async campaignDetails => {
   try {
-    await store.dispatch('campaigns/create', campaignDetails);
+    // Usar o helper para validar e preparar os dados da campanha
+    if (!CampaignHelper.validateAudience(campaignDetails.audience)) {
+      useAlert(t('CAMPAIGN.SMS.CREATE.FORM.API.INVALID_AUDIENCE'));
+      return;
+    }
+
+    // Log de debug para audiência
+    CampaignHelper.logAudienceDetails(campaignDetails.audience);
+
+    // Preparar payload
+    const payload = CampaignHelper.prepareCampaignPayload(campaignDetails);
+
+    // Criar campanha
+    await store.dispatch('campaigns/create', payload);
 
     // tracking this here instead of the store to track the type of campaign
     useTrack(CAMPAIGNS_EVENTS.CREATE_CAMPAIGN, {

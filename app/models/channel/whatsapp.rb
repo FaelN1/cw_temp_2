@@ -61,6 +61,7 @@ class Channel::Whatsapp < ApplicationRecord
   delegate :sync_templates, to: :provider_service
   delegate :media_url, to: :provider_service
   delegate :api_headers, to: :provider_service
+  delegate :send_text_message, to: :provider_service
 
   private
 

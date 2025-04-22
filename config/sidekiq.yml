@@ -21,6 +21,7 @@
   - default
   - mailers
   - action_mailbox_routing
+  - campaigns
   - low
   - scheduled_jobs
   - scheduled_messages

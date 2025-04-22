@@ -51,11 +51,29 @@ class Campaign < ApplicationRecord
   after_commit :set_display_id, unless: :display_id?
 
   def trigger!
+    Rails.logger.info("Tentando disparar campanha ##{id}: tipo=#{campaign_type}, status=#{campaign_status}, canal=#{inbox&.channel&.class&.name}")
+
+    # Verificar o tipo de canal ao invés do inbox_type
+    channel_type = inbox.channel.class.name
+
+    # Para campanhas WhatsApp, permitir tanto ONGOING quanto ONE_OFF
+    if channel_type == 'Channel::Whatsapp'
+      Rails.logger.info("Disparando campanha WhatsApp ##{id}")
+      Whatsapp::OneoffWhatsappCampaignService.new(campaign: self).perform
+      return
+    end
+
+    # Para outros tipos, manter a lógica original
     return unless one_off?
     return if completed?
 
-    Twilio::OneoffSmsCampaignService.new(campaign: self).perform if inbox.inbox_type == 'Twilio SMS'
-    Sms::OneoffSmsCampaignService.new(campaign: self).perform if inbox.inbox_type == 'Sms'
+    if channel_type == 'Channel::TwilioSms'
+      Rails.logger.info("Disparando campanha Twilio SMS ##{id}")
+      Twilio::OneoffSmsCampaignService.new(campaign: self).perform
+    elsif channel_type == 'Channel::Sms'
+      Rails.logger.info("Disparando campanha SMS ##{id}")
+      Sms::OneoffSmsCampaignService.new(campaign: self).perform
+    end
   end
 
   private
@@ -67,9 +85,12 @@ class Campaign < ApplicationRecord
   def validate_campaign_inbox
     return unless inbox
 
-    # Modificar esta validação para incluir API e WhatsApp como tipos válidos
-    valid_types = ['Website', 'Twilio SMS', 'Sms', 'API', 'Whatsapp']
-    unless valid_types.include?(inbox.inbox_type)
+    # Verificar o tipo de canal ao invés do tipo de inbox
+    channel_type = inbox.channel.class.name
+
+    # Usar os nomes das classes de canal ao invés do tipo de inbox
+    valid_types = ['Channel::WebWidget', 'Channel::TwilioSms', 'Channel::Sms', 'Channel::Api', 'Channel::Whatsapp']
+    unless valid_types.include?(channel_type)
       errors.add :inbox, 'Unsupported Inbox type'
     end
   end
@@ -94,13 +115,21 @@ class Campaign < ApplicationRecord
   def ensure_correct_campaign_attributes
     return if inbox.blank?
 
-    if ['Twilio SMS', 'Sms'].include?(inbox.inbox_type)
+    # Verificar o tipo de canal ao invés do tipo de inbox
+    channel_type = inbox.channel.class.name
+
+    if ['Channel::TwilioSms', 'Channel::Sms'].include?(channel_type)
       self.campaign_type = 'one_off'
       self.scheduled_at ||= Time.now.utc
+    elsif channel_type == 'Channel::Whatsapp' && scheduled_at.present?
+      # Se for WhatsApp e tiver data de agendamento, também será one_off
+      self.campaign_type = 'one_off'
     else
       self.campaign_type = 'ongoing'
       self.scheduled_at = nil
     end
+
+    Rails.logger.info("Campanha ##{id || 'nova'} configurada: tipo=#{campaign_type}, agendamento=#{scheduled_at}, canal=#{channel_type}")
   end
 
   def validate_url
