@@ -1,50 +1,88 @@
-class Api::V1::Accounts::CampaignsController < Api::V1::Accounts::BaseController
-  before_action :fetch_campaign, except: [:index, :create]
-  before_action :check_authorization
+module Api
+  module V1
+    module Accounts
+      class CampaignsController < Api::V1::Accounts::BaseController
+        before_action :fetch_campaign, except: [:index, :create]
+        before_action :check_authorization
 
-  def index
-    @campaigns = Current.account.campaigns
-  end
+        def index
+          @campaigns = Current.account.campaigns
+          @campaigns = @campaigns.where(campaign_type: params[:campaign_type]) if params[:campaign_type].present?
+          @campaigns = @campaigns.order(created_at: :desc)
+        end
 
-  def show; end
+        def create
+          # Processar template_params diretamente se estiver presente
+          if permitted_params[:template_params].present?
+            @campaign = Current.account.campaigns.new(permitted_params.except(:template_params))
+            @campaign.template_params = permitted_params[:template_params]
+          else
+            @campaign = Current.account.campaigns.new(permitted_params)
+          end
 
-  def create
-    # Adicionar logs para debugar
-    Campaigns::LoggerService.log_campaign_creation(campaign_params)
+          if @campaign.save
+            render json: @campaign
+          else
+            render json: { error: @campaign.errors.messages }.to_json, status: :unprocessable_entity
+          end
+        end
 
-    begin
-      ActiveRecord::Base.transaction do
-        @campaign = Current.account.campaigns.create!(campaign_params)
-        @campaign.file.attach(params[:file]) if params[:file].present?
+        def show
+          render json: @campaign
+        end
+
+        def update
+          # Processar template_params diretamente se estiver presente
+          if permitted_params[:template_params].present?
+            if @campaign.update(permitted_params.except(:template_params))
+              @campaign.update_column(:template_params, permitted_params[:template_params])
+              render json: @campaign
+            else
+              render json: { error: @campaign.errors.messages }.to_json, status: :unprocessable_entity
+            end
+          else
+            if @campaign.update(permitted_params)
+              render json: @campaign
+            else
+              render json: { error: @campaign.errors.messages }.to_json, status: :unprocessable_entity
+            end
+          end
+        end
+
+        def destroy
+          @campaign.destroy!
+          head :ok
+        end
+
+        private
+
+        def fetch_campaign
+          @campaign = Current.account.campaigns.find(params[:id])
+        end
+
+        def check_authorization
+          authorize(Campaign)
+        end
+
+        def permitted_params
+          # Adicione template_params à lista de parâmetros permitidos
+          params.permit(
+            :title,
+            :description,
+            :sender_id,
+            :message,
+            :enabled,
+            :inbox_id,
+            :scheduled_at,
+            :campaign_type,
+            :campaign_status,
+            :trigger_only_during_business_hours,
+            audience: [:id, :type],
+            trigger_rules: {},
+            template_params: {}
+          )
+        end
       end
-    rescue => e
-      Campaigns::LoggerService.log_campaign_error(e)
-      render_could_not_create_error(e.message)
     end
-  end
-
-  def update
-    @campaign.update!(campaign_params)
-  end
-
-  def destroy
-    @campaign.destroy!
-    head :ok
-  end
-
-  private
-
-  def fetch_campaign
-    @campaign ||= Current.account.campaigns.find_by(display_id: params[:id])
-  end
-
-  def campaign_params
-    # Logando os parâmetros puros para identificar qualquer problema
-    Rails.logger.info("Parâmetros brutos recebidos: #{params.inspect}")
-
-    params.permit(
-      :title, :description, :message, :sender_id, :inbox_id, :scheduled_at, :campaign_type, :tag_ids, :audience_size, :enabled, :trigger_rules,
-      audience: [:id, :type]
-    )
   end
 end

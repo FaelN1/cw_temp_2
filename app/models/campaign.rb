@@ -35,7 +35,6 @@ class Campaign < ApplicationRecord
   validates :title, presence: true
 
   # Alterando a validação para verificar se template_params está presente no hash de params
-  # durante a criação/atualização, em vez de verificar a coluna já salva
   validate :message_or_template_params_present
   validate :validate_campaign_inbox
   validate :validate_url
@@ -50,7 +49,15 @@ class Campaign < ApplicationRecord
 
   has_many :conversations, dependent: :nullify, autosave: true
 
+  # Adicionar additional_attributes como atributo serializável
+  store :additional_attributes, accessor: [:template_params], coder: JSON
+
+  # Adicionar atributo virtual para o template_params enviado diretamente na API
+  attr_accessor :direct_template_params
+
   before_validation :ensure_correct_campaign_attributes
+  before_validation :move_direct_template_params_to_additional_attributes
+  before_validation :check_template_params
   after_commit :set_display_id, unless: :display_id?
 
   def trigger!
@@ -81,12 +88,69 @@ class Campaign < ApplicationRecord
 
   private
 
-  # Corrigimos o método message_or_template_params_present para verificar template_params corretamente
-  def message_or_template_params_present
-    # Não deve exigir mensagem se template_params estiver presente
-    if template_params.blank? || template_params.empty?
-      errors.add(:message, :blank) if message.blank?
+  # Callback para mover template_params direto da API para o additional_attributes
+  def move_direct_template_params_to_additional_attributes
+    Rails.logger.info "==== Processando template_params direto ===="
+    Rails.logger.info "template_params attribute direto: #{direct_template_params.inspect}"
+    Rails.logger.info "Template params da tabela: #{attributes['template_params'].inspect}"
+
+    # Verificar se temos dados de template_params enviados diretamente
+    if direct_template_params.present?
+      Rails.logger.info "Movendo template_params direto para additional_attributes"
+      self.additional_attributes ||= {}
+      self.additional_attributes['template_params'] = direct_template_params
+    elsif attributes['template_params'].present? && attributes['template_params'].is_a?(Hash) && attributes['template_params'] != {}
+      # Se o template_params estiver na tabela (como coluna separada), mover para additional_attributes
+      Rails.logger.info "Movendo template_params da tabela para additional_attributes"
+      self.additional_attributes ||= {}
+      self.additional_attributes['template_params'] = attributes['template_params']
     end
+
+    Rails.logger.info "Additional attributes após processamento: #{additional_attributes.inspect}"
+  end
+
+  # Log adicional para ver estado atual dos template_params
+  def check_template_params
+    Rails.logger.info "Check de template_params antes de salvar:"
+    Rails.logger.info "additional_attributes: #{additional_attributes.inspect}"
+    if additional_attributes.present?
+      Rails.logger.info "template_params em additional_attributes: #{additional_attributes['template_params'].inspect}"
+    end
+  end
+
+  # Corrigido o método message_or_template_params_present para verificar template_params corretamente
+  def message_or_template_params_present
+    Rails.logger.info "Validando campanha #{id}: message=#{message.inspect}"
+    Rails.logger.info "Validando campanha #{id}: additional_attributes=#{additional_attributes.inspect}"
+    Rails.logger.info "Validando campanha #{id}: direct_template_params=#{direct_template_params.inspect}"
+    Rails.logger.info "Validando campanha #{id}: atributo template_params=#{attributes['template_params'].inspect}"
+
+    has_template = false
+    if additional_attributes.present?
+      template_params_str = additional_attributes['template_params']
+      template_params_sym = additional_attributes[:template_params]
+
+      Rails.logger.info "template_params como string: #{template_params_str.inspect}"
+      Rails.logger.info "template_params como símbolo: #{template_params_sym.inspect}"
+
+      has_template = template_params_str.present? || template_params_sym.present?
+    end
+
+    # Verificar também se temos direct_template_params
+    has_template ||= direct_template_params.present?
+    # Verificar se temos na coluna da tabela
+    has_template ||= (attributes['template_params'].present? && attributes['template_params'].is_a?(Hash) && attributes['template_params'] != {})
+
+    has_message = message.present?
+
+    Rails.logger.info "Resultado validação: has_message=#{has_message}, has_template=#{has_template}"
+
+    # Se alguma das condições for verdadeira, a validação passa
+    return true if has_template || has_message
+
+    # Se chegou aqui, não tem nem mensagem nem template
+    errors.add(:message, :blank)
+    false
   end
 
   def set_display_id

@@ -26,4 +26,16 @@ class AccountPolicy < ApplicationPolicy
   def checkout?
     @account_user.administrator?
   end
+
+  def administrator?
+    @account_user.administrator?
+  end
+
+  # Alias para manter compatibilidade se necessário
+  alias_method :admin?, :administrator?
+
+  # Método específico para gerenciamento de campanhas
+  def manage_campaigns?
+    administrator?
+  end
 end

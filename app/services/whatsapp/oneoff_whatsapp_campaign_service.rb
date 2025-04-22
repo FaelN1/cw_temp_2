@@ -19,8 +19,32 @@ module Whatsapp
         raise 'Campanha já concluída'
       end
 
+      # LOGS DETALHADOS PARA DEPURAÇÃO
+      Rails.logger.info "============= DEPURAÇÃO DA CAMPANHA #{campaign.id} ============="
+      Rails.logger.info "Mensagem: #{campaign.message.inspect}"
+      Rails.logger.info "template_params: #{campaign.template_params.inspect}"
+      Rails.logger.info "template_params class: #{campaign.template_params.class}"
+
+      # Verificar se a campanha tem template_params ou mensagem
+      has_template = false
+      if campaign.template_params.present?
+        has_template = true
+        Rails.logger.info "has_template: #{has_template}, template_params: #{campaign.template_params.inspect}"
+      end
+
+      has_message = campaign.message.present?
+      Rails.logger.info "has_message: #{has_message}"
+
+      # Validar se há ao menos uma forma válida de mensagem
+      unless has_template || has_message
+        Rails.logger.error "ERRO DE VALIDAÇÃO: Campanha #{campaign.id} sem mensagem (#{has_message}) e sem template (#{has_template})"
+        raise 'Campanha sem mensagem ou template'
+      end
+
       # Marca a campanha como concluída para que outros jobs não a processem
-      campaign.completed!
+      # Usamos update_column para evitar validações neste momento
+      campaign.update_column(:campaign_status, 'completed')
+      Rails.logger.info "Campanha #{campaign.id} marcada como concluída"
 
       # Obtém as etiquetas da audiência
       audience_label_ids = campaign.audience.select { |audience| audience['type'] == 'Label' }.pluck('id')
@@ -79,8 +103,8 @@ module Whatsapp
           if campaign.inbox.channel_type == 'Channel::Api'
             send_text_message(contact)
           else
-            # Para outros canais (ex: WhatsApp) verificar se tem template
-            if campaign.respond_to?(:message_template) && campaign.message_template.present?
+            # Para WhatsApp verificar se tem template_params
+            if campaign.template_params.present?
               send_template_message(contact)
             else
               send_text_message(contact)
@@ -103,19 +127,30 @@ module Whatsapp
 
       conversation = find_or_create_conversation(contact_inbox)
 
-      # Corrigido: combinando todos os parâmetros em um único hash (3º argumento)
-      message = Messages::MessageBuilder.new(
-        campaign.sender || campaign.inbox.account.agents.first, # 1º argumento: usuário
-        conversation,                                           # 2º argumento: conversa
-        {                                                       # 3º argumento: parâmetros
-          message_type: :outgoing,
-          content: campaign.message_template.content,
-          template: campaign.message_template,
-          template_params: campaign.message_template.try(:template_params)
-        }
-      ).perform
+      # Utilizar campaign.template_params diretamente
+      template_params = campaign.template_params
 
-      Rails.logger.info "Template enviado para #{contact.phone_number}, mensagem ##{message.id}"
+      # Processar template_params se for uma string JSON
+      if template_params.is_a?(String)
+        template_params = JSON.parse(template_params) rescue {}
+      end
+
+      Rails.logger.info "Template params: #{template_params.inspect}"
+
+      # Criar a mensagem com os parâmetros de template configurados diretamente no additional_attributes
+      message = conversation.messages.create!(
+        account_id: conversation.account_id,
+        inbox_id: conversation.inbox_id,
+        message_type: 'outgoing',
+        content: template_params['name'] || '', # Nome do template como conteúdo
+        sender: campaign.sender || campaign.inbox.account.agents.first,
+        additional_attributes: {
+          template_params: template_params,
+          campaign_id: campaign.id
+        }
+      )
+
+      Rails.logger.info "Template enviado para #{contact.phone_number}, mensagem ##{message.id}, template_params: #{template_params}"
       message
     end
 
@@ -125,15 +160,15 @@ module Whatsapp
 
       conversation = find_or_create_conversation(contact_inbox)
 
-      # Corrigido: combinando todos os parâmetros em um único hash (3º argumento)
-      message = Messages::MessageBuilder.new(
-        campaign.sender || campaign.inbox.account.agents.first, # 1º argumento: usuário
-        conversation,                                           # 2º argumento: conversa
-        {                                                       # 3º argumento: parâmetros
-          message_type: :outgoing,
-          content: campaign.message
-        }
-      ).perform
+      # Criar a mensagem diretamente para evitar problemas com o MessageBuilder
+      message = conversation.messages.create!(
+        account_id: conversation.account_id,
+        inbox_id: conversation.inbox_id,
+        message_type: 'outgoing',
+        content: campaign.message,
+        sender: campaign.sender || campaign.inbox.account.agents.first,
+        additional_attributes: { campaign_id: campaign.id }
+      )
 
       Rails.logger.info "Mensagem enviada para #{contact.phone_number}, mensagem ##{message.id}"
       message
@@ -176,9 +211,17 @@ module Whatsapp
     end
 
     def generate_source_id(contact)
-      # Remove caracteres não numéricos do telefone para usar como source_id
-      phone_digits = contact.phone_number.gsub(/[^\d]/, '')
-      "#{phone_digits}#{rand(1000..9999)}"
+      # Para WhatsApp, o source_id precisa ser um número puro (apenas dígitos)
+      # Não podemos usar letras ou caracteres especiais
+      if campaign.inbox.channel_type == 'Channel::Whatsapp'
+        # Extrair apenas os dígitos do número de telefone
+        phone_digits = contact.phone_number.gsub(/[^\d]/, '')
+        return phone_digits
+      else
+        # Para outros canais, podemos usar um formato mais complexo
+        phone_digits = contact.phone_number.gsub(/[^\d]/, '')
+        return "#{phone_digits}#{rand(1000..9999)}"
+      end
     end
   end
 end

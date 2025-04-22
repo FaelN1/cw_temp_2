@@ -53,8 +53,12 @@ export default {
         return false;
       }
 
+      // Se não houver configuração específica de fuso horário, usar o de Brasília (UTC-3)
+      const defaultTimezone = -3; // UTC-3 para Brasília
       const { utcOffset } = this.channelConfig;
-      const today = this.getDateWithOffset(utcOffset);
+      const timezoneOffset = utcOffset !== undefined ? utcOffset : defaultTimezone;
+      
+      const today = this.getDateWithOffset(timezoneOffset);
       const currentHours = today.getHours();
       const currentMinutes = today.getMinutes();
       const isAfterStartTime = isTimeAfter(

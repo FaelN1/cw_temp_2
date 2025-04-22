@@ -96,6 +96,7 @@ class Whatsapp::SendOnWhatsappService < Base::SendOnChannelService
     message.update!(source_id: message_id) if message_id.present?
   end
 
+  # Método inalterado para manter compatibilidade
   def template_params
     message.additional_attributes && message.additional_attributes['template_params']
   end

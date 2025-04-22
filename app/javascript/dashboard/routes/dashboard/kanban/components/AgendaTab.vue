@@ -219,6 +219,7 @@ const changeMonth = direction => {
 const formatDate = (date, options = { month: 'long', year: 'numeric' }) => {
   return new Intl.DateTimeFormat('pt-BR', {
     ...options,
+    timeZone: 'America/Sao_Paulo', // Forçar uso do fuso horário de Brasília
   }).format(date);
 };
 

@@ -42,6 +42,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  templateParams: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 const emit = defineEmits(['edit', 'delete']);
@@ -79,6 +83,35 @@ const inboxIcon = computed(() => {
   const { phone_number: phoneNumber, channel_type: type } = props.inbox;
   return getInboxIconByType(type, phoneNumber);
 });
+
+// Novo computed para mostrar o template ou a mensagem
+const displayContent = computed(() => {
+  if (props.message && props.message.trim()) {
+    return props.message;
+  }
+  
+  // Se não houver mensagem, mas houver template_params
+  if (props.templateParams?.name) {
+    let templateName = props.templateParams.name;
+    let params = '';
+    
+    // Obter os parâmetros formatados, se houver
+    if (props.templateParams.processed_params) {
+      params = Object.entries(props.templateParams.processed_params)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join(', ');
+    }
+    
+    return `Template: ${templateName}${params ? ` (${params})` : ''}`;
+  }
+  
+  return '';
+});
+
+// Indica se a campanha usa template
+const isTemplateMessage = computed(() => {
+  return !props.message && Object.keys(props.templateParams || {}).length > 0;
+});
 </script>
 
 <template>
@@ -98,8 +131,9 @@ const inboxIcon = computed(() => {
         </span>
       </div>
       <div
-        v-dompurify-html="formatMessage(message)"
+        v-dompurify-html="formatMessage(displayContent)"
         class="text-sm text-n-slate-11 line-clamp-1 [&>p]:mb-0 h-6"
+        :class="{ 'text-n-emerald-10': isTemplateMessage }"
       />
       <div class="flex items-center w-full h-6 gap-2 overflow-hidden">
         <LiveChatCampaignDetails
