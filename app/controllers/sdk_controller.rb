@@ -1,5 +1,7 @@
 class SdkController < ApplicationController
-  skip_before_action :authenticate_user!
+  # Remova ou modifique a linha skip_before_action :authenticate_user!
+  # Por exemplo, se o controlador realmente não precisa de autenticação:
+  # skip_before_action :authenticate_user!, if: -> { respond_to?(:authenticate_user!) }
   skip_before_action :verify_authenticity_token
 
   def index
