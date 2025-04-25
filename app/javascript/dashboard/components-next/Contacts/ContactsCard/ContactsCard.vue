@@ -139,6 +139,7 @@ const onClickViewDetails = () => emit('showContact', props.id);
             :label="t('CONTACTS_LAYOUT.CARD.VIEW_DETAILS')"
             variant="link"
             size="xs"
+            class="text-woot-400 hover:bg-woot-400/10 focus:bg-woot-400/20 active:bg-woot-400/20"
             @click="onClickViewDetails"
           />
         </div>

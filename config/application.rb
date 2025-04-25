@@ -40,7 +40,7 @@ module Chatwoot
 
     # Define o fuso horário padrão para Brasília (UTC-3)
     config.time_zone = 'America/Sao_Paulo'
-    config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :utc
 
     config.eager_load_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('enterprise/lib')

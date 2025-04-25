@@ -98,8 +98,8 @@ const redo = () => {
         <button
           class="control-button"
           :disabled="!canUndo"
-          @click="undo"
           title="Desfazer"
+          @click="undo"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -112,15 +112,15 @@ const redo = () => {
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M3 10h10a6 6 0 0 1 0 12H8"></path>
-            <path d="M7 10L3 6l4-4"></path>
+            <path d="M3 10h10a6 6 0 0 1 0 12H8" />
+            <path d="M7 10L3 6l4-4" />
           </svg>
         </button>
         <button
           class="control-button"
           :disabled="!canRedo"
-          @click="redo"
           title="Refazer"
+          @click="redo"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -133,8 +133,8 @@ const redo = () => {
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M21 10h-10a6 6 0 0 0 0 12h5"></path>
-            <path d="M17 10l4-4-4-4"></path>
+            <path d="M21 10h-10a6 6 0 0 0 0 12h5" />
+            <path d="M17 10l4-4-4-4" />
           </svg>
         </button>
       </div>
@@ -144,8 +144,8 @@ const redo = () => {
     <div class="quick-actions">
       <button
         class="quick-action-button trigger-button"
-        @click="addNodeToFlow(categories[0], 'item_created')"
         title="Adicionar Trigger: Item Criado"
+        @click="addNodeToFlow(categories[0], 'item_created')"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -158,14 +158,14 @@ const redo = () => {
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
         </svg>
         <span>Item Criado</span>
       </button>
       <button
         class="quick-action-button action-button"
-        @click="addNodeToFlow(categories[2], 'send_message')"
         title="Adicionar Ação: Enviar Mensagem"
+        @click="addNodeToFlow(categories[2], 'send_message')"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -178,15 +178,15 @@ const redo = () => {
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <path d="M22 2L11 13"></path>
-          <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+          <path d="M22 2L11 13" />
+          <path d="M22 2l-7 20-4-9-9-4 20-7z" />
         </svg>
         <span>Enviar Mensagem</span>
       </button>
       <button
         class="quick-action-button condition-button"
-        @click="addNodeToFlow(categories[1], 'status_equals')"
         title="Adicionar Condição: Status Igual"
+        @click="addNodeToFlow(categories[1], 'status_equals')"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +199,7 @@ const redo = () => {
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <path d="M6 9l6 6 6-6"></path>
+          <path d="M6 9l6 6 6-6" />
         </svg>
         <span>Verificar Status</span>
       </button>
@@ -216,8 +216,8 @@ const redo = () => {
       >
         <div
           class="category-header"
-          @click="toggleCategory(category.id)"
           :class="{ active: selectedCategory === category.id }"
+          @click="toggleCategory(category.id)"
         >
           <div class="category-icon-wrapper" :class="category.id">
             <!-- Disparadores (Trigger) -->
@@ -233,7 +233,7 @@ const redo = () => {
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
             </svg>
 
             <!-- Condições (Condition) -->
@@ -249,7 +249,7 @@ const redo = () => {
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path d="M6 9l6 6 6-6"></path>
+              <path d="M6 9l6 6 6-6" />
             </svg>
 
             <!-- Ações (Action) -->
@@ -265,9 +265,7 @@ const redo = () => {
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <polygon
-                points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-              ></polygon>
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
             </svg>
           </div>
 
@@ -286,7 +284,7 @@ const redo = () => {
             class="expand-icon"
             :class="{ expanded: selectedCategory === category.id }"
           >
-            <polyline points="6 9 12 15 18 9"></polyline>
+            <polyline points="6 9 12 15 18 9" />
           </svg>
         </div>
 
@@ -315,8 +313,8 @@ const redo = () => {
               stroke-linejoin="round"
               class="add-icon"
             >
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
           </div>
         </div>
@@ -373,8 +371,7 @@ const redo = () => {
     }
 
     &.condition-button {
-      @apply bg-purple-100 dark:bg-purple-900/30 text-purple-900 dark:text-purple-100
-        hover:bg-purple-200 dark:hover:bg-purple-800/40;
+      @apply bg-woot-400 dark:bg-woot-400 text-purple-900 dark:text-purple-100;
 
       svg {
         @apply text-purple-700 dark:text-purple-400;
@@ -382,8 +379,7 @@ const redo = () => {
     }
 
     &.action-button {
-      @apply bg-woot-100 dark:bg-woot-900/30 text-woot-900 dark:text-woot-100
-        hover:bg-woot-200 dark:hover:bg-woot-800/40;
+      @apply bg-woot-400 dark:bg-woot-400 text-woot-900 dark:text-woot-100;
 
       svg {
         @apply text-woot-700 dark:text-woot-400;

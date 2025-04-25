@@ -1316,7 +1316,7 @@ watch(
                             option.id === 'urgent',
                           'border-orange-200 bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400 hover:bg-orange-200 dark:hover:bg-orange-900/50':
                             option.id === 'high',
-                          'border-yellow-200 bg-yellow-100 text-[#996b00] dark:bg-yellow-900/30 dark:text-yellow-600 hover:bg-yellow-200 dark:hover:bg-yellow-900/50':
+                          'border-yellow-200 bg-woot-110 text-[#996b00] dark:bg-yellow-900/30 dark:text-yellow-600 hover:bg-yellow-200 dark:hover:bg-yellow-900/50':
                             option.id === 'medium',
                           'border-green-200 bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-900/50':
                             option.id === 'low',

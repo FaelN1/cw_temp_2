@@ -73,10 +73,27 @@ export const actions = {
   },
   create: async function createCampaign({ commit }, campaignObj) {
     console.log('=== INICIANDO CRIAÇÃO DE CAMPANHA ===');
-    console.log('Payload de entrada:', campaignObj);
+    // Log inicial do objeto recebido (pode ser FormData ou objeto normal)
+    console.log(
+      'Payload de entrada (tipo):',
+      campaignObj instanceof FormData ? 'FormData' : 'Object'
+    );
+
+    // Se for FormData, logar suas entradas
+    if (campaignObj instanceof FormData) {
+      console.log('Conteúdo do FormData:');
+      Array.from(campaignObj.entries()).forEach(([key, value]) => {
+        console.log(`  ${key}:`, value);
+      });
+    } else {
+      // Se for um objeto normal, logar como antes
+      console.log('Payload de entrada (objeto):', campaignObj);
+    }
+
     commit(types.SET_CAMPAIGN_UI_FLAG, { isCreating: true });
     try {
       console.log('Enviando requisição para a API...');
+      // Modificar a chamada da API para passar o objeto correto
       const response = await CampaignsAPI.create(campaignObj);
       console.log('Resposta da API:', response);
       console.log('Dados da campanha criada:', response.data);

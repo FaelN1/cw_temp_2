@@ -335,7 +335,6 @@ const sendMessage = async () => {
   if (!inputMessage.value.trim() || isLoading.value) return;
 
   // Send telemetry for message sent
-  await sendTelemetryEvent('message_sent', { message: inputMessage.value });
 
   // Verifica configuração OpenAI...
   if (!openAIConfig.value) {
@@ -429,7 +428,6 @@ const sendMessage = async () => {
 // Nova função para lidar com a seleção da fonte
 const handleSourceSelection = async source => {
   // Send telemetry for source selection
-  await sendTelemetryEvent('source_selected', { source });
 
   showSourceSelector.value = false;
   selectedSource.value = source;
@@ -480,10 +478,6 @@ const handleSourceSelection = async source => {
 // Nova função para selecionar pipeline
 const handleFunnelSelection = async funnel => {
   // Send telemetry for funnel selection
-  await sendTelemetryEvent('funnel_selected', {
-    funnel_id: funnel.id,
-    funnel_name: funnel.name,
-  });
 
   selectedFunnel.value = funnel;
   showFunnelSelector.value = false;
@@ -551,7 +545,6 @@ const quickPrompts = [
 
 const handleQuickAction = async action => {
   // Send telemetry for quick action
-  await sendTelemetryEvent('quick_action_used', { action_id: action.id });
 
   if (action.action === 'generate_items') {
     await fetchFunnels();
@@ -1010,48 +1003,6 @@ const confirmChanges = async () => {
   }
 };
 
-const sendTelemetryEvent = async (eventName, eventData = {}) => {
-  try {
-    const baseUrl = 'https://api.os.stacklab.digital/api';
-    const eventsUrl = `${baseUrl}/events`;
-    const installationData = {
-      installation_identifier:
-        window.installationConfig?.installationIdentifier ||
-        store.state.globalConfig.installationIdentifier,
-      installation_version:
-        window.installationConfig?.version || store.state.globalConfig.version,
-      installation_host: window.location.hostname,
-      installation_env: process.env.NODE_ENV,
-      edition:
-        window.installationConfig?.edition || store.state.globalConfig.edition,
-      account_id: accountId,
-      user_id: store.state.auth.currentUser?.id,
-      user_role: store.state.auth.currentUser?.role,
-    };
-
-    const info = {
-      event_name: `kanban_ai_${eventName}`,
-      event_data: {
-        ...eventData,
-        ...installationData,
-        component: 'KanbanAI',
-        timestamp: new Date().toISOString(),
-      },
-    };
-
-    await fetch(eventsUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(info),
-    });
-  } catch (error) {
-    // Silently fail to not disrupt user experience
-    console.error('Telemetry error:', error);
-  }
-};
 </script>
 
 <template>
@@ -1844,7 +1795,7 @@ const sendTelemetryEvent = async (eventName, eventData = {}) => {
 
 .coming-soon-badge {
   @apply inline-flex px-2 py-0.5 text-[9px] font-medium rounded-full
-    bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200
+    bg-woot-110 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-200
     self-start;
 }
 

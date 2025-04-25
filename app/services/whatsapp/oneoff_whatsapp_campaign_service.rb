@@ -24,6 +24,7 @@ module Whatsapp
       Rails.logger.info "Mensagem: #{campaign.message.inspect}"
       Rails.logger.info "template_params: #{campaign.template_params.inspect}"
       Rails.logger.info "template_params class: #{campaign.template_params.class}"
+      Rails.logger.info "Arquivo: #{campaign.attachments.first.inspect}"
 
       # Verificar se a campanha tem template_params ou mensagem
       has_template = false

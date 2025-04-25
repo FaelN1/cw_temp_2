@@ -331,8 +331,8 @@ export default {
       <woot-button
         v-if="!isOnPrivateNote"
         icon="calendar-clock"
-        color-scheme="primary"
-        variant="outline"
+        color-scheme="secondary"
+        variant="smooth"
         size="small"
         @click="$emit('openScheduleModal')"
       />
@@ -382,7 +382,8 @@ export default {
     <div class="right-wrap">
       <woot-button
         size="small"
-        :class-names="buttonClass"
+        class-names="send-button"
+        :class-names="[buttonClass, 'send-button']"
         :is-disabled="isSendDisabled"
         @click="onSend"
       >
@@ -397,7 +398,7 @@ export default {
   @apply flex justify-between py-3 px-4;
 
   &.is-note-mode {
-    @apply bg-yellow-100 dark:bg-yellow-800;
+    @apply bg-woot-110 dark:bg-woot-120;
   }
 }
 

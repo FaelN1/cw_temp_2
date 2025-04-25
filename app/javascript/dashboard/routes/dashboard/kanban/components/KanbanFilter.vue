@@ -73,7 +73,7 @@ const priorityOptions = computed(() => [
         : 'text-slate-700 dark:text-slate-300',
       hover: 'hover:bg-slate-100 dark:hover:bg-slate-700',
       selected:
-        'bg-yellow-50 dark:bg-yellow-800 border-yellow-500 dark:border-yellow-400',
+        'bg-yellow-50 dark:bg-woot-120 border-yellow-500 dark:border-yellow-400',
     },
   },
   {

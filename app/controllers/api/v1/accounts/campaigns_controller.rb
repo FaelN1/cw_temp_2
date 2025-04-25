@@ -12,53 +12,66 @@ module Api
         end
 
         def create
-          # Remover attachment dos parâmetros permitidos
-          campaign_params = permitted_params.except(:attachment)
+          # Usar um método de permissão específico para 'create' que permite audience/template_params como string
+          raw_params = permitted_params_for_create
+          attachment = raw_params[:attachment] # Guardar o anexo
 
-          # Processar audience como JSON se vier como string
-          if campaign_params[:audience].is_a?(String)
-            campaign_params[:audience] = JSON.parse(campaign_params[:audience])
-          end
+          # Preparar atributos para Campaign.new, excluindo o anexo por enquanto
+          campaign_attributes = raw_params.except(:attachment)
 
-          # Processar template_params se presente
-          if campaign_params[:template_params].present?
-            if campaign_params[:template_params].is_a?(String)
-              campaign_params[:template_params] = JSON.parse(campaign_params[:template_params])
+          # Processar audience: parse se for string JSON
+          if campaign_attributes[:audience].is_a?(String)
+            begin
+              parsed_audience = JSON.parse(campaign_attributes[:audience])
+              # Garantir que seja um array após o parse
+              campaign_attributes[:audience] = parsed_audience.is_a?(Array) ? parsed_audience : nil
+            rescue JSON::ParserError
+              # Lidar com JSON inválido (ex: definir como nil ou adicionar erro)
+              @campaign = Campaign.new # Criar um objeto para adicionar erros
+              @campaign.errors.add(:audience, :invalid_json)
+              render json: { error: @campaign.errors.full_messages.to_sentence }, status: :unprocessable_entity and return
             end
-            template_params = campaign_params.delete(:template_params)
           end
 
-          # Criar campanha sem o anexo
-          @campaign = Current.account.campaigns.new(campaign_params)
-
-          # Adicionar template_params se presentes
-          if template_params.present?
-            @campaign.template_params = template_params
+          # Processar template_params: parse se for string JSON
+          if campaign_attributes[:template_params].is_a?(String)
+            begin
+              parsed_template_params = JSON.parse(campaign_attributes[:template_params])
+              campaign_attributes[:template_params] = parsed_template_params.is_a?(Hash) ? parsed_template_params : nil
+            rescue JSON::ParserError
+              @campaign = Campaign.new
+              @campaign.errors.add(:template_params, :invalid_json)
+              render json: { error: @campaign.errors.full_messages.to_sentence }, status: :unprocessable_entity and return
+            end
           end
 
-          # Processar o anexo, se presente
-          if params[:attachment].present?
+          # Inicializar a campanha com os atributos processados
+          @campaign = Current.account.campaigns.new(campaign_attributes)
+
+          # Lógica para salvar com ou sem anexo
+          if attachment.present?
             # Flag para usar o texto como caption do anexo
             @campaign.additional_attributes ||= {}
             @campaign.additional_attributes['use_message_as_attachment_caption'] = true
 
             if @campaign.save
               # Criar o anexo após salvar a campanha
-              @attachment = @campaign.attachments.create!(
+              @campaign.attachments.create!(
                 account_id: Current.account.id,
-                file_type: detect_file_type(params[:attachment]),
-                file: params[:attachment]
+                file_type: detect_file_type(attachment),
+                file: attachment
               )
               render json: @campaign
             else
-              render json: { error: @campaign.errors.messages }.to_json, status: :unprocessable_entity
+              # Usar full_messages para erros mais claros
+              render json: { error: @campaign.errors.full_messages.to_sentence }, status: :unprocessable_entity
             end
           else
             # Sem anexo, apenas salvar a campanha normalmente
             if @campaign.save
               render json: @campaign
             else
-              render json: { error: @campaign.errors.messages }.to_json, status: :unprocessable_entity
+              render json: { error: @campaign.errors.full_messages.to_sentence }, status: :unprocessable_entity
             end
           end
         end
@@ -118,23 +131,30 @@ module Api
           authorize(Campaign)
         end
 
+        # Método de permissão original (pode ser usado para update ou refatorado)
         def permitted_params
-          # Adicione attachment à lista de parâmetros permitidos
           params.permit(
-            :title,
-            :description,
-            :sender_id,
-            :message,
-            :enabled,
-            :inbox_id,
-            :scheduled_at,
-            :campaign_type,
-            :campaign_status,
+            :title, :description, :sender_id, :message, :enabled, :inbox_id,
+            :scheduled_at, :campaign_type, :campaign_status,
             :trigger_only_during_business_hours,
             :attachment,
-            audience: [:id, :type],
+            audience: [:id, :type], # Permite array de hashes (JSON normal)
             trigger_rules: {},
-            template_params: {}
+            template_params: {} # Permite hash (JSON normal)
+          )
+        end
+
+        # Novo método de permissão específico para 'create' com FormData
+        def permitted_params_for_create
+          params.permit(
+            :title, :description, :sender_id, :message, :enabled, :inbox_id,
+            :scheduled_at, :campaign_type, :campaign_status,
+            :trigger_only_during_business_hours,
+            :attachment,
+            :audience, # Permite audience como escalar (string)
+            :template_params # Permite template_params como escalar (string)
+            # trigger_rules ainda precisa ser hash, se aplicável
+            # trigger_rules: {}
           )
         end
 

@@ -119,7 +119,7 @@ export default {
           v-tooltip.right-start="$t('SIDEBAR.SET_AUTO_OFFLINE.INFO_TEXT')"
           icon="info"
           size="14"
-          class="mt-px"
+          class="mt-px text-woot-400"
         />
 
         <span

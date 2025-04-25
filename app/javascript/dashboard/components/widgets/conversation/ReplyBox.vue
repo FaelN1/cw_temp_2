@@ -1271,13 +1271,13 @@ export default {
   }
 
   &.is-private {
-    @apply bg-yellow-100 dark:bg-yellow-800;
+    @apply bg-woot-110 dark:bg-woot-120;
 
     .reply-box__top {
-      @apply bg-yellow-100 dark:bg-yellow-800;
+      @apply bg-woot-110 dark:bg-woot-120;
 
       > input {
-        @apply bg-yellow-100 dark:bg-yellow-800;
+        @apply bg-woot-110 dark:bg-woot-120;
       }
     }
   }

@@ -42,11 +42,11 @@ export default {
 @tailwind components;
 @layer components {
   .avatar-color {
-    background-image: linear-gradient(to top, #c2e1ff 0%, #d6ebff 100%);
+    background-image: linear-gradient(to top, #a02503 0%, #a02503 100%);
   }
 
   .dark-avatar-color {
-    background-image: linear-gradient(to top, #135899 0%, #135899 100%);
+    background-image: linear-gradient(to top, #a02503 0%, #a02503 100%);
   }
 }
 .avatar-container {

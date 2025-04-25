@@ -3,8 +3,8 @@ require 'uri'
 require 'json'
 
 class Api::V1::Accounts::ProxifierController < Api::V1::Accounts::BaseController
-  # EVOLUTION_SERVER = 'https://api.salez.com.br' # URL fixa
-  EVOLUTION_SERVER = 'http://localhost:8080' # URL fixa
+  EVOLUTION_SERVER = 'https://api.salez.com.br' # URL fixa
+  # EVOLUTION_SERVER = 'http://localhost:8080' # URL fixa
   EVOLUTION_APIKEY = '429683C4C977415CAAFCCE10F7D57333' # Token fixo
 
 

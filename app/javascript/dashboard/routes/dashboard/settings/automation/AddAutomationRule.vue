@@ -245,8 +245,7 @@ export default {
             <div class="mt-4">
               <woot-button
                 icon="add"
-                color-scheme="success"
-                variant="smooth"
+                class="bg-woot-400 text-white"
                 size="small"
                 @click="appendNewCondition"
               >
@@ -289,8 +288,7 @@ export default {
             <div class="mt-4">
               <woot-button
                 icon="add"
-                color-scheme="success"
-                variant="smooth"
+                class="bg-woot-400 text-white"
                 size="small"
                 @click="appendNewAction"
               >

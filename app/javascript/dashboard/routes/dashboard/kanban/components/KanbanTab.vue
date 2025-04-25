@@ -228,6 +228,11 @@ const handleItemEdited = async item => {
 
 // Computed
 const userHasAccess = computed(() => {
+  // Retornar true para desenvolvimento
+  return true;
+
+  // Código original comentado:
+  /*
   const currentUser = store.getters.getCurrentUser;
   const currentFunnel = store.getters['funnel/getSelectedFunnel'];
 
@@ -237,6 +242,7 @@ const userHasAccess = computed(() => {
   return currentFunnel.settings?.agents?.some(
     agent => agent.id === currentUser.id
   );
+  */
 });
 
 // Computed para filtrar os itens baseado na busca e nos filtros

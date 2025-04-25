@@ -41,6 +41,7 @@ const defaultChartOptions = {
   datasets: {
     bar: {
       barPercentage: 1.0,
+      backgroundColor: '#ff3900', // woot 500
     },
   },
   scales: {

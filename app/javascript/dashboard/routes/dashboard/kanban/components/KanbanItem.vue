@@ -72,7 +72,7 @@ const priorityInfo = computed(() => {
     medium: {
       label: t('KANBAN.PRIORITY_LABELS.MEDIUM'),
       class:
-        'bg-yellow-50 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-50',
+        'bg-yellow-50 dark:bg-woot-120 text-yellow-800 dark:text-yellow-50',
     },
     low: {
       label: t('KANBAN.PRIORITY_LABELS.LOW'),
@@ -875,7 +875,7 @@ watch(
               :class="{
                 'bg-green-100 text-green-700':
                   conversationData.status === t('KANBAN.ITEM_STATUS.OPEN'),
-                'bg-yellow-100 text-yellow-700':
+                'bg-woot-110 text-yellow-700':
                   conversationData.status === t('KANBAN.ITEM_STATUS.PENDING'),
                 'bg-slate-100 text-slate-700':
                   conversationData.status === t('KANBAN.ITEM_STATUS.RESOLVED'),

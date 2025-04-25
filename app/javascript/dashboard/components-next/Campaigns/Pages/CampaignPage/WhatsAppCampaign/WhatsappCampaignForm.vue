@@ -308,30 +308,44 @@ const handleSubmit = async () => {
 
   const campaignDetails = prepareCampaignDetails();
 
+  // console.log('campaignDetails', campaignDetails); // Keep for debugging if needed
+
   if (state.file) {
-    // Se temos um arquivo, criar um FormData e emitir como objeto especial
     const formData = new FormData();
 
-    // Adicionar todos os campos do objeto campaignDetails ao formData
+    // console.log('formData', formData); // Keep for debugging if needed
+
     Object.keys(campaignDetails).forEach(key => {
+      const value = campaignDetails[key];
+
+      // console.log('key', key); // Keep for debugging if needed
+
       if (key === 'audience') {
-        // Converter array para JSON string
-        formData.append(key, JSON.stringify(campaignDetails[key]));
-      } else if (key === 'template_params') {
-        // Converter objeto para JSON string
-        formData.append(key, JSON.stringify(campaignDetails[key]));
-      } else {
-        formData.append(key, campaignDetails[key]);
+        // console.log('audience', value); // Keep for debugging if needed
+        // Enviar audience como JSON string, mesmo se for array vazio
+        formData.append(key, JSON.stringify(value || []));
+      } else if (key === 'scheduled_at') {
+        // Enviar scheduled_at como string vazia se for null, caso contrário, enviar o valor ISOString
+        formData.append(key, value === null ? '' : value);
+      } else if (key === 'template_params' && value) {
+        // Garantir que template_params seja enviado como JSON string
+        formData.append(key, JSON.stringify(value));
+      } else if (value !== null && value !== undefined) {
+        // Adicionar outros campos normalmente, exceto null/undefined
+        formData.append(key, value);
       }
     });
 
-    // Adicionar o arquivo
+    // console.log('state.file', state.file); // Keep for debugging if needed
     formData.append('attachment', state.file);
 
-    // Emitir o FormData e um flag indicando que é FormData
+    // console.log('formData', formData); // Keep for debugging if needed
+    // Iterar sobre formData para debug (opcional)
+    Array.from(formData.entries()).forEach(([key, value]) => {
+      console.log(`${key}: ${value}`);
+    });
     emit('submit', formData, true);
   } else {
-    // Se não tem arquivo, emitir normalmente
     emit('submit', campaignDetails);
   }
 
@@ -574,7 +588,7 @@ const handleKeydownMax = e => {
     </div>
 
     <!-- Slider Input com Range - Implementação melhorada -->
-    <div class="flex flex-col gap-1">
+    <!-- <div class="flex flex-col gap-1">
       <label
         for="slider-range"
         class="mb-0.5 text-sm font-medium text-n-slate-12"
@@ -583,12 +597,12 @@ const handleKeydownMax = e => {
         {{ state.sliderMaxValue }}
       </label>
       <div ref="sliderRef" class="relative h-12 mt-1">
-        <!-- Barra base do slider -->
+
         <div
           class="absolute top-1/2 left-0 right-0 h-2 -translate-y-1/2 bg-n-slate-4 dark:bg-n-slate-8 rounded-lg"
         />
 
-        <!-- Área selecionada (preenchida) -->
+
         <div
           class="absolute top-1/2 h-2 -translate-y-1/2 bg-blue-500 rounded-lg"
           :style="{
@@ -597,11 +611,10 @@ const handleKeydownMax = e => {
           }"
         />
 
-        <!-- Indicadores de valores -->
+
         <div class="flex justify-between text-xs text-n-slate-10 px-0.5 mt-6">
         </div>
 
-        <!-- Controlador mínimo -->
         <div
           role="slider"
           :aria-valuemin="1"
@@ -614,7 +627,7 @@ const handleKeydownMax = e => {
           @keydown="handleKeydownMin"
         />
 
-        <!-- Controlador máximo -->
+
         <div
           role="slider"
           :aria-valuemin="1"
@@ -627,7 +640,7 @@ const handleKeydownMax = e => {
           @keydown="handleKeydownMax"
         />
       </div>
-    </div>
+    </div> -->
 
     <div class="flex flex-col gap-1">
       <label for="audience" class="mb-0.5 text-sm font-medium text-n-slate-12">
@@ -649,6 +662,7 @@ const handleKeydownMax = e => {
       :label="scheduledAtLabel"
       type="datetime-local"
       :placeholder="scheduledAtPlaceholder"
+      :min="currentDateTime"
       :message="formErrors.scheduledAt"
       :message-type="formErrors.scheduledAt ? 'error' : 'info'"
     />

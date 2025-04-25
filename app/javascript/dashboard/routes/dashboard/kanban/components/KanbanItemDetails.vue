@@ -158,7 +158,7 @@ const priorityInfo = computed(() => {
     medium: {
       label: t('KANBAN.PRIORITY_LABELS.MEDIUM'),
       class:
-        'bg-yellow-50 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-50',
+        'bg-yellow-50 dark:bg-woot-120 text-yellow-800 dark:text-yellow-50',
     },
     low: {
       label: t('KANBAN.PRIORITY_LABELS.LOW'),
@@ -173,7 +173,7 @@ const priorityClass = computed(() => {
   const priorityMap = {
     high: 'bg-ruby-50 dark:bg-ruby-800 text-ruby-800 dark:text-ruby-50',
     medium:
-      'bg-yellow-50 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-50',
+      'bg-yellow-50 dark:bg-woot-120 text-yellow-800 dark:text-yellow-50',
     low: 'bg-green-50 dark:bg-green-800 text-green-800 dark:text-green-50',
     none: 'bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-50',
   };
@@ -1882,7 +1882,7 @@ onMounted(() => {
                       :class="{
                         'bg-green-100 text-green-700':
                           conversationData.status === 'open',
-                        'bg-yellow-100 text-yellow-700':
+                        'bg-woot-110 text-yellow-700':
                           conversationData.status === 'pending',
                         'bg-slate-100 text-slate-700':
                           conversationData.status === 'resolved',
@@ -3128,9 +3128,9 @@ onMounted(() => {
 }
 
 .header-section {
-  @apply bg-white dark:bg-slate-800 
-    rounded-lg 
-    p-4 mb-4 
+  @apply bg-white dark:bg-slate-800
+    rounded-lg
+    p-4 mb-4
     border border-slate-100 dark:border-slate-700;
 }
 
@@ -3404,12 +3404,12 @@ onMounted(() => {
 }
 
 .preview-image {
-  @apply w-24 h-24 object-cover rounded-lg cursor-pointer 
+  @apply w-24 h-24 object-cover rounded-lg cursor-pointer
          hover:opacity-90 transition-opacity;
 }
 
 .note-card {
-  @apply bg-white dark:bg-slate-800 rounded-lg p-4 mb-4 
+  @apply bg-white dark:bg-slate-800 rounded-lg p-4 mb-4
          border border-slate-200 dark:border-slate-700;
 }
 
@@ -3426,7 +3426,7 @@ onMounted(() => {
 }
 
 .note-metadata {
-  @apply flex items-center justify-between text-sm 
+  @apply flex items-center justify-between text-sm
          text-slate-500 dark:text-slate-400 mb-3;
 }
 
@@ -3443,8 +3443,8 @@ onMounted(() => {
 }
 
 .file-attachment {
-  @apply flex items-center justify-between p-2 
-         bg-slate-50 dark:bg-slate-700 
+  @apply flex items-center justify-between p-2
+         bg-slate-50 dark:bg-slate-700
          rounded-lg text-sm;
 }
 
@@ -3478,7 +3478,7 @@ onMounted(() => {
 }
 
 .preview-image {
-  @apply w-24 h-24 object-cover rounded-lg cursor-pointer 
+  @apply w-24 h-24 object-cover rounded-lg cursor-pointer
          hover:opacity-90 transition-opacity;
 }
 
@@ -3520,7 +3520,7 @@ onMounted(() => {
 }
 
 .icon-button {
-  @apply flex items-center justify-center w-6 h-6 rounded-full 
+  @apply flex items-center justify-center w-6 h-6 rounded-full
          transition-colors duration-200;
 }
 
@@ -3545,12 +3545,12 @@ onMounted(() => {
 }
 
 .image-card {
-  @apply rounded-md overflow-hidden bg-slate-50 dark:bg-slate-700 
+  @apply rounded-md overflow-hidden bg-slate-50 dark:bg-slate-700
          border border-slate-200 dark:border-slate-600;
 }
 
 .attachment-preview {
-  @apply w-full h-16 object-cover cursor-pointer 
+  @apply w-full h-16 object-cover cursor-pointer
          hover:opacity-90 transition-opacity;
 }
 
@@ -3589,7 +3589,7 @@ onMounted(() => {
 
 /* Adicione estes estilos */
 .selected-file-preview {
-  @apply mt-1 px-2 py-1 text-xs bg-slate-50 dark:bg-slate-700 
+  @apply mt-1 px-2 py-1 text-xs bg-slate-50 dark:bg-slate-700
          rounded border border-slate-200 dark:border-slate-600;
 }
 
@@ -3606,8 +3606,8 @@ onMounted(() => {
 }
 
 .history-icon {
-  @apply absolute left-0 z-10 flex items-center justify-center w-8 h-8 
-          rounded-full bg-white dark:bg-slate-800 border-2 border-woot-500 
+  @apply absolute left-0 z-10 flex items-center justify-center w-8 h-8
+          rounded-full bg-white dark:bg-slate-800 border-2 border-woot-500
           text-woot-500;
 }
 
@@ -3646,7 +3646,7 @@ onMounted(() => {
 }
 
 .history-author {
-  @apply flex items-center gap-2 pt-3 mt-3 border-t 
+  @apply flex items-center gap-2 pt-3 mt-3 border-t
           border-slate-100 dark:border-slate-700;
 }
 

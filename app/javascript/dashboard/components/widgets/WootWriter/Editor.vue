@@ -783,12 +783,12 @@ useEmitter(BUS_EVENTS.INSERT_INTO_RICH_EDITOR, insertContentIntoEditor);
 
 .is-private {
   .prosemirror-mention-node {
-    @apply font-medium bg-yellow-100 dark:bg-yellow-800 text-slate-900 dark:text-slate-25 py-0 px-1;
+    @apply font-medium bg-woot-110 dark:bg-woot-120 text-slate-900 dark:text-slate-25 py-0 px-1;
   }
 
   .ProseMirror-menubar-wrapper {
     .ProseMirror-menubar {
-      @apply bg-yellow-100 dark:bg-yellow-800 text-slate-700 dark:text-slate-25;
+      @apply bg-woot-110 dark:bg-woot-120 text-slate-700 dark:text-slate-25;
     }
 
     > .ProseMirror {
