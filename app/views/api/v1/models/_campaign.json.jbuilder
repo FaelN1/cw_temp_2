@@ -19,5 +19,17 @@ end
 json.trigger_rules resource.trigger_rules
 json.trigger_only_during_business_hours resource.trigger_only_during_business_hours
 json.template_params resource.template_params if resource.template_params.present?
+
+# Adicionar informações do anexo
+if resource.attachments.present?
+  json.attachment do
+    attachment = resource.attachments.first
+    json.id attachment.id
+    json.file_type attachment.file_type
+    json.data_url attachment.file_url
+    json.thumb_url attachment.thumb_url if attachment.file_type == 'image'
+  end
+end
+
 json.created_at resource.created_at
 json.updated_at resource.updated_at

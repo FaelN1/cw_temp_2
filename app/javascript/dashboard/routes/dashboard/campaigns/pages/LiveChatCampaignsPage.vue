@@ -28,12 +28,14 @@ const isFetchingCampaigns = computed(() => uiFlags.value.isFetching);
 
 const [showLiveChatCampaignDialog, toggleLiveChatCampaignDialog] = useToggle();
 
-const liveChatCampaigns = computed(() =>
-  getters['campaigns/getCampaigns'].value(
-    CAMPAIGN_TYPES.ONGOING,
-    CAMPAIGN_CHANNEL_TYPES.SMS
-  )
-);
+// const liveChatCampaigns = computed(() =>
+//   getters['campaigns/getCampaigns'].value(
+//     CAMPAIGN_TYPES.ONGOING,
+//     CAMPAIGN_CHANNEL_TYPES.SMS
+//   )
+// );
+
+const liveChatCampaigns = null;
 
 const hasNoLiveChatCampaigns = computed(
   () => liveChatCampaigns.value?.length === 0 && !isFetchingCampaigns.value

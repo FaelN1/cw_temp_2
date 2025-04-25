@@ -3,6 +3,7 @@
 # Table name: attachments
 #
 #  id               :integer          not null, primary key
+#  attachable_type  :string
 #  coordinates_lat  :float            default(0.0)
 #  coordinates_long :float            default(0.0)
 #  extension        :string
@@ -12,12 +13,14 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  account_id       :integer          not null
-#  message_id       :integer          not null
+#  attachable_id    :integer
+#  message_id       :integer
 #
 # Indexes
 #
-#  index_attachments_on_account_id  (account_id)
-#  index_attachments_on_message_id  (message_id)
+#  index_attachments_on_account_id                         (account_id)
+#  index_attachments_on_attachable_type_and_attachable_id  (attachable_type,attachable_id)
+#  index_attachments_on_message_id                         (message_id)
 #
 
 class Attachment < ApplicationRecord
@@ -33,8 +36,14 @@ class Attachment < ApplicationRecord
     application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
     application/vnd.openxmlformats-officedocument.wordprocessingml.document
   ].freeze
+
   belongs_to :account
-  belongs_to :message
+  # Tornar belongs_to :message opcional
+  belongs_to :message, optional: true
+
+  # Adicionar relação polimórfica
+  belongs_to :attachable, polymorphic: true, optional: true
+
   has_one_attached :file
   validate :acceptable_file
   validates :external_url, length: { maximum: Limits::URL_LENGTH_LIMIT }
@@ -123,7 +132,7 @@ class Attachment < ApplicationRecord
   def should_validate_file?
     return unless file.attached?
     # we are only limiting attachment types in case of website widget
-    return unless message.inbox.channel_type == 'Channel::WebWidget'
+    return unless message && message.inbox.channel_type == 'Channel::WebWidget'
 
     true
   end

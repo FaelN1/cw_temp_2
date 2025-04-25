@@ -10,6 +10,7 @@
 #  enabled                            :boolean          default(TRUE)
 #  message                            :text             not null
 #  scheduled_at                       :datetime
+#  template_params                    :jsonb            not null
 #  title                              :string           not null
 #  trigger_only_during_business_hours :boolean          default(FALSE)
 #  trigger_rules                      :jsonb
@@ -52,6 +53,12 @@ class Campaign < ApplicationRecord
   # Adicionar additional_attributes como atributo serializável
   store :additional_attributes, accessor: [:template_params], coder: JSON
 
+  # Adicionar associação com anexos
+  has_many :attachments, as: :attachable, dependent: :destroy
+
+  # Adicionar atributo virtual para o anexo
+  attr_accessor :attachment_file
+
   # Adicionar atributo virtual para o template_params enviado diretamente na API
   attr_accessor :direct_template_params
 
@@ -84,6 +91,16 @@ class Campaign < ApplicationRecord
       Rails.logger.info("Disparando campanha SMS ##{id}")
       Sms::OneoffSmsCampaignService.new(campaign: self).perform
     end
+  end
+
+  # Verificar se há anexo e configurar a flag de caption
+  def has_attachment?
+    attachments.exists?
+  end
+
+  # Verificar se o anexo deve usar o texto como caption
+  def use_message_as_attachment_caption?
+    additional_attributes&.dig('use_message_as_attachment_caption') || has_attachment?
   end
 
   private

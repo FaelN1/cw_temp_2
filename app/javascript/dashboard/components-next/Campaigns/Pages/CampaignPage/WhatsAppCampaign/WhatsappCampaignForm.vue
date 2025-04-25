@@ -298,7 +298,7 @@ const prepareCampaignDetails = () => {
   return {
     ...commonDetails,
     message: state.message,
-    file: state.file,
+    // Não incluir o arquivo aqui, será enviado pelo FormData
   };
 };
 
@@ -306,7 +306,35 @@ const handleSubmit = async () => {
   const isFormValid = await v$.value.$validate();
   if (!isFormValid) return;
 
-  emit('submit', prepareCampaignDetails());
+  const campaignDetails = prepareCampaignDetails();
+
+  if (state.file) {
+    // Se temos um arquivo, criar um FormData e emitir como objeto especial
+    const formData = new FormData();
+
+    // Adicionar todos os campos do objeto campaignDetails ao formData
+    Object.keys(campaignDetails).forEach(key => {
+      if (key === 'audience') {
+        // Converter array para JSON string
+        formData.append(key, JSON.stringify(campaignDetails[key]));
+      } else if (key === 'template_params') {
+        // Converter objeto para JSON string
+        formData.append(key, JSON.stringify(campaignDetails[key]));
+      } else {
+        formData.append(key, campaignDetails[key]);
+      }
+    });
+
+    // Adicionar o arquivo
+    formData.append('attachment', state.file);
+
+    // Emitir o FormData e um flag indicando que é FormData
+    emit('submit', formData, true);
+  } else {
+    // Se não tem arquivo, emitir normalmente
+    emit('submit', campaignDetails);
+  }
+
   resetState();
   handleCancel();
 };

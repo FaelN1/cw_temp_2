@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_04_22_054800) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -178,13 +178,16 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_22_054800) do
     t.string "external_url"
     t.float "coordinates_lat", default: 0.0
     t.float "coordinates_long", default: 0.0
-    t.integer "message_id", null: false
+    t.integer "message_id"
     t.integer "account_id", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "fallback_title"
     t.string "extension"
+    t.string "attachable_type"
+    t.integer "attachable_id"
     t.index ["account_id"], name: "index_attachments_on_account_id"
+    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id"
     t.index ["message_id"], name: "index_attachments_on_message_id"
   end
 

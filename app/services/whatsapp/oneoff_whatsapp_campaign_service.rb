@@ -160,15 +160,40 @@ module Whatsapp
 
       conversation = find_or_create_conversation(contact_inbox)
 
-      # Criar a mensagem diretamente para evitar problemas com o MessageBuilder
-      message = conversation.messages.create!(
-        account_id: conversation.account_id,
-        inbox_id: conversation.inbox_id,
-        message_type: 'outgoing',
-        content: campaign.message,
-        sender: campaign.sender || campaign.inbox.account.agents.first,
-        additional_attributes: { campaign_id: campaign.id }
-      )
+      # Verificar se há anexo na campanha
+      attachment = campaign.attachments.first
+
+      if attachment.present? && campaign.use_message_as_attachment_caption?
+        # Criar a mensagem com o anexo e texto como caption
+        message = conversation.messages.new(
+          account_id: conversation.account_id,
+          inbox_id: conversation.inbox_id,
+          message_type: 'outgoing',
+          content: campaign.message, # texto como caption
+          sender: campaign.sender || campaign.inbox.account.agents.first,
+          additional_attributes: { campaign_id: campaign.id }
+        )
+
+        # Anexar o arquivo da campanha à mensagem
+        message.attachments.new(
+          account_id: campaign.account_id,
+          file_type: attachment.file_type,
+          file: attachment.file.blob
+        )
+
+        # Salvar a mensagem com o anexo
+        message.save!
+      else
+        # Criar mensagem de texto simples (comportamento original)
+        message = conversation.messages.create!(
+          account_id: conversation.account_id,
+          inbox_id: conversation.inbox_id,
+          message_type: 'outgoing',
+          content: campaign.message,
+          sender: campaign.sender || campaign.inbox.account.agents.first,
+          additional_attributes: { campaign_id: campaign.id }
+        )
+      end
 
       Rails.logger.info "Mensagem enviada para #{contact.phone_number}, mensagem ##{message.id}"
       message

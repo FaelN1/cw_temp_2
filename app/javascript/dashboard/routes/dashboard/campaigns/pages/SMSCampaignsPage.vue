@@ -24,12 +24,14 @@ const isFetchingCampaigns = computed(() => uiFlags.value.isFetching);
 
 const confirmDeleteCampaignDialogRef = ref(null);
 
-const SMSCampaigns = computed(() =>
-  getters['campaigns/getCampaigns'].value(
-    CAMPAIGN_TYPES.ONGOING,
-    CAMPAIGN_CHANNEL_TYPES.SMS
-  )
-);
+// const SMSCampaigns = computed(() =>
+//   getters['campaigns/getCampaigns'].value(
+//     CAMPAIGN_TYPES.ONGOING,
+//     CAMPAIGN_CHANNEL_TYPES.SMS
+//   )
+// );
+
+const SMSCampaigns = null;
 
 const hasNoSMSCampaigns = computed(
   () => SMSCampaigns.value?.length === 0 && !isFetchingCampaigns.value
