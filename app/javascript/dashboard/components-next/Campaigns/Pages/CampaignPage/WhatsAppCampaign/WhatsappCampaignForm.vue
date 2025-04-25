@@ -1,3 +1,5 @@
+<!-- eslint-disable no-console -->
+<!-- eslint-disable no-cond-assign -->
 <script setup>
 import { reactive, computed, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -33,6 +35,8 @@ const initialState = {
   file: null,
   selectedTemplate: null,
   templateVariables: {}, // Armazenar valores das variáveis do template
+  sliderMinValue: 15, // Valor inicial mínimo
+  sliderMaxValue: 45, // Valor inicial máximo
 };
 
 const state = reactive({ ...initialState });
@@ -340,6 +344,96 @@ const variablesTitle = t(
   'CAMPAIGN.WHATSAPP.CREATE.FORM.VARIABLES.TITLE',
   'Variáveis do Template'
 );
+const sliderLabel = t(
+  'CAMPAIGN.WHATSAPP.CREATE.FORM.SLIDER.LABEL',
+  'Intervalo selecionado'
+);
+
+// Função para garantir que o valor mínimo não ultrapasse o máximo
+const updateMinSliderValue = e => {
+  const newValue = parseInt(e.target.value, 10);
+  state.sliderMinValue = Math.min(newValue, state.sliderMaxValue - 1);
+};
+
+// Função para garantir que o valor máximo não seja menor que o mínimo
+const updateMaxSliderValue = e => {
+  const newValue = parseInt(e.target.value, 10);
+  state.sliderMaxValue = Math.max(newValue, state.sliderMinValue + 1);
+};
+
+// Funções para controlar o slider de intervalo
+const isDraggingMin = ref(false);
+const isDraggingMax = ref(false);
+const sliderRef = ref(null);
+
+const startDragMin = () => {
+  isDraggingMin.value = true;
+  document.addEventListener('mousemove', handleMouseMoveMin);
+  document.addEventListener('mouseup', stopDragMin);
+};
+
+const stopDragMin = () => {
+  isDraggingMin.value = false;
+  document.removeEventListener('mousemove', handleMouseMoveMin);
+  document.removeEventListener('mouseup', stopDragMin);
+};
+
+const handleMouseMoveMin = e => {
+  if (!isDraggingMin.value || !sliderRef.value) return;
+  const rect = sliderRef.value.getBoundingClientRect();
+  const percentage = (e.clientX - rect.left) / rect.width;
+  const clampedPercentage = Math.max(0, Math.min(percentage, 1));
+  const value = Math.round(clampedPercentage * 59) + 1;
+  if (value < state.sliderMaxValue) {
+    state.sliderMinValue = value;
+  }
+};
+
+const startDragMax = () => {
+  isDraggingMax.value = true;
+  document.addEventListener('mousemove', handleMouseMoveMax);
+  document.addEventListener('mouseup', stopDragMax);
+};
+
+const stopDragMax = () => {
+  isDraggingMax.value = false;
+  document.removeEventListener('mousemove', handleMouseMoveMax);
+  document.removeEventListener('mouseup', stopDragMax);
+};
+
+const handleMouseMoveMax = e => {
+  if (!isDraggingMax.value || !sliderRef.value) return;
+  const rect = sliderRef.value.getBoundingClientRect();
+  const percentage = (e.clientX - rect.left) / rect.width;
+  const clampedPercentage = Math.max(0, Math.min(percentage, 1));
+  const value = Math.round(clampedPercentage * 59) + 1;
+  if (value > state.sliderMinValue) {
+    state.sliderMaxValue = value;
+  }
+};
+
+// Opcionalmente, também podemos atualizar os valores usando o teclado
+const handleKeydownMin = e => {
+  if (e.key === 'ArrowLeft' && state.sliderMinValue > 1) {
+    state.sliderMinValue--;
+  } else if (
+    e.key === 'ArrowRight' &&
+    state.sliderMinValue < state.sliderMaxValue - 1
+  ) {
+    state.sliderMinValue++;
+  }
+};
+
+const handleKeydownMax = e => {
+  if (
+    e.key === 'ArrowLeft' &&
+    state.sliderMaxValue > state.sliderMinValue + 1
+  ) {
+    state.sliderMaxValue--;
+  } else if (e.key === 'ArrowRight' && state.sliderMaxValue < 60) {
+    state.sliderMaxValue++;
+  }
+};
 </script>
 
 <template>
@@ -448,6 +542,62 @@ const variablesTitle = t(
             required
           />
         </div>
+      </div>
+    </div>
+
+    <!-- Slider Input com Range - Implementação melhorada -->
+    <div class="flex flex-col gap-1">
+      <label
+        for="slider-range"
+        class="mb-0.5 text-sm font-medium text-n-slate-12"
+      >
+        {{ sliderLabel }}: {{ state.sliderMinValue }} -
+        {{ state.sliderMaxValue }}
+      </label>
+      <div ref="sliderRef" class="relative h-12 mt-1">
+        <!-- Barra base do slider -->
+        <div
+          class="absolute top-1/2 left-0 right-0 h-2 -translate-y-1/2 bg-n-slate-4 dark:bg-n-slate-8 rounded-lg"
+        />
+
+        <!-- Área selecionada (preenchida) -->
+        <div
+          class="absolute top-1/2 h-2 -translate-y-1/2 bg-blue-500 rounded-lg"
+          :style="{
+            left: `${((state.sliderMinValue - 1) / 59) * 100}%`,
+            right: `${(1 - (state.sliderMaxValue - 1) / 59) * 100}%`,
+          }"
+        />
+
+        <!-- Indicadores de valores -->
+        <div class="flex justify-between text-xs text-n-slate-10 px-0.5 mt-6">
+        </div>
+
+        <!-- Controlador mínimo -->
+        <div
+          role="slider"
+          :aria-valuemin="1"
+          :aria-valuemax="60"
+          :aria-valuenow="state.sliderMinValue"
+          tabindex="0"
+          class="absolute top-1/2 w-5 h-5 -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-blue-500 rounded-full shadow cursor-pointer z-30 hover:scale-110 transition-transform"
+          :style="{ left: `${((state.sliderMinValue - 1) / 59) * 100}%` }"
+          @mousedown.prevent="startDragMin"
+          @keydown="handleKeydownMin"
+        />
+
+        <!-- Controlador máximo -->
+        <div
+          role="slider"
+          :aria-valuemin="1"
+          :aria-valuemax="60"
+          :aria-valuenow="state.sliderMaxValue"
+          tabindex="0"
+          class="absolute top-1/2 w-5 h-5 -translate-x-1/2 -translate-y-1/2 bg-white border-2 border-blue-500 rounded-full shadow cursor-pointer z-30 hover:scale-110 transition-transform"
+          :style="{ left: `${((state.sliderMaxValue - 1) / 59) * 100}%` }"
+          @mousedown.prevent="startDragMax"
+          @keydown="handleKeydownMax"
+        />
       </div>
     </div>
 
