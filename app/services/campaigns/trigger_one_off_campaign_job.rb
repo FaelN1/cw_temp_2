@@ -1,4 +1,4 @@
-class Campaigns::TriggerOneoffCampaignJob < ApplicationJob
+class Campaigns::TriggerOneOffCampaignJob < ApplicationJob
   queue_as :campaigns
 
   def perform(campaign)
