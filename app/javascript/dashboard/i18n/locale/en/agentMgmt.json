@@ -1,120 +1,121 @@
 {
-  "AGENT_MGMT": {
-    "HEADER": "Agents",
-    "HEADER_BTN_TXT": "Add Agent",
-    "LOADING": "Fetching Agent List",
-    "DESCRIPTION": "An agent is a member of your customer support team who can view and respond to user messages. The list below shows all the agents in your account.",
-    "LEARN_MORE": "Learn about user roles",
-    "AGENT_TYPES": {
-      "ADMINISTRATOR": "Administrator",
-      "AGENT": "Agent"
-    },
-    "LIST": {
-      "404": "There are no agents associated to this account",
-      "TITLE": "Manage agents in your team",
-      "DESC": "You can add/remove agents to/in your team.",
-      "NAME": "Name",
-      "EMAIL": "EMAIL",
-      "STATUS": "Status",
-      "ACTIONS": "Actions",
-      "VERIFIED": "Verified",
-      "VERIFICATION_PENDING": "Verification Pending",
-      "AVAILABLE_CUSTOM_ROLE": "Available custom role permissions"
-    },
+  "ATTRIBUTES_MGMT": {
+    "HEADER": "Campos",
+    "HEADER_BTN_TXT": "Adicionar campo",
+    "LOADING": "Carregando campos...",
+    "DESCRIPTION": "Os campos rastreiam informações chaves sobre seus contatos/conversas, ficando disponíveis na parte de detalhes do contato na seção de conversas.",
+    "LEARN_MORE": "Saiba mais sobre as funções dos campos",
     "ADD": {
-      "TITLE": "Add agent to your team",
-      "DESC": "You can add people who will be able to handle support for your inboxes.",
-      "CANCEL_BUTTON_TEXT": "Cancel",
+      "TITLE": "Adicionar campo",
+      "SUBMIT": "Salvar",
+      "CANCEL_BUTTON_TEXT": "Cancelar",
       "FORM": {
         "NAME": {
-          "LABEL": "Agent Name",
-          "PLACEHOLDER": "Please enter a name of the agent"
+          "LABEL": "Nome do campo",
+          "PLACEHOLDER": "Digite o nome de exibição para o campo",
+          "ERROR": "Ops! O nome é obrigatório."
         },
-        "AGENT_TYPE": {
-          "LABEL": "Role",
-          "PLACEHOLDER": "Please select a role",
-          "ERROR": "Role is required"
+        "DESC": {
+          "LABEL": "Descrição",
+          "PLACEHOLDER": "Digite a descrição deste campo",
+          "ERROR": "Ops! A descrição é obrigatória."
         },
-        "EMAIL": {
-          "LABEL": "Email Address",
-          "PLACEHOLDER": "Please enter an email address of the agent"
+        "MODEL": {
+          "LABEL": "Aplica-se a",
+          "PLACEHOLDER": "Por favor, selecione um",
+          "ERROR": "Ops! O modelo é necessário."
         },
-        "SUBMIT": "Add Agent"
+        "TYPE": {
+          "LABEL": "Tipo",
+          "PLACEHOLDER": "Selecione um tipo",
+          "ERROR": "Ops! O tipo é obrigatório.",
+          "LIST": {
+            "LABEL": "Listar valores",
+            "PLACEHOLDER": "Digite o valor e pressione Enter",
+            "ERROR": "Ops! Deve ter pelo menos um valor."
+          }
+        },
+        "KEY": {
+          "LABEL": "Chave",
+          "PLACEHOLDER": "Digite a chave do campo",
+          "ERROR": "Ops! A chave é obrigatória.",
+          "IN_VALID": "Chave inválida"
+        },
+        "REGEX_PATTERN": {
+          "LABEL": "Padrão personalizado",
+          "PLACEHOLDER": "Insira o padrão de expressão regular para campo (Opcional)"
+        },
+        "REGEX_CUE": {
+          "LABEL": "Sugestão personalizada",
+          "PLACEHOLDER": "Insira a sugestão para o padrão de expressão regular (Opcional)"
+        },
+        "ENABLE_REGEX": {
+          "LABEL": "Habilitar validação personalizada"
+        }
       },
       "API": {
-        "SUCCESS_MESSAGE": "Agent added successfully",
-        "EXIST_MESSAGE": "Agent email already in use, Please try another email address",
-        "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later"
+        "SUCCESS_MESSAGE": "Oba! Campo adicionado com sucesso! 🚀",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para adicionar o campo. Vamos tentar novamente? 🤞"
       }
     },
     "DELETE": {
-      "BUTTON_TEXT": "Delete",
+      "BUTTON_TEXT": "Excluir",
       "API": {
-        "SUCCESS_MESSAGE": "Agent deleted successfully",
-        "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later"
+        "SUCCESS_MESSAGE": "Oba! Campo excluído com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir o campo. Vamos tentar novamente? 🤞"
       },
       "CONFIRM": {
-        "TITLE": "Confirm Deletion",
-        "MESSAGE": "Are you sure to delete ",
-        "YES": "Yes, Delete ",
-        "NO": "No, Keep "
+        "TITLE": "Confirmar exclusão",
+        "PLACE_HOLDER": "Digite {attributeName} para confirmar",
+        "MESSAGE": "Você tem certeza que deseja excluir o campo?",
+        "YES": "Excluir",
+        "NO": "Cancelar"
       }
     },
     "EDIT": {
-      "TITLE": "Edit agent",
-      "FORM": {
-        "NAME": {
-          "LABEL": "Agent Name",
-          "PLACEHOLDER": "Please enter a name of the agent"
-        },
-        "AGENT_TYPE": {
-          "LABEL": "Role",
-          "PLACEHOLDER": "Please select a role",
-          "ERROR": "Role is required"
-        },
-        "EMAIL": {
-          "LABEL": "Email Address",
-          "PLACEHOLDER": "Please enter an email address of the agent"
-        },
-        "AGENT_AVAILABILITY": {
-          "LABEL": "Availability",
-          "PLACEHOLDER": "Please select an availability status",
-          "ERROR": "Availability is required"
-        },
-        "SUBMIT": "Edit Agent"
+      "TITLE": "Editar campo",
+      "UPDATE_BUTTON_TEXT": "Salvar",
+      "TYPE": {
+        "LIST": {
+          "LABEL": "Listar campos",
+          "PLACEHOLDER": "Digite o campo e pressione Enter"
+        }
       },
-      "BUTTON_TEXT": "Edit",
-      "CANCEL_BUTTON_TEXT": "Cancel",
       "API": {
-        "SUCCESS_MESSAGE": "Agent updated successfully",
-        "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later"
-      },
-      "PASSWORD_RESET": {
-        "ADMIN_RESET_BUTTON": "Reset Password",
-        "ADMIN_SUCCESS_MESSAGE": "An email with reset password instructions has been sent to the agent",
-        "SUCCESS_MESSAGE": "Agent password reset successfully",
-        "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later"
+        "SUCCESS_MESSAGE": "Oba! Campo editado com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para editar o campo. Vamos tentar novamente? 🤞"
       }
     },
-    "SEARCH": {
-      "NO_RESULTS": "No results found."
+    "TABS": {
+      "HEADER": "Campos",
+      "CONVERSATION": "Conversas",
+      "CONTACT": "Contatos"
     },
-    "MULTI_SELECTOR": {
-      "PLACEHOLDER": "None",
-      "TITLE": {
-        "AGENT": "Select agent",
-        "TEAM": "Select team"
+    "LIST": {
+      "TABLE_HEADER": [
+        "Nome",
+        "Descrição",
+        "Tipo",
+        "Chave"
+      ],
+      "BUTTONS": {
+        "EDIT": "Editar",
+        "DELETE": "Excluir"
       },
-      "SEARCH": {
-        "NO_RESULTS": {
-          "AGENT": "No agents found",
-          "TEAM": "No teams found"
-        },
-        "PLACEHOLDER": {
-          "AGENT": "Search agents",
-          "TEAM": "Search teams",
-          "INPUT": "Search for agents"
-        }
+      "EMPTY_RESULT": {
+        "404": "Ops! Nenhum campo criado ainda. Vamos criar? 🙌",
+        "NOT_FOUND": "Ops! Nenhum campo configurado ainda. Vamos configurar? 🙌"
+      },
+      "REGEX_PATTERN": {
+        "LABEL": "Padrão personalizado",
+        "PLACEHOLDER": "Insira o padrão de expressão regular para o campo (Opcional)"
+      },
+      "REGEX_CUE": {
+        "LABEL": "Sugestão personalizada",
+        "PLACEHOLDER": "Insira a sugestão para o padrão de expressão regular (Opcional)"
+      },
+      "ENABLE_REGEX": {
+        "LABEL": "Habilitar validação personalizada"
       }
     }
   }

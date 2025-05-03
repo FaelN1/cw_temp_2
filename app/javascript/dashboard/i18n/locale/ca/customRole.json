@@ -1,8 +1,8 @@
 {
   "CUSTOM_ROLE": {
-    "HEADER": "Custom Roles",
-    "LEARN_MORE": "Learn more about custom roles",
-    "DESCRIPTION": "Custom roles are roles that are created by the account owner or admin. These roles can be assigned to agents to define their access and permissions within the account. Custom roles can be created with specific permissions and access levels to suit the requirements of the organization.",
+    "HEADER": "Permissões",
+    "LEARN_MORE": "Saiba mais sobre as funções das permissões",
+    "DESCRIPTION": "As permissões são criadas para definir o acesso dos colaboradores de forma personalizada e individualizada com acessos específicos dentro da plataforma.",
     "HEADER_BTN_TXT": "Add custom role",
     "LOADING": "Fetching custom roles...",
     "SEARCH_404": "No hi ha cap resposta que coincideixi amb aquesta consulta.",
@@ -21,7 +21,7 @@
     "LIST": {
       "404": "There are no custom roles available in this account.",
       "TITLE": "Manage custom roles",
-      "DESC": "Custom roles are roles that are created by the account owner or admin. These roles can be assigned to agents to define their access and permissions within the account. Custom roles can be created with specific permissions and access levels to suit the requirements of the organization.",
+      "DESC": "As permissões são criadas para definir o acesso dos colaboradores de forma personalizada e individualizada com acessos específicos dentro da plataforma.",
       "TABLE_HEADER": [
         "Nom",
         "Descripció",

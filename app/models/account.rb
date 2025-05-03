@@ -4,38 +4,25 @@
 #
 #  id                     :integer          not null, primary key
 #  auto_resolve_duration  :integer
-#  billing_cycle          :string
-#  billing_status         :string
 #  custom_attributes      :jsonb
 #  domain                 :string(100)
 #  feature_flags          :bigint           default(0), not null
 #  limits                 :jsonb
 #  locale                 :integer          default("en")
 #  name                   :string           not null
-#  next_due_date          :date
 #  status                 :integer          default("active")
-#  subscription_status    :string
-#  subscription_type      :string
 #  support_email          :string(100)
-#  value                  :decimal(10, 2)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  asaas_customer_id      :string
-#  asaas_subscription_id  :string
 #  stripe_customer_id     :string
 #  stripe_price_id        :string
 #  stripe_subscription_id :string
 #
 # Indexes
 #
-#  index_accounts_on_asaas_customer_id       (asaas_customer_id)
-#  index_accounts_on_asaas_subscription_id   (asaas_subscription_id)
-#  index_accounts_on_billing_status          (billing_status)
 #  index_accounts_on_status                  (status)
 #  index_accounts_on_stripe_customer_id      (stripe_customer_id)
 #  index_accounts_on_stripe_subscription_id  (stripe_subscription_id)
-#  index_accounts_on_subscription_status     (subscription_status)
-#  index_accounts_on_subscription_type       (subscription_type)
 #
 
 class Account < ApplicationRecord

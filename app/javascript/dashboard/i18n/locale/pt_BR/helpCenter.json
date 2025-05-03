@@ -1,5 +1,9 @@
 {
   "HELP_CENTER": {
+    "NEW_PAGE": {
+      "DESCRIPTION": "Crie portais de central de ajuda de autoatendimento para seus clientes. Ajude-os a encontrar respostas rapidamente, sem esperar. Simplifique as consultas, aumente a eficiência dos agentes e eleve o suporte ao cliente.",
+      "CREATE_PORTAL_BUTTON": "Criar Portal"
+    },
     "HEADER": {
       "FILTER": "Filtrar por",
       "SORT": "Ordenar por",

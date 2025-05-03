@@ -1,92 +1,92 @@
 {
   "CUSTOM_ROLE": {
-    "HEADER": "Custom Roles",
-    "LEARN_MORE": "Learn more about custom roles",
-    "DESCRIPTION": "Custom roles are roles that are created by the account owner or admin. These roles can be assigned to agents to define their access and permissions within the account. Custom roles can be created with specific permissions and access levels to suit the requirements of the organization.",
-    "HEADER_BTN_TXT": "Add custom role",
-    "LOADING": "Fetching custom roles...",
-    "SEARCH_404": "There are no items matching this query.",
+    "HEADER": "Permissões",
+    "LEARN_MORE": "Saiba mais sobre as funções das permissões",
+    "DESCRIPTION": "As permissões são criadas para definir o acesso dos colaboradores de forma personalizada e individualizada com acessos específicos dentro da plataforma.",
+    "HEADER_BTN_TXT": "Adicionar permissão",
+    "LOADING": "Carregando permissões...",
+    "SEARCH_404": "Ops! Nenhuma permissão criada ainda. Vamos criar? 🙌",
     "PAYWALL": {
-      "TITLE": "Upgrade to create custom roles",
-      "AVAILABLE_ON": "The custom role feature is only available in the Business and Enterprise plans.",
-      "UPGRADE_PROMPT": "Upgrade your plan to get access to advanced features like team management, automations, custom attributes, and more.",
-      "UPGRADE_NOW": "Upgrade now",
-      "CANCEL_ANYTIME": "You can change or cancel your plan anytime"
+      "TITLE": "Faça upgrade para criar permissões",
+      "AVAILABLE_ON": "As permissões estão disponíveis apenas nos planos Business e Enterprise.",
+      "UPGRADE_PROMPT": "Faça upgrade do seu plano para acessar recursos avançados como automações, fluxos, permissões e etc.",
+      "UPGRADE_NOW": "Faça upgrade agora",
+      "CANCEL_ANYTIME": "Você pode alterar ou cancelar seu plano a qualquer momento."
     },
     "ENTERPRISE_PAYWALL": {
-      "AVAILABLE_ON": "The custom role feature is only available in the paid plans.",
-      "UPGRADE_PROMPT": "Upgrade to a paid plan to access advanced features like audit logs, agent capacity, and more.",
-      "ASK_ADMIN": "Please reach out to your administrator for the upgrade."
+      "AVAILABLE_ON": "As permissões estão disponíveis apenas nos planos Business e Enterprise.",
+      "UPGRADE_PROMPT": "Faça upgrade do seu plano para acessar recursos avançados como automações, fluxos, permissões e etc.",
+      "ASK_ADMIN": "Entre em contato com o suporte para realizar o upgrade."
     },
     "LIST": {
-      "404": "There are no custom roles available in this account.",
-      "TITLE": "Manage custom roles",
-      "DESC": "Custom roles are roles that are created by the account owner or admin. These roles can be assigned to agents to define their access and permissions within the account. Custom roles can be created with specific permissions and access levels to suit the requirements of the organization.",
+      "404": "Não há permissões disponíveis nesta conta.",
+      "TITLE": "Gerenciar permissões",
+      "DESC": "As permissões são criadas para definir o acesso dos colaboradores de forma personalizada e individualizada com acessos específicos dentro da plataforma.",
       "TABLE_HEADER": {
-        "NAME": "Name",
-        "DESCRIPTION": "Description",
-        "PERMISSIONS": "Permissions",
-        "ACTIONS": "Actions"
+        "NAME": "Nome",
+        "DESCRIPTION": "Descrição",
+        "PERMISSIONS": "Permissões",
+        "ACTIONS": "Ações"
       }
     },
     "PERMISSIONS": {
-      "CONVERSATION_MANAGE": "Manage all conversations",
-      "CONVERSATION_UNASSIGNED_MANAGE": "Manage unassigned conversations and those assigned to them",
-      "CONVERSATION_PARTICIPATING_MANAGE": "Manage participating conversations and those assigned to them",
-      "CONTACT_MANAGE": "Manage contacts",
-      "REPORT_MANAGE": "Manage reports",
-      "KNOWLEDGE_BASE_MANAGE": "Manage knowledge base",
-      "KANBAN_MANAGE": "Manage Kanban",
-      "KANBAN_VIEW": "View Kanban"
+      "CONVERSATION_MANAGE": "Visualizar todas as conversas",
+      "CONVERSATION_UNASSIGNED_MANAGE": "Visualizar conversas não atribuídas e atribuídas",
+      "CONVERSATION_PARTICIPATING_MANAGE": "Visualizar conversas participantes",
+      "CONTACT_MANAGE": "Visualizar contatos",
+      "REPORT_MANAGE": "Visualizar relatórios",
+      "KNOWLEDGE_BASE_MANAGE": "Visualizar manuais",
+      "KANBAN_MANAGE": "Visualizar pipeline",
+      "CAMPAIGN_MANAGE": "Visualizar campanhas"
     },
     "FORM": {
       "NAME": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "Please enter a name.",
-        "ERROR": "Name is required."
+        "LABEL": "Nome da permissão",
+        "PLACEHOLDER": "Digite o nome da permissão",
+        "ERROR": "Ops! O nome da permissão é obrigatório."
       },
       "DESCRIPTION": {
-        "LABEL": "Description",
-        "PLACEHOLDER": "Please enter a description.",
-        "ERROR": "Description is required."
+        "LABEL": "Descrição",
+        "PLACEHOLDER": "Digite a descrição da permissão",
+        "ERROR": "Ops! A descrição é obrigatória."
       },
       "PERMISSIONS": {
-        "LABEL": "Permissions",
-        "ERROR": "Permissions are required."
+        "LABEL": "Permissões",
+        "ERROR": "Ops! A permissão é obrigatória."
       },
-      "CANCEL_BUTTON_TEXT": "Cancel",
+      "CANCEL_BUTTON_TEXT": "Cancelar",
       "API": {
-        "ERROR_MESSAGE": "Could not connect to Woot server. Please try again."
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para adicionar a permissão. Vamos tentar novamente? 🤞"
       }
     },
     "ADD": {
-      "TITLE": "Add custom role",
-      "DESC": " Custom roles allows you to create roles with specific permissions and access levels to suit the requirements of the organization.",
-      "SUBMIT": "Submit",
+      "TITLE": "Adicionar permissão",
+      "DESC": "",
+      "SUBMIT": "Salvar",
       "API": {
-        "SUCCESS_MESSAGE": "Custom role added successfully."
+        "SUCCESS_MESSAGE": "Oba! Permissão adicionada com sucesso! 🚀"
       }
     },
     "EDIT": {
-      "BUTTON_TEXT": "Edit",
-      "TITLE": "Edit custom role",
-      "DESC": " Custom roles allows you to create roles with specific permissions and access levels to suit the requirements of the organization.",
-      "SUBMIT": "Update",
+      "BUTTON_TEXT": "Editar",
+      "TITLE": "Editar permissão",
+      "DESC": "",
+      "SUBMIT": "Salvar",
       "API": {
-        "SUCCESS_MESSAGE": "Custom role updated successfully."
+        "SUCCESS_MESSAGE": "Oba! Permissão editada com sucesso! 🚀"
       }
     },
     "DELETE": {
-      "BUTTON_TEXT": "Delete",
+      "BUTTON_TEXT": "Excluir",
       "API": {
-        "SUCCESS_MESSAGE": "Custom role deleted successfully.",
-        "ERROR_MESSAGE": "Could not connect to Woot server. Please try again."
+        "SUCCESS_MESSAGE": "Oba! Permissão excluída com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir a permissão. Vamos tentar novamente? 🤞"
       },
       "CONFIRM": {
-        "TITLE": "Confirm deletion",
-        "MESSAGE": "Are you sure to delete ",
-        "YES": "Yes, delete ",
-        "NO": "No, keep "
+        "TITLE": "Confirmar exclusão",
+        "MESSAGE": "Você tem certeza que deseja excluir a automação?",
+        "YES": "Excluir",
+        "NO": "Cancelar"
       }
     }
   }

@@ -38,11 +38,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.integer "availability", default: 0, null: false
     t.boolean "auto_offline", default: true, null: false
     t.bigint "custom_role_id"
-    t.bigint "selected_funnel_id"
     t.index ["account_id", "user_id"], name: "uniq_user_id_per_account_id", unique: true
     t.index ["account_id"], name: "index_account_users_on_account_id"
     t.index ["custom_role_id"], name: "index_account_users_on_custom_role_id"
-    t.index ["selected_funnel_id"], name: "index_account_users_on_selected_funnel_id"
     t.index ["user_id"], name: "index_account_users_on_user_id"
   end
 
@@ -58,25 +56,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.jsonb "limits", default: {}
     t.jsonb "custom_attributes", default: {}
     t.integer "status", default: 0
-    t.string "subscription_type"
-    t.string "subscription_status"
-    t.string "billing_cycle"
-    t.date "next_due_date"
-    t.decimal "value", precision: 10, scale: 2
-    t.string "asaas_customer_id"
-    t.string "asaas_subscription_id"
-    t.string "billing_status"
     t.string "stripe_customer_id"
     t.string "stripe_subscription_id"
     t.string "stripe_price_id"
-    t.index ["asaas_customer_id"], name: "index_accounts_on_asaas_customer_id"
-    t.index ["asaas_subscription_id"], name: "index_accounts_on_asaas_subscription_id"
-    t.index ["billing_status"], name: "index_accounts_on_billing_status"
     t.index ["status"], name: "index_accounts_on_status"
     t.index ["stripe_customer_id"], name: "index_accounts_on_stripe_customer_id"
     t.index ["stripe_subscription_id"], name: "index_accounts_on_stripe_subscription_id"
-    t.index ["subscription_status"], name: "index_accounts_on_subscription_status"
-    t.index ["subscription_type"], name: "index_accounts_on_subscription_type"
   end
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
@@ -226,14 +211,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.index ["account_id"], name: "index_automation_rules_on_account_id"
   end
 
-  create_table "billings", force: :cascade do |t|
-    t.string "name"
-    t.string "subscription_type"
-    t.string "subscription_status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "campaigns", force: :cascade do |t|
     t.integer "display_id", null: false
     t.string "title", null: false
@@ -328,19 +305,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.index ["forward_to_email"], name: "index_channel_email_on_forward_to_email", unique: true
   end
 
-  create_table "channel_evolution_apis", force: :cascade do |t|
-    t.integer "account_id", null: false
-    t.string "inbox_name", null: false
-    t.string "webhook_url"
-    t.string "instance_id"
-    t.string "instance_token"
-    t.string "connection_status", default: "created"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_channel_evolution_apis_on_account_id"
-    t.index ["inbox_name"], name: "index_channel_evolution_apis_on_inbox_name"
-  end
-
   create_table "channel_facebook_pages", id: :serial, force: :cascade do |t|
     t.string "page_id", null: false
     t.string "user_access_token", null: false
@@ -361,18 +325,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["line_channel_id"], name: "index_channel_line_on_line_channel_id", unique: true
-  end
-
-  create_table "channel_mercadolivres", force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.string "mercadolivre_id", null: false
-    t.string "mercadolivre_token", null: false
-    t.string "provider", default: "mercadolivre"
-    t.jsonb "additional_attributes", default: {}
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_channel_mercadolivres_on_account_id"
-    t.index ["mercadolivre_id"], name: "index_channel_mercadolivres_on_mercadolivre_id", unique: true
   end
 
   create_table "channel_sms", force: :cascade do |t|
@@ -708,7 +660,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.jsonb "serialized_value", default: {}, null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.boolean "locked", default: true, null: false
+    t.boolean "locked", default: false, null: false
     t.index ["name", "created_at"], name: "index_installation_configs_on_name_and_created_at", unique: true
     t.index ["name"], name: "index_installation_configs_on_name", unique: true
   end
@@ -1133,7 +1085,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "channel_mercadolivres", "accounts"
   add_foreign_key "inboxes", "portals"
   add_foreign_key "kanban_automations", "accounts"
   add_foreign_key "kanban_items", "funnels"
