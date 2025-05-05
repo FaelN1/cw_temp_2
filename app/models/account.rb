@@ -4,6 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  auto_resolve_duration  :integer
+#  billing_status         :integer          default(0)
 #  custom_attributes      :jsonb
 #  domain                 :string(100)
 #  feature_flags          :bigint           default(0), not null

@@ -8,8 +8,11 @@
 #  campaign_type                      :integer          default("ongoing"), not null
 #  description                        :text
 #  enabled                            :boolean          default(TRUE)
+#  failed                             :integer          default(0), not null
+#  it_sent                            :integer          default(0), not null
 #  message                            :text             not null
 #  scheduled_at                       :datetime
+#  status_send                        :integer          default(0), not null
 #  template_params                    :jsonb            not null
 #  title                              :string           not null
 #  trigger_only_during_business_hours :boolean          default(FALSE)

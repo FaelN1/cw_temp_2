@@ -10,6 +10,7 @@
 #  auto_assignment_config        :jsonb
 #  business_name                 :string
 #  channel_type                  :string
+#  csat_response_visible         :boolean          default(FALSE), not null
 #  csat_survey_enabled           :boolean          default(FALSE)
 #  email_address                 :string
 #  enable_auto_assignment        :boolean          default(TRUE)
@@ -21,6 +22,7 @@
 #  name                          :string           not null
 #  out_of_office_message         :string
 #  sender_name_type              :integer          default("friendly"), not null
+#  shot_limit                    :integer          default(100)
 #  timezone                      :string           default("UTC")
 #  working_hours_enabled         :boolean          default(FALSE)
 #  created_at                    :datetime         not null

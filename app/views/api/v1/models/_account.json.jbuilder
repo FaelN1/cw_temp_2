@@ -23,7 +23,7 @@ end
 json.stripe_customer_id resource.stripe_customer_id
 json.stripe_subscription_id resource.stripe_subscription_id
 json.stripe_price_id resource.stripe_price_id
-json.billing_status resource.billing_status
+json.billing_status resource.respond_to?(:billing_status) ? resource.billing_status : nil
 
 json.domain @account.domain
 json.features @account.enabled_features
