@@ -172,6 +172,15 @@ class Account < ApplicationRecord
     write_attribute(:stripe_price_id, value) if respond_to?(:write_attribute, true)
   end
 
+  # Método temporário para o atributo billing_status
+  def billing_status
+    respond_to?(:read_attribute, true) ? read_attribute(:billing_status) : nil
+  end
+
+  def billing_status=(value)
+    write_attribute(:billing_status, value) if respond_to?(:write_attribute, true)
+  end
+
   private
 
   def notify_creation
