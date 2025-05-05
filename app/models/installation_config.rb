@@ -3,7 +3,7 @@
 # Table name: installation_configs
 #
 #  id               :bigint           not null, primary key
-#  locked           :boolean          default(FALSE), not null
+#  locked           :boolean          default(TRUE), not null
 #  name             :string           not null
 #  serialized_value :jsonb            not null
 #  created_at       :datetime         not null
