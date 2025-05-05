@@ -1,24 +1,23 @@
-json.access_token resource.access_token.token
-json.account_id resource.active_account_user&.account_id
+json.id resource.id
+json.email resource.email
+json.name resource.name
 json.available_name resource.available_name
 json.avatar_url resource.avatar_url
-json.confirmed resource.confirmed?
-json.display_name resource.display_name
+json.type resource.type
+json.created_at resource.created_at
+json.updated_at resource.updated_at
+json.custom_attributes resource.custom_attributes
 json.message_signature resource.message_signature
-json.email resource.email
-json.id resource.id
-json.name resource.name
-json.provider resource.provider
-json.pubsub_token resource.pubsub_token
-json.custom_attributes resource.custom_attributes if resource.custom_attributes.present?
-json.role resource.active_account_user&.role
-json.ui_settings resource.ui_settings
-json.uid resource.uid
-json.accounts do
-  json.array! resource.account_users do |account_user|
-    json.id account_user.account_id
-    json.name account_user.account.name
-    json.active_at account_user.active_at
-    json.role account_user.role
-  end
+json.display_name resource.display_name
+json.confirmed resource.confirmed?
+
+# Incluir informações detalhadas das contas do usuário
+json.accounts resource.account_users do |account_user|
+  json.id account_user.account_id
+  json.role account_user.role
+  json.role_name account_user.role # Isto mostrará o nome do enum ao invés do valor numérico
+  json.availability account_user.availability
+  json.availability_name account_user.availability # Nome do enum de disponibilidade
+  json.auto_offline account_user.auto_offline
+  json.custom_role_id account_user.custom_role_id
 end
