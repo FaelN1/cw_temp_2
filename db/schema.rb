@@ -229,11 +229,20 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.datetime "scheduled_at", precision: nil
     t.boolean "trigger_only_during_business_hours", default: false
     t.jsonb "template_params", default: {}, null: false
+    t.integer "failed", default: 0
+    t.integer "it_sent", default: 0
+    t.integer "status_send", default: 0
     t.index ["account_id"], name: "index_campaigns_on_account_id"
     t.index ["campaign_status"], name: "index_campaigns_on_campaign_status"
     t.index ["campaign_type"], name: "index_campaigns_on_campaign_type"
     t.index ["inbox_id"], name: "index_campaigns_on_inbox_id"
     t.index ["scheduled_at"], name: "index_campaigns_on_scheduled_at"
+  end
+
+  create_table "campaigns_failed", force: :cascade do |t|
+    t.integer "campaign_id"
+    t.text "contact_name"
+    t.string "phone"
   end
 
   create_table "canned_responses", id: :serial, force: :cascade do |t|
@@ -650,6 +659,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.string "business_name"
     t.boolean "allow_agent_to_delete_message", default: true, null: false
     t.string "external_token"
+    t.boolean "csat_response_visible", default: false
+    t.integer "shot_limit"
     t.index ["account_id"], name: "index_inboxes_on_account_id"
     t.index ["channel_id", "channel_type"], name: "index_inboxes_on_channel_id_and_channel_type"
     t.index ["portal_id"], name: "index_inboxes_on_portal_id"
@@ -779,6 +790,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.index ["inbox_id"], name: "index_messages_on_inbox_id"
     t.index ["sender_type", "sender_id"], name: "index_messages_on_sender_type_and_sender_id"
     t.index ["source_id"], name: "index_messages_on_source_id"
+  end
+
+# Could not dump table "messages_corrompidas" because of following StandardError
+#   Unknown type 'tid' for column 'linha_ctid'
+
+  create_table "n8n_chat_histories_salez", force: :cascade do |t|
+    t.jsonb "message"
+    t.string "session_id"
+  end
+
+  create_table "n8n_chat_histories_squalo", force: :cascade do |t|
+    t.jsonb "message"
+    t.string "session_id"
   end
 
   create_table "notes", force: :cascade do |t|

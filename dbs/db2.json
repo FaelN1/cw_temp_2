@@ -1,0 +1,3952 @@
+[
+  {
+    "c0": "access_tokens",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "access_tokens",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "access_tokens",
+    "c1": "owner_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "access_tokens",
+    "c1": "owner_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "access_tokens",
+    "c1": "token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "access_tokens",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "account_users",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "account_users",
+    "c1": "active_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "account_users",
+    "c1": "auto_offline",
+    "c2": "boolean"
+  },
+  {
+    "c0": "account_users",
+    "c1": "availability",
+    "c2": "integer"
+  },
+  {
+    "c0": "account_users",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "account_users",
+    "c1": "custom_role_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "account_users",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "account_users",
+    "c1": "inviter_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "account_users",
+    "c1": "role",
+    "c2": "integer"
+  },
+  {
+    "c0": "account_users",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "account_users",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "accounts",
+    "c1": "auto_resolve_duration",
+    "c2": "integer"
+  },
+  {
+    "c0": "accounts",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "accounts",
+    "c1": "custom_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "accounts",
+    "c1": "domain",
+    "c2": "character varying"
+  },
+  {
+    "c0": "accounts",
+    "c1": "feature_flags",
+    "c2": "bigint"
+  },
+  {
+    "c0": "accounts",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "accounts",
+    "c1": "limits",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "accounts",
+    "c1": "locale",
+    "c2": "integer"
+  },
+  {
+    "c0": "accounts",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "accounts",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "accounts",
+    "c1": "stripe_customer_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "accounts",
+    "c1": "stripe_price_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "accounts",
+    "c1": "stripe_subscription_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "accounts",
+    "c1": "support_email",
+    "c2": "character varying"
+  },
+  {
+    "c0": "accounts",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "action_mailbox_inbound_emails",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "action_mailbox_inbound_emails",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "action_mailbox_inbound_emails",
+    "c1": "message_checksum",
+    "c2": "character varying"
+  },
+  {
+    "c0": "action_mailbox_inbound_emails",
+    "c1": "message_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "action_mailbox_inbound_emails",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "action_mailbox_inbound_emails",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "active_storage_attachments",
+    "c1": "blob_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "active_storage_attachments",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "active_storage_attachments",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "active_storage_attachments",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "active_storage_attachments",
+    "c1": "record_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "active_storage_attachments",
+    "c1": "record_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "byte_size",
+    "c2": "bigint"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "checksum",
+    "c2": "character varying"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "content_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "filename",
+    "c2": "character varying"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "key",
+    "c2": "character varying"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "metadata",
+    "c2": "text"
+  },
+  {
+    "c0": "active_storage_blobs",
+    "c1": "service_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "active_storage_variant_records",
+    "c1": "blob_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "active_storage_variant_records",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "active_storage_variant_records",
+    "c1": "variation_digest",
+    "c2": "character varying"
+  },
+  {
+    "c0": "agent_bot_inboxes",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "agent_bot_inboxes",
+    "c1": "agent_bot_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "agent_bot_inboxes",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "agent_bot_inboxes",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "agent_bot_inboxes",
+    "c1": "inbox_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "agent_bot_inboxes",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "agent_bot_inboxes",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "bot_config",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "bot_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "description",
+    "c2": "character varying"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "outgoing_url",
+    "c2": "character varying"
+  },
+  {
+    "c0": "agent_bots",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "applied_slas",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "applied_slas",
+    "c1": "conversation_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "applied_slas",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "applied_slas",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "applied_slas",
+    "c1": "sla_policy_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "applied_slas",
+    "c1": "sla_status",
+    "c2": "integer"
+  },
+  {
+    "c0": "applied_slas",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "ar_internal_metadata",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "ar_internal_metadata",
+    "c1": "key",
+    "c2": "character varying"
+  },
+  {
+    "c0": "ar_internal_metadata",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "ar_internal_metadata",
+    "c1": "value",
+    "c2": "character varying"
+  },
+  {
+    "c0": "articles",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "articles",
+    "c1": "associated_article_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "articles",
+    "c1": "author_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "articles",
+    "c1": "category_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "articles",
+    "c1": "content",
+    "c2": "text"
+  },
+  {
+    "c0": "articles",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "articles",
+    "c1": "description",
+    "c2": "text"
+  },
+  {
+    "c0": "articles",
+    "c1": "folder_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "articles",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "articles",
+    "c1": "locale",
+    "c2": "character varying"
+  },
+  {
+    "c0": "articles",
+    "c1": "meta",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "articles",
+    "c1": "portal_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "articles",
+    "c1": "position",
+    "c2": "integer"
+  },
+  {
+    "c0": "articles",
+    "c1": "slug",
+    "c2": "character varying"
+  },
+  {
+    "c0": "articles",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "articles",
+    "c1": "title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "articles",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "articles",
+    "c1": "views",
+    "c2": "integer"
+  },
+  {
+    "c0": "attachments",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "attachments",
+    "c1": "attachable_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "attachments",
+    "c1": "attachable_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "attachments",
+    "c1": "coordinates_lat",
+    "c2": "double precision"
+  },
+  {
+    "c0": "attachments",
+    "c1": "coordinates_long",
+    "c2": "double precision"
+  },
+  {
+    "c0": "attachments",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "attachments",
+    "c1": "extension",
+    "c2": "character varying"
+  },
+  {
+    "c0": "attachments",
+    "c1": "external_url",
+    "c2": "character varying"
+  },
+  {
+    "c0": "attachments",
+    "c1": "fallback_title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "attachments",
+    "c1": "file_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "attachments",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "attachments",
+    "c1": "message_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "attachments",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "audits",
+    "c1": "action",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "associated_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "audits",
+    "c1": "associated_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "auditable_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "audits",
+    "c1": "auditable_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "audited_changes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "audits",
+    "c1": "comment",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "audits",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "audits",
+    "c1": "remote_address",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "request_uuid",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "audits",
+    "c1": "user_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "username",
+    "c2": "character varying"
+  },
+  {
+    "c0": "audits",
+    "c1": "version",
+    "c2": "integer"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "actions",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "active",
+    "c2": "boolean"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "conditions",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "description",
+    "c2": "text"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "event_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "automation_rules",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "audience",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "campaign_status",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "campaign_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "description",
+    "c2": "text"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "display_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "failed",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "inbox_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "it_sent",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "message",
+    "c2": "text"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "scheduled_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "sender_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "status_send",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "template_params",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "trigger_only_during_business_hours",
+    "c2": "boolean"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "trigger_rules",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "campaigns",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "campaigns_failed",
+    "c1": "campaign_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "campaigns_failed",
+    "c1": "contact_name",
+    "c2": "text"
+  },
+  {
+    "c0": "campaigns_failed",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "campaigns_failed",
+    "c1": "phone",
+    "c2": "character varying"
+  },
+  {
+    "c0": "canned_responses",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "canned_responses",
+    "c1": "content",
+    "c2": "text"
+  },
+  {
+    "c0": "canned_responses",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "canned_responses",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "canned_responses",
+    "c1": "short_code",
+    "c2": "character varying"
+  },
+  {
+    "c0": "canned_responses",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "categories",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "categories",
+    "c1": "associated_category_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "categories",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "categories",
+    "c1": "description",
+    "c2": "text"
+  },
+  {
+    "c0": "categories",
+    "c1": "icon",
+    "c2": "character varying"
+  },
+  {
+    "c0": "categories",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "categories",
+    "c1": "locale",
+    "c2": "character varying"
+  },
+  {
+    "c0": "categories",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "categories",
+    "c1": "parent_category_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "categories",
+    "c1": "portal_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "categories",
+    "c1": "position",
+    "c2": "integer"
+  },
+  {
+    "c0": "categories",
+    "c1": "slug",
+    "c2": "character varying"
+  },
+  {
+    "c0": "categories",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "additional_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "hmac_mandatory",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "hmac_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "identifier",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_api",
+    "c1": "webhook_url",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "email",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "forward_to_email",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "imap_address",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "imap_enable_ssl",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "imap_enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "imap_login",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "imap_password",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "imap_port",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "provider",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "provider_config",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_address",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_authentication",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_domain",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_enable_ssl_tls",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_enable_starttls_auto",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_login",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_openssl_verify_mode",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_password",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "smtp_port",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_email",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "instagram_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "page_access_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "page_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_facebook_pages",
+    "c1": "user_access_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_line",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_line",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_line",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_line",
+    "c1": "line_channel_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_line",
+    "c1": "line_channel_secret",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_line",
+    "c1": "line_channel_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_line",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_sms",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_sms",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_sms",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_sms",
+    "c1": "phone_number",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_sms",
+    "c1": "provider",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_sms",
+    "c1": "provider_config",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "channel_sms",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_telegram",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_telegram",
+    "c1": "bot_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_telegram",
+    "c1": "bot_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_telegram",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_telegram",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_telegram",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "account_sid",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "api_key_sid",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "auth_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "medium",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "messaging_service_sid",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "phone_number",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twilio_sms",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "profile_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "tweets_enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "twitter_access_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "twitter_access_token_secret",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_twitter_profiles",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "continuity_via_email",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "feature_flags",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "hmac_mandatory",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "hmac_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "pre_chat_form_enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "pre_chat_form_options",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "reply_time",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "website_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "website_url",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "welcome_tagline",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "welcome_title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_web_widgets",
+    "c1": "widget_color",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "message_templates",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "message_templates_last_updated",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "phone_number",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "provider",
+    "c2": "character varying"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "provider_config",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "channel_whatsapp",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "contact_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "hmac_verified",
+    "c2": "boolean"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "inbox_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "pubsub_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "source_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contact_inboxes",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "contacts",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "contacts",
+    "c1": "additional_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "contacts",
+    "c1": "blocked",
+    "c2": "boolean"
+  },
+  {
+    "c0": "contacts",
+    "c1": "contact_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "contacts",
+    "c1": "country_code",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "contacts",
+    "c1": "custom_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "contacts",
+    "c1": "email",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "contacts",
+    "c1": "identifier",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "last_activity_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "contacts",
+    "c1": "last_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "location",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "middle_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "phone_number",
+    "c2": "character varying"
+  },
+  {
+    "c0": "contacts",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversation_participants",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversation_participants",
+    "c1": "conversation_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversation_participants",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversation_participants",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversation_participants",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversation_participants",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversations",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "conversations",
+    "c1": "additional_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "conversations",
+    "c1": "agent_last_seen_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "assignee_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "conversations",
+    "c1": "assignee_last_seen_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "cached_label_list",
+    "c2": "text"
+  },
+  {
+    "c0": "conversations",
+    "c1": "campaign_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversations",
+    "c1": "contact_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversations",
+    "c1": "contact_inbox_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversations",
+    "c1": "contact_last_seen_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "custom_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "conversations",
+    "c1": "display_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "conversations",
+    "c1": "first_reply_created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "conversations",
+    "c1": "identifier",
+    "c2": "character varying"
+  },
+  {
+    "c0": "conversations",
+    "c1": "inbox_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "conversations",
+    "c1": "last_activity_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "priority",
+    "c2": "integer"
+  },
+  {
+    "c0": "conversations",
+    "c1": "sla_policy_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversations",
+    "c1": "snoozed_until",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "conversations",
+    "c1": "team_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "conversations",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "conversations",
+    "c1": "uuid",
+    "c2": "uuid"
+  },
+  {
+    "c0": "conversations",
+    "c1": "waiting_since",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "assigned_agent_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "contact_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "conversation_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "feedback_message",
+    "c2": "text"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "message_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "rating",
+    "c2": "integer"
+  },
+  {
+    "c0": "csat_survey_responses",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "attribute_description",
+    "c2": "text"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "attribute_display_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "attribute_display_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "attribute_key",
+    "c2": "character varying"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "attribute_model",
+    "c2": "integer"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "attribute_values",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "default_value",
+    "c2": "integer"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "regex_cue",
+    "c2": "character varying"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "regex_pattern",
+    "c2": "character varying"
+  },
+  {
+    "c0": "custom_attribute_definitions",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "filter_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "query",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "custom_filters",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "custom_roles",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "custom_roles",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "custom_roles",
+    "c1": "description",
+    "c2": "character varying"
+  },
+  {
+    "c0": "custom_roles",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "custom_roles",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "custom_roles",
+    "c1": "permissions",
+    "c2": "ARRAY"
+  },
+  {
+    "c0": "custom_roles",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "content",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "icon",
+    "c2": "character varying"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "show_in_navigation",
+    "c2": "boolean"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "dashboard_apps",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "data_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "processed_records",
+    "c2": "integer"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "processing_errors",
+    "c2": "text"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "total_records",
+    "c2": "integer"
+  },
+  {
+    "c0": "data_imports",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "body",
+    "c2": "text"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "locale",
+    "c2": "integer"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "template_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "email_templates",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "folders",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "folders",
+    "c1": "category_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "folders",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "folders",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "folders",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "folders",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "funnels",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "funnels",
+    "c1": "active",
+    "c2": "boolean"
+  },
+  {
+    "c0": "funnels",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "funnels",
+    "c1": "description",
+    "c2": "character varying"
+  },
+  {
+    "c0": "funnels",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "funnels",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "funnels",
+    "c1": "settings",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "funnels",
+    "c1": "stages",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "funnels",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "inbox_members",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "inbox_members",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "inbox_members",
+    "c1": "inbox_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "inbox_members",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "inbox_members",
+    "c1": "user_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "allow_agent_to_delete_message",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "allow_messages_after_resolved",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "auto_assignment_config",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "business_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "channel_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "channel_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "csat_response_visible",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "csat_survey_enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "email_address",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "enable_auto_assignment",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "enable_email_collect",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "external_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "greeting_enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "greeting_message",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "lock_to_single_conversation",
+    "c2": "boolean"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "out_of_office_message",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "portal_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "sender_name_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "shot_limit",
+    "c2": "integer"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "timezone",
+    "c2": "character varying"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "inboxes",
+    "c1": "working_hours_enabled",
+    "c2": "boolean"
+  },
+  {
+    "c0": "installation_configs",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "installation_configs",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "installation_configs",
+    "c1": "locked",
+    "c2": "boolean"
+  },
+  {
+    "c0": "installation_configs",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "installation_configs",
+    "c1": "serialized_value",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "installation_configs",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "access_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "app_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "hook_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "inbox_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "reference_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "settings",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "integrations_hooks",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "actions",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "active",
+    "c2": "boolean"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "conditions",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "description",
+    "c2": "text"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "trigger",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "kanban_automations",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "conversation_display_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "custom_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "funnel_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "funnel_stage",
+    "c2": "character varying"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "item_details",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "position",
+    "c2": "integer"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "stage_entered_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "timer_duration",
+    "c2": "integer"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "timer_started_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "kanban_items",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "labels",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "labels",
+    "c1": "color",
+    "c2": "character varying"
+  },
+  {
+    "c0": "labels",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "labels",
+    "c1": "description",
+    "c2": "text"
+  },
+  {
+    "c0": "labels",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "labels",
+    "c1": "show_on_sidebar",
+    "c2": "boolean"
+  },
+  {
+    "c0": "labels",
+    "c1": "title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "labels",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "macros",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "macros",
+    "c1": "actions",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "macros",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "macros",
+    "c1": "created_by_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "macros",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "macros",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "macros",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "macros",
+    "c1": "updated_by_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "macros",
+    "c1": "visibility",
+    "c2": "integer"
+  },
+  {
+    "c0": "mentions",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "mentions",
+    "c1": "conversation_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "mentions",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "mentions",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "mentions",
+    "c1": "mentioned_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "mentions",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "mentions",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "messages",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "messages",
+    "c1": "additional_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "messages",
+    "c1": "content",
+    "c2": "text"
+  },
+  {
+    "c0": "messages",
+    "c1": "content_attributes",
+    "c2": "json"
+  },
+  {
+    "c0": "messages",
+    "c1": "content_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "messages",
+    "c1": "conversation_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "messages",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "messages",
+    "c1": "external_source_ids",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "messages",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "messages",
+    "c1": "inbox_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "messages",
+    "c1": "message_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "messages",
+    "c1": "private",
+    "c2": "boolean"
+  },
+  {
+    "c0": "messages",
+    "c1": "processed_message_content",
+    "c2": "text"
+  },
+  {
+    "c0": "messages",
+    "c1": "sender_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "messages",
+    "c1": "sender_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "messages",
+    "c1": "sentiment",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "messages",
+    "c1": "source_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "messages",
+    "c1": "status",
+    "c2": "integer"
+  },
+  {
+    "c0": "messages",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "messages_corrompidas",
+    "c1": "coluna_erro",
+    "c2": "text"
+  },
+  {
+    "c0": "messages_corrompidas",
+    "c1": "detectado_em",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "messages_corrompidas",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "messages_corrompidas",
+    "c1": "linha_ctid",
+    "c2": "tid"
+  },
+  {
+    "c0": "n8n_chat_histories_salez",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "n8n_chat_histories_salez",
+    "c1": "message",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "n8n_chat_histories_salez",
+    "c1": "session_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "n8n_chat_histories_squalo",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "n8n_chat_histories_squalo",
+    "c1": "message",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "n8n_chat_histories_squalo",
+    "c1": "session_id",
+    "c2": "character varying"
+  },
+  {
+    "c0": "notes",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notes",
+    "c1": "contact_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notes",
+    "c1": "content",
+    "c2": "text"
+  },
+  {
+    "c0": "notes",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notes",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notes",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notes",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notification_settings",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "notification_settings",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notification_settings",
+    "c1": "email_flags",
+    "c2": "integer"
+  },
+  {
+    "c0": "notification_settings",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notification_settings",
+    "c1": "push_flags",
+    "c2": "integer"
+  },
+  {
+    "c0": "notification_settings",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notification_settings",
+    "c1": "user_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "notification_subscriptions",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notification_subscriptions",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notification_subscriptions",
+    "c1": "identifier",
+    "c2": "text"
+  },
+  {
+    "c0": "notification_subscriptions",
+    "c1": "subscription_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "notification_subscriptions",
+    "c1": "subscription_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "notification_subscriptions",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notification_subscriptions",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notifications",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notifications",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notifications",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notifications",
+    "c1": "last_activity_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notifications",
+    "c1": "meta",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "notifications",
+    "c1": "notification_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "notifications",
+    "c1": "primary_actor_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notifications",
+    "c1": "primary_actor_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "notifications",
+    "c1": "read_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notifications",
+    "c1": "secondary_actor_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "notifications",
+    "c1": "secondary_actor_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "notifications",
+    "c1": "snoozed_until",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notifications",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "notifications",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "calls",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "dbid",
+    "c2": "oid"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_deform_count",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_deform_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_emission_count",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_emission_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_functions",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_generation_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_inlining_count",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_inlining_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_optimization_count",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "jit_optimization_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "local_blk_read_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "local_blk_write_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "local_blks_dirtied",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "local_blks_hit",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "local_blks_read",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "local_blks_written",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "max_exec_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "max_plan_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "mean_exec_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "mean_plan_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "min_exec_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "min_plan_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "minmax_stats_since",
+    "c2": "timestamp with time zone"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "plans",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "query",
+    "c2": "text"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "queryid",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "rows",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "shared_blk_read_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "shared_blk_write_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "shared_blks_dirtied",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "shared_blks_hit",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "shared_blks_read",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "shared_blks_written",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "stats_since",
+    "c2": "timestamp with time zone"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "stddev_exec_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "stddev_plan_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "temp_blk_read_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "temp_blk_write_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "temp_blks_read",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "temp_blks_written",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "toplevel",
+    "c2": "boolean"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "total_exec_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "total_plan_time",
+    "c2": "double precision"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "userid",
+    "c2": "oid"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "wal_bytes",
+    "c2": "numeric"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "wal_fpi",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements",
+    "c1": "wal_records",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements_info",
+    "c1": "dealloc",
+    "c2": "bigint"
+  },
+  {
+    "c0": "pg_stat_statements_info",
+    "c1": "stats_reset",
+    "c2": "timestamp with time zone"
+  },
+  {
+    "c0": "platform_app_permissibles",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "platform_app_permissibles",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "platform_app_permissibles",
+    "c1": "permissible_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "platform_app_permissibles",
+    "c1": "permissible_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "platform_app_permissibles",
+    "c1": "platform_app_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "platform_app_permissibles",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "platform_apps",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "platform_apps",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "platform_apps",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "platform_apps",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "portal_members",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "portal_members",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "portal_members",
+    "c1": "portal_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "portal_members",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "portal_members",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "portals",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "portals",
+    "c1": "archived",
+    "c2": "boolean"
+  },
+  {
+    "c0": "portals",
+    "c1": "channel_web_widget_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "portals",
+    "c1": "color",
+    "c2": "character varying"
+  },
+  {
+    "c0": "portals",
+    "c1": "config",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "portals",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "portals",
+    "c1": "custom_domain",
+    "c2": "character varying"
+  },
+  {
+    "c0": "portals",
+    "c1": "header_text",
+    "c2": "text"
+  },
+  {
+    "c0": "portals",
+    "c1": "homepage_link",
+    "c2": "character varying"
+  },
+  {
+    "c0": "portals",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "portals",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "portals",
+    "c1": "page_title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "portals",
+    "c1": "slug",
+    "c2": "character varying"
+  },
+  {
+    "c0": "portals",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "portals_members",
+    "c1": "portal_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "portals_members",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "related_categories",
+    "c1": "category_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "related_categories",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "related_categories",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "related_categories",
+    "c1": "related_category_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "related_categories",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "conversation_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "event_end_time",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "event_start_time",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "inbox_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "user_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "value",
+    "c2": "double precision"
+  },
+  {
+    "c0": "reporting_events",
+    "c1": "value_in_business_hours",
+    "c2": "double precision"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "content",
+    "c2": "text"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "conversation_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "inbox_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "scheduled_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "status",
+    "c2": "character varying"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "title",
+    "c2": "character varying"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "scheduled_messages",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "schema_migrations",
+    "c1": "version",
+    "c2": "character varying"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "applied_sla_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "conversation_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "event_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "inbox_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "meta",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "sla_policy_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_events",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "description",
+    "c2": "character varying"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "first_response_time_threshold",
+    "c2": "double precision"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "next_response_time_threshold",
+    "c2": "double precision"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "only_during_business_hours",
+    "c2": "boolean"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "resolution_time_threshold",
+    "c2": "double precision"
+  },
+  {
+    "c0": "sla_policies",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "taggings",
+    "c1": "context",
+    "c2": "character varying"
+  },
+  {
+    "c0": "taggings",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "taggings",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "taggings",
+    "c1": "tag_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "taggings",
+    "c1": "taggable_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "taggings",
+    "c1": "taggable_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "taggings",
+    "c1": "tagger_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "taggings",
+    "c1": "tagger_type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "tags",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "tags",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "tags",
+    "c1": "taggings_count",
+    "c2": "integer"
+  },
+  {
+    "c0": "team_members",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "team_members",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "team_members",
+    "c1": "team_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "team_members",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "team_members",
+    "c1": "user_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "teams",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "teams",
+    "c1": "allow_auto_assign",
+    "c2": "boolean"
+  },
+  {
+    "c0": "teams",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "teams",
+    "c1": "description",
+    "c2": "text"
+  },
+  {
+    "c0": "teams",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "teams",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "teams",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "telegram_bots",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "telegram_bots",
+    "c1": "auth_key",
+    "c2": "character varying"
+  },
+  {
+    "c0": "telegram_bots",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "telegram_bots",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "telegram_bots",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "telegram_bots",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "availability",
+    "c2": "integer"
+  },
+  {
+    "c0": "users",
+    "c1": "confirmation_sent_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "confirmation_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "confirmed_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "current_sign_in_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "current_sign_in_ip",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "custom_attributes",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "users",
+    "c1": "display_name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "email",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "encrypted_password",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "id",
+    "c2": "integer"
+  },
+  {
+    "c0": "users",
+    "c1": "last_sign_in_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "last_sign_in_ip",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "message_signature",
+    "c2": "text"
+  },
+  {
+    "c0": "users",
+    "c1": "name",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "provider",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "pubsub_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "remember_created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "reset_password_sent_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "users",
+    "c1": "reset_password_token",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "sign_in_count",
+    "c2": "integer"
+  },
+  {
+    "c0": "users",
+    "c1": "tokens",
+    "c2": "json"
+  },
+  {
+    "c0": "users",
+    "c1": "type",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "ui_settings",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "users",
+    "c1": "uid",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "unconfirmed_email",
+    "c2": "character varying"
+  },
+  {
+    "c0": "users",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "account_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "inbox_id",
+    "c2": "integer"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "subscriptions",
+    "c2": "jsonb"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "url",
+    "c2": "character varying"
+  },
+  {
+    "c0": "webhooks",
+    "c1": "webhook_type",
+    "c2": "integer"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "account_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "close_hour",
+    "c2": "integer"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "close_minutes",
+    "c2": "integer"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "closed_all_day",
+    "c2": "boolean"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "created_at",
+    "c2": "timestamp without time zone"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "day_of_week",
+    "c2": "integer"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "inbox_id",
+    "c2": "bigint"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "open_all_day",
+    "c2": "boolean"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "open_hour",
+    "c2": "integer"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "open_minutes",
+    "c2": "integer"
+  },
+  {
+    "c0": "working_hours",
+    "c1": "updated_at",
+    "c2": "timestamp without time zone"
+  }
+]
