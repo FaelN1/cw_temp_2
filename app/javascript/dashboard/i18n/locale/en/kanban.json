@@ -440,9 +440,9 @@
           "EDIT_STAGE": "Edit stage"
         },
         "ACTIONS": {
-          "CANCEL": "Cancel",
-          "SAVE": "Save",
-          "NEW": "New Funnel"
+          "CANCEL": "Cancelar",
+          "SAVE": "Salvar",
+          "NEW": "Novo Funil"
         }
       },
       "TEMPLATES": {
