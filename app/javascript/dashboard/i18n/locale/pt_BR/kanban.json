@@ -1,6 +1,7 @@
 {
   "KANBAN": {
     "OPEN": "Aberto",
+    "SELECT_FUNNEL": "Funil selecionado",
     "CURRENCY": "BRL",
     "PENDING": "Pendente",
     "NO_AGENT_ASSIGNED": "Nenhum agente atribuído",

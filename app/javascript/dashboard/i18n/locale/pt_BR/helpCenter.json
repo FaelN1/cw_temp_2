@@ -317,6 +317,70 @@
         }
       }
     },
+    "ARTICLES_PAGE": {
+      "ARTICLE_CARD": {
+      "CARD": {
+        "VIEWS": "{count} visualização | {count} visualizações",
+        "DROPDOWN_MENU": {
+        "PUBLISH": "Publicar",
+        "DRAFT": "Rascunho",
+        "ARCHIVE": "Arquivar",
+        "DELETE": "Excluir"
+        },
+        "STATUS": {
+        "DRAFT": "Rascunho",
+        "PUBLISHED": "Publicado",
+        "ARCHIVED": "Arquivado"
+        },
+        "CATEGORY": {
+        "UNCATEGORISED": "Sem categoria"
+        }
+      }
+      },
+      "ARTICLES_HEADER": {
+      "TABS": {
+        "ALL": "Todos os conteúdos",
+        "MINE": "Meus",
+        "DRAFT": "Rascunho",
+        "PUBLISHED": "Publicado",
+        "ARCHIVED": "Arquivado"
+      },
+      "CATEGORY": {
+        "ALL": "Todas as categorias"
+      },
+      "LOCALE": {
+        "ALL": "Todas as localidades"
+      },
+      "NEW_ARTICLE": "Novo conteúdo"
+      },
+      "EMPTY_STATE": {
+      "ALL": {
+        "TITLE": "Escreva um conteúdo",
+        "SUBTITLE": "Escreva um conteúdo completo, vamos começar!",
+        "BUTTON_LABEL": "Novo conteúdo"
+      },
+      "MINE": {
+        "TITLE": "Você ainda não escreveu nenhum conteúdo aqui",
+        "SUBTITLE": "Todos os conteúdos escritos por você aparecem aqui para acesso rápido."
+      },
+      "DRAFT": {
+        "TITLE": "Não há conteúdos em rascunho",
+        "SUBTITLE": "Conteúdos em rascunho aparecerão aqui"
+      },
+      "PUBLISHED": {
+        "TITLE": "Não há conteúdos publicados",
+        "SUBTITLE": "Conteúdos publicados aparecerão aqui"
+      },
+      "ARCHIVED": {
+        "TITLE": "Não há conteúdos arquivados",
+        "SUBTITLE": "Conteúdos arquivados não aparecem no manual, você pode usar para marcar páginas desatualizadas ou obsoletas"
+      },
+      "CATEGORY": {
+        "TITLE": "Não há conteúdos nesta categoria",
+        "SUBTITLE": "Conteúdos desta categoria aparecerão aqui"
+      }
+      }
+    },
     "TABLE": {
       "LOADING_MESSAGE": "Carregando conteúdos...",
       "404": "Nenhum conteúdo corresponde à sua pesquisa 🔍",
