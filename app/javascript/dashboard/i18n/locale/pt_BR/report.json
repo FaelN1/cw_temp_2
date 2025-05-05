@@ -148,6 +148,32 @@
       "EMPTY_LIST": "Ops! Nenhum resultado encontrado."
     }
   },
+  "PAGINATION": {
+    "PREVIOUS": "Anterior",
+    "NEXT": "Próximo",
+    "PAGE": "Página %{page}",
+    "RESULTS": "Mostrando %{start} - %{end} de %{total} resultados",
+    "PAGE_COUNT": "de %{count} páginas",
+    "ROWS_PER_PAGE": "Linhas por página",
+    "ROWS_PER_PAGE_OPTIONS": [
+      {
+        "id": 0,
+        "name": "5"
+      },
+      {
+        "id": 1,
+        "name": "10"
+      },
+      {
+        "id": 2,
+        "name": "20"
+      },
+      {
+        "id": 3,
+        "name": "50"
+      }
+    ]
+  },
   "AGENT_REPORTS": {
     "HEADER": "Relatório dos Usuários",
     "LOADING_CHART": "Carregando dados do gráfico...",
