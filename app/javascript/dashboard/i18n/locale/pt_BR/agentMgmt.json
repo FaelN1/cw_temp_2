@@ -1,121 +1,120 @@
 {
-  "ATTRIBUTES_MGMT": {
-    "HEADER": "Campos",
-    "HEADER_BTN_TXT": "Adicionar campo",
-    "LOADING": "Carregando campos...",
-    "DESCRIPTION": "Os campos rastreiam informações chaves sobre seus contatos/conversas, ficando disponíveis na parte de detalhes do contato na seção de conversas.",
-    "LEARN_MORE": "Saiba mais sobre as funções dos campos",
+  "AGENT_MGMT": {
+    "HEADER": "Usuários",
+    "HEADER_BTN_TXT": "Adicionar usuário",
+    "LOADING": "Carregando usuários...",
+    "DESCRIPTION": "Os usuários são os membros da sua equipe que faz o atendimento ao cliente, assim que adicionado receberá um e-mail com o link de confirmação para ativar sua conta.",
+    "LEARN_MORE": "Saiba mais sobre as funções dos usuários",
+    "AGENT_TYPES": {
+      "ADMINISTRATOR": "Administrador",
+      "AGENT": "Colaborador"
+    },
+    "LIST": {
+      "404": "Ops! Nenhum usuário criado ainda. Vamos criar? 🙌",
+      "TITLE": "Gerenciar usuários da sua conta",
+      "DESC": "Você pode adicionar e/ou remover usuários.",
+      "NAME": "Nome",
+      "EMAIL": "E-mail",
+      "STATUS": "Situação",
+      "ACTIONS": "Ações",
+      "VERIFIED": "Verificado",
+      "VERIFICATION_PENDING": "Verificação pendente",
+      "AVAILABLE_CUSTOM_ROLE": "Permissões de função personalizadas disponíveis"
+    },
     "ADD": {
-      "TITLE": "Adicionar campo",
-      "SUBMIT": "Salvar",
+      "TITLE": "Adicionar usuário",
+      "DESC": "",
       "CANCEL_BUTTON_TEXT": "Cancelar",
       "FORM": {
         "NAME": {
-          "LABEL": "Nome do campo",
-          "PLACEHOLDER": "Digite o nome de exibição para o campo",
-          "ERROR": "Ops! O nome é obrigatório."
+          "LABEL": "Nome do usuário",
+          "PLACEHOLDER": "Digite o nome do usuário"
         },
-        "DESC": {
-          "LABEL": "Descrição",
-          "PLACEHOLDER": "Digite a descrição deste campo",
-          "ERROR": "Ops! A descrição é obrigatória."
-        },
-        "MODEL": {
-          "LABEL": "Aplica-se a",
-          "PLACEHOLDER": "Por favor, selecione um",
-          "ERROR": "Ops! O modelo é necessário."
-        },
-        "TYPE": {
-          "LABEL": "Tipo",
+        "AGENT_TYPE": {
+          "LABEL": "Tipo de usuário",
           "PLACEHOLDER": "Selecione um tipo",
-          "ERROR": "Ops! O tipo é obrigatório.",
-          "LIST": {
-            "LABEL": "Listar valores",
-            "PLACEHOLDER": "Digite o valor e pressione Enter",
-            "ERROR": "Ops! Deve ter pelo menos um valor."
-          }
+          "ERROR": "Ops! É necessário o tipo de usuário."
         },
-        "KEY": {
-          "LABEL": "Chave",
-          "PLACEHOLDER": "Digite a chave do campo",
-          "ERROR": "Ops! A chave é obrigatória.",
-          "IN_VALID": "Chave inválida"
+        "EMAIL": {
+          "LABEL": "E-mail",
+          "PLACEHOLDER": "Digite o e-mail do usuário"
         },
-        "REGEX_PATTERN": {
-          "LABEL": "Padrão personalizado",
-          "PLACEHOLDER": "Insira o padrão de expressão regular para campo (Opcional)"
-        },
-        "REGEX_CUE": {
-          "LABEL": "Sugestão personalizada",
-          "PLACEHOLDER": "Insira a sugestão para o padrão de expressão regular (Opcional)"
-        },
-        "ENABLE_REGEX": {
-          "LABEL": "Habilitar validação personalizada"
-        }
+        "SUBMIT": "Salvar"
       },
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Campo adicionado com sucesso! 🚀",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para adicionar o campo. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Oba! Usuário adicionado com sucesso! 🚀",
+        "EXIST_MESSAGE": "Ops! O E-mail do usuário informado já está em uso. Por favor, tente outro e-mail.",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar com o servidor. Vamos tentar novamente? 🤞"
       }
     },
     "DELETE": {
       "BUTTON_TEXT": "Excluir",
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Campo excluído com sucesso!",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para excluir o campo. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Oba! Usuário excluído com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar com o servidor. Vamos tentar novamente? 🤞"
       },
       "CONFIRM": {
         "TITLE": "Confirmar exclusão",
-        "PLACE_HOLDER": "Digite {attributeName} para confirmar",
-        "MESSAGE": "Você tem certeza que deseja excluir o campo?",
+        "MESSAGE": "Você tem certeza que deseja excluir o usuário?",
         "YES": "Excluir",
         "NO": "Cancelar"
       }
     },
     "EDIT": {
-      "TITLE": "Editar campo",
-      "UPDATE_BUTTON_TEXT": "Salvar",
-      "TYPE": {
-        "LIST": {
-          "LABEL": "Listar campos",
-          "PLACEHOLDER": "Digite o campo e pressione Enter"
-        }
+      "TITLE": "Editar",
+      "FORM": {
+        "NAME": {
+          "LABEL": "Nome do usuário",
+          "PLACEHOLDER": "Insira o nome do usuário"
+        },
+        "AGENT_TYPE": {
+          "LABEL": "Tipo de usuário",
+          "PLACEHOLDER": "Selecione um tipo",
+          "ERROR": "Ops! É necessário o tipo de usuário."
+        },
+        "EMAIL": {
+          "LABEL": "E-mail",
+          "PLACEHOLDER": "Insira o e-mail do usuário"
+        },
+        "AGENT_AVAILABILITY": {
+          "LABEL": "Disponibilidade",
+          "PLACEHOLDER": "Selecione a disponibilidade do usuário",
+          "ERROR": "Ops! A disponibilidade é necessária."
+        },
+        "SUBMIT": "Salvar"
       },
+      "BUTTON_TEXT": "Editar",
+      "CANCEL_BUTTON_TEXT": "Cancelar",
       "API": {
-        "SUCCESS_MESSAGE": "Oba! Campo editado com sucesso!",
-        "ERROR_MESSAGE": "Ops! Houve alguma falha para editar o campo. Vamos tentar novamente? 🤞"
+        "SUCCESS_MESSAGE": "Oba! Usuário editado com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar com o servidor. Vamos tentar novamente? 🤞"
+      },
+      "PASSWORD_RESET": {
+        "ADMIN_RESET_BUTTON": "Redefinir a senha",
+        "ADMIN_SUCCESS_MESSAGE": "O e-mail com instruções de redefinição de senha foi enviado para o usuário.",
+        "SUCCESS_MESSAGE": "Oba! Senha do usuário redefinida com sucesso!",
+        "ERROR_MESSAGE": "Ops! Houve alguma falha para conectar com o servidor. Vamos tentar novamente? 🤞"
       }
     },
-    "TABS": {
-      "HEADER": "Campos",
-      "CONVERSATION": "Conversas",
-      "CONTACT": "Contatos"
+    "SEARCH": {
+      "NO_RESULTS": "Nenhum resultado encontrado."
     },
-    "LIST": {
-      "TABLE_HEADER": [
-        "Nome",
-        "Descrição",
-        "Tipo",
-        "Chave"
-      ],
-      "BUTTONS": {
-        "EDIT": "Editar",
-        "DELETE": "Excluir"
+    "MULTI_SELECTOR": {
+      "PLACEHOLDER": "Nenhuma",
+      "TITLE": {
+        "AGENT": "Selecionar usuário",
+        "TEAM": "Selecionar equipe"
       },
-      "EMPTY_RESULT": {
-        "404": "Ops! Nenhum campo criado ainda. Vamos criar? 🙌",
-        "NOT_FOUND": "Ops! Nenhum campo configurado ainda. Vamos configurar? 🙌"
-      },
-      "REGEX_PATTERN": {
-        "LABEL": "Padrão personalizado",
-        "PLACEHOLDER": "Insira o padrão de expressão regular para o campo (Opcional)"
-      },
-      "REGEX_CUE": {
-        "LABEL": "Sugestão personalizada",
-        "PLACEHOLDER": "Insira a sugestão para o padrão de expressão regular (Opcional)"
-      },
-      "ENABLE_REGEX": {
-        "LABEL": "Habilitar validação personalizada"
+      "SEARCH": {
+        "NO_RESULTS": {
+          "AGENT": "Nenhum usuário encontrado",
+          "TEAM": "Nenhuma equipe encontrada"
+        },
+        "PLACEHOLDER": {
+          "AGENT": "Pesquisar usuários",
+          "TEAM": "Pesquisar equipes",
+          "INPUT": "Pesquisar por usuários"
+        }
       }
     }
   }

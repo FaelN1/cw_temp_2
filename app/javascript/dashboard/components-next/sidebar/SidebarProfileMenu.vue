@@ -59,7 +59,7 @@ const menuItems = computed(() => {
       },
     },
     {
-      show: true,
+      show: false,
       label: t('SIDEBAR_ITEMS.DOCS'),
       icon: 'i-lucide-book',
       link: 'https://www.chatwoot.com/hc/user-guide/en',

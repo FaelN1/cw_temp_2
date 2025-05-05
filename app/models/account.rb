@@ -21,9 +21,7 @@
 #
 # Indexes
 #
-#  index_accounts_on_status                  (status)
-#  index_accounts_on_stripe_customer_id      (stripe_customer_id)
-#  index_accounts_on_stripe_subscription_id  (stripe_subscription_id)
+#  index_accounts_on_status  (status)
 #
 
 class Account < ApplicationRecord

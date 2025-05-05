@@ -57,12 +57,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_25_000000) do
     t.jsonb "custom_attributes", default: {}
     t.integer "status", default: 0
     t.string "stripe_customer_id"
-    t.string "stripe_price_id"
     t.string "stripe_subscription_id"
+    t.string "stripe_price_id"
     t.integer "billing_status", default: 0
     t.index ["status"], name: "index_accounts_on_status"
-    t.index ["stripe_customer_id"], name: "index_accounts_on_stripe_customer_id"
-    t.index ["stripe_subscription_id"], name: "index_accounts_on_stripe_subscription_id"
   end
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
@@ -1143,10 +1141,10 @@ AS $function$
                   IF tag_id_variable IS NOT NULL THEN
                       -- Verificar si la etiqueta ya está asociada al contacto
                       IF NOT EXISTS (
-                          SELECT 1
-                          FROM taggings
+                          SELECT 1 
+                          FROM taggings 
                           WHERE tag_id = tag_id_variable
-                            AND taggable_type = 'Contact'
+                            AND taggable_type = 'Contact' 
                             AND taggable_id = NEW.contact_id
                       ) THEN
                           -- Insertar la nueva asociación de etiqueta
@@ -1203,29 +1201,10 @@ AS $function$
   SQL
 
   # no candidate create_trigger statement could be found, creating an adapter-specific one
-  execute("CREATE TRIGGER after_delete_labels AFTER DELETE ON \"labels\" FOR EACH ROW EXECUTE FUNCTION delete_labels_from_tags_and_taggings()")
-
-  # no candidate create_trigger statement could be found, creating an adapter-specific one
   execute("CREATE TRIGGER after_insert_labels AFTER INSERT ON \"labels\" FOR EACH ROW EXECUTE FUNCTION replicate_labels_to_tags()")
 
   # no candidate create_trigger statement could be found, creating an adapter-specific one
   execute("CREATE TRIGGER after_update_labels AFTER UPDATE ON \"labels\" FOR EACH ROW EXECUTE FUNCTION update_labels_to_tags()")
-
-  # no candidate create_trigger statement could be found, creating an adapter-specific one
-  execute(<<-SQL)
-CREATE OR REPLACE FUNCTION public.delete_labels_from_tags_and_taggings()
- RETURNS trigger
- LANGUAGE plpgsql
-AS $function$
-BEGIN
-    -- Exclui da tabela tags
-    DELETE FROM tags WHERE id = OLD.id;
-    -- Exclui da tabela taggings
-    DELETE FROM taggings WHERE tag_id = OLD.id;
-    RETURN OLD;
-END;
-$function$
-  SQL
 
   # no candidate create_trigger statement could be found, creating an adapter-specific one
   execute("CREATE TRIGGER n8n_trigger_22ed75a2_76d5_4bbf_9628_89bdde6cee34 AFTER INSERT ON \"taggings\" FOR EACH ROW EXECUTE FUNCTION n8n_trigger_function_22ed75a2_76d5_4bbf_9628_89bdde6cee34()")
