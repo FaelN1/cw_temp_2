@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useStore, useMapGetter } from 'dashboard/composables/store';
 import { useAlert } from 'dashboard/composables';
 import { useI18n } from 'vue-i18n';
@@ -63,19 +63,23 @@ const onClickViewDetails = async id => {
 const toggleExpanded = id => {
   expandedCardId.value = expandedCardId.value === id ? null : id;
 };
+
+onMounted(() => {
+  console.log('Dados de contatos recebidos:', props.contacts);
+});
 </script>
 
 <template>
   <div class="flex flex-col gap-4 px-6 pt-4 pb-6">
     <ContactsCard
       v-for="contact in contacts"
-      :key="contact.id"
       :id="contact.id"
+      :key="contact.id"
       :name="contact.name"
       :email="contact.email"
       :thumbnail="contact.thumbnail"
-      :phone-number="contact.phone_number"
-      :additional-attributes="contact.additional_attributes"
+      :phone-number="contact.phoneNumber"
+      :additional-attributes="contact.additionalAttributes"
       :is-expanded="expandedCardId === contact.id"
       :is-updating="isUpdating"
       @toggle="toggleExpanded(contact.id)"

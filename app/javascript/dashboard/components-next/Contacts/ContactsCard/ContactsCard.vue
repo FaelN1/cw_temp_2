@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 import CardLayout from 'dashboard/components-next/CardLayout.vue';
@@ -26,6 +26,10 @@ const emit = defineEmits(['toggle', 'updateContact', 'showContact']);
 const { t } = useI18n();
 
 const contactsFormRef = ref(null);
+
+onMounted(() => {
+  console.log('Props do contato:', JSON.stringify(props, null, 2));
+});
 
 const getInitialContactData = () => ({
   id: props.id,
