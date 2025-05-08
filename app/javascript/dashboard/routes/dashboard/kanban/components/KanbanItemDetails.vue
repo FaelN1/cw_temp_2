@@ -101,7 +101,7 @@ const currentStageName = computed(() => {
 // Adicione este computed para pegar o nome do usuário atual
 const currentUser = computed(() => store.getters['getCurrentUser']);
 
-// Adicione esta função para buscar os atributos disponíveis
+// Adicione esta função para buscar os campos disponíveis
 const fetchCustomAttributes = async () => {
   try {
     loadingAttributes.value = true;
@@ -110,7 +110,7 @@ const fetchCustomAttributes = async () => {
       attr => attr.attribute_model === 'conversation_attribute'
     );
   } catch (error) {
-    console.error('Erro ao carregar atributos:', error);
+    console.error('Erro ao carregar campos:', error);
   } finally {
     loadingAttributes.value = false;
   }
@@ -1039,7 +1039,7 @@ onMounted(() => {
     fetchConversationData(props.item.item_details.conversation_id);
   }
 
-  // Carregar atributos apenas se necessário
+  // Carregar campos apenas se necessário
   if (
     props.item.item_details?.conversation_id &&
     activeTab.value === 'custom_fields'
@@ -1079,7 +1079,7 @@ onMounted(() => {
     fetchConversationData(props.item.item_details.conversation_id);
   }
 
-  // Carregar atributos apenas se necessário
+  // Carregar campos apenas se necessário
   if (
     props.item.item_details?.conversation_id &&
     activeTab.value === 'custom_fields'

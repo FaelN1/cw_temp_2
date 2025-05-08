@@ -195,7 +195,7 @@
     "NO_INBOX": "Couldn't find an inbox to initiate a new conversation with this contact.",
     "FORM": {
       "TO": {
-        "LABEL": "To"
+        "LABEL": "Para"
       },
       "INBOX": {
         "LABEL": "Inbox",

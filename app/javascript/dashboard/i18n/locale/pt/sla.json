@@ -9,7 +9,7 @@
     "PAYWALL": {
       "TITLE": "Upgrade para criar SLAs",
       "AVAILABLE_ON": "O recurso SLA apenas está disponível nos planos Business e Enterprise.",
-      "UPGRADE_PROMPT": "Faça upgrade do seu plano para obter acesso a recursos avançados, como gestão de equipas, automações, atributos personalizados e muito mais.",
+      "UPGRADE_PROMPT": "Faça upgrade do seu plano para obter acesso a recursos avançados, como gestão de equipas, automações, campos personalizados e muito mais.",
       "UPGRADE_NOW": "Fazer upgrade agora",
       "CANCEL_ANYTIME": "Pode alterar ou cancelar o plano a qualquer momento"
     },

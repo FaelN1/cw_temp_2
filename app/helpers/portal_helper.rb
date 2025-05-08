@@ -63,7 +63,7 @@ module PortalHelper
   end
 
   def thumbnail_bg_color(username)
-    colors = ['#a02503', '#A4C3C3', '#E19191'] # woot 900, outros exemplos
+    colors = ['#FFD2C4', '#A4C3C3', '#E19191'] # woot 900, outros exemplos
     return colors.sample if username.blank?
 
     colors[username.length % colors.size]

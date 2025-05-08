@@ -48,7 +48,7 @@
         "404": "Nu există webhook-uri configurate pentru acest cont.",
         "TITLE": "Gestionează webhook-uri",
         "TABLE_HEADER": [
-          "Webhook endpoint",
+          "Webhook",
           "Actiuni"
         ]
       },

@@ -7,11 +7,11 @@
     "PLACEHOLDER": "Select an option...",
     "EMPTY_SEARCH_RESULTS": "No items found for the search term `{searchTerm}`",
     "EMPTY_STATE": "No results found.",
-    "SEARCH_PLACEHOLDER": "Search...",
+    "SEARCH_PLACEHOLDER": "Pesquisar...",
     "MORE": "+{count} more"
   },
   "DROPDOWN_MENU": {
-    "SEARCH_PLACEHOLDER": "Search...",
+    "SEARCH_PLACEHOLDER": "Pesquisar...",
     "EMPTY_STATE": "No results found.",
     "SEARCHING": "Searching..."
   },
@@ -38,6 +38,6 @@
     "TOGGLE": "Toggle switch"
   },
   "LABEL": {
-    "TAG_BUTTON": "tag"
+    "TAG_BUTTON": "etiqueta"
   }
 }

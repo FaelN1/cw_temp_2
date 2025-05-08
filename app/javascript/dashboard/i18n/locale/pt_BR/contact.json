@@ -585,7 +585,7 @@
     },
     "SIDEBAR": {
       "TABS": {
-        "ATTRIBUTES": "Atributos",
+        "ATTRIBUTES": "campos",
         "HISTORY": "Histórico",
         "NOTES": "Anotações",
         "MERGE": "Mesclar"
@@ -594,9 +594,9 @@
         "EMPTY_STATE": "Não há conversas anteriores associadas a este contato"
       },
       "ATTRIBUTES": {
-        "SEARCH_PLACEHOLDER": "Pesquisar atributos",
-        "UNUSED_ATTRIBUTES": "{count} atributo usado | {count} atributos não usados",
-        "EMPTY_STATE": "Não há atributos personalizados disponíveis nesta conta. Você pode criar um atributo personalizado nas configurações.",
+        "SEARCH_PLACEHOLDER": "Pesquisar campos",
+        "UNUSED_ATTRIBUTES": "{count} atributo usado | {count} campos não usados",
+        "EMPTY_STATE": "Não há campos personalizados disponíveis nesta conta. Você pode criar um atributo personalizado nas configurações.",
         "YES": "Sim",
         "NO": "Não",
         "TRIGGER": {
@@ -620,7 +620,7 @@
       },
       "MERGE": {
         "TITLE": "Mesclar contatos",
-        "DESCRIPTION": "Combine dois perfis em um, incluindo todos os atributos e conversas. Em caso de conflito, os atributos do contato principal terão precedência.",
+        "DESCRIPTION": "Combine dois perfis em um, incluindo todos os campos e conversas. Em caso de conflito, os campos do contato principal terão precedência.",
         "PRIMARY": "Contato principal",
         "PRIMARY_HELP_LABEL": "Para ser mantido",
         "PRIMARY_REQUIRED_ERROR": "Por favor, selecione um contato para mesclar antes de prosseguir",

@@ -111,7 +111,7 @@ export const DEFAULT_LINE_CHART = {
 
 export const DEFAULT_BAR_CHART = {
   type: 'bar',
-  backgroundColor: '#ff3900', // woot 500
+  backgroundColor: '#FFD2C4', // woot 500
 };
 
 const createChartConfig = yAxisTickCallback => ({

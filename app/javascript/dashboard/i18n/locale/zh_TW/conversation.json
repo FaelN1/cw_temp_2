@@ -164,7 +164,7 @@
       "STOP_AUDIO_RECORDING": "Stop audio recording",
       "": "",
       "EMAIL_HEAD": {
-        "TO": "TO",
+        "TO": "Para",
         "ADD_BCC": "密件副本",
         "CC": {
           "LABEL": "副本",
@@ -307,7 +307,7 @@
   },
   "EMAIL_HEADER": {
     "FROM": "From",
-    "TO": "To",
+    "TO": "Para",
     "BCC": "密件副本",
     "CC": "副本",
     "SUBJECT": "主旨"

@@ -386,7 +386,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_05_000000) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "website_token"
-    t.string "widget_color", default: "#1f93ff"
+    t.string "widget_color", default: "#FF3900"
     t.string "welcome_title"
     t.string "welcome_tagline"
     t.integer "feature_flags", default: 7, null: false
@@ -725,7 +725,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_05_000000) do
   create_table "labels", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "color", default: "#1f93ff", null: false
+    t.string "color", default: "#FF3900", null: false
     t.boolean "show_on_sidebar"
     t.bigint "account_id"
     t.datetime "created_at", null: false
@@ -1141,10 +1141,10 @@ AS $function$
                   IF tag_id_variable IS NOT NULL THEN
                       -- Verificar si la etiqueta ya está asociada al contacto
                       IF NOT EXISTS (
-                          SELECT 1 
-                          FROM taggings 
+                          SELECT 1
+                          FROM taggings
                           WHERE tag_id = tag_id_variable
-                            AND taggable_type = 'Contact' 
+                            AND taggable_type = 'Contact'
                             AND taggable_id = NEW.contact_id
                       ) THEN
                           -- Insertar la nueva asociación de etiqueta

@@ -1,8 +1,8 @@
 {
   "ATTRIBUTES_MGMT": {
-    "HEADER": "Atributos personalizados",
+    "HEADER": "campos personalizados",
     "HEADER_BTN_TXT": "Añadir atributo personalizado",
-    "LOADING": "Obtener atributos personalizados",
+    "LOADING": "Obtener campos personalizados",
     "DESCRIPTION": "A custom attribute tracks additional details about your contacts or conversations—such as the subscription plan or the date of their first purchase. You can add different types of custom attributes, such as text, lists, or numbers, to capture the specific information you need.",
     "LEARN_MORE": "Learn more about custom attributes",
     "ADD": {
@@ -87,7 +87,7 @@
       }
     },
     "TABS": {
-      "HEADER": "Atributos personalizados",
+      "HEADER": "campos personalizados",
       "CONVERSATION": "Conversación",
       "CONTACT": "Contacto"
     },
@@ -103,8 +103,8 @@
         "DELETE": "Eliminar"
       },
       "EMPTY_RESULT": {
-        "404": "No hay atributos personalizados creados",
-        "NOT_FOUND": "No hay atributos personalizados configurados"
+        "404": "No hay campos personalizados creados",
+        "NOT_FOUND": "No hay campos personalizados configurados"
       },
       "REGEX_PATTERN": {
         "LABEL": "Patrón de Regex",

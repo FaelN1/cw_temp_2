@@ -46,7 +46,7 @@
     "SEND_TRANSCRIPT": "Enviar transcrição",
     "EDIT_LABEL": "Editar",
     "SIDEBAR_SECTIONS": {
-      "CUSTOM_ATTRIBUTES": "Atributos personalizados",
+      "CUSTOM_ATTRIBUTES": "campos personalizados",
       "CONTACT_LABELS": "Etiquetas de contacto",
       "PREVIOUS_CONVERSATIONS": "Histórico de conversas",
       "NO_RECORDS_FOUND": "Nenhum atributo encontrado"
@@ -294,12 +294,12 @@
     }
   },
   "CUSTOM_ATTRIBUTES": {
-    "ADD_BUTTON_TEXT": "Adicionar atributos",
+    "ADD_BUTTON_TEXT": "Adicionar campos",
     "BUTTON": "Adicionar atributo personalizado",
-    "NOT_AVAILABLE": "Não há atributos personalizados disponíveis para este contacto.",
+    "NOT_AVAILABLE": "Não há campos personalizados disponíveis para este contacto.",
     "COPY_SUCCESSFUL": "Copiado para área de transferência com sucesso",
-    "SHOW_MORE": "Mostrar todos os atributos",
-    "SHOW_LESS": "Mostrar menos atributos",
+    "SHOW_MORE": "Mostrar todos os campos",
+    "SHOW_LESS": "Mostrar menos campos",
     "ACTIONS": {
       "COPY": "Copiar atributo",
       "DELETE": "Apagar atributo",
@@ -335,8 +335,8 @@
         "ERROR": "Não foi possível apagar o atributo. Por favor, tente mais tarde"
       },
       "ATTRIBUTE_SELECT": {
-        "TITLE": "Adicionar atributos",
-        "PLACEHOLDER": "Pesquisar atributos",
+        "TITLE": "Adicionar campos",
+        "PLACEHOLDER": "Pesquisar campos",
         "NO_RESULT": "Nenhum atributo encontrado"
       },
       "ATTRIBUTE_TYPE": {
@@ -355,7 +355,7 @@
   },
   "MERGE_CONTACTS": {
     "TITLE": "Unir contactos",
-    "DESCRIPTION": "Unir contactos para combinar dois perfis num, incluindo todos os atributos e conversas. Em caso de conflito, os atributos do contacto principal terão prioridade.",
+    "DESCRIPTION": "Unir contactos para combinar dois perfis num, incluindo todos os campos e conversas. Em caso de conflito, os campos do contacto principal terão prioridade.",
     "PRIMARY": {
       "TITLE": "Contacto principal",
       "HELP_LABEL": "Para ser apagado"

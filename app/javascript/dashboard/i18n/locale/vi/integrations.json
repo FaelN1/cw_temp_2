@@ -47,7 +47,7 @@
       "LIST": {
         "404": "Không có webhook nào được định cấu hình cho tài khoản này.",
         "TITLE": "Quản lý webhooks",
-        "TABLE_HEADER": ["Webhook endpoint", "Hành động"]
+        "TABLE_HEADER": ["Webhook", "Hành động"]
       },
       "EDIT": {
         "BUTTON_TEXT": "Chỉnh sửa",

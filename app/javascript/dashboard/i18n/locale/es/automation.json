@@ -88,8 +88,8 @@
     },
     "CONDITION": {
       "DELETE_MESSAGE": "Necesitas tener al menos una condición para guardar",
-      "CONTACT_CUSTOM_ATTR_LABEL": "Atributos personalizados del contacto",
-      "CONVERSATION_CUSTOM_ATTR_LABEL": "Atributos personalizados de la conversación"
+      "CONTACT_CUSTOM_ATTR_LABEL": "campos personalizados del contacto",
+      "CONVERSATION_CUSTOM_ATTR_LABEL": "campos personalizados de la conversación"
     },
     "ACTION": {
       "DELETE_MESSAGE": "Necesitas tener al menos una acción para guardar",

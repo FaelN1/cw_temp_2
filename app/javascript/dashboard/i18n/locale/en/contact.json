@@ -14,7 +14,7 @@
     "OS": "Operating System",
     "INITIATED_FROM": "Initiated from",
     "INITIATED_AT": "Initiated at",
-    "IP_ADDRESS": "IP Address",
+    "IP_ADDRESS": "Endereço IPP",
     "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "New message",
     "CONVERSATIONS": {
@@ -155,7 +155,7 @@
     "NO_INBOX": "Couldn't find an inbox to initiate a new conversation with this contact.",
     "FORM": {
       "TO": {
-        "LABEL": "To"
+        "LABEL": "Para"
       },
       "INBOX": {
         "LABEL": "Via Inbox",
@@ -286,7 +286,7 @@
     "HEADER": {
       "TITLE": "Contacts",
       "SEARCH_TITLE": "Search contacts",
-      "SEARCH_PLACEHOLDER": "Search...",
+      "SEARCH_PLACEHOLDER": "Pesquisar...",
       "MESSAGE_BUTTON": "Message",
       "SEND_MESSAGE": "Send message",
       "BREADCRUMB": {
@@ -562,12 +562,12 @@
       "NO_INBOX_ALERT": "There are no available inboxes to start a conversation with this contact.",
       "CONTACT_SELECTOR": {
         "LABEL": "To:",
-        "TAG_INPUT_PLACEHOLDER": "Search for a contact with name, email or phone number",
+        "TAG_INPUT_PLACEHOLDER": "Procure um contato por nome, e-mail ou número de telefone",
         "CONTACT_CREATING": "Creating contact..."
       },
       "INBOX_SELECTOR": {
         "LABEL": "Via:",
-        "BUTTON": "Show inboxes"
+        "BUTTON": "Selecione o canal"
       },
       "EMAIL_OPTIONS": {
         "SUBJECT_LABEL": "Subject :",
@@ -579,7 +579,7 @@
         "BCC_BUTTON": "Bcc"
       },
       "MESSAGE_EDITOR": {
-        "PLACEHOLDER": "Write your message here..."
+        "PLACEHOLDER": "Digite uma mensagem"
       },
       "WHATSAPP_OPTIONS": {
         "LABEL": "Select template",
@@ -593,7 +593,7 @@
         }
       },
       "ACTION_BUTTONS": {
-        "DISCARD": "Discard",
+        "DISCARD": "Cancelar",
         "SEND": "Send ({keyCode})"
       }
     }

@@ -825,7 +825,7 @@ export default {
         gap: 4px;
 
         .icon {
-          color: #1f93ff;
+          color: #FF3900;
         }
       }
     }
@@ -856,7 +856,7 @@ export default {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: #1f93ff;
+        color: #FF3900;
 
         svg {
           width: 14px;
@@ -898,7 +898,7 @@ export default {
       }
 
       &.edit {
-        color: #1f93ff;
+        color: #FF3900;
       }
 
       &.delete {

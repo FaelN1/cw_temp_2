@@ -278,7 +278,7 @@
       "CONVERSATION_ACTIONS": "Acciones de conversación",
       "CONVERSATION_LABELS": "Etiquetas de conversación",
       "CONVERSATION_INFO": "Información de la conversación",
-      "CONTACT_ATTRIBUTES": "Atributos de contacto",
+      "CONTACT_ATTRIBUTES": "campos de contacto",
       "PREVIOUS_CONVERSATION": "Conversaciones anteriores",
       "MACROS": "Macros",
       "KANBAN_ACTIONS": "Acciones de Kanban"
@@ -286,7 +286,7 @@
   },
   "CONVERSATION_CUSTOM_ATTRIBUTES": {
     "ADD_BUTTON_TEXT": "Crear atributo",
-    "NO_RECORDS_FOUND": "No se encontraron atributos",
+    "NO_RECORDS_FOUND": "No se encontraron campos",
     "UPDATE": {
       "SUCCESS": "Atributo actualizado correctamente",
       "ERROR": "No se puede actualizar el atributo. Por favor, inténtalo de nuevo más tarde"
@@ -301,9 +301,9 @@
       "ERROR": "No se puede eliminar el atributo. Por favor, inténtalo de nuevo más tarde"
     },
     "ATTRIBUTE_SELECT": {
-      "TITLE": "Añadir atributos",
-      "PLACEHOLDER": "Buscar atributos",
-      "NO_RESULT": "No se encontraron atributos"
+      "TITLE": "Añadir campos",
+      "PLACEHOLDER": "Buscar campos",
+      "NO_RESULT": "No se encontraron campos"
     }
   },
   "EMAIL_HEADER": {

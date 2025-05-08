@@ -568,7 +568,7 @@ export default {
 
 .spinner-qrcode {
   border: 4px solid rgba(255, 255, 255, 0.1);
-  border-top-color: #1f93ff;
+  border-top-color: #FF3900;
   border-radius: 50%;
   width: 50px;
   height: 50px;

@@ -12,9 +12,9 @@
       "TITLE": "Manage Audit Logs",
       "DESC": "Audit Logs are trails for events and actions in a Salez System.",
       "TABLE_HEADER": {
-        "ACTIVITY": "Activity",
-        "TIME": "Time",
-        "IP_ADDRESS": "IP Address"
+        "ACTIVITY": "Atividade",
+        "TIME": "Data e Horário",
+        "IP_ADDRESS": "Endereço IP"
       }
     },
     "API": {

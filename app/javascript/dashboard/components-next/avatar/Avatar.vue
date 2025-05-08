@@ -64,7 +64,7 @@ const AVATAR_COLORS = {
     ['#E1E9FF', '#3A5BC7'],
   ],
   // Troque o padrão para woot 900
-  default: { bg: '#a02503', text: '#fff' },
+  default: { bg: '#FFD2C4', text: '#fff' },
 };
 
 const STATUS_CLASSES = {

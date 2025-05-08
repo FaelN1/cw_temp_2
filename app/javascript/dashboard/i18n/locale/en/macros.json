@@ -26,10 +26,10 @@
     },
     "LIST": {
       "TABLE_HEADER": {
-        "NAME": "Name",
-        "CREATED BY": "Created by",
-        "LAST_UPDATED_BY": "Last updated by",
-        "VISIBILITY": "Visibility"
+        "NAME": "Nome",
+        "CREATED BY": "Criado por",
+        "LAST_UPDATED_BY": "Última atualização",
+        "VISIBILITY": "Última atualização"
       },
       "404": "No macros found"
     },
@@ -59,7 +59,7 @@
       "ADD_BTN_TOOLTIP": "Add new action",
       "DELETE_BTN_TOOLTIP": "Delete Action",
       "VISIBILITY": {
-        "LABEL": "Macro Visibility",
+        "LABEL": "Macro Última atualização",
         "GLOBAL": {
           "LABEL": "Public",
           "DESCRIPTION": "This macro is available publicly for all agents in this account."

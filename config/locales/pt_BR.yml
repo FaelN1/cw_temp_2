@@ -23,6 +23,8 @@ pt_BR:
     reset_password_failure: Uh ho! Não conseguimos encontrar nenhum usuário com o e-mail especificado.
     inbox_deletetion_response: Seu pedido de exclusão da caixa de entrada será processado dentro de algum tempo.
   errors:
+    messages:
+      blank: "não pode ficar em branco"
     validations:
       presence: não pode ficar em branco
     webhook:
@@ -193,14 +195,14 @@ pt_BR:
       description: "Apps do Painel permitem que você crie e incorpore aplicativos que exibem informações, pedidos ou histórico de pagamento, fornecendo mais contexto aos seus agentes de suporte ao cliente."
     dyte:
       name: "Dyte"
-      description: "Dyte é um produto que integra as funcionalidades de áudio e vídeo em seu aplicativo. Com esta integração, seus agentes podem iniciar chamadas de vídeo/voz com seus clientes diretamente do Chatwoot."
+      description: "Dyte é um produto que integra as funcionalidades de áudio e vídeo em seu aplicativo. Com esta integração, seus agentes podem iniciar chamadas de vídeo/voz com seus clientes diretamente da Salez."
       meeting_name: "%{agent_name} começou a reunião"
     slack:
       name: "Slack"
       description: "Integre Chatwoot com Slack para manter sua equipe em sincronia. Essa integração permite que você receba notificações de novas conversas e as responda diretamente na interface do Slack."
     webhooks:
       name: "Webhooks"
-      description: "Eventos webhook fornecem atualizações sobre atividades em tempo real na sua conta Chatwoot. Você pode se inscrever em seus eventos preferidos, e o Chatwoot enviará as chamadas HTTP com as atualizações."
+      description: "Eventos webhook fornecem atualizações sobre atividades em tempo real na sua conta da Salez. Você pode se inscrever os eventos e a Salez enviará as chamadas HTTP com as atualizações."
     dialogflow:
       name: "Fluxo de diálogo"
       description: "Construa chatbots com o Dialogflow e integre-os facilmente na sua caixa de entrada. Esses bots podem lidar com as consultas iniciais antes de transferi-las para um agente de atendimento ao cliente."
@@ -258,8 +260,6 @@ pt_BR:
       phone_number: Telefone
       company_name: Empresa
       inbox_name: Caixa de Entrada
-      inbox_type: Tipo de Caixa de Entrada
-    button: Abrir conversa
   time_units:
     days:
       one: "%{count} dia"
@@ -275,10 +275,10 @@ pt_BR:
       other: "%{count} segundos"
   activerecord:
     models:
-      kanban_item: 
+      kanban_item:
         one: "Item do Kanban"
         other: "Itens do Kanban"
-    
+
     attributes:
       kanban_item:
         funnel_id: "Funil"
@@ -291,7 +291,7 @@ pt_BR:
         item_details: "Detalhes do Item"
         stage_entered_at: "Entrada na Etapa"
         account: "Conta"
-    
+
     errors:
       models:
         kanban_item:
@@ -304,7 +304,5 @@ pt_BR:
               blank: "A posição é obrigatória"
             account:
               blank: "A conta é obrigatória"
-
-  errors:
     messages:
       blank: "não pode ficar em branco"

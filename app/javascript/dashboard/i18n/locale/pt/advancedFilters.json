@@ -61,7 +61,7 @@
     "GROUPS": {
       "STANDARD_FILTERS": "Filtros padrão",
       "ADDITIONAL_FILTERS": "Filtros adicionais",
-      "CUSTOM_ATTRIBUTES": "Atributos personalizados"
+      "CUSTOM_ATTRIBUTES": "campos personalizados"
     },
     "CUSTOM_VIEWS": {
       "ADD": {

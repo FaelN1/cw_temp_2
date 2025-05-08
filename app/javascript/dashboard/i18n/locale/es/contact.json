@@ -46,10 +46,10 @@
     "SEND_TRANSCRIPT": "Enviar Transcripción",
     "EDIT_LABEL": "Editar",
     "SIDEBAR_SECTIONS": {
-      "CUSTOM_ATTRIBUTES": "Atributos personalizados",
+      "CUSTOM_ATTRIBUTES": "campos personalizados",
       "CONTACT_LABELS": "Etiqueta de Contacto",
       "PREVIOUS_CONVERSATIONS": "Conversaciones anteriores",
-      "NO_RECORDS_FOUND": "No se encontraron atributos"
+      "NO_RECORDS_FOUND": "No se encontraron campos"
     }
   },
   "EDIT_CONTACT": {
@@ -294,12 +294,12 @@
     }
   },
   "CUSTOM_ATTRIBUTES": {
-    "ADD_BUTTON_TEXT": "Añadir atributos",
+    "ADD_BUTTON_TEXT": "Añadir campos",
     "BUTTON": "Añadir atributo personalizado",
-    "NOT_AVAILABLE": "No hay atributos personalizados disponibles para este contacto.",
+    "NOT_AVAILABLE": "No hay campos personalizados disponibles para este contacto.",
     "COPY_SUCCESSFUL": "Copiado al portapapeles satisfactoriamente",
-    "SHOW_MORE": "Mostrar todos los atributos",
-    "SHOW_LESS": "Mostrar menos atributos",
+    "SHOW_MORE": "Mostrar todos los campos",
+    "SHOW_LESS": "Mostrar menos campos",
     "ACTIONS": {
       "COPY": "Copiar atributo",
       "DELETE": "Eliminar atributo",
@@ -310,7 +310,7 @@
       "DESC": "Añadir información personalizada a este contacto."
     },
     "FORM": {
-      "CREATE": "Agregar atributos",
+      "CREATE": "Agregar campos",
       "CANCEL": "Cancelar",
       "NAME": {
         "LABEL": "Nombre de atributo personalizado",
@@ -335,9 +335,9 @@
         "ERROR": "No se puede eliminar el atributo. Por favor, inténtalo de nuevo más tarde"
       },
       "ATTRIBUTE_SELECT": {
-        "TITLE": "Añadir atributos",
-        "PLACEHOLDER": "Buscar atributos",
-        "NO_RESULT": "No se encontraron atributos"
+        "TITLE": "Añadir campos",
+        "PLACEHOLDER": "Buscar campos",
+        "NO_RESULT": "No se encontraron campos"
       },
       "ATTRIBUTE_TYPE": {
         "LIST": {
@@ -355,7 +355,7 @@
   },
   "MERGE_CONTACTS": {
     "TITLE": "Combinar contactos",
-    "DESCRIPTION": "Fusionar los contactos para combinar dos perfiles en uno, incluyendo todos los atributos y conversaciones.",
+    "DESCRIPTION": "Fusionar los contactos para combinar dos perfiles en uno, incluyendo todos los campos y conversaciones.",
     "PRIMARY": {
       "TITLE": "Contacto principal",
       "HELP_LABEL": "A eliminar"

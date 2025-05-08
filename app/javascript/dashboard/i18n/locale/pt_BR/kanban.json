@@ -124,7 +124,7 @@
     },
     "CUSTOM_FIELDS": {
       "TITLE": "Dados Adicionais",
-      "CONVERSATION_ATTRIBUTES": "Atributos da Conversa ",
+      "CONVERSATION_ATTRIBUTES": "campos da Conversa ",
       "NOT_FILLED": "Não preenchido",
       "NO_CUSTOM_FIELDS": "Nenhum campo personalizado",
       "NO_CUSTOM_FIELDS_DESCRIPTION": "Não há campos personalizados definidos para conversas."

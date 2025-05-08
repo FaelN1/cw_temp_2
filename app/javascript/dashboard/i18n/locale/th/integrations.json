@@ -47,7 +47,7 @@
       "LIST": {
         "404": "ไม่มีการตั้งค่า Webhooks กับบัญชีนี้",
         "TITLE": "จัดการ Webhooks",
-        "TABLE_HEADER": ["Webhook endpoint", "การกระทำ"]
+        "TABLE_HEADER": ["Webhook", "การกระทำ"]
       },
       "EDIT": {
         "BUTTON_TEXT": "เเก้ไข",

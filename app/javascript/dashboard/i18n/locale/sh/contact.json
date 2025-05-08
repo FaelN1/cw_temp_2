@@ -14,7 +14,7 @@
     "OS": "Operating System",
     "INITIATED_FROM": "Initiated from",
     "INITIATED_AT": "Initiated at",
-    "IP_ADDRESS": "IP Address",
+    "IP_ADDRESS": "Endereço IPP",
     "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "New message",
     "CONVERSATIONS": {
@@ -195,7 +195,7 @@
     "NO_INBOX": "Couldn't find an inbox to initiate a new conversation with this contact.",
     "FORM": {
       "TO": {
-        "LABEL": "To"
+        "LABEL": "Para"
       },
       "INBOX": {
         "LABEL": "Via Inbox",

@@ -48,7 +48,7 @@
         "404": "لا توجد webhooks مكونة لهذا الحساب.",
         "TITLE": "إدارة الـ webhooks",
         "TABLE_HEADER": [
-          "Webhook endpoint",
+          "Webhook",
           "الإجراءات"
         ]
       },

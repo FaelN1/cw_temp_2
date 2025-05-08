@@ -48,7 +48,7 @@
         "404": "Šioje paskyroje nėra sukonfigūruotų webhook.",
         "TITLE": "Tvarkykite webhooks",
         "TABLE_HEADER": [
-          "Webhook endpoint",
+          "Webhook",
           "Veiksmai"
         ]
       },

@@ -48,7 +48,7 @@
         "404": "There are no webhooks configured for this account.",
         "TITLE": "Manage webhooks",
         "TABLE_HEADER": [
-          "Webhook endpoint",
+          "Webhook",
           "Actions"
         ]
       },

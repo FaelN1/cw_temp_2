@@ -24,8 +24,8 @@ export const colors = {
     600: '#e53300',
     700: '#cc2d00',
     800: '#b22700',
-    900: '#a02503', // woot 900
-    110: '#ffb49c',
+    900: '#FFD2C4', // woot 900
+    110: '#FFD2C4',
     120: '#b22700',
   },
   green: {
@@ -35,7 +35,7 @@ export const colors = {
     100: orange.orange5,
     200: orange.orange7,
     300: orange.orange8,
-    400: orangeDark.orange11,
+    400: '#FFD2C4',
     500: orangeDark.orange10,
     600: orangeDark.orange9,
     700: orangeDark.orange8,

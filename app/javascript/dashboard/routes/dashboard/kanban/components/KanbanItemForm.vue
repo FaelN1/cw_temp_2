@@ -201,7 +201,7 @@ const customAttributes = ref([]);
 const loadingAttributes = ref(false);
 const conversationAttributes = ref({});
 
-// Adicione esta função para buscar os atributos
+// Adicione esta função para buscar os campos
 const fetchCustomAttributes = async () => {
   try {
     loadingAttributes.value = true;
@@ -210,24 +210,24 @@ const fetchCustomAttributes = async () => {
       attr => attr.attribute_model === 'conversation_attribute'
     );
   } catch (error) {
-    console.error('Erro ao carregar atributos:', error);
+    console.error('Erro ao carregar campos:', error);
   } finally {
     loadingAttributes.value = false;
   }
 };
 
-// Adicione esta função para buscar os valores dos atributos da conversa
+// Adicione esta função para buscar os valores dos campos da conversa
 const fetchConversationAttributes = async () => {
   if (!form.value.item_details?.conversation_id) return;
 
   try {
-    // Use os atributos que já vêm na conversa
+    // Use os campos que já vêm na conversa
     const conversation = form.value.item_details.conversation;
     if (conversation?.custom_attributes) {
       conversationAttributes.value = conversation.custom_attributes;
     }
   } catch (error) {
-    console.error('Erro ao carregar atributos da conversa:', error);
+    console.error('Erro ao carregar campos da conversa:', error);
   }
 };
 
@@ -881,7 +881,7 @@ const addNewOffer = () => {
   offers.value.push(newOffer);
 };
 
-// Adicione um watch para atualizar atributos quando a conversa mudar
+// Adicione um watch para atualizar campos quando a conversa mudar
 watch(
   () => form.value.item_details?.conversation_id,
   async newId => {

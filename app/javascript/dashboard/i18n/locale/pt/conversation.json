@@ -278,7 +278,7 @@
       "CONVERSATION_ACTIONS": "Ações de conversa",
       "CONVERSATION_LABELS": "Etiquetas da conversa",
       "CONVERSATION_INFO": "Informação da conversa",
-      "CONTACT_ATTRIBUTES": "Atributos do contacto",
+      "CONTACT_ATTRIBUTES": "campos do contacto",
       "PREVIOUS_CONVERSATION": "Conversas anteriores",
       "MACROS": "Macros"
     }
@@ -300,8 +300,8 @@
       "ERROR": "Não foi possível apagar o atributo. Por favor, tente mais tarde"
     },
     "ATTRIBUTE_SELECT": {
-      "TITLE": "Adicionar atributos",
-      "PLACEHOLDER": "Pesquisar atributos",
+      "TITLE": "Adicionar campos",
+      "PLACEHOLDER": "Pesquisar campos",
       "NO_RESULT": "Nenhum atributo encontrado"
     }
   },

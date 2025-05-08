@@ -152,7 +152,7 @@
       "REPLY_TITLE": "Respon el suggeriment amb IA",
       "SUBTITLE": "Es generarà una resposta millorada mitjançant IA, basada en el teu esborrany actual.",
       "TONE": {
-        "TITLE": "To",
+        "TITLE": "Para",
         "OPTIONS": {
           "PROFESSIONAL": "Professional",
           "FRIENDLY": "Amable"

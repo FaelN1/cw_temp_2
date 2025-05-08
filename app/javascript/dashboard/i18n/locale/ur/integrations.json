@@ -47,7 +47,7 @@
       "LIST": {
         "404": "There are no webhooks configured for this account.",
         "TITLE": "Manage webhooks",
-        "TABLE_HEADER": ["Webhook endpoint", "عمل"]
+        "TABLE_HEADER": ["Webhook", "عمل"]
       },
       "EDIT": {
         "BUTTON_TEXT": "ترمیم",

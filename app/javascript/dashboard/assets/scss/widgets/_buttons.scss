@@ -31,7 +31,7 @@ button {
 }
 
 .button {
-  @apply items-center bg-[#ff3900] dark:bg-[#ff3900] px-2.5 text-white dark:text-white inline-flex h-10 mb-0 gap-2 font-medium;
+  @apply items-center bg-[#FFD2C4] dark:bg-[#FFD2C4] px-2.5 text-white dark:text-white inline-flex h-10 mb-0 gap-2 font-medium;
 
   .button__content {
     @apply w-full whitespace-nowrap overflow-hidden text-ellipsis;
@@ -52,7 +52,7 @@ button {
   }
 
   &.success {
-    @apply bg-[#ff3900] dark:bg-[#ff3900] text-white dark:text-white;
+    @apply bg-[#FFD2C4] dark:bg-[#FFD2C4] text-white dark:text-white;
   }
 
   &.secondary {
@@ -115,7 +115,7 @@ button {
   }
 
   &.hollow {
-    @apply border border-woot-500 bg-transparent dark:bg-transparent dark:border-woot-500 text-woot-500 dark:text-woot-500 hover:bg-woot-50 dark:hover:bg-woot-900;
+    @apply border border-woot-500 bg-woot-50 dark:bg-woot-50 dark:border-woot-500 text-woot-500 hover:bg-woot-50 dark:hover:bg-woot-900;
 
     &.secondary {
       @apply text-slate-700 border-slate-100 dark:border-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700;
@@ -130,7 +130,7 @@ button {
     }
 
     &.warning {
-      @apply text-yellow-600 dark:text-yellow-600 border-yellow-600 dark:border-yellow-700 hover:bg-yellow-50 dark:hover:bg-woot-120;
+      @apply text-yellow-600 dark:text-yellow-600 border-yellow-600 dark:border-yellow-700 hover:bg-yellow-50 dark:hover:bg-woot-50;
     }
 
     &:hover {
@@ -156,7 +156,7 @@ button {
 
   // Smooth style
   &.smooth {
-    @apply bg-woot-800 dark:bg-woot-800 text-woot-700 dark:text-woot-100 hover:text-woot-700 dark:hover:text-woot-700 hover:bg-woot-100 dark:hover:bg-woot-900;
+    @apply bg-woot-50 dark:bg-woot-50 text-woot-700 dark:text-woot-100 hover:text-woot-700 dark:hover:text-woot-700 hover:bg-woot-100 dark:hover:bg-woot-900;
 
     &.secondary {
       @apply bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800;
@@ -229,6 +229,8 @@ button {
 
   // Sizes
   &.tiny {
+    @apply bg-woot-50 dark:bg-woot-50 text-woot-700 dark:text-woot-100 hover:text-woot-700 dark:hover:text-woot-700 hover:bg-woot-100 dark:hover:bg-woot-900;
+
     @apply h-6;
   }
 
