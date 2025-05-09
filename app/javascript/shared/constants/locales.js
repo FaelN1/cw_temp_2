@@ -407,7 +407,7 @@ const locales = {
   pl_PL: 'Polish (Poland)',
   pt: 'Portuguese',
   pt_AO: 'Portuguese (Angola)',
-  pt_BR: 'Portuguese (Brazil)',
+  pt_BR: 'Português (Brasil)',
   pt_CV: 'Portuguese (Cape Verde)',
   pt_GW: 'Portuguese (Guinea-Bissau)',
   pt_MO: 'Portuguese (Macau SAR China)',

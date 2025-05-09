@@ -86,10 +86,10 @@ const STYLE_CONFIG = {
     blue: {
       solid: 'bg-n-brand text-white hover:brightness-110 outline-transparent',
       faded:
-        'bg-n-brand/10 text-n-blue-text hover:bg-n-brand/20 outline-transparent',
-      outline: 'text-n-blue-text outline-n-blue-border',
-      ghost: 'text-n-blue-text hover:bg-n-alpha-2 outline-transparent',
-      link: 'text-n-blue-text hover:underline outline-transparent',
+        'bg-n-brand/10 text-woot-500 hover:bg-n-brand/20 outline-transparent',
+      outline: 'text-woot-500 outline-n-blue-border',
+      ghost: 'text-woot-500 hover:bg-n-alpha-2 outline-transparent',
+      link: 'text-woot-500 hover:underline outline-transparent',
     },
     ruby: {
       solid: 'bg-n-ruby-9 text-white hover:bg-n-ruby-10 outline-transparent',

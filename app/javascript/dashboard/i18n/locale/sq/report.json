@@ -498,8 +498,8 @@
     "AGENT_STATUS": {
       "HEADER": "Agent status",
       "ONLINE": "Online",
-      "BUSY": "Busy",
-      "OFFLINE": "Offline"
+      "BUSY": "Ausente",
+      "OFFLINE": "Desconectado"
     }
   },
   "DAYS_OF_WEEK": {

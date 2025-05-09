@@ -70,6 +70,15 @@ const contactAdditionalAttributes = computed(
   () => contact.value.additional_attributes || {}
 );
 
+// Adicione esta propriedade computada junto com as outras
+const currentAccountId = useMapGetter('getCurrentAccountId');
+const isKanbanEnabled = computed(() => 
+  store.getters['accounts/isFeatureEnabledonAccount'](
+    currentAccountId.value, 
+    'kanban_board'
+  )
+);
+
 const getContactDetails = () => {
   if (contactId.value) {
     store.dispatch('contacts/show', { id: contactId.value });
@@ -105,11 +114,23 @@ onMounted(() => {
     const filteredItems = savedItems.filter(
       item => item.name !== 'kanban_actions'
     );
-    conversationSidebarItems.value = [
-      { name: 'kanban_actions' },
-      ...filteredItems,
-    ];
+    
+    // Apenas adicione kanban_actions se o recurso estiver habilitado
+    if (isKanbanEnabled.value) {
+      conversationSidebarItems.value = [
+        { name: 'kanban_actions' },
+        ...filteredItems,
+      ];
+    } else {
+      conversationSidebarItems.value = filteredItems;
+    }
+  } else if (!isKanbanEnabled.value) {
+    // Se não houver itens salvos mas kanban não estiver habilitado, remova-o da lista padrão
+    conversationSidebarItems.value = conversationSidebarItems.value.filter(
+      item => item.name !== 'kanban_actions'
+    );
   }
+  
   getContactDetails();
   store.dispatch('attributes/get', 0);
 });
@@ -134,7 +155,7 @@ onMounted(() => {
       >
         <template #item="{ element }">
           <div :key="element.name" class="bg-white dark:bg-gray-800">
-            <div v-if="element.name === 'kanban_actions'">
+            <div v-if="element.name === 'kanban_actions' && isKanbanEnabled">
               <AccordionItem
                 :title="$t('CONVERSATION_SIDEBAR.ACCORDION.KANBAN_ACTIONS')"
                 :is-open="isContactSidebarItemOpen('is_kanban_actions_open')"

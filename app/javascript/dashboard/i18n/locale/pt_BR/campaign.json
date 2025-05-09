@@ -134,9 +134,9 @@
             "ERROR": "O título é obrigatório"
           },
           "INBOX": {
-            "LABEL": "Selecionar Inbox",
-            "PLACEHOLDER": "Selecione um inbox",
-            "ERROR": "Por favor selecione um inbox"
+            "LABEL": "Selecionar canal",
+            "PLACEHOLDER": "Selecione um canal",
+            "ERROR": "Por favor selecione um canal"
           },
           "MESSAGE": {
             "LABEL": "Mensagem",
@@ -155,9 +155,9 @@
             "LABEL": "Anexar arquivo"
           },
           "AUDIENCE": {
-            "LABEL": "Selecione a Audiência",
-            "PLACEHOLDER": "Selecione uma audiência",
-            "ERROR": "Por favor selecione uma audiência"
+            "LABEL": "Selecione a etiqueta",
+            "PLACEHOLDER": "Selecione uma etiqueta",
+            "ERROR": "Por favor selecione uma etiqueta"
           },
           "SCHEDULED_AT": {
             "LABEL": "Agendar para",
@@ -176,7 +176,7 @@
       },
       "EMPTY_STATE": {
         "TITLE": "Nenhuma campanha WhatsApp",
-        "SUBTITLE": "Parece que você ainda não criou nenhuma campanha WhatsApp. Vamos criar?"
+        "SUBTITLE": "Ops! Nenhuma campanha WhatsApp criada ainda. Vamos criar? 🙌"
       }
     },
     "SMS": {

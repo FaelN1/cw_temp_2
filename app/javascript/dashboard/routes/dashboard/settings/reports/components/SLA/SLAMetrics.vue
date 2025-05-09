@@ -33,9 +33,9 @@ defineProps({
 
     <div class="w-full sm:w-px bg-n-strong" />
     <SLAMetricCard
-      :label="$t('SLA_REPORTS.METRICS.NO_OF_MISSES.LABEL')"
+      :label="'Número de conversas com SLA expirado'"
       :value="noOfBreaches"
-      :tool-tip="$t('SLA_REPORTS.METRICS.NO_OF_MISSES.TOOLTIP')"
+      :tool-tip="'Número total de conversas com SLA expirado'"
       :is-loading="isLoading"
     />
     <div class="w-full sm:w-px bg-n-strong" />

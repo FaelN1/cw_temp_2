@@ -148,7 +148,7 @@
         "STATUSES_LIST": [
           "Online",
           "Foglalt",
-          "Offline"
+          "Desconectado"
         ],
         "SET_AVAILABILITY_SUCCESS": "Elérhetőség beállítása sikeres",
         "SET_AVAILABILITY_ERROR": "Nem sikerült beállítani az elérhetőséget, kérlek, próbáld újra"

@@ -1,7 +1,9 @@
 <script setup>
-import { computed, useSlots } from 'vue';
+import { computed, useSlots, watch, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { useMapGetter } from 'dashboard/composables/store';
 
 import Button from 'dashboard/components-next/button/Button.vue';
 import Breadcrumb from 'dashboard/components-next/breadcrumb/Breadcrumb.vue';
@@ -26,6 +28,8 @@ const emit = defineEmits(['goToContactsList']);
 const { t } = useI18n();
 const slots = useSlots();
 const route = useRoute();
+const store = useStore();
+const currentAccountId = useMapGetter('getCurrentAccountId');
 
 const contactId = computed(() => route.params.contactId);
 
@@ -51,6 +55,22 @@ const breadcrumbItems = computed(() => {
 const handleBreadcrumbClick = () => {
   emit('goToContactsList');
 };
+
+const activeTab = ref('history');
+const isKanbanEnabled = computed(() => 
+  store.getters['accounts/isFeatureEnabledonAccount'](
+    currentAccountId.value, 
+    'kanban_board'
+  )
+);
+
+// Modifique a lógica para garantir que se a aba kanban estiver ativa
+// mas o recurso for desabilitado, mude para a aba de histórico
+watch(isKanbanEnabled, (enabled) => {
+  if (!enabled && activeTab.value === 'kanban') {
+    activeTab.value = 'history';
+  }
+});
 </script>
 
 <template>
@@ -98,6 +118,7 @@ const handleBreadcrumbClick = () => {
               {{ t('CONTACTS_LAYOUT.SIDEBAR.TABS.HISTORY') }}
             </button>
             <button
+              v-if="isKanbanEnabled"
               class="px-2 py-1 rounded-lg hover:bg-n-alpha-1"
               :class="{ 'bg-n-alpha-1': activeTab === 'kanban' }"
               @click="activeTab = 'kanban'"
@@ -127,14 +148,3 @@ const handleBreadcrumbClick = () => {
     </div>
   </section>
 </template>
-
-<script>
-// Adicione o estado para controlar a aba ativa
-export default {
-  data() {
-    return {
-      activeTab: 'history',
-    };
-  },
-};
-</script>

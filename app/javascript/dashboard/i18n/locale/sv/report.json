@@ -499,7 +499,7 @@
       "HEADER": "Agent status",
       "ONLINE": "Online",
       "BUSY": "Upptagen",
-      "OFFLINE": "Offline"
+      "OFFLINE": "Desconectado"
     }
   },
   "DAYS_OF_WEEK": {

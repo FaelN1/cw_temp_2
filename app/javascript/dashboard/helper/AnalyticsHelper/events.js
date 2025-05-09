@@ -62,7 +62,7 @@ export const CAMPAIGNS_EVENTS = Object.freeze({
 // PORTAL EVENTS
 export const PORTALS_EVENTS = Object.freeze({
   ONBOARD_BASIC_INFORMATION: 'New Portal: Completed basic information',
-  ONBOARD_CUSTOMIZATION: 'New portal: Completed customization',
+  ONBOARD_CUSTOMIZATION: 'Novo Manual: Completed customization',
   CREATE_PORTAL: 'Created a portal',
   DELETE_PORTAL: 'Deleted a portal',
   UPDATE_PORTAL: 'Updated a portal',

@@ -95,7 +95,7 @@
   },
   "NETWORK": {
     "NOTIFICATION": {
-      "OFFLINE": "Offline",
+      "OFFLINE": "Desconectado",
       "RECONNECTING": "Verbinde neu...",
       "RECONNECT_SUCCESS": "Wiederverbunden"
     },

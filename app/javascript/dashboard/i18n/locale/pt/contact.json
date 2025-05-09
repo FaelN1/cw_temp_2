@@ -295,7 +295,7 @@
   },
   "CUSTOM_ATTRIBUTES": {
     "ADD_BUTTON_TEXT": "Adicionar campos",
-    "BUTTON": "Adicionar atributo personalizado",
+    "BUTTON": "Adicionar campo",
     "NOT_AVAILABLE": "Não há campos personalizados disponíveis para este contacto.",
     "COPY_SUCCESSFUL": "Copiado para área de transferência com sucesso",
     "SHOW_MORE": "Mostrar todos os campos",
@@ -306,7 +306,7 @@
       "EDIT": "Editar atributo"
     },
     "ADD": {
-      "TITLE": "Criar atributo personalizado",
+      "TITLE": "Criar campo",
       "DESC": "Adicionar informação personalizada a este contacto."
     },
     "FORM": {

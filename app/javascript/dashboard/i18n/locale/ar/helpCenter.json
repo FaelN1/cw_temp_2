@@ -385,17 +385,17 @@
         },
         "SLUG": {
           "LABEL": "Slug",
-          "PLACEHOLDER": "Category slug for urls",
+          "PLACEHOLDER": "Slug da categoria",
           "HELP_TEXT": "app.chatwoot.com/hc/my-portal/en-US/categories/my-slug",
           "ERROR": "Slug is required"
         },
         "DESCRIPTION": {
           "LABEL": "الوصف",
-          "PLACEHOLDER": "Give a short description about the category.",
+          "PLACEHOLDER": "Digite uma descrição",
           "ERROR": "الوصف مطلوب"
         },
         "BUTTONS": {
-          "CREATE": "Create category",
+          "CREATE": "Criar categoria",
           "CANCEL": "إلغاء"
         },
         "API": {
@@ -416,13 +416,13 @@
         },
         "SLUG": {
           "LABEL": "Slug",
-          "PLACEHOLDER": "Category slug for urls",
+          "PLACEHOLDER": "Slug da categoria",
           "HELP_TEXT": "app.chatwoot.com/hc/my-portal/en-US/categories/my-slug",
           "ERROR": "Slug is required"
         },
         "DESCRIPTION": {
           "LABEL": "الوصف",
-          "PLACEHOLDER": "Give a short description about the category.",
+          "PLACEHOLDER": "Digite uma descrição",
           "ERROR": "الوصف مطلوب"
         },
         "BUTTONS": {

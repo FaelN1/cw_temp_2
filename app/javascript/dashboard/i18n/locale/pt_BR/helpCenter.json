@@ -597,7 +597,7 @@
         "CUSTOM_DOMAIN": {
           "HEADER": "Domínio personalizado",
           "LABEL": "Domínio personalizado:",
-          "DESCRIPTION": "Você pode hospedar seu portal em um domínio personalizado. Por exemplo, se seu site for yourdomain.com e você quiser que seu portal fique em docs.yourdomain.com, basta inserir isso neste campo.",
+          "DESCRIPTION": "Você pode hospedar seu portal em um domínio personalizado. Por exemplo, se seu site for seudominio.com.br e você quiser que seu portal fique em manual.seudominio.com.br, basta inserir isso neste campo.",
           "PLACEHOLDER": "Domínio personalizado do portal",
           "EDIT_BUTTON": "Editar domínio personalizado",
           "ADD_BUTTON": "Adicionar domínio personalizado",

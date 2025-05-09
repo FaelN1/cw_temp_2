@@ -148,7 +148,7 @@
         "STATUSES_LIST": [
           "Online",
           "Zajęty",
-          "Offline"
+          "Desconectado"
         ],
         "SET_AVAILABILITY_SUCCESS": "Dostępność została pomyślnie ustawiona",
         "SET_AVAILABILITY_ERROR": "Nie można ustawić dostępności, spróbuj ponownie"

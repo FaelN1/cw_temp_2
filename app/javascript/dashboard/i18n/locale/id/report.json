@@ -499,7 +499,7 @@
       "HEADER": "Status Agen",
       "ONLINE": "Online",
       "BUSY": "Sibuk",
-      "OFFLINE": "Offline"
+      "OFFLINE": "Desconectado"
     }
   },
   "DAYS_OF_WEEK": {

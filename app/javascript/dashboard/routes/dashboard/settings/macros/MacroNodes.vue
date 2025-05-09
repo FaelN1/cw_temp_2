@@ -90,6 +90,7 @@ export default {
           color-scheme="success"
           variant="smooth"
           icon="add-circle"
+          style="background-color: #ffd2c4"
           @click="$emit('addNewNode')"
         >
           {{ $t('MACROS.EDITOR.ADD_BTN_TOOLTIP') }}

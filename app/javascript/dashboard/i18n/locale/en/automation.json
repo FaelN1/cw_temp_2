@@ -11,14 +11,14 @@
       "CANCEL_BUTTON_TEXT": "Cancel",
       "FORM": {
         "NAME": {
-          "LABEL": "Rule Name",
+          "LABEL": "Rule Nome",
           "PLACEHOLDER": "Enter rule name",
-          "ERROR": "Name is required"
+          "ERROR": "Nome is required"
         },
         "DESC": {
-          "LABEL": "Description",
+          "LABEL": "Descrição",
           "PLACEHOLDER": "Enter rule description",
-          "ERROR": "Description is required"
+          "ERROR": "Descrição is required"
         },
         "EVENT": {
           "LABEL": "Event",
@@ -41,10 +41,10 @@
     },
     "LIST": {
       "TABLE_HEADER": {
-        "NAME": "Name",
-        "DESCRIPTION": "Description",
-        "ACTIVE": "Active",
-        "CREATED_ON": "Created on"
+        "NAME": "Nome",
+        "DESCRIPTION": "Descrição",
+        "ACTIVE": "Ativo",
+        "CREATED_ON": "Criado em"
       },
       "404": "No automation rules found"
     },

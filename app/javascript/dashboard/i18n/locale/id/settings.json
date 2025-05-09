@@ -148,7 +148,7 @@
         "STATUSES_LIST": [
           "Online",
           "Sibuk",
-          "Offline"
+          "Desconectado"
         ],
         "SET_AVAILABILITY_SUCCESS": "Ketersediaan berhasil diatur",
         "SET_AVAILABILITY_ERROR": "Tidak dapat mengatur ketersediaan, silakan coba lagi"

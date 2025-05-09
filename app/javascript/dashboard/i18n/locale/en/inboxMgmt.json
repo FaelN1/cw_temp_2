@@ -10,20 +10,20 @@
     },
     "CREATE_FLOW": {
       "CHANNEL": {
-        "TITLE": "Choose Channel",
-        "BODY": "Choose the provider you want to integrate with Salez."
+      "TITLE": "Escolher Canal",
+      "BODY": "Escolha o provedor que você deseja integrar com o Salez."
       },
       "INBOX": {
-        "TITLE": "Create Inbox",
-        "BODY": "Authenticate your account and create an inbox."
+      "TITLE": "Criar Caixa de Entrada",
+      "BODY": "Autentique sua conta e crie uma caixa de entrada."
       },
       "AGENT": {
-        "TITLE": "Add Agents",
-        "BODY": "Add agents to the created inbox."
+      "TITLE": "Adicionar Agentes",
+      "BODY": "Adicione agentes à caixa de entrada criada."
       },
       "FINISH": {
-        "TITLE": "Voilà!",
-        "BODY": "You are all set to go!"
+      "TITLE": "Pronto!",
+      "BODY": "Tudo pronto para começar!"
       }
     },
     "EVOLUTION_API_CONFIG": {
@@ -778,16 +778,16 @@
       "OTHER_PROVIDERS": "Other Providers"
     },
     "CHANNELS": {
-      "MESSENGER": "Messenger",
+      "MESSENGER": "Meta",
       "WEB_WIDGET": "Website",
       "TWITTER_PROFILE": "Twitter",
       "TWILIO_SMS": "Twilio SMS",
-      "WHATSAPP": "WhatsApp",
+      "WHATSAPP": "WhatsApp Web",
       "SMS": "SMS",
       "EMAIL": "Email",
       "TELEGRAM": "Telegram",
       "LINE": "Line",
-      "API": "API Channel"
+      "API": "WhatsApp API"
     }
   }
 }

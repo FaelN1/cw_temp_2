@@ -132,7 +132,7 @@ class Article < ApplicationRecord
   private
 
   def category_id_changed_action
-    # We need to update the position of the article in the new category
+    # We need to update the position of the article in the Nova categoria
     return unless persisted?
 
     # this means the article is just created

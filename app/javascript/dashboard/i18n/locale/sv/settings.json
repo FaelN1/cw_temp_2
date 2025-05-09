@@ -145,7 +145,7 @@
       },
       "AVAILABILITY": {
         "LABEL": "Tillgänglighet",
-        "STATUSES_LIST": ["Online", "Upptagen", "Offline"],
+        "STATUSES_LIST": ["Online", "Upptagen", "Desconectado"],
         "SET_AVAILABILITY_SUCCESS": "Availability has been set successfully",
         "SET_AVAILABILITY_ERROR": "Couldn't set availability, please try again"
       },

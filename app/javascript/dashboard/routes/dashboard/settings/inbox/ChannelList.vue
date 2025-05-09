@@ -24,13 +24,13 @@ export default {
       const { apiChannelName, apiChannelThumbnail } = this.globalConfig;
       return [
         { key: 'website', name: 'Website' },
-        { key: 'facebook', name: 'Messenger' },
-        { key: 'whatsapp', name: 'WhatsApp' },
+        { key: 'facebook', name: 'Meta' },
+        { key: 'whatsapp', name: 'WhatsApp Web' },
         { key: 'sms', name: 'SMS' },
         { key: 'email', name: 'Email' },
         {
           key: 'api',
-          name: apiChannelName || 'API',
+          name: apiChannelName || 'WhatsApp API',
           thumbnail: apiChannelThumbnail,
         },
         { key: 'telegram', name: 'Telegram' },

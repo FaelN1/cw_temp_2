@@ -499,7 +499,7 @@
       "HEADER": "Agentenstatus",
       "ONLINE": "Online",
       "BUSY": "Beschäftigt",
-      "OFFLINE": "Offline"
+      "OFFLINE": "Desconectado"
     }
   },
   "DAYS_OF_WEEK": {

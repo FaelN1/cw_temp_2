@@ -19,7 +19,7 @@ class CreateKanbanItems < ActiveRecord::Migration[7.0]
       t.integer :position, null: false
       
       # Campos flexíveis para personalização
-      t.jsonb :custom_attributes, default: {} # Atributos personalizados por conta
+      t.jsonb :custom_attributes, default: {} # Campos por conta
       t.jsonb :item_details, default: {} # Detalhes como título, descrição, prioridade, etc
       
       # Campos para controle de tempo

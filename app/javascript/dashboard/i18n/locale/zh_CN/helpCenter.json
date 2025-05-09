@@ -172,7 +172,7 @@
         },
         "CATEGORIES": {
           "TITLE": "Categories in",
-          "NEW_CATEGORY": "New category",
+          "NEW_CATEGORY": "Nova categoria",
           "TABLE": {
             "NAME": "姓名：",
             "DESCRIPTION": "描述信息",
@@ -385,7 +385,7 @@
         },
         "SLUG": {
           "LABEL": "Slug",
-          "PLACEHOLDER": "Category slug for urls",
+          "PLACEHOLDER": "Slug da categoria",
           "HELP_TEXT": "app.chatwoot.com/hc/my-portal/en-US/categories/my-slug",
           "ERROR": "Slug is required"
         },
@@ -416,7 +416,7 @@
         },
         "SLUG": {
           "LABEL": "Slug",
-          "PLACEHOLDER": "Category slug for urls",
+          "PLACEHOLDER": "Slug da categoria",
           "HELP_TEXT": "app.chatwoot.com/hc/my-portal/en-US/categories/my-slug",
           "ERROR": "Slug is required"
         },

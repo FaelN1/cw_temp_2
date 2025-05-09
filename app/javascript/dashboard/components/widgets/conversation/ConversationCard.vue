@@ -407,7 +407,7 @@ export default {
           />
         </span>
         <span
-          class="unread shadow-lg rounded-full hidden text-xxs font-semibold h-4 leading-4 ml-auto mt-1 min-w-[1rem] px-1 py-0 text-center text-orange-600 bg-green-400"
+          class="unread shadow-lg rounded-full hidden text-xxs font-semibold h-4 leading-4 ml-auto mt-1 min-w-[1rem] px-1 py-0 text-center text-woot-500 bg-green-400"
         >
           {{ unreadCount > 9 ? '9+' : unreadCount }}
         </span>

@@ -267,7 +267,7 @@ export default {
             <div class="mt-4">
               <woot-button
                 icon="add"
-                class="bg-woot-400 text-white"
+                class="bg-woot-50 text-white"
                 size="small"
                 @click="appendNewAction"
               >

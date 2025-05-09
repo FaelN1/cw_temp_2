@@ -8,7 +8,7 @@
     "HEADER": {
       "FILTER": "Filter by",
       "SORT": "Sort by",
-      "LOCALE": "Locale",
+      "LOCALE": "Idioma",
       "SETTINGS_BUTTON": "Settings",
       "NEW_BUTTON": "New Article",
       "DROPDOWN_OPTIONS": {
@@ -84,7 +84,7 @@
       },
       "BUTTONS": {
         "ARCHIVE": "Archive article",
-        "DELETE": "Delete article"
+        "DELETE": "Excluir article"
       }
     },
     "ARTICLE_SEARCH_RESULT": {
@@ -99,7 +99,7 @@
       "PREVIEW_LINK": "Preview article"
     },
     "PORTAL": {
-      "HEADER": "Portals",
+      "HEADER": "Manuais",
       "DEFAULT": "Default",
       "NEW_BUTTON": "New Portal",
       "ACTIVE_BADGE": "active",
@@ -107,12 +107,12 @@
       "LOADING_MESSAGE": "Loading portals...",
       "ARTICLES_LABEL": "articles",
       "NO_PORTALS_MESSAGE": "There are no available portals",
-      "ADD_NEW_LOCALE": "Add a new locale",
+      "ADD_NEW_LOCALE": "Add a Novo idioma",
       "POPOVER": {
-        "TITLE": "Portals",
+        "TITLE": "Manuais",
         "PORTAL_SETTINGS": "Portal settings",
         "SUBTITLE": "You have multiple portals and can have different locales for each portal.",
-        "CANCEL_BUTTON_LABEL": "Cancel",
+        "CANCEL_BUTTON_LABEL": "Cancelar",
         "CHOOSE_LOCALE_BUTTON": "Choose Locale"
       },
       "PORTAL_SETTINGS": {
@@ -122,12 +122,12 @@
             "ADD": "Add locale",
             "VISIT": "Visit site",
             "SETTINGS": "Settings",
-            "DELETE": "Delete"
+            "DELETE": "Excluir"
           },
           "PORTAL_CONFIG": {
             "TITLE": "Portal Configurations",
             "ITEMS": {
-              "NAME": "Name",
+              "NAME": "Nome",
               "DOMAIN": "Custom domain",
               "SLUG": "Slug",
               "TITLE": "Portal title",
@@ -141,15 +141,15 @@
               "NAME": "Locale name",
               "CODE": "Locale code",
               "ARTICLE_COUNT": "No. of articles",
-              "CATEGORIES": "No. of categories",
+              "CATEGORIES": "No. of categorias",
               "SWAP": "Swap",
-              "DELETE": "Delete",
+              "DELETE": "Excluir",
               "DEFAULT_LOCALE": "Default"
             }
           }
         },
         "DELETE_PORTAL": {
-          "TITLE": "Delete portal",
+          "TITLE": "Excluir portal",
           "MESSAGE": "Are you sure you want to delete this portal",
           "YES": "Yes, delete portal",
           "NO": "No, keep portal",
@@ -177,17 +177,17 @@
         },
         "CATEGORIES": {
           "TITLE": "Categories in",
-          "NEW_CATEGORY": "New category",
+          "NEW_CATEGORY": "Nova categoria",
           "TABLE": {
-            "NAME": "Name",
+            "NAME": "Nome",
             "DESCRIPTION": "Description",
-            "LOCALE": "Locale",
+            "LOCALE": "Idioma",
             "ARTICLE_COUNT": "No. of articles",
             "ACTION_BUTTON": {
               "EDIT": "Edit category",
-              "DELETE": "Delete category"
+              "DELETE": "Excluir category"
             },
-            "EMPTY_TEXT": "No categories found"
+            "EMPTY_TEXT": "No categorias found"
           }
         },
         "EDIT_BASIC_INFO": {
@@ -236,7 +236,7 @@
           "IMAGE_DELETE_ERROR": "Error while deleting logo"
         },
         "NAME": {
-          "LABEL": "Name",
+          "LABEL": "Nome",
           "PLACEHOLDER": "Portal name",
           "HELP_TEXT": "The name will be used in the public facing portal internally.",
           "ERROR": "Name is required"
@@ -282,17 +282,17 @@
         }
       },
       "ADD_LOCALE": {
-        "TITLE": "Add a new locale",
-        "SUB_TITLE": "This adds a new locale to your available translation list.",
+        "TITLE": "Add a Novo idioma",
+        "SUB_TITLE": "This adds a Novo idioma to your available translation list.",
         "PORTAL": "Portal",
         "LOCALE": {
-          "LABEL": "Locale",
+          "LABEL": "Idioma",
           "PLACEHOLDER": "Choose a locale",
           "ERROR": "Locale is required"
         },
         "BUTTONS": {
           "CREATE": "Create locale",
-          "CANCEL": "Cancel"
+          "CANCEL": "Cancelar"
         },
         "API": {
           "SUCCESS_MESSAGE": "Locale added successfully",
@@ -359,7 +359,7 @@
         "CONFIRM": {
           "TITLE": "Confirm Deletion",
           "MESSAGE": "Are you sure to delete the article?",
-          "YES": "Yes, Delete",
+          "YES": "Yes, Excluir",
           "NO": "No, Keep it"
         }
       },
@@ -381,27 +381,27 @@
         "TITLE": "Create a category",
         "SUB_TITLE": "The category will be used in the public facing portal to categorize articles.",
         "PORTAL": "Portal",
-        "LOCALE": "Locale",
+        "LOCALE": "Idioma",
         "NAME": {
-          "LABEL": "Name",
-          "PLACEHOLDER": "Category name",
+          "LABEL": "Nome",
+          "PLACEHOLDER": "Nome da categoria",
           "HELP_TEXT": "The category name and icon will be used in the public facing portal to categorize articles.",
           "ERROR": "Name is required"
         },
         "SLUG": {
           "LABEL": "Slug",
-          "PLACEHOLDER": "Category slug for urls",
-          "HELP_TEXT": "app.Salez.com/hc/my-portal/en-US/categories/my-slug",
+          "PLACEHOLDER": "Slug da categoria",
+          "HELP_TEXT": "app.Salez.com/hc/my-portal/en-US/categorias/my-slug",
           "ERROR": "Slug is required"
         },
         "DESCRIPTION": {
           "LABEL": "Description",
-          "PLACEHOLDER": "Give a short description about the category.",
+          "PLACEHOLDER": "Digite uma descrição",
           "ERROR": "Description is required"
         },
         "BUTTONS": {
-          "CREATE": "Create category",
-          "CANCEL": "Cancel"
+          "CREATE": "Criar categoria",
+          "CANCEL": "Cancelar"
         },
         "API": {
           "SUCCESS_MESSAGE": "Category created successfully",
@@ -412,27 +412,27 @@
         "TITLE": "Edit a category",
         "SUB_TITLE": "Editing a category will update the category in the public facing portal.",
         "PORTAL": "Portal",
-        "LOCALE": "Locale",
+        "LOCALE": "Idioma",
         "NAME": {
-          "LABEL": "Name",
-          "PLACEHOLDER": "Category name",
+          "LABEL": "Nome",
+          "PLACEHOLDER": "Nome da categoria",
           "HELP_TEXT": "The category name and icon will be used in the public facing portal to categorize articles.",
           "ERROR": "Name is required"
         },
         "SLUG": {
           "LABEL": "Slug",
-          "PLACEHOLDER": "Category slug for urls",
-          "HELP_TEXT": "app.Salez.com/hc/my-portal/en-US/categories/my-slug",
+          "PLACEHOLDER": "Slug da categoria",
+          "HELP_TEXT": "app.Salez.com/hc/my-portal/en-US/categorias/my-slug",
           "ERROR": "Slug is required"
         },
         "DESCRIPTION": {
           "LABEL": "Description",
-          "PLACEHOLDER": "Give a short description about the category.",
+          "PLACEHOLDER": "Digite uma descrição",
           "ERROR": "Description is required"
         },
         "BUTTONS": {
           "CREATE": "Update category",
-          "CANCEL": "Cancel"
+          "CANCEL": "Cancelar"
         },
         "API": {
           "SUCCESS_MESSAGE": "Category updated successfully",
@@ -497,7 +497,7 @@
             "PUBLISH": "Publish",
             "DRAFT": "Draft",
             "ARCHIVE": "Archive",
-            "DELETE": "Delete"
+            "DELETE": "Excluir"
           },
           "STATUS": {
             "DRAFT": "Draft",
@@ -518,7 +518,7 @@
           "ARCHIVED": "Archived"
         },
         "CATEGORY": {
-          "ALL": "All categories"
+          "ALL": "All categorias"
         },
         "LOCALE": {
           "ALL": "All locales"
@@ -555,17 +555,17 @@
     },
     "CATEGORY_PAGE": {
       "CATEGORY_HEADER": {
-        "NEW_CATEGORY": "New category",
+        "NEW_CATEGORY": "Nova categoria",
         "EDIT_CATEGORY": "Edit category",
-        "CATEGORIES_COUNT": "{n} category | {n} categories",
+        "CATEGORIES_COUNT": "{n} category | {n} categorias",
         "BREADCRUMB": {
           "CATEGORY_LOCALE": "Categories ({localeCode})",
           "ACTIVE_CATEGORY": "{categoryName} ({categoryCount} articles) | {categoryName} ({categoryCount} article)"
         }
       },
       "CATEGORY_EMPTY_STATE": {
-        "TITLE": "No categories found",
-        "SUBTITLE": "Categories will appear here. You can add a category by clicking the 'New Category' button."
+        "TITLE": "No categorias found",
+        "SUBTITLE": "Categories will appear here. You can add a category by clicking the 'Nova categoria' button."
       },
       "CATEGORY_CARD": {
         "ARTICLES_COUNT": "{count} article | {count} articles"
@@ -590,51 +590,51 @@
           }
         },
         "HEADER": {
-          "CREATE": "Create category",
+          "CREATE": "Criar categoria",
           "EDIT": "Edit category",
           "DESCRIPTION": "Editing a category will update the category in the public facing portal.",
           "PORTAL": "Portal",
-          "LOCALE": "Locale"
+          "LOCALE": "Idioma"
         },
         "FORM": {
           "NAME": {
-            "LABEL": "Name",
-            "PLACEHOLDER": "Category name",
+            "LABEL": "Nome",
+            "PLACEHOLDER": "Nome da categoria",
             "ERROR": "Name is required"
           },
           "SLUG": {
             "LABEL": "Slug",
-            "PLACEHOLDER": "Category slug for urls",
+            "PLACEHOLDER": "Slug da categoria",
             "ERROR": "Slug is required",
-            "HELP_TEXT": "app.Salez.com/hc/{portalSlug}/{localeCode}/categories/{categorySlug}"
+            "HELP_TEXT": "app.Salez.com/hc/{portalSlug}/{localeCode}/categorias/{categorySlug}"
           },
           "DESCRIPTION": {
             "LABEL": "Description",
-            "PLACEHOLDER": "Give a short description about the category.",
+            "PLACEHOLDER": "Digite uma descrição",
             "ERROR": "Description is required"
           }
         },
         "BUTTONS": {
-          "CREATE": "Create",
-          "EDIT": "Update",
-          "CANCEL": "Cancel"
+          "CREATE": "Criar",
+          "EDIT": "Atualizar",
+          "CANCEL": "Cancelar"
         }
       }
     },
     "LOCALES_PAGE": {
       "LOCALES_COUNT": "No locales available | {n} locale | {n} locales",
-      "NEW_LOCALE_BUTTON_TEXT": "New locale",
+      "NEW_LOCALE_BUTTON_TEXT": "Novo idioma",
       "LOCALE_CARD": {
         "ARTICLES_COUNT": "{count} article | {count} articles",
-        "CATEGORIES_COUNT": "{count} category | {count} categories",
+        "CATEGORIES_COUNT": "{count} category | {count} categorias",
         "DEFAULT": "Default",
         "DROPDOWN_MENU": {
-          "MAKE_DEFAULT": "Make default",
-          "DELETE": "Delete"
+          "MAKE_DEFAULT": "Marcar como padrão",
+          "DELETE": "Excluir"
         }
       },
       "ADD_LOCALE_DIALOG": {
-        "TITLE": "Add a new locale",
+        "TITLE": "Add a Novo idioma",
         "DESCRIPTION": "Select the language in which this article will be written. This will be added to your list of translations, and you can add more later.",
         "COMBOBOX": {
           "PLACEHOLDER": "Select locale..."
@@ -676,26 +676,26 @@
       }
     },
     "PORTAL_SWITCHER": {
-      "NEW_PORTAL": "New portal",
-      "PORTALS": "Portals",
-      "CREATE_PORTAL": "Create and manage multiple portals",
+      "NEW_PORTAL": "Novo Manual",
+      "PORTALS": "Manuais",
+      "CREATE_PORTAL": "Crie e gerencie múltiplos manuais",
       "ARTICLES": "articles",
       "DOMAIN": "domain",
       "PORTAL_NAME": "Portal name"
     },
     "CREATE_PORTAL_DIALOG": {
-      "TITLE": "Create new portal",
-      "DESCRIPTION": "Give your portal a name and create a user-friendly URL slug. You can modify both later in the settings.",
-      "CONFIRM_BUTTON_LABEL": "Create",
+      "TITLE": "Criar novo manual",
+      "DESCRIPTION": "Dê um nome ao seu manual e crie um slug de URL amigável. Você pode modificar ambos posteriormente nas configurações..",
+      "CONFIRM_BUTTON_LABEL": "Criar",
       "NAME": {
-        "LABEL": "Name",
-        "PLACEHOLDER": "User Guide | Salez",
-        "MESSAGE": "Choose an name for your portal.",
+        "LABEL": "Nome",
+        "PLACEHOLDER": "Nome do manual | Salez",
+        "MESSAGE": "Escolha um nome para seu manual.",
         "ERROR": "Name is required"
       },
       "SLUG": {
         "LABEL": "Slug",
-        "PLACEHOLDER": "user-guide",
+        "PLACEHOLDER": "nome-do-manual",
         "ERROR": "Slug is required"
       }
     },
@@ -710,7 +710,7 @@
           "IMAGE_UPLOAD_SIZE_ERROR": "Image size should be less than {size}MB"
         },
         "NAME": {
-          "LABEL": "Name",
+          "LABEL": "Nome",
           "PLACEHOLDER": "Portal name",
           "ERROR": "Name is required"
         },
@@ -766,13 +766,13 @@
           }
         },
         "DELETE_PORTAL": {
-          "BUTTON": "Delete {portalName}",
-          "HEADER": "Delete portal",
+          "BUTTON": "Excluir {portalName}",
+          "HEADER": "Excluir portal",
           "DESCRIPTION": "Permanently delete this portal. This action is irreversible",
           "DIALOG": {
             "HEADER": "Sure you want to delete {portalName}?",
             "DESCRIPTION": "This is a permanent action that cannot be reversed.",
-            "CONFIRM_BUTTON_LABEL": "Delete"
+            "CONFIRM_BUTTON_LABEL": "Excluir"
           }
         },
         "EDIT_CONFIGURATION": "Edit configuration"

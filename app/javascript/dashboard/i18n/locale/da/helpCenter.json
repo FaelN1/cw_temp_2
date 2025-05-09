@@ -94,7 +94,7 @@
       "PREVIEW_LINK": "Preview article"
     },
     "PORTAL": {
-      "HEADER": "Portals",
+      "HEADER": "Manuais",
       "DEFAULT": "Standard",
       "NEW_BUTTON": "Ny Portal",
       "ACTIVE_BADGE": "aktiv",
@@ -104,7 +104,7 @@
       "NO_PORTALS_MESSAGE": "Der er ingen tilgængelige portaler",
       "ADD_NEW_LOCALE": "Tilføj en ny landestandard",
       "POPOVER": {
-        "TITLE": "Portals",
+        "TITLE": "Manuais",
         "PORTAL_SETTINGS": "Portal indstillinger",
         "SUBTITLE": "Du har flere portaler og kan have forskellige landestandarder for hver portal.",
         "CANCEL_BUTTON_LABEL": "Annuller",

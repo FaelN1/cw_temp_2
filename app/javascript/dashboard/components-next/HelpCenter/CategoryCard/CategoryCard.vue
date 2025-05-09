@@ -60,7 +60,7 @@ const categoryTitleWithIcon = computed(() => {
 });
 
 const description = computed(() => {
-  return props.description ? props.description : 'No description added';
+  return props.description ? props.description : 'Sem descrição adicionada';
 });
 
 const hasDescription = computed(() => {
@@ -83,7 +83,7 @@ const handleAction = ({ action, value }) => {
       <div class="flex justify-between w-full gap-2">
         <div class="flex items-center justify-start w-full min-w-0 gap-2">
           <span
-            class="text-base truncate cursor-pointer hover:underline underline-offset-2 hover:text-n-blue-text text-n-slate-12"
+            class="text-base truncate cursor-pointer hover:underline underline-offset-2 hover:text-woot-500 text-n-slate-12"
             @click="handleClick(slug)"
           >
             {{ categoryTitleWithIcon }}

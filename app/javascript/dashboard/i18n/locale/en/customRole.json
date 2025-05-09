@@ -36,8 +36,9 @@
       "CONTACT_MANAGE": "Visualizar contatos",
       "REPORT_MANAGE": "Visualizar relatórios",
       "KNOWLEDGE_BASE_MANAGE": "Visualizar manuais",
-      "KANBAN_MANAGE": "Visualizar pipeline",
-      "CAMPAIGN_MANAGE": "Visualizar campanhas"
+      "KANBAN_MANAGE": "Editar pipeline",
+      "CAMPAIGN_MANAGE": "Visualizar campanhas",
+      "KANBAN_VIEW": "Visualizar pipeline"
     },
     "FORM": {
       "NAME": {

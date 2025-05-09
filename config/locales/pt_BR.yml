@@ -287,7 +287,7 @@ pt_BR:
         conversation_display_id: "Conversa"
         timer_started_at: "Início do Timer"
         timer_duration: "Duração do Timer"
-        custom_attributes: "Atributos Personalizados"
+        custom_attributes: "Campos"
         item_details: "Detalhes do Item"
         stage_entered_at: "Entrada na Etapa"
         account: "Conta"

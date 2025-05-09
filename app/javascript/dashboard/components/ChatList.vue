@@ -202,7 +202,7 @@ const userPermissions = computed(() => {
 });
 
 const assigneeTabItems = computed(() => {
-  return filterItemsByPermission(
+  let items = filterItemsByPermission(
     ASSIGNEE_TYPE_TAB_PERMISSIONS,
     userPermissions.value,
     item => item.permissions
@@ -214,6 +214,13 @@ const assigneeTabItems = computed(() => {
         ? kanbanConversationCount.value
         : conversationStats.value[countKey] || 0,
   }));
+
+  // Remover a aba de Kanban se o recurso não estiver habilitado
+  if (!isKanbanEnabled.value) {
+    items = items.filter(item => item.key !== wootConstants.ASSIGNEE_TYPE.KANBAN);
+  }
+
+  return items;
 });
 
 const showAssigneeInConversationCard = computed(() => {

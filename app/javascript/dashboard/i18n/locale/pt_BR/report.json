@@ -313,7 +313,7 @@
     "LOADING_CHART": "Carregando dados do gráfico...",
     "NO_ENOUGH_DATA": "Ops! Não existem dados suficientes para gerar o relatório. Tente novamente mais tarde.",
     "DOWNLOAD_INBOX_REPORTS": "Baixar relatório",
-    "FILTER_DROPDOWN_LABEL": "Canais",
+    "FILTER_DROPDOWN_LABEL": "Canal",
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Conversas",

@@ -499,7 +499,7 @@
       "HEADER": "Ügynök státusz",
       "ONLINE": "Online",
       "BUSY": "Foglalt",
-      "OFFLINE": "Offline"
+      "OFFLINE": "Desconectado"
     }
   },
   "DAYS_OF_WEEK": {

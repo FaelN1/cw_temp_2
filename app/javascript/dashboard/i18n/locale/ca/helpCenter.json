@@ -94,7 +94,7 @@
       "PREVIEW_LINK": "Vista prèvia de l'article"
     },
     "PORTAL": {
-      "HEADER": "Portals",
+      "HEADER": "Manuais",
       "DEFAULT": "Per defecte",
       "NEW_BUTTON": "Nou portal",
       "ACTIVE_BADGE": "actiu",
@@ -104,7 +104,7 @@
       "NO_PORTALS_MESSAGE": "No hi ha portals disponibles",
       "ADD_NEW_LOCALE": "Afegeix una nova localització",
       "POPOVER": {
-        "TITLE": "Portals",
+        "TITLE": "Manuais",
         "PORTAL_SETTINGS": "Configuració del portal",
         "SUBTITLE": "Tens diversos portals i pots tenir diferents localitzacions per a cada portal.",
         "CANCEL_BUTTON_LABEL": "Cancel·la",

@@ -298,6 +298,7 @@ const menuItems = computed(() => {
           name: 'Reports Kanban',
           label: t('SIDEBAR.REPORTS_KANBAN'),
           to: accountScopedRoute('kanban_reports'),
+          featureFlag: 'kanban_board',
         },
         {
           name: 'Reports SLA',
@@ -309,11 +310,11 @@ const menuItems = computed(() => {
           label: t('SIDEBAR.REPORTS_BOT'),
           to: accountScopedRoute('bot_reports'),
         },
-        {
-          name: 'Reports Bot',
-          label: 'Campanhas',
-          to: accountScopedRoute('bot_reports'),
-        },
+        // {
+        //   name: 'Reports Bot',
+        //   label: 'Campanhas',
+        //   to: accountScopedRoute('bot_reports'),
+        // },
       ],
     },
     {

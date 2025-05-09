@@ -147,8 +147,8 @@
         "LABEL": "Availability",
         "STATUSES_LIST": [
           "Online",
-          "Busy",
-          "Offline"
+          "Ausente",
+          "Desconectado"
         ],
         "SET_AVAILABILITY_SUCCESS": "Availability has been set successfully",
         "SET_AVAILABILITY_ERROR": "Couldn't set availability, please try again"
