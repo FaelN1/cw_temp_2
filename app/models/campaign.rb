@@ -219,12 +219,20 @@ class Campaign < ApplicationRecord
     elsif channel_type == 'Channel::Whatsapp' && scheduled_at.present?
       # Se for WhatsApp e tiver data de agendamento, também será one_off
       self.campaign_type = 'one_off'
+    elsif channel_type == 'Channel::Api' && scheduled_at.present?
+      # Se for API e tiver data de agendamento, permitir agendamento mas manter como ongoing
+      self.campaign_type = 'ongoing'
     else
       self.campaign_type = 'ongoing'
-      self.scheduled_at = nil
+      self.scheduled_at = nil if channel_type != 'Channel::Api' # Manter scheduled_at para Canal API
     end
 
-    Rails.logger.info("Campanha ##{id || 'nova'} configurada: tipo=#{campaign_type}, agendamento=#{scheduled_at}, canal=#{channel_type}")
+    # Converter audience para que seja salvo corretamente se for um array de ActionController::Parameters
+    if audience.is_a?(Array) && audience.any? { |item| item.is_a?(ActionController::Parameters) }
+      self.audience = audience.map(&:to_h)
+    end
+
+    Rails.logger.info("Campanha ##{id || 'nova'} configurada: tipo=#{campaign_type}, agendamento=#{scheduled_at}, canal=#{channel_type}, audience=#{audience.inspect}")
   end
 
   def validate_url

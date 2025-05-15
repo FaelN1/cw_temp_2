@@ -92,8 +92,8 @@
           "SCHEDULED": "Scheduled"
         },
         "CAMPAIGN_DETAILS": {
-          "SENT_FROM": "Sent from",
-          "ON": "on"
+          "SENT_FROM": "Enviado por",
+          "ON": "em"
         }
       },
       "CREATE": {

@@ -3,176 +3,184 @@ class AutomationRules::ActionService < ActionService
     super(conversation)
     @rule = rule
     @account = account
-    Current.executed_by = rule
+    @actions_to_perform = rule.actions || []
     @processed_actions = []
-    @sent_blob_ids = [] # Controla quais blobs já foram enviados
+    @sent_blob_ids = [] # Controla quais blobs já foram enviados nesta execução
   end
 
   def perform
-    # Log para debug das ações
-    Rails.logger.info "ActionService: Processando #{@rule.actions.length} ações para a regra ID=#{@rule.id}"
-    @rule.actions.each_with_index do |action, idx|
-      Rails.logger.info "ActionService: Ação[#{idx}] = #{action['action_name']} com params=#{action['action_params']}"
-    end
+    Current.account = @account
+    Current.user = @rule.user || User.system_bot # Garante que Current.user esteja definido
 
-    # Log dos arquivos disponíveis na regra
-    if @rule.files.attached?
-      Rails.logger.info "ActionService: Regra possui #{@rule.files.count} arquivos anexados"
-      @rule.files.each_with_index do |file, idx|
-        Rails.logger.info "ActionService: Arquivo[#{idx}] = ID:#{file.id}, nome:#{file.filename}, blob_id:#{file.blob_id}"
-      end
-    end
+    Rails.logger.info "ActionService: Processando #{@actions_to_perform.count} ações para a regra ID=#{@rule.id}"
 
-    # Criar mapeamento de ações para processamento mais organizado
-    action_mapping = {}
-    # Primeiro coletamos todas as ações em um mapa para referência futura
-    @rule.actions.each_with_index do |action, index|
-      action = action.with_indifferent_access
-      action_mapping[index] = {
-        action_name: action[:action_name],
-        action_params: action[:action_params],
-        processed: false
-      }
-    end
+    i = 0
+    while i < @actions_to_perform.length
+      current_action = @actions_to_perform[i]
+      action_name = current_action['action_name']
+      action_params = current_action['action_params']
 
-    # Agrupar mensagens e anexos para envio conjunto
-    message_groups = []
-    current_group = { attachments: [], message: nil, indices: [] }
+      Rails.logger.info "ActionService: Executando ação '#{action_name}' (índice #{i}) com params: #{action_params.inspect}"
 
-    # Percorrer as ações em ordem para formar grupos de mensagem + anexos
-    @rule.actions.each_with_index do |action, index|
-      action = action.with_indifferent_access
+      case action_name
+      when 'send_message'
+        message_content = action_params.is_a?(Array) ? action_params[0] : nil
+        send_message(message_content) if message_content.present?
+        @processed_actions << current_action
+        i += 1
 
-      if action[:action_name] == 'send_attachment'
-        if current_group[:message].nil?
-          # Se ainda não tem mensagem, adiciona anexo ao grupo atual
-          current_group[:attachments].push(action[:action_params].first)
-          current_group[:indices].push(index)
-        else
-          # Se já tem mensagem, fecha o grupo atual e inicia um novo com este anexo
-          message_groups.push(current_group) if current_group[:message]
-          current_group = { attachments: [action[:action_params].first], message: nil, indices: [index] }
-        end
-      elsif action[:action_name] == 'send_message'
-        if current_group[:message].nil?
-          # Se não tem mensagem no grupo atual, adiciona
-          current_group[:message] = action[:action_params].first
-          current_group[:indices].push(index)
+      when 'send_attachment'
+        blob_ids_param = action_params
+        actual_blob_ids = []
 
-          # Se já tem anexos neste grupo, está completo
-          if current_group[:attachments].any?
-            message_groups.push(current_group)
-            current_group = { attachments: [], message: nil, indices: [] }
+        if blob_ids_param.is_a?(Array)
+          blob_ids_param.each do |param_item|
+            if param_item.is_a?(Hash) && param_item['blob_id']
+              actual_blob_ids << param_item['blob_id']
+            elsif param_item.is_a?(String) || param_item.is_a?(Integer)
+              actual_blob_ids << param_item
+            end
           end
-        else
-          # Se já tem mensagem, fecha o grupo e inicia um novo com esta mensagem
-          message_groups.push(current_group)
-          current_group = { attachments: [], message: action[:action_params].first, indices: [index] }
         end
+        actual_blob_ids.compact!
+        actual_blob_ids.uniq!
+
+        if actual_blob_ids.empty?
+          Rails.logger.warn "ActionService: Ação 'send_attachment' sem blob_ids válidos. Params: #{action_params.inspect}"
+          @processed_actions << current_action
+          i += 1
+          next
+        end
+
+        caption = nil
+        # Verifica se a próxima ação é 'send_message' para ser a legenda
+        if (i + 1) < @actions_to_perform.length && @actions_to_perform[i + 1]['action_name'] == 'send_message'
+          caption_text_array = @actions_to_perform[i + 1]['action_params']
+          caption = caption_text_array[0] if caption_text_array.is_a?(Array) && caption_text_array[0].present?
+        end
+
+        if caption
+          Rails.logger.info "ActionService: Enviando anexo com legenda: '#{caption}'"
+          # Usar os blob_ids que ainda não foram enviados nesta execução
+          ids_to_send_now = actual_blob_ids.reject { |id| @sent_blob_ids.include?(id) }
+          send_message_with_attachments(caption, ids_to_send_now) unless ids_to_send_now.empty?
+
+          @processed_actions << current_action # Ação do anexo
+          @processed_actions << @actions_to_perform[i + 1] # Ação da legenda
+          @sent_blob_ids.concat(ids_to_send_now).uniq!
+          i += 2 # Pula o anexo e a legenda
+        else
+          Rails.logger.info "ActionService: Enviando anexo sem legenda."
+          ids_to_send_now = actual_blob_ids.reject { |id| @sent_blob_ids.include?(id) }
+          send_attachments_only(ids_to_send_now) unless ids_to_send_now.empty?
+
+          @processed_actions << current_action # Ação do anexo
+          @sent_blob_ids.concat(ids_to_send_now).uniq!
+          i += 1 # Pula apenas o anexo
+        end
+
+      when 'add_label_to_conversation'
+        add_labels_to_conversation(action_params) if action_params.present?
+        @processed_actions << current_action
+        i += 1
+      when 'remove_label_from_conversation'
+        remove_labels_from_conversation(action_params) if action_params.present?
+        @processed_actions << current_action
+        i += 1
+      when 'assign_agent'
+        agent_id = action_params[0].is_a?(Hash) ? action_params[0]['id'] : action_params[0]
+        assign_agent(agent_id) if agent_id.present?
+        @processed_actions << current_action
+        i += 1
+      when 'assign_team'
+        team_id = action_params[0].is_a?(Hash) ? action_params[0]['id'] : action_params[0]
+        assign_team(team_id) if team_id.present?
+        @processed_actions << current_action
+        i += 1
+      when 'send_email_to_team'
+        email_param_obj = action_params[0] if action_params.is_a?(Array)
+        if email_param_obj.is_a?(Hash) && email_param_obj['team_id'] && email_param_obj['message']
+          send_email_to_team(team_ids: [email_param_obj['team_id']], message: email_param_obj['message'])
+        else
+          Rails.logger.warn "ActionService: Parâmetros inválidos para send_email_to_team: #{action_params.inspect}"
+        end
+        @processed_actions << current_action
+        i += 1
+      when 'send_webhook_event'
+        webhook_url = action_params[0] if action_params.is_a?(Array)
+        send_webhook_event(webhook_url) if webhook_url.present?
+        @processed_actions << current_action
+        i += 1
+      when 'mute_conversation'
+        mute_conversation
+        @processed_actions << current_action
+        i += 1
+      when 'snooze_conversation'
+        snooze_duration_key = action_params[0] if action_params.is_a?(Array)
+        mark_as_snoozed(snooze_duration_key) if snooze_duration_key.present?
+        @processed_actions << current_action
+        i += 1
+      when 'resolve_conversation'
+        resolve_conversation
+        @processed_actions << current_action
+        i += 1
+      when 'reopen_conversation'
+        reopen_conversation
+        @processed_actions << current_action
+        i += 1
+      when 'change_priority'
+        priority = action_params[0] if action_params.is_a?(Array)
+        change_priority(priority) if priority.present?
+        @processed_actions << current_action
+        i += 1
+      when 'send_private_note'
+        note_content = action_params.is_a?(Array) ? action_params[0] : nil
+        send_private_note(note_content) if note_content.present?
+        @processed_actions << current_action
+        i += 1
       else
-        # Para outras ações, processamos individualmente depois
-        action_mapping[index][:processed] = false
+        Rails.logger.warn "ActionService: Ação desconhecida ou não explicitamente tratada no loop principal: '#{action_name}'. Pulando."
+        @processed_actions << current_action # Marca como processada para fins de log
+        i += 1
       end
     end
 
-    # Adicionar o último grupo se não estiver vazio
-    message_groups.push(current_group) if current_group[:message] || current_group[:attachments].any?
-
-    # Processar os grupos de mensagens com anexos
-    message_groups.each do |group|
-      process_message_group(group, action_mapping)
-    end
-
-    # Processar outras ações que não foram incluídas em nenhum grupo
-    process_remaining_actions(action_mapping)
-
-    Rails.logger.info "ActionService: Finalizado processamento de ações, processados=#{@processed_actions.inspect}, blobs enviados=#{@sent_blob_ids.inspect}"
+    Rails.logger.info "ActionService: Finalizado processamento de ações. Ações processadas: #{@processed_actions.count}. IDs de blob enviados nesta execução: #{@sent_blob_ids.inspect}"
   ensure
     Current.reset
   end
 
   private
 
-  def process_message_group(group, action_mapping)
-    Rails.logger.info "ActionService: Processando grupo com mensagem='#{group[:message]}' e anexos=#{group[:attachments].inspect}"
-
-    # Marque todas as ações deste grupo como processadas
-    group[:indices].each do |index|
-      action_mapping[index][:processed] = true
-      @processed_actions << index
-    end
-
-    # Só enviar se tiver mensagem e/ou anexos
-    if group[:message].present? || group[:attachments].present?
-      if group[:attachments].present? && group[:message].present?
-        send_message_with_attachments(group[:message], group[:attachments])
-      elsif group[:attachments].present?
-        send_attachments_only(group[:attachments])
-      elsif group[:message].present?
-        send_message([group[:message]])
-      end
-    end
-  end
-
-  def process_remaining_actions(action_mapping)
-    action_mapping.each do |index, action_data|
-      next if action_data[:processed]
-
-      begin
-        send(action_data[:action_name], action_data[:action_params])
-        @processed_actions << index
-      rescue StandardError => e
-        Rails.logger.error "ActionService: ERRO ao processar ação #{action_data[:action_name]}: #{e.message}\n#{e.backtrace.join("\n")}"
-        ChatwootExceptionTracker.new(e, account: @account).capture_exception
-      end
-    end
-  end
-
-  def send_message_with_attachments(message_content, blob_ids)
+  # Modificado para não depender de @rule.files e usar os blob_ids fornecidos
+  def send_message_with_attachments(message_content, blob_ids_for_this_message)
     return if conversation_a_tweet?
-    return unless @rule.files.attached?
+    return if blob_ids_for_this_message.blank?
 
-    Rails.logger.info "ActionService: Enviando mensagem '#{message_content}' com anexos #{blob_ids.inspect}"
-
-    # Obter arquivos através dos blob_ids
-    attachments = []
-    blob_ids.each do |blob_id|
-      # Encontrar o Attachment correto baseado no blob_id
-      attachment = @rule.files.find_by(blob_id: blob_id)
-      if attachment
-        attachments << attachment
-        Rails.logger.info "ActionService: Anexo encontrado para blob_id=#{blob_id}, filename=#{attachment.filename}"
-      else
-        Rails.logger.warn "ActionService: Anexo não encontrado para blob_id=#{blob_id}"
-      end
+    attached_files = files_to_attach(blob_ids_for_this_message)
+    if attached_files.any?
+      create_messages_with_attachments(message_content, attached_files)
+    elsif message_content.present?
+      # Se não houver arquivos válidos mas houver legenda, enviar apenas a legenda como mensagem normal.
+      # No entanto, a lógica do perform já consumiu a ação de legenda, então isso não deve ocorrer
+      # a menos que files_to_attach retorne vazio para IDs válidos.
+      Rails.logger.warn "ActionService: Nenhum arquivo válido encontrado para blob_ids: #{blob_ids_for_this_message.inspect} ao tentar enviar com legenda. Legenda: '#{message_content}'"
+      # Considerar se a legenda deve ser enviada como mensagem separada se os arquivos falharem.
+      # Por ora, se os arquivos falham, a mensagem com anexo não é criada.
     end
-
-    return if attachments.blank?
-
-    # Usar a mensagem para criar um novo registro
-    message = @conversation.messages.build(
-      account_id: @conversation.account_id,
-      inbox_id: @conversation.inbox_id,
-      message_type: :outgoing,
-      content: message_content,
-      content_attributes: { automation_rule_id: @rule.id }
-    )
-
-    # Anexar os arquivos diretamente ao invés de usar o MessageBuilder
-    attachments.each do |file_attachment|
-      message.attachments.new(
-        account_id: @conversation.account_id,
-        file_type: file_attachment.content_type =~ /image/ ? :image : :file
-      ).file.attach(file_attachment.blob)
-    end
-
-    message.save!
-    Rails.logger.info "ActionService: Mensagem criada ID=#{message.id} com #{message.attachments.count} anexos"
   end
 
-  def send_attachments_only(blob_ids)
-    Rails.logger.info "ActionService: Enviando somente anexos #{blob_ids.inspect}"
-    send_message_with_attachments('', blob_ids)
+  # Modificado para não depender de @rule.files e usar os blob_ids fornecidos
+  def send_attachments_only(blob_ids_for_this_message)
+    return if conversation_a_tweet?
+    return if blob_ids_for_this_message.blank?
+
+    attached_files = files_to_attach(blob_ids_for_this_message)
+    if attached_files.any?
+      create_messages_with_attachments(nil, attached_files) # nil para content
+    else
+      Rails.logger.warn "ActionService: Nenhum arquivo válido encontrado para blob_ids: #{blob_ids_for_this_message.inspect} ao tentar enviar apenas anexos."
+    end
   end
 
   def send_webhook_event(webhook_url)

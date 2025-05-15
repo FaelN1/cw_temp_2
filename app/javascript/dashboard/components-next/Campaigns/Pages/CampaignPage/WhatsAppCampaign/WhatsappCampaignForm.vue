@@ -6,7 +6,6 @@ import { useI18n } from 'vue-i18n';
 import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 import { useMapGetter, useStore } from 'dashboard/composables/store';
-import { INBOX_TYPES } from 'dashboard/helper/inbox';
 import { WHATSAPP_CAMPAIGN_SUPPORTED_INBOX_TYPES } from 'shared/constants/whatsappCampaign';
 
 import Input from 'dashboard/components-next/input/Input.vue';
@@ -248,8 +247,16 @@ const isSubmitDisabled = computed(() => {
   return v$.value.$invalid;
 });
 
-const formatToUTCString = localDateTime =>
-  localDateTime ? new Date(localDateTime).toISOString() : null;
+// Modificada para fornecer um valor padrão se localDateTime for nulo
+const formatToUTCString = localDateTime => {
+  if (!localDateTime) {
+    // Se não houver data definida, usar a data atual + 1 hora como padrão
+    const defaultDate = new Date();
+    defaultDate.setHours(defaultDate.getHours() + 1);
+    return defaultDate.toISOString();
+  }
+  return new Date(localDateTime).toISOString();
+};
 
 const resetState = () => {
   Object.assign(state, { ...initialState });
@@ -305,6 +312,14 @@ const prepareCampaignDetails = () => {
 const handleSubmit = async () => {
   const isFormValid = await v$.value.$validate();
   if (!isFormValid) return;
+
+  // Verificar especificamente se scheduledAt tem valor
+  if (!state.scheduledAt) {
+    // Definir um valor padrão (data atual + 1 hora)
+    const defaultDate = new Date();
+    defaultDate.setHours(defaultDate.getHours() + 1);
+    state.scheduledAt = defaultDate.toISOString().slice(0, 16);
+  }
 
   const campaignDetails = prepareCampaignDetails();
 

@@ -89,28 +89,39 @@ const displayContent = computed(() => {
   if (props.message && props.message.trim()) {
     return props.message;
   }
-  
+
   // Se não houver mensagem, mas houver template_params
   if (props.templateParams?.name) {
     let templateName = props.templateParams.name;
     let params = '';
-    
+
     // Obter os parâmetros formatados, se houver
     if (props.templateParams.processed_params) {
       params = Object.entries(props.templateParams.processed_params)
         .map(([key, value]) => `${key}: ${value}`)
         .join(', ');
     }
-    
+
     return `Template: ${templateName}${params ? ` (${params})` : ''}`;
   }
-  
+
   return '';
 });
 
 // Indica se a campanha usa template
 const isTemplateMessage = computed(() => {
   return !props.message && Object.keys(props.templateParams || {}).length > 0;
+});
+
+// Vamos garantir que scheduledAt seja um timestamp válido ou null
+const effectiveScheduledAt = computed(() => {
+  // Se scheduledAt for 0 ou inválido, verificamos se temos created_at nos dados
+  if (!props.scheduledAt || props.scheduledAt === 0) {
+    // Aqui estamos usando new Date().getTime() como fallback final
+    // Mas idealmente seria null para indicar "Não agendado"
+    return null;
+  }
+  return props.scheduledAt;
 });
 </script>
 
@@ -146,7 +157,7 @@ const isTemplateMessage = computed(() => {
           v-else
           :inbox-name="inboxName"
           :inbox-icon="inboxIcon"
-          :scheduled-at="scheduledAt"
+          :scheduled-at="effectiveScheduledAt"
         />
       </div>
     </div>

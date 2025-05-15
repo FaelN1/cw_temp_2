@@ -25,6 +25,7 @@ pt_BR:
   errors:
     messages:
       blank: "não pode ficar em branco"
+      record_invalid: "A validação falhou: %{errors}"
     validations:
       presence: não pode ficar em branco
     webhook:
@@ -306,3 +307,4 @@ pt_BR:
               blank: "A conta é obrigatória"
     messages:
       blank: "não pode ficar em branco"
+      record_invalid: "A validação falhou: %{errors}"

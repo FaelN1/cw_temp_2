@@ -2,25 +2,31 @@ class Api::V1::Accounts::Contacts::LabelsController < Api::V1::Accounts::Contact
   include LabelConcern
 
   def create
+    # Garante que todos os Labels (seu modelo personalizado) existam na conta.
+    # Normaliza para minúsculas, conforme definido no seu modelo Label.
+    normalized_label_titles = permitted_params[:labels].map { |name| name.strip.downcase }.reject(&:blank?)
+
     ActiveRecord::Base.transaction do
-      # Remover labels existentes
-      @contact.taggings.destroy_all
-
-      # Adicionar novas labels
-      permitted_params[:labels].each do |label_name|
-        # Encontra ou cria a etiqueta
-        label = @contact.account.labels.find_or_create_by!(title: label_name)
-
-        # Associa explicitamente o contato à etiqueta
-        @contact.taggings.create!(tag_id: label.id, taggable_type: 'Contact')
+      # Primeiro, garante que todos os modelos Label personalizados existam ou sejam criados.
+      # Isso é importante se você tem validações ou callbacks no seu modelo Label.
+      normalized_label_titles.each do |label_title|
+        @contact.account.labels.find_or_create_by!(title: label_title)
       end
 
-      # Log para debug
-      Rails.logger.info("Etiquetas aplicadas ao contato ##{@contact.id}: #{permitted_params[:labels].inspect}")
-      Rails.logger.info("IDs das etiquetas aplicadas: #{@contact.taggings.includes(:tag).map { |t| t.tag.id }.inspect}")
+      # Agora, usa o método correto fornecido por acts-as-taggable-on com o contexto :labels
+      @contact.label_list = normalized_label_titles
+      @contact.save!
     end
 
-    render json: { message: 'Labels atribuídas com sucesso', labels: @contact.taggings.includes(:tag).map { |t| t.tag.title } }
+    # Log para debug
+    Rails.logger.info("Etiquetas aplicadas ao contato ##{@contact.id}: #{@contact.label_list.inspect}")
+
+    render json: { message: 'Labels atribuídas com sucesso', labels: @contact.label_list }
+  rescue ActiveRecord::RecordInvalid => e
+    # Se find_or_create_by! falhar no seu modelo Label (ex: validação do Label),
+    # ou se @contact.save! falhar (o que pode acontecer se houver problemas com as tags).
+    Rails.logger.error("Erro ao atribuir labels: #{e.message}")
+    render json: { error: e.message }, status: :unprocessable_entity
   end
 
   private
