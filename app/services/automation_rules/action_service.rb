@@ -1,221 +1,187 @@
+require 'set' # Necessário para 'Set'
+
 class AutomationRules::ActionService < ActionService
   def initialize(rule, account, conversation)
     super(conversation)
     @rule = rule
     @account = account
-    @actions_to_perform = rule.actions || []
-    @processed_actions = []
-    @sent_blob_ids = [] # Controla quais blobs já foram enviados nesta execução
+    Current.executed_by = rule
   end
 
   def perform
-    Current.account = @account
-    Current.user = @rule.user || User.system_bot # Garante que Current.user esteja definido
+    actions = @rule.actions.map(&:with_indifferent_access)
+    processed_action_indices = Set.new # Para rastrear ações já tratadas
 
-    Rails.logger.info "ActionService: Processando #{@actions_to_perform.count} ações para a regra ID=#{@rule.id}"
+    actions.each_with_index do |action, index|
+      next if processed_action_indices.include?(index) # Pula se já foi processada
 
-    i = 0
-    while i < @actions_to_perform.length
-      current_action = @actions_to_perform[i]
-      action_name = current_action['action_name']
-      action_params = current_action['action_params']
+      # Verifica se a ação deve ser pulada se a conversa for um tweet
+      is_restricted_by_tweet = conversation_a_tweet? &&
+                               ['send_message', 'send_attachment', 'send_private_note'].include?(action[:action_name])
+      next if is_restricted_by_tweet
 
-      Rails.logger.info "ActionService: Executando ação '#{action_name}' (índice #{i}) com params: #{action_params.inspect}"
+      @conversation.reload
 
-      case action_name
-      when 'send_message'
-        message_content = action_params.is_a?(Array) ? action_params[0] : nil
-        send_message(message_content) if message_content.present?
-        @processed_actions << current_action
-        i += 1
+      begin
+        case action[:action_name]
+        when 'send_attachment'
+          # Log para depurar os action_params recebidos para esta ação de anexo
+          Rails.logger.debug "AutomationRules::ActionService: Processing send_attachment action at index #{index} with action_params: #{action[:action_params].inspect} for rule #{@rule.id}"
 
-      when 'send_attachment'
-        blob_ids_param = action_params
-        actual_blob_ids = []
+          # Garante que cada iteração trabalhe com uma cópia independente dos parâmetros
+          attachment_action_params = action[:action_params].is_a?(Array) ? action[:action_params].dup : action[:action_params]
+          caption_to_use = nil
+          caption_action_original_index = -1
+          caption_action_data = nil # Para armazenar o hash da ação de legenda para atributos
 
-        if blob_ids_param.is_a?(Array)
-          blob_ids_param.each do |param_item|
-            if param_item.is_a?(Hash) && param_item['blob_id']
-              actual_blob_ids << param_item['blob_id']
-            elsif param_item.is_a?(String) || param_item.is_a?(Integer)
-              actual_blob_ids << param_item
+          potential_caption_index = index + 1
+          # Verifica se a próxima ação é 'send_message' para usar como legenda
+          if potential_caption_index < actions.length &&
+             actions[potential_caption_index][:action_name] == 'send_message' &&
+             !processed_action_indices.include?(potential_caption_index)
+
+            # Uma mensagem combinada (anexo com legenda de texto) só é formada se não for um tweet.
+            unless conversation_a_tweet?
+              caption_action_data = actions[potential_caption_index]
+              message_content_array = caption_action_data[:action_params]
+              caption_to_use = message_content_array[0] if message_content_array.is_a?(Array)
+              caption_action_original_index = potential_caption_index
             end
           end
-        end
-        actual_blob_ids.compact!
-        actual_blob_ids.uniq!
 
-        if actual_blob_ids.empty?
-          Rails.logger.warn "ActionService: Ação 'send_attachment' sem blob_ids válidos. Params: #{action_params.inspect}"
-          @processed_actions << current_action
-          i += 1
-          next
-        end
+          if caption_to_use # Implica !conversation_a_tweet? devido à verificação acima
+            actual_blob_ids = Array(attachment_action_params).flatten.compact_blank
+            if actual_blob_ids.any? && @rule.files.attached?
+              fetched_blobs = ActiveStorage::Blob.where(id: actual_blob_ids).to_a
+              unless fetched_blobs.blank?
+                caption_attributes = caption_action_data[:content_attributes] if caption_action_data
+                combined_params = {
+                  content: caption_to_use,
+                  private: false,
+                  attachments: fetched_blobs,
+                  content_attributes: caption_attributes || { automation_rule_id: @rule.id }
+                }
+                Messages::MessageBuilder.new(nil, @conversation, combined_params).perform
+                processed_action_indices.add(caption_action_original_index) # Marca a legenda como usada
+                processed_action_indices.add(index) # Marca o anexo como usado
+              else
+                Rails.logger.warn "AutomationRules::ActionService: Blobs buscados estão vazios para mensagem combinada. Rule: #{@rule.id}, AttachActionIndex: #{index}, CaptionActionIndex: #{caption_action_original_index}"
+                processed_action_indices.add(index) # Marca a ação de anexo como tratada (tentativa falhou)
+                processed_action_indices.add(caption_action_original_index) if caption_action_original_index != -1 # Marca a legenda como tratada
+              end
+            else
+              Rails.logger.warn "AutomationRules::ActionService: Sem actual_blob_ids ou @rule.files.attached? é falso para mensagem combinada. Rule: #{@rule.id}, AttachActionIndex: #{index}"
+              processed_action_indices.add(index)
+              processed_action_indices.add(caption_action_original_index) if caption_action_original_index != -1
+            end
+          else
+            # Nenhuma legenda encontrada, ou é um contexto de tweet onde mensagens combinadas não são enviadas.
+            # Envia o anexo sozinho usando o método privado.
+            # O método privado send_attachment tem suas próprias verificações (tweet, files.attached, blobs.blank).
+            send_attachment(attachment_action_params)
+            processed_action_indices.add(index) # Marca a ação de anexo como tratada
+          end
 
-        caption = nil
-        # Verifica se a próxima ação é 'send_message' para ser a legenda
-        if (i + 1) < @actions_to_perform.length && @actions_to_perform[i + 1]['action_name'] == 'send_message'
-          caption_text_array = @actions_to_perform[i + 1]['action_params']
-          caption = caption_text_array[0] if caption_text_array.is_a?(Array) && caption_text_array[0].present?
-        end
+        when 'send_message'
+          # Esta ação é processada aqui se não foi usada como legenda por um 'send_attachment' anterior.
+          # A verificação 'is_restricted_by_tweet' no início do loop garante que isso não seja chamado para tweets.
+          Rails.logger.debug "AutomationRules::ActionService: Processing send_message action at index #{index} with action_params: #{action[:action_params].inspect} for rule #{@rule.id}"
+          send_message(action[:action_params])
+          processed_action_indices.add(index)
 
-        if caption
-          Rails.logger.info "ActionService: Enviando anexo com legenda: '#{caption}'"
-          # Usar os blob_ids que ainda não foram enviados nesta execução
-          ids_to_send_now = actual_blob_ids.reject { |id| @sent_blob_ids.include?(id) }
-          send_message_with_attachments(caption, ids_to_send_now) unless ids_to_send_now.empty?
+        when 'send_webhook_event'
+          send_webhook_event(action[:action_params])
+          processed_action_indices.add(index)
 
-          @processed_actions << current_action # Ação do anexo
-          @processed_actions << @actions_to_perform[i + 1] # Ação da legenda
-          @sent_blob_ids.concat(ids_to_send_now).uniq!
-          i += 2 # Pula o anexo e a legenda
+        when 'send_private_note'
+          # A verificação 'is_restricted_by_tweet' no início do loop garante que isso não seja chamado para tweets.
+          send_private_note(action[:action_params])
+          processed_action_indices.add(index)
+
+        when 'send_email_to_team'
+          send_email_to_team(action[:action_params])
+          processed_action_indices.add(index)
+
         else
-          Rails.logger.info "ActionService: Enviando anexo sem legenda."
-          ids_to_send_now = actual_blob_ids.reject { |id| @sent_blob_ids.include?(id) }
-          send_attachments_only(ids_to_send_now) unless ids_to_send_now.empty?
-
-          @processed_actions << current_action # Ação do anexo
-          @sent_blob_ids.concat(ids_to_send_now).uniq!
-          i += 1 # Pula apenas o anexo
+          # Trata outras ações despachadas dinamicamente
+          if respond_to?(action[:action_name], true)
+            send(action[:action_name], action[:action_params])
+          else
+            Rails.logger.warn "Unknown action: #{action[:action_name]} for rule #{@rule.id}, account #{@account.id}"
+          end
+          # Marca como processada mesmo se desconhecida ou falhou em responder, para evitar reprocessamento neste loop.
+          processed_action_indices.add(index)
         end
-
-      when 'add_label_to_conversation'
-        add_labels_to_conversation(action_params) if action_params.present?
-        @processed_actions << current_action
-        i += 1
-      when 'remove_label_from_conversation'
-        remove_labels_from_conversation(action_params) if action_params.present?
-        @processed_actions << current_action
-        i += 1
-      when 'assign_agent'
-        agent_id = action_params[0].is_a?(Hash) ? action_params[0]['id'] : action_params[0]
-        assign_agent(agent_id) if agent_id.present?
-        @processed_actions << current_action
-        i += 1
-      when 'assign_team'
-        team_id = action_params[0].is_a?(Hash) ? action_params[0]['id'] : action_params[0]
-        assign_team(team_id) if team_id.present?
-        @processed_actions << current_action
-        i += 1
-      when 'send_email_to_team'
-        email_param_obj = action_params[0] if action_params.is_a?(Array)
-        if email_param_obj.is_a?(Hash) && email_param_obj['team_id'] && email_param_obj['message']
-          send_email_to_team(team_ids: [email_param_obj['team_id']], message: email_param_obj['message'])
-        else
-          Rails.logger.warn "ActionService: Parâmetros inválidos para send_email_to_team: #{action_params.inspect}"
-        end
-        @processed_actions << current_action
-        i += 1
-      when 'send_webhook_event'
-        webhook_url = action_params[0] if action_params.is_a?(Array)
-        send_webhook_event(webhook_url) if webhook_url.present?
-        @processed_actions << current_action
-        i += 1
-      when 'mute_conversation'
-        mute_conversation
-        @processed_actions << current_action
-        i += 1
-      when 'snooze_conversation'
-        snooze_duration_key = action_params[0] if action_params.is_a?(Array)
-        mark_as_snoozed(snooze_duration_key) if snooze_duration_key.present?
-        @processed_actions << current_action
-        i += 1
-      when 'resolve_conversation'
-        resolve_conversation
-        @processed_actions << current_action
-        i += 1
-      when 'reopen_conversation'
-        reopen_conversation
-        @processed_actions << current_action
-        i += 1
-      when 'change_priority'
-        priority = action_params[0] if action_params.is_a?(Array)
-        change_priority(priority) if priority.present?
-        @processed_actions << current_action
-        i += 1
-      when 'send_private_note'
-        note_content = action_params.is_a?(Array) ? action_params[0] : nil
-        send_private_note(note_content) if note_content.present?
-        @processed_actions << current_action
-        i += 1
-      else
-        Rails.logger.warn "ActionService: Ação desconhecida ou não explicitamente tratada no loop principal: '#{action_name}'. Pulando."
-        @processed_actions << current_action # Marca como processada para fins de log
-        i += 1
+      rescue StandardError => e
+        ChatwootExceptionTracker.new(e, account: @account, custom_attributes: { rule_id: @rule.id, action_name: action[:action_name], action_params: action[:action_params] }).capture_exception
+        # Marca como processada para evitar tentar novamente a mesma ação falha dentro desta chamada de perform
+        processed_action_indices.add(index) unless processed_action_indices.include?(index)
       end
     end
-
-    Rails.logger.info "ActionService: Finalizado processamento de ações. Ações processadas: #{@processed_actions.count}. IDs de blob enviados nesta execução: #{@sent_blob_ids.inspect}"
   ensure
     Current.reset
   end
 
   private
 
-  # Modificado para não depender de @rule.files e usar os blob_ids fornecidos
-  def send_message_with_attachments(message_content, blob_ids_for_this_message)
+  def send_attachment(blob_ids_param)
     return if conversation_a_tweet?
-    return if blob_ids_for_this_message.blank?
+    return unless @rule.files.attached?
 
-    attached_files = files_to_attach(blob_ids_for_this_message)
-    if attached_files.any?
-      create_messages_with_attachments(message_content, attached_files)
-    elsif message_content.present?
-      # Se não houver arquivos válidos mas houver legenda, enviar apenas a legenda como mensagem normal.
-      # No entanto, a lógica do perform já consumiu a ação de legenda, então isso não deve ocorrer
-      # a menos que files_to_attach retorne vazio para IDs válidos.
-      Rails.logger.warn "ActionService: Nenhum arquivo válido encontrado para blob_ids: #{blob_ids_for_this_message.inspect} ao tentar enviar com legenda. Legenda: '#{message_content}'"
-      # Considerar se a legenda deve ser enviada como mensagem separada se os arquivos falharem.
-      # Por ora, se os arquivos falham, a mensagem com anexo não é criada.
-    end
+    actual_blob_ids = Array(blob_ids_param).flatten.compact_blank
+    return if actual_blob_ids.blank?
+
+    blobs = ActiveStorage::Blob.where(id: actual_blob_ids)
+    return if blobs.blank?
+
+    params = { content: nil, private: false, attachments: blobs, content_attributes: { automation_rule_id: @rule.id } }
+    Messages::MessageBuilder.new(nil, @conversation, params).perform
   end
 
-  # Modificado para não depender de @rule.files e usar os blob_ids fornecidos
-  def send_attachments_only(blob_ids_for_this_message)
-    return if conversation_a_tweet?
-    return if blob_ids_for_this_message.blank?
+  def send_webhook_event(webhook_url_param)
+    webhook_url = webhook_url_param.is_a?(Array) ? webhook_url_param[0] : webhook_url_param
+    return if webhook_url.blank?
 
-    attached_files = files_to_attach(blob_ids_for_this_message)
-    if attached_files.any?
-      create_messages_with_attachments(nil, attached_files) # nil para content
-    else
-      Rails.logger.warn "ActionService: Nenhum arquivo válido encontrado para blob_ids: #{blob_ids_for_this_message.inspect} ao tentar enviar apenas anexos."
-    end
-  end
-
-  def send_webhook_event(webhook_url)
     payload = @conversation.webhook_data.merge(event: "automation_event.#{@rule.event_name}")
-    WebhookJob.perform_later(webhook_url[0], payload)
+    WebhookJob.perform_later(webhook_url, payload)
   end
 
-  def send_message(message)
+  def send_message(message_param)
     return if conversation_a_tweet?
 
-    params = { content: message[0], private: false, content_attributes: { automation_rule_id: @rule.id } }
+    content = message_param.is_a?(Array) ? message_param[0] : message_param
+    # Permite string vazia, mas não outros tipos blank se não for string.
+    return if content.nil? || (content.respond_to?(:empty?) && content.empty? && !content.is_a?(String))
+
+
+    params = { content: content, private: false, content_attributes: { automation_rule_id: @rule.id } }
     Messages::MessageBuilder.new(nil, @conversation, params).perform
   end
 
-  def send_private_note(message)
+  def send_private_note(message_param)
     return if conversation_a_tweet?
-    params = { content: message[0], private: true, content_attributes: { automation_rule_id: @rule.id } }
+
+    content = message_param.is_a?(Array) ? message_param[0] : message_param
+    return if content.nil? || (content.respond_to?(:empty?) && content.empty? && !content.is_a?(String))
+
+    params = { content: content, private: true, content_attributes: { automation_rule_id: @rule.id } }
     Messages::MessageBuilder.new(nil, @conversation, params).perform
   end
 
-  def send_email_to_team(params)
-    teams = Team.where(id: params[0][:team_ids])
+  def send_email_to_team(params_param)
+    param_data = params_param.is_a?(Array) ? params_param[0] : params_param
+    return unless param_data.is_a?(Hash)
+
+    team_ids = param_data[:team_ids]
+    message_content = param_data[:message]
+
+    return if Array(team_ids).empty? || message_content.blank? # Garante que team_ids seja tratado como array para .empty?
+
+    teams = Team.where(id: team_ids)
+    return if teams.empty?
 
     teams.each do |team|
-      TeamNotifications::AutomationNotificationMailer.conversation_creation(@conversation, team, params[0][:message])&.deliver_now
+      TeamNotifications::AutomationNotificationMailer.conversation_creation(@conversation, team, message_content)&.deliver_now
     end
-  end
-
-  # Método mantido para compatibilidade, redirecionando para o novo método
-  def send_attachment_with_message(blob_ids, message_content)
-    send_message_with_attachments(message_content, blob_ids)
-  end
-
-  # Método mantido para compatibilidade, redirecionando para o novo método
-  def send_attachment(blob_ids)
-    send_attachments_only(blob_ids)
   end
 end
