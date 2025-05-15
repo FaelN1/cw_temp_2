@@ -31,8 +31,12 @@ class Team < ApplicationRecord
     self.name = name.downcase if attribute_present?('name')
   end
 
-  def add_member(user_id)
-    team_members.find_or_create_by(user_id: user_id)&.user
+ # Removes multiple members from the team
+  # @param user_ids [Array<Integer>] Array of user IDs to remove
+  # @return [void]
+  def remove_members(user_ids)
+    team_members.where(user_id: user_ids).destroy_all
+    update_account_cache
   end
 
   def remove_member(user_id)
